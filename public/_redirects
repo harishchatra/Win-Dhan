@@ -1,0 +1,5 @@
+# Netlify Redirects & API Rewrite Rule
+# This redirects/rewrites all /api/* requests to your Railway backend server dynamically.
+# Replace the placeholder URL with your actual Railway backend service URL.
+
+/api/*  https://dhan-win-backend.up.railway.app/api/:splat  200

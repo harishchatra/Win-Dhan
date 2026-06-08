@@ -1,0 +1,3055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRE Expo 2026 | Admin Portal</title>
+  
+  <script>
+    // Immediate auth check
+    (function() {
+      document.documentElement.style.visibility = 'hidden';
+      fetch('/api/auth/session')
+        .then(res => {
+          if (!res.ok) throw new Error('Unauthorized');
+          return res.json();
+        })
+        .then(data => {
+          if (data.success) {
+            document.documentElement.style.visibility = 'visible';
+          } else {
+            window.location.href = '/login.html';
+          }
+        })
+        .catch(() => {
+          window.location.href = '/login.html';
+        });
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ── DESIGN TOKENS & APPLICATION THEME ── */
+    :root {
+      --copper:        #B87333;
+      --copper-lt:     #D4956A;
+      --copper-pale:   #F0C99A;
+      --copper-dk:     #8B5E2A;
+      --gold:          #C9A84C;
+      --gold-lt:       #E8C97A;
+      --silver:        #A8A9AD;
+      --bg:            #F5FAF6; /* Mint-Green Background */
+      --bg-card:       #FFFFFF;
+      --bg-section:    #EEF5F0;
+      --text:          #112A18; /* Deep Forest Green */
+      --text-dim:      #2D4735;
+      --text-muted:    #556B5C;
+      --border:        rgba(45, 90, 45, 0.13);
+      --border-cu:     rgba(184, 115, 51, 0.25);
+      
+      --shadow-sm:     0 2px 8px rgba(14, 31, 18, 0.04);
+      --shadow-md:     0 8px 22px rgba(14, 31, 18, 0.06);
+      --shadow-lg:     0 16px 40px rgba(14, 31, 18, 0.09);
+      
+      --font:          'Outfit', sans-serif;
+      --font-display:  'Playfair Display', serif;
+      
+      --radius:        12px;
+      --radius-sm:     6px;
+      --radius-pill:   999px;
+      
+      /* Status Colors */
+      --status-available: #2e7d32;       /* Green */
+      --status-reserved: #f57c00;        /* Orange/Yellow */
+      --status-pending: #1565c0;         /* Blue */
+      --status-sold: #c62828;            /* Red */
+    }
+
+    /* ── RESET & BODY ── */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-weight: 500;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+    input, select, textarea { font-family: inherit; outline: none; }
+
+    /* ── APP LAYOUT ── */
+    .app-header {
+      height: 56px;
+      background: rgba(255, 253, 248, 0.95);
+      border-top: 3px solid var(--copper);
+      border-bottom: 1px solid var(--border-cu);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: 0.2px;
+    }
+
+    .brand-title span {
+      color: var(--copper);
+      font-size: 0.72rem;
+      font-family: var(--font);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: block;
+      margin-top: -2px;
+      font-weight: 700;
+    }
+
+    /* Search Area */
+    .header-search-container {
+      position: relative;
+      width: 280px;
+    }
+
+    .header-search {
+      width: 100%;
+      background: var(--bg-section);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 0.45rem 1rem 0.45rem 2.2rem;
+      font-size: 0.8rem;
+      color: var(--text);
+      transition: all 0.25s;
+    }
+
+    .header-search:focus {
+      background: #fff;
+      border-color: var(--copper);
+      box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.08);
+      width: 320px;
+    }
+
+    .header-search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Search Instant Dropdown Results */
+    .search-results-dropdown {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      max-height: 280px;
+      overflow-y: auto;
+      z-index: 110;
+      display: none;
+    }
+
+    .search-group-title {
+      background: var(--bg-section);
+      padding: 4px 10px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    .search-item {
+      padding: 8px 10px;
+      font-size: 0.76rem;
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .search-item:hover {
+      background: rgba(184, 115, 51, 0.05);
+    }
+
+    .search-item .lbl {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .search-item .sub {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+    }
+
+    .search-item .tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Role Tester Dropdown & Header actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .role-dropdown-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-section);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+    }
+
+    .role-dropdown-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .role-select {
+      background: transparent;
+      border: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--copper-dk);
+      cursor: pointer;
+      padding-right: 4px;
+    }
+
+    .user-profile-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--copper), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Notification Tray Bell Styles */
+    .notif-bell-btn {
+      background: var(--bg-section);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      font-size: 1.05rem;
+    }
+
+    .notif-bell-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: var(--status-sold);
+      color: #fff;
+      font-size: 7px;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 50px;
+      display: none;
+    }
+
+    .notif-center-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 15px;
+      width: 300px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      z-index: 120;
+      display: none;
+      overflow: hidden;
+    }
+
+    .notif-tray-header {
+      padding: 10px 12px;
+      background: var(--bg-section);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .notif-tray-item {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .notif-tray-item.read {
+      opacity: 0.65;
+    }
+
+    .notif-tray-item:hover {
+      background: rgba(184,115,51,0.03);
+    }
+
+    .notif-tray-item .msg {
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      line-height: 1.35;
+    }
+
+    .notif-tray-item .msg strong {
+      font-weight: 700;
+      color: var(--copper-dk);
+    }
+
+    .notif-tray-item .time {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* App Workspace Layout */
+    .app-workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Sidebar Navigation */
+    .app-sidebar {
+      width: 210px;
+      background: rgba(255, 253, 248, 0.85);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .sidebar-menu-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.52rem 1.15rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      background: transparent;
+      width: 100%;
+      text-align: left;
+      border-left: 3.5px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .sidebar-menu-btn .ico {
+      font-size: 1.05rem;
+      width: 18px;
+      text-align: center;
+    }
+
+    .sidebar-menu-btn:hover {
+      background: rgba(184, 115, 51, 0.04);
+      color: var(--copper);
+    }
+
+    .sidebar-menu-btn.active {
+      background: rgba(184, 115, 51, 0.08);
+      color: var(--copper-dk);
+      font-weight: 700;
+      border-left-color: var(--copper);
+    }
+
+    .sidebar-footer-note {
+      padding: 0 1.15rem;
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+      margin-top: 1rem;
+    }
+
+    /* Main Content Area */
+    .app-viewport {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 1.8rem;
+      background: var(--bg);
+      position: relative;
+    }
+
+    /* View containers */
+    .view-pane {
+      display: none;
+      animation: tabFadeIn 0.25s ease forwards;
+    }
+
+    .view-pane.active {
+      display: block;
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typography & headings */
+    .view-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .view-title-area h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .view-title-area p {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .view-actions-area {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* Grids & Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--border-cu);
+    }
+
+    .kpi-card.accent-copper::after { background: var(--copper); }
+    .kpi-card.accent-gold::after { background: var(--gold); }
+    .kpi-card.accent-green::after { background: var(--status-available); }
+    .kpi-card.accent-red::after { background: var(--status-sold); }
+
+    .kpi-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .kpi-value {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 0.2rem;
+    }
+
+    .kpi-meta {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-col-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .chart-container-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .card-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      padding-bottom: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* SVG Charts */
+    .svg-donut-chart {
+      width: 110px;
+      height: 110px;
+    }
+
+    .donut-segment {
+      fill: none;
+      stroke-width: 14;
+      transition: stroke-dasharray 0.3s;
+      transform: rotate(-90deg);
+      transform-origin: 70px 70px;
+    }
+
+    .donut-center-text {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      text-anchor: middle;
+      fill: var(--text);
+    }
+
+    .donut-center-subtext {
+      font-family: var(--font);
+      font-size: 8px;
+      font-weight: 700;
+      text-anchor: middle;
+      fill: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chart-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.68rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .legend-bullet {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .bar-chart-row { margin-bottom: 10px; }
+    .bar-chart-lbl { display: flex; justify-content: space-between; font-size: 0.68rem; font-weight: 700; margin-bottom: 2px; }
+    .bar-chart-track { height: 8px; background: var(--bg-section); border-radius: 4px; overflow: hidden; }
+    .bar-chart-fill { height: 100%; border-radius: 4px; transition: width 0.4s; }
+
+    .funnel-stage { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .funnel-label { width: 85px; font-size: 0.65rem; font-weight: 700; text-align: right; color: var(--text-dim); }
+    .funnel-bar-track { flex: 1; height: 14px; background: var(--bg-section); border-radius: 2px; overflow: hidden; }
+    .funnel-bar-fill { height: 100%; background: linear-gradient(90deg, var(--copper-lt), var(--gold)); border-radius: 2px; display: flex; align-items: center; padding-left: 6px; font-size: 0.55rem; color: #fff; font-weight: 800; transition: width 0.4s; }
+
+    .activity-list { display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto; }
+    .activity-item { display: flex; gap: 8px; font-size: 0.72rem; border-bottom: 1px dashed rgba(0,0,0,0.04); padding-bottom: 6px; }
+    .activity-icon { width: 22px; height: 22px; border-radius: 50%; background: var(--bg-section); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.68rem; flex-shrink: 0; }
+    .activity-details { flex: 1; }
+    .activity-msg { color: var(--text); }
+    .activity-time { font-size: 0.62rem; color: var(--text-muted); margin-top: 1px; }
+
+    /* Tables & Inputs */
+    .filter-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1.15rem;
+    }
+
+    .filter-group-inputs { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .filter-input-wrap { position: relative; }
+    .filter-select, .filter-text-input { padding: 0.38rem 1.6rem 0.38rem 0.65rem; border: 1px solid var(--border); border-radius: 5px; font-size: 0.74rem; color: var(--text); background: var(--bg); appearance: none; -webkit-appearance: none; font-weight: 600; cursor: pointer; }
+    .filter-text-input { padding-right: 0.65rem; cursor: text; }
+    .filter-select:focus, .filter-text-input:focus { background: #fff; border-color: var(--copper); }
+    .filter-select-arrow { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 0.45rem; color: var(--text-muted); pointer-events: none; }
+
+    .btn-action-primary { background: linear-gradient(135deg, var(--copper), var(--gold)); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 0.42rem 0.9rem; border-radius: 5px; box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; }
+    .btn-action-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(184, 115, 51, 0.2); }
+    .btn-action-outline { border: 1px solid var(--border-cu); background: #fff; color: var(--text); font-size: 0.72rem; font-weight: 700; padding: 0.42rem 0.9rem; border-radius: 5px; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; }
+    .btn-action-outline:hover { border-color: var(--copper); color: var(--copper); background: var(--bg-section); }
+    .btn-action-danger { background: #c62828; color: #fff; font-size: 0.72rem; font-weight: 700; padding: 0.42rem 0.9rem; border-radius: 5px; display: inline-flex; align-items: center; gap: 5px; }
+    .btn-action-danger:hover { background: #b71c1c; }
+
+    .table-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow-x: auto; margin-bottom: 1.5rem; }
+    .datatable { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.76rem; }
+    .datatable th { background: var(--bg-section); color: var(--text-dim); font-weight: 800; text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.8px; padding: 0.75rem 1.15rem; border-bottom: 1px solid var(--border); }
+    .datatable td { padding: 0.75rem 1.15rem; border-bottom: 1px solid rgba(0,0,0,0.03); color: var(--text-dim); vertical-align: middle; }
+    .datatable tr:last-child td { border-bottom: none; }
+    .datatable tr:hover td { background: rgba(45, 90, 45, 0.012); }
+
+    .status-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; padding: 2px 7px; border-radius: var(--radius-pill); letter-spacing: 0.5px; }
+    .status-badge.available { background: rgba(46, 125, 50, 0.08); color: var(--status-available); border: 1px solid rgba(46, 125, 50, 0.2); }
+    .status-badge.reserved { background: rgba(245, 124, 0, 0.08); color: var(--status-reserved); border: 1px solid rgba(245, 124, 0, 0.2); }
+    .status-badge.pending { background: rgba(21, 101, 192, 0.08); color: var(--status-pending); border: 1px solid rgba(21, 101, 192, 0.2); }
+    .status-badge.sold { background: rgba(198, 40, 40, 0.08); color: var(--status-sold); border: 1px solid rgba(198, 40, 40, 0.2); }
+    .table-actions { display: flex; gap: 5px; }
+    .btn-table-icon { width: 24px; height: 24px; border-radius: 4px; background: var(--bg-section); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.68rem; color: var(--text-dim); transition: all 0.2s; }
+    .btn-table-icon:hover { border-color: var(--copper-lt); color: var(--copper); background: #fff; }
+    .btn-table-icon.danger:hover { background: #ffebee; color: #c62828; border-color: rgba(198, 40, 40, 0.2); }
+
+    /* Map, split maps layout */
+    .map-split-container { display: grid; grid-template-columns: 1.6fr 1.4fr; gap: 1.25rem; margin-bottom: 1.5rem; }
+    .map-canvas-card { background: #FAF9F6; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden; height: 500px; display: flex; flex-direction: column; position: relative; }
+    .map-canvas-header { padding: 0.7rem 1.15rem; background: #fff; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .map-canvas-viewport { flex: 1; width: 100%; height: 100%; overflow: auto; display: flex; align-items: center; justify-content: center; position: relative; background: #fff; }
+    .map-canvas-wrapper { transition: transform 0.2s; transform-origin: center center; }
+    .map-svg-stall { cursor: pointer; stroke-width: 1.2; }
+    .map-svg-stall:hover { opacity: 0.85; stroke: var(--text); }
+    .map-svg-stall.selected { stroke: #000; stroke-width: 2.2; }
+    .map-legend-bar { padding: 7px 11px; background: #fff; border-top: 1px solid var(--border); display: flex; justify-content: center; gap: 12px; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; }
+    .map-legend-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 3px; vertical-align: middle; }
+    
+    .detail-inspector-card { display: flex; flex-direction: column; justify-content: space-between; }
+    .inspector-content { flex: 1; }
+    .inspector-stat-row { display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(0,0,0,0.05); padding: 7px 0; font-size: 0.76rem; }
+    .inspector-stat-row span:first-child { font-weight: 600; color: var(--text-dim); }
+    .inspector-stat-row span:last-child { font-weight: 700; color: var(--text); }
+
+    /* Modals & drawers */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(17, 42, 24, 0.4); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.22s; }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-box { background: #fff; border-radius: var(--radius); width: 90%; max-width: 550px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); overflow: hidden; transform: scale(0.96); transition: transform 0.22s; }
+    .modal-overlay.active .modal-box { transform: scale(1); }
+    .modal-header { padding: 1rem 1.35rem; background: var(--bg-section); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; color: var(--text); }
+    .modal-close-btn { font-size: 1.3rem; font-weight: 700; color: var(--text-muted); background: transparent; cursor: pointer; }
+    .modal-body { padding: 1.35rem; max-height: 70vh; overflow-y: auto; }
+    .modal-footer { padding: 0.9rem 1.35rem; border-top: 1px solid var(--border); background: var(--bg-section); display: flex; justify-content: flex-end; gap: 8px; }
+    .modal-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .modal-form-group { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; }
+    .modal-form-group label { font-size: 0.65rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+    .modal-form-group input, .modal-form-group select, .modal-form-group textarea { padding: 0.42rem 0.65rem; border: 1px solid var(--border); border-radius: 5px; font-size: 0.8rem; color: var(--text); background: var(--bg); outline: none; width: 100%; }
+    .modal-form-group input:focus, .modal-form-group select:focus, .modal-form-group textarea:focus { background: #fff; border-color: var(--copper); }
+    .modal-form-group textarea { min-height: 70px; resize: vertical; }
+
+    .uploaded-files-list { margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+    .uploaded-file-item { display: flex; justify-content: space-between; align-items: center; background: var(--bg-section); border: 1px solid var(--border); border-radius: 4px; padding: 5px 8px; font-size: 0.7rem; }
+    .uploaded-file-item .fn { font-weight: 700; color: var(--text); }
+    .uploaded-file-item .meta { font-size: 0.62rem; color: var(--text-muted); }
+
+    .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 999; display: flex; flex-direction: column; gap: 8px; }
+    .toast-msg { background: #112A18; color: #fff; border-left: 4px solid var(--copper); padding: 8px 14px; border-radius: 4px; font-size: 0.74rem; font-weight: 600; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 6px; animation: toastSlideIn 0.3s ease forwards; }
+
+    /* Phase 2 Specific CSS layout overrides */
+    .split-pane-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .agenda-day-tabs-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .agenda-day-tab {
+      padding: 0.35rem 1rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .agenda-day-tab.active {
+      background: rgba(184,115,51,0.08);
+      color: var(--copper-dk);
+      border: 1px solid var(--border-cu);
+    }
+
+    .agenda-session-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow-sm);
+      cursor: grab;
+      position: relative;
+    }
+
+    .agenda-session-card:active {
+      cursor: grabbing;
+      opacity: 0.75;
+    }
+
+    .speaker-directory-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* Visitor Pass ticket styles (Module 2) */
+    .visitor-pass-modal-box {
+      background: #112A18;
+      border-radius: 12px;
+      width: 320px;
+      overflow: hidden;
+      border: 1.5px solid var(--gold);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .visitor-pass-top {
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+      border-bottom: 1.5px dashed rgba(255,255,255,0.15);
+      position: relative;
+    }
+
+    .visitor-pass-top::before, .visitor-pass-top::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+    }
+    .visitor-pass-top::before { left: -8px; }
+    .visitor-pass-top::after { right: -8px; }
+
+    .visitor-pass-body {
+      background: #fff;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .visitor-pass-qr {
+      background: #fff;
+      padding: 6px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      width: 120px;
+      height: 120px;
+    }
+
+    .visitor-pass-table {
+      width: 100%;
+      font-size: 0.7rem;
+      border-collapse: collapse;
+    }
+
+    .visitor-pass-table td {
+      padding: 4px 0;
+      border-bottom: 1px dashed rgba(0,0,0,0.04);
+      color: var(--text-dim);
+    }
+
+    .visitor-pass-table tr td:first-child { font-weight: 600; text-align: left; }
+    .visitor-pass-table tr td:last-child { font-weight: 700; text-align: right; color: var(--text); }
+
+    /* Media file gallery grids */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    /* Print styling rules */
+    @media print {
+      body * { display: none !important; }
+      #printable-report-card, #printable-report-card * { display: block !important; visibility: visible !important; }
+      #printable-report-card {
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%;
+        padding: 2cm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOAST ALERTS -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- APP HEADER -->
+  <header class="app-header">
+    <div class="brand-area">
+      <a href="ire.html">
+        <svg class="brand-logo" viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg">
+          <rect width="86" height="52" rx="11" fill="#1A3A1A"/>
+          <rect width="86" height="52" rx="11" fill="none" stroke="rgba(184,115,51,0.45)" stroke-width="1.2"/>
+          <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#C9A84C">W</text>
+          <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#B87333">IN</text>
+          <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(201,168,76,0.65)" letter-spacing="1.5">DHAN</text>
+          <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(184,115,51,0.35)" stroke-width="1"/>
+          <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#B87333">D</text>
+          <circle cx="55" cy="24" r="4" fill="#C9A84C"/>
+          <circle cx="55" cy="24" r="2.2" fill="#B87333"/>
+          <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#C9A84C">E</text>
+        </svg>
+      </a>
+      <div class="brand-title">
+        IRE Expo 2026
+        <span>Organiser Admin</span>
+      </div>
+    </div>
+
+    <!-- Universal Search (Module 9) -->
+    <div class="header-search-container">
+      <span class="header-search-icon">🔍</span>
+      <input type="text" class="header-search" id="global-search-input" placeholder="Global Search everywhere..." oninput="handleGlobalSearch(this.value)">
+      <div class="search-results-dropdown" id="global-search-dropdown">
+        <!-- Results injected dynamically -->
+      </div>
+    </div>
+
+    <!-- Actions, Alerts Tray & Profile Switcher -->
+    <div class="header-actions">
+      <!-- Notification tray bell (Module 9) -->
+      <button class="notif-bell-btn" onclick="toggleNotifTray(event)" title="Notifications Center">
+        🔔
+        <span class="notif-bell-badge" id="notif-bell-badge">0</span>
+      </button>
+      <div class="notif-center-dropdown" id="notif-center-dropdown">
+        <div class="notif-tray-header">
+          <span>🔔 Events Notifications</span>
+          <button class="btn-action-outline" style="font-size:8px; padding:2px 5px;" onclick="clearAllNotifications()">Clear All</button>
+        </div>
+        <div id="notif-tray-list">
+          <!-- notifications listing -->
+        </div>
+      </div>
+
+      <div class="role-dropdown-container">
+        <span class="role-dropdown-label">Role:</span>
+        <span id="session-role-display" style="font-size: 0.78rem; font-weight: 700; color: var(--copper-dk); text-transform: uppercase; margin-right: 5px;">Super Admin</span>
+        <button onclick="handleLogout()" class="btn-action-outline" style="font-size: 9px; padding: 3px 7px; margin-left: 8px; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;">Logout</button>
+      </div>
+      <div class="user-profile-badge" id="user-profile-avatar" title="Hari Prasad">HP</div>
+    </div>
+  </header>
+
+  <!-- WORKSPACE SPLIT LAYOUT -->
+  <div class="app-workspace">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="app-sidebar">
+      <div class="sidebar-menu">
+        <button class="sidebar-menu-btn active" id="nav-btn-dashboard" onclick="switchView('dashboard', this)">
+          <span class="ico">📊</span> Dashboard
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-stalls" onclick="switchView('stalls', this)">
+          <span class="ico">🏪</span> Stall Inventory
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-map" onclick="switchView('map', this)">
+          <span class="ico">🗺️</span> Interactive Map
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-leads" onclick="switchView('leads', this)">
+          <span class="ico">👤</span> Lead CRM
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-exhibitors" onclick="switchView('exhibitors', this)">
+          <span class="ico">🤝</span> Exhibitors
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-payments" onclick="switchView('payments', this)">
+          <span class="ico">💳</span> Payments Ledger
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-visitors" onclick="switchView('visitors', this)">
+          <span class="ico">👥</span> Visitor CRM &amp; QR
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-sponsors" onclick="switchView('sponsors', this)">
+          <span class="ico">🏆</span> Sponsors Package
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-sponsor-apps" onclick="switchView('sponsor-apps', this)">
+          <span class="ico">📋</span> Sponsor Apps
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-program" onclick="switchView('program', this)">
+          <span class="ico">📅</span> Summit Program
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-marketing" onclick="switchView('marketing', this)">
+          <span class="ico">📢</span> Marketing &amp; Inqs
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-media" onclick="switchView('media', this)">
+          <span class="ico">📂</span> Central Gallery
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-tasks" onclick="switchView('tasks', this)">
+          <span class="ico">🛠️</span> Task Manager
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-reports" onclick="switchView('reports', this)">
+          <span class="ico">🖨️</span> Analytics Reports
+        </button>
+        <button class="sidebar-menu-btn" id="nav-btn-settings" onclick="switchView('settings', this)">
+          <span class="ico">⚙️</span> Site &amp; Public Regs
+        </button>
+        
+        <!-- Exhibitor Only Portal Nav -->
+        <button class="sidebar-menu-btn" id="nav-btn-exhibitor-portal" style="display:none;" onclick="switchView('exhibitor-portal', this)">
+          <span class="ico">🚪</span> Exhibitor Portal
+        </button>
+      </div>
+
+      <div class="sidebar-footer-note">
+        IRE Expo Management System<br>
+        v3.0 (Self-Service Platform)<br>
+        <strong>Dhan Enterprise</strong>
+      </div>
+    </aside>
+
+    <!-- CONTENT VIEWPORT -->
+    <main class="app-viewport">
+
+      <!-- ==========================================
+           MODULE 1: DASHBOARD VIEW
+           ========================================== -->
+      <div class="view-pane active" id="view-dashboard">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Organiser Dashboard</h2>
+            <p>IRE 2026 real-time metrics, occupancy tracking, and activity audits.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-outline" onclick="exportModuleData('payments')">📊 Export Revenue Report</button>
+          </div>
+        </div>
+
+        <!-- Top KPI Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card accent-copper">
+            <div class="kpi-label">Stall Count Status</div>
+            <div class="kpi-value" id="kpi-stalls-status">0 / 0</div>
+            <div class="kpi-meta">Booked / Total Stalls</div>
+          </div>
+          <div class="kpi-card accent-green">
+            <div class="kpi-label">Available Stalls</div>
+            <div class="kpi-value" id="kpi-stalls-available">0</div>
+            <div class="kpi-meta" id="kpi-stalls-reserved">0 Reserved</div>
+          </div>
+          <div class="kpi-card accent-gold">
+            <div class="kpi-label">Revenue Collected</div>
+            <div class="kpi-value" id="kpi-revenue-collected">₹0L</div>
+            <div class="kpi-meta" id="kpi-revenue-total">Total Expected: ₹0L</div>
+          </div>
+          <div class="kpi-card accent-red">
+            <div class="kpi-label">CRM Leads & Sales</div>
+            <div class="kpi-value" id="kpi-leads-count">0 / 0</div>
+            <div class="kpi-meta" id="kpi-exhibitors-count">0 Confirmed Exhibitors</div>
+          </div>
+        </div>
+
+        <!-- Graphs & Lists Section -->
+        <div class="dashboard-layout">
+          <div class="dashboard-col-left">
+            <div class="chart-container-grid">
+              
+              <!-- Chart 1: Stall Breakdown -->
+              <div class="card-panel">
+                <div class="panel-title">Stall Allocation status</div>
+                <div style="display:flex; align-items:center; gap: 15px; justify-content: space-around;">
+                  <svg class="svg-donut-chart" id="dashboard-donut-svg" viewBox="0 0 140 140">
+                    <circle cx="70" cy="70" r="50" fill="none" stroke="var(--bg-section)" stroke-width="16" />
+                    <text x="70" y="70" class="donut-center-text" id="donut-center-num">0</text>
+                    <text x="70" y="88" class="donut-center-subtext">Stalls</text>
+                  </svg>
+                  
+                  <div class="chart-legend" style="flex: 1;">
+                    <div class="legend-item">
+                      <span><span class="legend-bullet" style="background: var(--status-available);"></span>Available</span>
+                      <strong id="legend-count-available">0</strong>
+                    </div>
+                    <div class="legend-item">
+                      <span><span class="legend-bullet" style="background: var(--status-reserved);"></span>Reserved</span>
+                      <strong id="legend-count-reserved">0</strong>
+                    </div>
+                    <div class="legend-item">
+                      <span><span class="legend-bullet" style="background: var(--status-pending);"></span>Pending Pay</span>
+                      <strong id="legend-count-pending">0</strong>
+                    </div>
+                    <div class="legend-item">
+                      <span><span class="legend-bullet" style="background: var(--status-sold);"></span>Sold Out</span>
+                      <strong id="legend-count-sold">0</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chart 2: Revenue Progress -->
+              <div class="card-panel">
+                <div class="panel-title">Revenue Progress Ledger</div>
+                <div class="bar-chart-row">
+                  <div class="bar-chart-lbl">
+                    <span>Collected Cash (Net)</span>
+                    <span id="progress-val-collected">₹0</span>
+                  </div>
+                  <div class="bar-chart-track">
+                    <div class="bar-chart-fill" id="progress-fill-collected" style="background: var(--status-available); width: 0%;"></div>
+                  </div>
+                </div>
+                
+                <div class="bar-chart-row" style="margin-top: 15px;">
+                  <div class="bar-chart-lbl">
+                    <span>Pending Receivables</span>
+                    <span id="progress-val-pending">₹0</span>
+                  </div>
+                  <div class="bar-chart-track">
+                    <div class="bar-chart-fill" id="progress-fill-pending" style="background: var(--status-pending); width: 0%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chart 3: Leads Funnel -->
+            <div class="card-panel">
+              <div class="panel-title">CRM Leads Status Funnel</div>
+              <div id="leads-funnel-container">
+                <!-- Funnel bars drawn dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Audit Log -->
+          <div class="card-panel">
+            <div class="panel-title">Audited Logs Feed</div>
+            <div class="activity-list" id="audit-logs-list">
+              <!-- Logs loaded dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           MODULE 2: STALL MANAGEMENT VIEW
+           ========================================== -->
+      <div class="view-pane" id="view-stalls">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Stall Inventory Management</h2>
+            <p>Add, edit, reserve, sell, and delete exhibition stall grid configurations.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" id="btn-create-stall-trigger" onclick="openStallModal(null)">➕ Create Stall</button>
+          </div>
+        </div>
+
+        <!-- Filters Grid -->
+        <div class="filter-bar">
+          <div class="filter-group-inputs">
+            <div class="filter-input-wrap">
+              <select class="filter-select" id="stall-filter-block" onchange="renderStallsTable()">
+                <option value="">All Blocks</option>
+                <option value="A">Block A</option>
+                <option value="B">Block B</option>
+                <option value="C">Block C</option>
+                <option value="D">Block D</option>
+                <option value="E">Block E</option>
+              </select>
+              <span class="filter-select-arrow">▼</span>
+            </div>
+
+            <div class="filter-input-wrap">
+              <select class="filter-select" id="stall-filter-status" onchange="renderStallsTable()">
+                <option value="">All Statuses</option>
+                <option value="available">Available</option>
+                <option value="reserved">Reserved</option>
+                <option value="payment_pending">Payment Pending</option>
+                <option value="sold">Sold</option>
+              </select>
+              <span class="filter-select-arrow">▼</span>
+            </div>
+
+            <input type="text" class="filter-text-input" id="stall-search-company" placeholder="Search by Company..." oninput="renderStallsTable()">
+          </div>
+          <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-dim);" id="stall-table-count">0 Stalls matching</div>
+        </div>
+
+        <!-- Stalls Table -->
+        <div class="table-container">
+          <table class="datatable" id="stalls-table">
+            <thead>
+              <tr>
+                <th>Stall ID</th>
+                <th>Block</th>
+                <th>Category</th>
+                <th>Dimensions</th>
+                <th>Rate (INR)</th>
+                <th>Status</th>
+                <th>Assigned Partner</th>
+                <th style="width: 140px; text-anchor: middle;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="stalls-table-body">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           MODULE 3: INTERACTIVE FLOOR PLAN VIEW
+           ========================================== -->
+      <div class="view-pane" id="view-map">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Floor Plan Grid Mapping</h2>
+            <p>Visualize layout occupancy map and toggle floor grid coordinate settings.</p>
+          </div>
+        </div>
+
+        <div class="map-split-container">
+          <!-- Left: SVG Floor Plan Canvas -->
+          <div class="map-canvas-card">
+            <div class="map-canvas-header">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Hall Blueprint Occupancy Grid</span>
+              <div style="display:flex; gap: 4px;">
+                <button class="btn-action-outline" style="padding: 2px 6px;" onclick="zoomAdminMap(1.25)">➕</button>
+                <button class="btn-action-outline" style="padding: 2px 6px;" onclick="zoomAdminMap(0.8)">➖</button>
+                <button class="btn-action-outline" style="padding: 2px 6px;" onclick="resetAdminMapZoom()">⟲</button>
+              </div>
+            </div>
+            
+            <div class="map-canvas-viewport">
+              <div class="map-canvas-wrapper" id="admin-map-wrapper">
+                <svg width="600" height="520" viewBox="0 0 900 800" id="admin-map-svg" style="background:#fff;">
+                  <!-- Dynamically populated SVG layouts mirroring blueprint -->
+                </svg>
+              </div>
+            </div>
+
+            <div class="map-legend-bar">
+              <span><span class="map-legend-dot" style="background: var(--status-available)"></span>Available</span>
+              <span><span class="map-legend-dot" style="background: var(--status-reserved)"></span>Reserved</span>
+              <span><span class="map-legend-dot" style="background: var(--status-pending)"></span>Pending</span>
+              <span><span class="map-legend-dot" style="background: var(--status-sold)"></span>Sold</span>
+            </div>
+          </div>
+
+          <!-- Right: Visual Inspector Details & Local Maps Setup -->
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            
+            <!-- Map Inspector Detail -->
+            <div class="card-panel detail-inspector-card">
+              <div class="panel-title">Selected Stall Inspector</div>
+              
+              <div id="inspector-placeholder" style="text-align:center; padding: 3rem 0; color: var(--text-muted); font-size: 0.8rem;">
+                ℹ️ Click any SVG stall cell on the left map blueprint to inspect allocation ledger and trigger status changes.
+              </div>
+              
+              <div id="inspector-body" style="display:none;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+                  <span style="font-family:var(--font-display); font-size: 1.5rem; font-weight:800; color: var(--copper-dk);" id="inspector-stall-id">A1</span>
+                  <span class="status-badge" id="inspector-status-badge">Available</span>
+                </div>
+                
+                <div class="inspector-content">
+                  <div class="inspector-stat-row">
+                    <span>Block Grid</span>
+                    <span id="inspector-block">-</span>
+                  </div>
+                  <div class="inspector-stat-row">
+                    <span>Category Tier</span>
+                    <span id="inspector-category">-</span>
+                  </div>
+                  <div class="inspector-stat-row">
+                    <span>Stall Dimensions</span>
+                    <span id="inspector-size">-</span>
+                  </div>
+                  <div class="inspector-stat-row">
+                    <span>Net Rate (INR)</span>
+                    <span id="inspector-price">-</span>
+                  </div>
+                  <div class="inspector-stat-row" style="margin-bottom: 1.25rem;">
+                    <span>Assigned Company</span>
+                    <span id="inspector-company" style="color:var(--copper);">-</span>
+                  </div>
+                </div>
+
+                <div style="margin-top: 1.5rem; display:flex; gap: 8px; flex-wrap:wrap;" id="inspector-actions">
+                  <!-- Actions generated dynamically based on active role permissions -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Floor Plan Image Uploads (Module 7 Asset previews) -->
+            <div class="card-panel">
+              <div class="panel-title">Floor Plan Mock Uploads</div>
+              <p style="font-size: 0.72rem; color:var(--text-muted); margin-bottom: 1rem;">Configure the active image layers mapped to client floor layouts.</p>
+              
+              <div class="modal-form-group">
+                <label>Upload Floor Plan File</label>
+                <input type="file" accept="image/*" id="floor-plan-upload-field" onchange="previewMockUpload('floor_plan', this)" style="font-size:0.75rem;">
+              </div>
+              
+              <div class="uploaded-files-list" id="uploaded-maps-list">
+                <!-- Preview items loaded here -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           MODULE 4: LEAD CRM VIEW
+           ========================================== -->
+      <div class="view-pane" id="view-leads">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Exhibitor Lead CRM Pipeline</h2>
+            <p>Track business leads, add communication notes, and convert leads into active exhibitors.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" onclick="openLeadModal(null)">➕ Add New Lead</button>
+            <button class="btn-action-outline" onclick="exportModuleData('leads')">📥 Export Leads CSV</button>
+          </div>
+        </div>
+
+        <!-- Lead Filter bar -->
+        <div class="filter-bar">
+          <div class="filter-group-inputs">
+            <div class="filter-input-wrap">
+              <select class="filter-select" id="lead-filter-status" onchange="renderLeadsTable()">
+                <option value="">All Statuses</option>
+                <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="interested">Interested</option>
+                <option value="proposal_sent">Proposal Sent</option>
+                <option value="negotiation">Negotiation</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="lost">Lost</option>
+              </select>
+              <span class="filter-select-arrow">▼</span>
+            </div>
+
+            <div class="filter-input-wrap">
+              <select class="filter-select" id="lead-filter-segment" onchange="renderLeadsTable()">
+                <option value="">All Segments</option>
+                <option value="Solar PV">Solar PV</option>
+                <option value="Electric Vehicles">Electric Vehicles</option>
+                <option value="BESS">Battery Storage</option>
+                <option value="Charging">Charging Infrastructure</option>
+                <option value="Wind">Wind Energy</option>
+                <option value="General">General / Smart Grid</option>
+              </select>
+              <span class="filter-select-arrow">▼</span>
+            </div>
+
+            <input type="text" class="filter-text-input" id="lead-search-query" placeholder="Search Company or Contacts..." oninput="renderLeadsTable()">
+          </div>
+          <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-dim);" id="lead-table-count">0 Leads matching</div>
+        </div>
+
+        <!-- Leads Table -->
+        <div class="table-container">
+          <table class="datatable" id="leads-table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Energy Sector</th>
+                <th>Contact Name</th>
+                <th>Phone &amp; Email</th>
+                <th>Location</th>
+                <th>Owner</th>
+                <th>Source</th>
+                <th>Status</th>
+                <th style="width: 160px; text-anchor: middle;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="leads-table-body">
+              <!-- Injected dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           MODULE 5: EXHIBITOR MANAGEMENT VIEW
+           ========================================== -->
+      <div class="view-pane" id="view-exhibitors">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Exhibitor Database</h2>
+            <p>Manage confirmed exhibitor details, assign booths, and record certification documents.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" onclick="openExhibitorModal(null)">➕ Add Exhibitor Profile</button>
+            <button class="btn-action-outline" onclick="exportModuleData('exhibitors')">📥 Export Exhibitors CSV</button>
+          </div>
+        </div>
+
+        <!-- Exhibitor Database Filters -->
+        <div class="filter-bar">
+          <div class="filter-group-inputs">
+            <input type="text" class="filter-text-input" id="exh-search-query" placeholder="Search company, stall, or gstin..." oninput="renderExhibitorsTable()">
+          </div>
+          <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-dim);" id="exh-table-count">0 Exhibitors found</div>
+        </div>
+
+        <!-- Exhibitors list Table -->
+        <div class="table-container">
+          <table class="datatable" id="exhibitors-table">
+            <thead>
+              <tr>
+                <th>Exhibitor Name</th>
+                <th>GSTIN</th>
+                <th>Contact Info</th>
+                <th>Address &amp; Web</th>
+                <th>Sector Class</th>
+                <th>Assigned Stall</th>
+                <th>Docs Verified</th>
+                <th>Booth Status</th>
+                <th style="width: 120px; text-anchor: middle;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="exhibitors-table-body">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           MODULE 6: PAYMENT TRACKING VIEW
+           ========================================== -->
+      <div class="view-pane" id="view-payments">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Payments Ledger Ledger</h2>
+            <p>Track booking fees invoices, register partial payments, and inspect collection statistics.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-outline" onclick="exportModuleData('payments')">📥 Export Ledgers CSV</button>
+          </div>
+        </div>
+
+        <!-- Small payment collections KPI row -->
+        <div class="kpi-grid" style="margin-bottom: 1.25rem;">
+          <div class="kpi-card accent-green" style="padding: 0.8rem 1rem;">
+            <div class="kpi-label" style="font-size: 0.6rem;">Total Invoiced</div>
+            <div class="kpi-value" id="ledger-kpi-total" style="font-size: 1.3rem;">₹0.00</div>
+          </div>
+          <div class="kpi-card accent-copper" style="padding: 0.8rem 1rem;">
+            <div class="kpi-label" style="font-size: 0.6rem;">Collected Balance</div>
+            <div class="kpi-value" id="ledger-kpi-collected" style="font-size: 1.3rem;">₹0.00</div>
+          </div>
+          <div class="kpi-card accent-red" style="padding: 0.8rem 1rem;">
+            <div class="kpi-label" style="font-size: 0.6rem;">Receivable Deficit</div>
+            <div class="kpi-value" id="ledger-kpi-pending" style="font-size: 1.3rem;">₹0.00</div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+          <div class="filter-group-inputs">
+            <div class="filter-input-wrap">
+              <select class="filter-select" id="pay-filter-status" onchange="renderPaymentsTable()">
+                <option value="">All Statuses</option>
+                <option value="paid">Paid</option>
+                <option value="partial">Partial</option>
+                <option value="pending">Pending</option>
+              </select>
+              <span class="filter-select-arrow">▼</span>
+            </div>
+            <input type="text" class="filter-text-input" id="pay-search-company" placeholder="Search Company or Stall..." oninput="renderPaymentsTable()">
+          </div>
+        </div>
+
+        <!-- Ledger table -->
+        <div class="table-container">
+          <table class="datatable" id="payments-table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Stall</th>
+                <th>Base rate (INR)</th>
+                <th>GST (18%)</th>
+                <th>Total Invoiced</th>
+                <th>Collected amount</th>
+                <th>Due balance</th>
+                <th>Invoice Due</th>
+                <th>Status</th>
+                <th style="width: 140px; text-anchor: middle;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="payments-table-body">
+              <!-- rows loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           NEW MODULES FOR PHASE 2 IMPLEMENTATION
+           ========================================== -->
+      
+      <!-- MODULE 1 & 2: VISITORS & QR PASS SYSTEMS -->
+      <div class="view-pane" id="view-visitors">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Visitor CRM &amp; Attendance Passes</h2>
+            <p>Manage registrations list, inspect type category, and simulate scanner check-in.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" onclick="openCheckInScanner()">📷 Check-In Scanner Simulator</button>
+            <button class="btn-action-primary" onclick="openVisitorModal(null)">➕ Register Visitor</button>
+            <button class="btn-action-outline" onclick="exportModuleData('visitors')">📥 Export Visitors CSV</button>
+          </div>
+        </div>
+
+        <!-- Visitor metrics card row -->
+        <div class="kpi-grid">
+          <div class="kpi-card accent-copper">
+            <div class="kpi-label">Registered Visitors</div>
+            <div class="kpi-value" id="v-kpi-registered">0</div>
+            <div class="kpi-meta">Delegate Passes issued</div>
+          </div>
+          <div class="kpi-card accent-green">
+            <div class="kpi-label">Checked-In attendance</div>
+            <div class="kpi-value" id="v-kpi-checkedin">0</div>
+            <div class="kpi-meta">Verified at HMDA gates</div>
+          </div>
+          <div class="kpi-card accent-gold">
+            <div class="kpi-label">Attendance Rate</div>
+            <div class="kpi-value" id="v-kpi-attendance">0%</div>
+            <div class="kpi-meta">Check-in occupancy %</div>
+          </div>
+        </div>
+
+        <!-- Filters Grid -->
+        <div class="filter-bar">
+          <div class="filter-group-inputs">
+            <div class="filter-input-wrap">
+              <select class="filter-select" id="visitor-filter-type" onchange="renderVisitorsTable()">
+                <option value="">All Categories</option>
+                <option value="Government">Government</option>
+                <option value="Corporate">Corporate</option>
+                <option value="MSME">MSME Partner</option>
+                <option value="Student">Student</option>
+                <option value="General Public">General Public</option>
+                <option value="Investor">Investor</option>
+                <option value="Dealer">Dealer</option>
+                <option value="Distributor">Distributor</option>
+              </select>
+              <span class="filter-select-arrow">▼</span>
+            </div>
+
+            <div class="filter-input-wrap">
+              <select class="filter-select" id="visitor-filter-status" onchange="renderVisitorsTable()">
+                <option value="">All Statuses</option>
+                <option value="registered">Registered</option>
+                <option value="checked_in">Checked-In</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <span class="filter-select-arrow">▼</span>
+            </div>
+
+            <input type="text" class="filter-text-input" id="visitor-search-query" placeholder="Search name, company, email..." oninput="renderVisitorsTable()">
+          </div>
+          <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-dim);" id="visitor-table-count">0 Visitors matching</div>
+        </div>
+
+        <!-- Visitors list Table -->
+        <div class="table-container">
+          <table class="datatable" id="visitors-table">
+            <thead>
+              <tr>
+                <th>Reg ID</th>
+                <th>Visitor Name</th>
+                <th>Company</th>
+                <th>Phone &amp; Email</th>
+                <th>Location</th>
+                <th>Category</th>
+                <th>Attendance</th>
+                <th style="width: 140px; text-anchor: middle;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="visitors-table-body">
+              <!-- dynamic list -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MODULE 3: CORPORATE SPONSORSHIPS -->
+      <div class="view-pane" id="view-sponsors">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Sponsors Directory Packages</h2>
+            <p>Track branding packages invoices, benefit logs, and agreement certificates.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" id="btn-add-sponsor-trigger" onclick="openSponsorModal(null)">➕ Add Sponsor Profile</button>
+            <button class="btn-action-outline" onclick="exportModuleData('sponsors')">📥 Export Sponsors CSV</button>
+          </div>
+        </div>
+
+        <!-- Sponsor Filter -->
+        <div class="filter-bar">
+          <div class="filter-group-inputs">
+            <input type="text" class="filter-text-input" id="sponsor-search-query" placeholder="Search sponsors..." oninput="renderSponsorsTable()">
+          </div>
+          <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-dim);" id="sponsor-table-count">0 Sponsors matching</div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+          <table class="datatable" id="sponsors-table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Sponsorship Package</th>
+                <th>Contact Representative</th>
+                <th>Email Address</th>
+                <th>Contract Amount (Net)</th>
+                <th>Agreement Files</th>
+                <th>Invoice Status</th>
+                <th style="width: 120px; text-anchor: middle;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="sponsors-table-body">
+              <!-- dynamic sponsor rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MODULE 4 & 5: SUMMIT TIMETABLE & SPEAKERS DIRECTORY -->
+      <div class="view-pane" id="view-program">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Summit Agenda Program &amp; Speakers</h2>
+            <p>Build Day 1 &amp; Day 2 timeline schedules, drag to reorder sessions, and manage speaker listings.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" id="btn-create-session-trigger" onclick="openSessionModal(null)">➕ Add Session</button>
+            <button class="btn-action-primary" id="btn-add-speaker-trigger" onclick="openSpeakerModal(null)">➕ Add Speaker</button>
+          </div>
+        </div>
+
+        <!-- Split Layout: Left sessions drag list | Right speakers directory -->
+        <div class="split-pane-layout">
+          <!-- Left: Agenda timeline builder -->
+          <div class="card-panel">
+            <div class="panel-title">Timetable Sessions builder</div>
+            
+            <div class="agenda-day-tabs-row">
+              <button class="agenda-day-tab active" id="day-tab-1" onclick="switchAgendaDayTab(1)">Day 1 — 3rd July</button>
+              <button class="agenda-day-tab" id="day-tab-2" onclick="switchAgendaDayTab(2)">Day 2 — 4th July</button>
+            </div>
+
+            <p style="font-size:0.68rem; color:var(--text-muted); margin-bottom:12px;">💡 Drag and drop session cards vertically to adjust sorting sequence. Published sessions sync to website instantly.</p>
+            
+            <div id="agenda-sessions-list" style="display:flex; flex-direction:column; gap:10px;">
+              <!-- dynamic session list cards -->
+            </div>
+          </div>
+
+          <!-- Right: Speaker list -->
+          <div class="card-panel" style="height:fit-content;">
+            <div class="panel-title">Speakers Directory</div>
+            <div id="speakers-list" style="display:flex; flex-direction:column; gap:10px; max-height: 520px; overflow-y:auto;">
+              <!-- dynamic speakers -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 6 & 7: MARKETING CAMPAIGNS & CONTACT INQUIRIES -->
+      <div class="view-pane" id="view-marketing">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Marketing Campaigns &amp; Site Inquiries</h2>
+            <p>Track WhatsApp/Email funnel conversions and process B2B inquiries submitted from public forms.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" onclick="openCampaignModal()">➕ Create Campaign Blast</button>
+          </div>
+        </div>
+
+        <div class="split-pane-layout">
+          <!-- Left: Marketing campaigns -->
+          <div class="card-panel">
+            <div class="panel-title">Campaign Conversion Funnels</div>
+            <div id="marketing-campaigns-list" style="display:flex; flex-direction:column; gap:12px; max-height:500px; overflow-y:auto;">
+              <!-- dynamic list -->
+            </div>
+          </div>
+
+          <!-- Right: Inquiries CRM -->
+          <div class="card-panel" style="grid-column: 1 / -1;">
+            <div class="panel-title">
+              B2B website inquiries board
+              <div style="display:flex; gap:8px;">
+                <select class="filter-select" id="inq-filter-type" style="padding: 2px 20px 2px 8px; font-size:10px;" onchange="renderInquiriesTable()">
+                  <option value="">All Types</option>
+                  <option value="exhibitor">Exhibitor</option>
+                  <option value="sponsor">Sponsor</option>
+                  <option value="visitor">Visitor Inquiry</option>
+                </select>
+                <select class="filter-select" id="inq-filter-status" style="padding: 2px 20px 2px 8px; font-size:10px;" onchange="renderInquiriesTable()">
+                  <option value="">All Statuses</option>
+                  <option value="new">New</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Inquiries table -->
+            <div class="table-container">
+              <table class="datatable" id="inquiries-table">
+                <thead>
+                  <tr>
+                    <th>Partner / Sender</th>
+                    <th>Type</th>
+                    <th>Contact Info</th>
+                    <th>Inquiry Message</th>
+                    <th>Assigned Executive</th>
+                    <th>Status</th>
+                    <th style="width: 140px; text-anchor: middle;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inquiries-table-body">
+                  <!-- dynamic inquiries rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 8 & 13: CENTRALIZED MEDIA GALLERY & DOCUMENTS -->
+      <div class="view-pane" id="view-media">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Centralized Media Gallery &amp; Documents</h2>
+            <p>Manage press kit PDFs, floor blueprints, sponsor brochure decks, and public site media assets.</p>
+          </div>
+        </div>
+
+        <div class="split-pane-layout">
+          <!-- Left: Document Repository -->
+          <div class="card-panel">
+            <div class="panel-title">Documents center (Contracts &amp; brochures)</div>
+            
+            <div style="background:var(--bg-section); padding:10px; border-radius:6px; border:1px dashed var(--border-cu); margin-bottom:12px; text-align:center;">
+              <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim); display:block; margin-bottom:4px;">Upload Document Asset</span>
+              <input type="file" onchange="handleDocumentRepoUpload(this)" style="font-size:10px;">
+            </div>
+
+            <div id="documents-list-container" style="display:flex; flex-direction:column; gap:8px;">
+              <!-- dynamic documents -->
+            </div>
+          </div>
+
+          <!-- Right: Event Media Gallery -->
+          <div class="card-panel">
+            <div class="panel-title">
+              Public site media gallery
+              <select class="filter-select" id="gallery-filter-category" style="padding: 2px 20px 2px 8px; font-size:10px;" onchange="renderMediaGalleryGrid()">
+                <option value="">All Categories</option>
+                <option value="Event Photos">Event Photos</option>
+                <option value="Sponsor Photos">Sponsor Photos</option>
+                <option value="Venue Photos">Venue Photos</option>
+                <option value="Press Photos">Press Photos</option>
+              </select>
+            </div>
+
+            <div style="background:var(--bg-section); padding:10px; border-radius:6px; border:1px dashed var(--border-cu); margin-bottom:12px; text-align:center;">
+              <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim); display:block; margin-bottom:4px;">Upload Photo to Gallery</span>
+              <div style="display:flex; gap:6px; justify-content:center; align-items:center;">
+                <select id="gallery-upload-category-input" class="filter-select" style="font-size:10px; padding:2px;">
+                  <option value="Event Photos">Event Photo</option>
+                  <option value="Sponsor Photos">Sponsor Photo</option>
+                  <option value="Venue Photos">Venue Photo</option>
+                  <option value="Press Photos">Press Photo</option>
+                </select>
+                <input type="file" accept="image/*" onchange="handleGalleryPhotoUpload(this)" style="font-size:10px; width:150px;">
+              </div>
+            </div>
+
+            <div class="gallery-grid" id="media-gallery-grid-container">
+              <!-- dynamic photo thumbnails -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 10 & 11: ADVANCED REPORTING HUB -->
+      <div class="view-pane" id="view-reports">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Analytics &amp; Reporting Centre</h2>
+            <p>Inspect visitor registrations trend line, sponsors funding metrics, and export auditing sheets.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" onclick="triggerReportPrint()">🖨️ Print Active Report</button>
+            <button class="btn-action-outline" onclick="triggerReportExportCSV()">📥 Export CSV Sheets</button>
+          </div>
+        </div>
+
+        <div class="split-pane-layout">
+          <!-- Left: Reports Navigation -->
+          <div class="card-panel" style="height:fit-content;">
+            <div class="panel-title">Audit Reports list</div>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <button class="sidebar-menu-btn report-type-btn active" id="report-btn-visitor" onclick="switchReportTab('visitor')">👥 Visitor Attendance Report</button>
+              <button class="sidebar-menu-btn report-type-btn" id="report-btn-sponsor" onclick="switchReportTab('sponsor')">🏆 Sponsors Funding Report</button>
+              <button class="sidebar-menu-btn report-type-btn" id="report-btn-exhibitor" onclick="switchReportTab('exhibitor')">🤝 Exhibitor Allocation Audit</button>
+              <button class="sidebar-menu-btn report-type-btn" id="report-btn-revenue" onclick="switchReportTab('revenue')">💰 Cash Revenue Ledger</button>
+              <button class="sidebar-menu-btn report-type-btn" id="report-btn-leads" onclick="switchReportTab('leads')">📈 CRM Leads Funnel progress</button>
+            </div>
+          </div>
+
+          <!-- Right: Visual audit report card frame (printable) -->
+          <div class="card-panel" id="printable-report-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid var(--copper); padding-bottom:8px; margin-bottom:15px;">
+              <div>
+                <h4 style="font-family:var(--font-display); font-size:1.1rem; font-weight:800; color:var(--text);" id="report-summary-title">Visitor Attendance Audit Report</h4>
+                <span style="font-size:9.5px; text-transform:uppercase; color:var(--text-muted); font-weight:700; letter-spacing:1px;">IRE EXPO HYDERABAD 2026</span>
+              </div>
+              <span style="font-size:0.65rem; color:var(--text-muted); text-align:right;">Generated Date: 2026-06-05<br>Scope: Phase 2 Database</span>
+            </div>
+
+            <div id="report-summary-details">
+              <!-- dynamic details reports -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic analytics visualization cards (SVG graphics) -->
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; margin-top:1.25rem;">
+          <div class="card-panel">
+            <div class="panel-title">Visitor Registrations Trend</div>
+            <svg id="chart-visitor-trend" width="320" height="120" style="width:100%; display:block; margin: 0 auto;"></svg>
+          </div>
+          <div class="card-panel">
+            <div class="panel-title">Revenue by Sponsor Tier</div>
+            <svg id="chart-sponsor-progress" width="320" height="120" style="width:100%; display:block; margin: 0 auto;"></svg>
+          </div>
+          <div class="card-panel">
+            <div class="panel-title">Stall occupancy Tiers</div>
+            <div style="display:flex; justify-content:center; align-items:center; gap:10px;">
+              <svg id="chart-category-occupancy" width="140" height="140" style="transform:rotate(-90deg);">
+                <circle cx="70" cy="70" r="45" fill="none" stroke="var(--bg-section)" stroke-width="16" />
+                <text x="70" y="70" id="pie-center-num" font-family="var(--font-display)" font-size="20px" font-weight="800" text-anchor="middle" fill="var(--text)" transform="rotate(90 70 70)">0</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 12 & 14: WEBSITE CONTENT MANAGER & PUBLIC REGISTRATION SETTINGS -->
+      <div class="view-pane" id="view-settings">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Site Content Manager &amp; Public Settings</h2>
+            <p>Update landing page hero text block titles, close registration triggers, and configure visitor limit rules.</p>
+          </div>
+        </div>
+
+        <div class="split-pane-layout">
+          <!-- Left: Website Content Manager (Module 12) -->
+          <div class="card-panel">
+            <div class="panel-title">Public Webpage Content manager</div>
+            <form id="website-content-form" onsubmit="saveWebsiteContentManager(event)" novalidate>
+              <div class="modal-form-group">
+                <label for="site-edit-hero-title">Landing Hero main Header (HTML support) *</label>
+                <input type="text" id="site-edit-hero-title" required placeholder="e.g. India Renewable Energy &lt;span&gt;Expo 2026&lt;/span&gt;">
+              </div>
+
+              <div class="modal-form-group">
+                <label for="site-edit-about-text">About Section Paragraph *</label>
+                <textarea id="site-edit-about-text" required style="min-height:120px;" placeholder="Type main about overview..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-action-primary">⚡ Update Website content</button>
+            </form>
+          </div>
+
+          <!-- Right: Registration Settings (Module 14) -->
+          <div class="card-panel" style="height:fit-content;">
+            <div class="panel-title">Public registration settings</div>
+            <form id="public-reg-settings-form" onsubmit="savePublicRegSettings(event)" novalidate>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:15px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim);">Open Visitor Registrations</span>
+                  <input type="checkbox" id="set-reg-open" style="width:20px; height:20px; cursor:pointer;">
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim);">Max Registration capacity limit</span>
+                  <input type="number" id="set-reg-limit" style="width:70px; padding:3px; font-size:11px;" placeholder="5000">
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim);">Requires Admin Approval</span>
+                  <input type="checkbox" id="set-reg-approval" style="width:20px; height:20px; cursor:pointer;">
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim);">Generate QR pass Badges</span>
+                  <input type="checkbox" id="set-reg-qr" style="width:20px; height:20px; cursor:pointer;">
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim);">Enable Email Confirmation</span>
+                  <input type="checkbox" id="set-reg-email" style="width:20px; height:20px; cursor:pointer;">
+                </div>
+              </div>
+
+              <button type="submit" class="btn-action-primary">⚡ Save Settings parameters</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE: SPONSOR APPLICATIONS -->
+      <div class="view-pane" id="view-sponsor-apps">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Corporate Sponsor Applications</h2>
+            <p>Review and approve incoming B2B sponsorship package requests.</p>
+          </div>
+        </div>
+        
+        <!-- Sponsor Apps list Table -->
+        <div class="table-container">
+          <table class="datatable">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Contact Representative</th>
+                <th>Phone &amp; Email</th>
+                <th>Industry Segment</th>
+                <th>Requested Package</th>
+                <th>Sponsorship Amount</th>
+                <th>Status</th>
+                <th style="width: 160px; text-anchor: middle;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="sponsor-apps-table-body">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MODULE: TASK MANAGER -->
+      <div class="view-pane" id="view-tasks">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Organiser Task Management</h2>
+            <p>Create, edit, assign, and track operational tasks for expo staff teams.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" onclick="openAddTaskModal()">➕ Add Task</button>
+          </div>
+        </div>
+        
+        <!-- Filters -->
+        <div class="filter-bar">
+          <div class="filter-group-inputs">
+            <select class="filter-select" id="task-filter-status" onchange="renderTasksTable()">
+              <option value="">All Statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+            <select class="filter-select" id="task-filter-category" onchange="renderTasksTable()">
+              <option value="">All Categories</option>
+              <option value="Sales">Sales</option>
+              <option value="Venue">Venue</option>
+              <option value="Sponsor">Sponsor</option>
+              <option value="Marketing">Marketing</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="datatable">
+            <thead>
+              <tr>
+                <th>Task Title</th>
+                <th>Priority</th>
+                <th>Deadline</th>
+                <th>Assigned Staff</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th style="width: 160px; text-anchor: middle;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tasks-table-body">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- MODULE: EXHIBITOR PORTAL -->
+      <div class="view-pane" id="view-exhibitor-portal">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Exhibitor Self-Service Portal
+              <select id="ex-portal-company-switcher" onchange="switchPortalExhibitor(this.value)" style="font-size:12px; margin-left:10px; padding:3px 10px; border-radius:4px; font-weight:normal; font-family:var(--font);">
+                <!-- populated dynamically -->
+              </select>
+            </h2>
+            <p>Configure company profile, download documents, and check meeting requests.</p>
+          </div>
+        </div>
+        
+        <div class="split-pane-layout">
+          <!-- Left: Profile and Uploads -->
+          <div class="card-panel">
+            <div class="panel-title">Upload Profile &amp; Brochure</div>
+            <div style="margin-bottom:1.5rem;">
+              <h4 style="font-size:0.8rem; margin-bottom:8px; color:var(--text-dim);">Exhibitor Information</h4>
+              <p><strong>Company:</strong> <span id="ex-portal-company">—</span></p>
+              <p><strong>Stall Assigned:</strong> <span id="ex-portal-stall" style="color:var(--copper); font-weight:700;">—</span></p>
+              <p><strong>GSTIN:</strong> <span id="ex-portal-gstin">—</span></p>
+            </div>
+            
+            <form id="exhibitor-uploader-form" onsubmit="uploadExhibitorDocFromPortal(event)">
+              <div class="modal-form-group">
+                <label>Upload Corporate Brochure (PDF)</label>
+                <input type="file" id="ex-portal-brochure-file" required style="font-size:0.75rem; width:100%; border:1px dashed var(--border-cu); padding:8px; border-radius:4px; margin-bottom:10px;">
+              </div>
+              <button type="submit" class="btn-action-primary">⚡ Upload Brochure</button>
+            </form>
+
+            <div style="margin-top:1.5rem;">
+              <h4 style="font-size:0.8rem; margin-bottom:8px; color:var(--text-dim);">Uploaded Documents</h4>
+              <ul id="ex-portal-docs-list" style="font-size:0.75rem; color:var(--text-muted); list-style:none; padding-left:0;">
+                <!-- list of files -->
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Right: Payments, Invoices and Downloads -->
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            <div class="card-panel">
+              <div class="panel-title">Payment &amp; Invoices</div>
+              <div style="margin-bottom:1rem;">
+                <p><strong>Status:</strong> <span class="status-badge" id="ex-portal-payment-status">PENDING</span></p>
+                <p><strong>Total Due:</strong> <span id="ex-portal-payment-due">₹0</span></p>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button class="btn-action-outline" onclick="downloadExhibitorInvoice()">🖨️ Download GST Invoice</button>
+                <button class="btn-action-outline" id="ex-portal-cert-btn" disabled onclick="downloadExhibitorCert()">🎓 Print Participation Certificate</button>
+              </div>
+            </div>
+
+            <!-- B2B Networking Schedules -->
+            <div class="card-panel">
+              <div class="panel-title">B2B Networking Calendar</div>
+              <p style="font-size:0.72rem; color:var(--text-muted); margin-bottom:1rem;">Manage meeting requests from registered visitor delegates.</p>
+              <table class="datatable" style="font-size:0.7rem;">
+                <thead>
+                  <tr>
+                    <th>Visitor</th>
+                    <th>Date / Time</th>
+                    <th>Notes</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="ex-portal-meetings-tbody">
+                  <!-- meetings list -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ==========================================
+       POPUP SPA MODALS (PHASE 2 EXPANDED)
+       ========================================== -->
+       
+  <!-- MODAL A: CREATE/EDIT STALL -->
+  <div class="modal-overlay" id="modal-stall">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="stall-modal-title">Create New Stall</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-stall')">&times;</button>
+      </div>
+      <form id="stall-modal-form" onsubmit="submitStallForm(event)" novalidate>
+        <input type="hidden" id="stall-modal-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="stall-id-input">Stall Identifier *</label>
+              <input type="text" id="stall-id-input" required placeholder="e.g. A5 or D12">
+            </div>
+            <div class="modal-form-group">
+              <label for="stall-block-input">Floor Grid Block *</label>
+              <select id="stall-block-input" required>
+                <option value="A">Block A (Top Wall)</option>
+                <option value="B">Block B (Left Wall)</option>
+                <option value="C">Block C (Right Wall)</option>
+                <option value="D">Block D (Centre Clusters)</option>
+                <option value="E">Block E (VIP/Entry)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="stall-category-input">Category Tier *</label>
+              <select id="stall-category-input" required>
+                <option value="Gold">Gold Tier</option>
+                <option value="Diamond">Diamond Tier</option>
+                <option value="Standard">Standard Tier</option>
+                <option value="VIP">VIP Lounge Tier</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="stall-size-input">Stall Dimensions (W x L) *</label>
+              <input type="text" id="stall-size-input" required placeholder="e.g. 10ft x 10ft or 9m x 5.7m">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="stall-price-input">Net Floor Rate (INR) *</label>
+              <input type="number" id="stall-price-input" required placeholder="e.g. 136000">
+            </div>
+            <div class="modal-form-group">
+              <label for="stall-status-input">Inventory status *</label>
+              <select id="stall-status-input" required>
+                <option value="available">Available</option>
+                <option value="reserved">Reserved</option>
+                <option value="payment_pending">Payment Pending</option>
+                <option value="sold">Sold</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="stall-company-input">Assigned Company Partner (Optional)</label>
+            <input type="text" id="stall-company-input" placeholder="e.g. Tata Motors Ltd">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-stall')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Save Stall Configuration</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL B: CREATE/EDIT LEAD -->
+  <div class="modal-overlay" id="modal-lead">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="lead-modal-title">Add New Business Lead</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-lead')">&times;</button>
+      </div>
+      <form id="lead-modal-form" onsubmit="submitLeadForm(event)" novalidate>
+        <input type="hidden" id="lead-modal-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="lead-company-input">Company Name *</label>
+              <input type="text" id="lead-company-input" required placeholder="e.g. Ola Solars">
+            </div>
+            <div class="modal-form-group">
+              <label for="lead-segment-input">Clean Energy Segment *</label>
+              <select id="lead-segment-input" required>
+                <option value="Solar PV">Solar PV</option>
+                <option value="Electric Vehicles">Electric Vehicles</option>
+                <option value="BESS">Battery Storage (BESS)</option>
+                <option value="Charging">Charging Infrastructure</option>
+                <option value="Wind">Wind Energy</option>
+                <option value="General">General / Smart Grid</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="lead-contact-input">Contact Person *</label>
+              <input type="text" id="lead-contact-input" required placeholder="e.g. Rajesh Kumar">
+            </div>
+            <div class="modal-form-group">
+              <label for="lead-phone-input">Phone Number *</label>
+              <input type="tel" id="lead-phone-input" required pattern="^[6-9]\d{9}$" placeholder="10-digit mobile">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="lead-email-input">Email Address *</label>
+              <input type="email" id="lead-email-input" required placeholder="e.g. contact@company.com">
+            </div>
+            <div class="modal-form-group">
+              <label for="lead-source-input">Lead Acquisition Source *</label>
+              <select id="lead-source-input" required>
+                <option value="Website Form">Website Contact Form</option>
+                <option value="Visitor Reg">Visitor Registry Portal</option>
+                <option value="Direct Call">Direct Phone Call</option>
+                <option value="Referral">Business Referral</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="lead-city-input">City *</label>
+              <input type="text" id="lead-city-input" required placeholder="e.g. Hyderabad">
+            </div>
+            <div class="modal-form-group">
+              <label for="lead-state-input">State *</label>
+              <input type="text" id="lead-state-input" required placeholder="e.g. Telangana">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="lead-owner-input">Assigned Lead Owner *</label>
+              <select id="lead-owner-input" required>
+                <option value="Hari Prasad">Hari Prasad</option>
+                <option value="Suprabha Manager">Suprabha Manager</option>
+                <option value="Raju Kumar">Raju Kumar (Sales Exec)</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="lead-status-input">Pipeline Status *</label>
+              <select id="lead-status-input" required>
+                <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="interested">Interested</option>
+                <option value="proposal_sent">Proposal Sent</option>
+                <option value="negotiation">Negotiation</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="lost">Lost</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="lead-notes-input">Communication Notes & Follow-ups</label>
+            <textarea id="lead-notes-input" placeholder="Type historical comments..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-lead')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Save Lead Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL C: CONVERT LEAD TO EXHIBITOR -->
+  <div class="modal-overlay" id="modal-convert">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Convert Lead to Confirmed Exhibitor</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-convert')">&times;</button>
+      </div>
+      <form id="convert-lead-form" onsubmit="submitLeadConversion(event)" novalidate>
+        <input type="hidden" id="convert-lead-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label>Lead Company Profile</label>
+            <input type="text" id="convert-company-display" readonly style="background:#eee; font-weight:700;">
+          </div>
+          
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="convert-gstin-input">Company GSTIN Number *</label>
+              <input type="text" id="convert-gstin-input" required pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$" placeholder="e.g. 36AAAAA1111A1Z1">
+            </div>
+            <div class="modal-form-group">
+              <label for="convert-category-input">Exhibitor Category *</label>
+              <select id="convert-category-input" required>
+                <option value="Solar EPC Partner">Solar EPC Partner</option>
+                <option value="EV OEM Manufacturer">EV OEM Manufacturer</option>
+                <option value="BESS Storage Integrator">BESS Storage Integrator</option>
+                <option value="Government Department">Government Department</option>
+                <option value="MSME Supplier">MSME Supplier</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="convert-stall-input">Assign Stalls Grid Placement *</label>
+            <select id="convert-stall-input" required onchange="updateConvertPriceMeta(this.value)">
+              <!-- Dynamic available list -->
+            </select>
+          </div>
+
+          <div style="background:var(--bg-section); border:1px solid var(--border-cu); border-radius:6px; padding: 12px; margin-top: 10px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.76rem; font-weight:700; color:var(--text-dim);">
+              <span>Stall Dimensions:</span>
+              <span id="convert-meta-size">-</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.76rem; font-weight:700; color:var(--text-dim); margin-top: 5px;">
+              <span>Base Rate (Excl GST):</span>
+              <span id="convert-meta-price">₹0.00</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.76rem; font-weight:700; color:var(--text); margin-top: 5px; border-top:1px dashed rgba(0,0,0,0.1); padding-top:5px;">
+              <span>Invoiced Total (Incl 18% GST):</span>
+              <span id="convert-meta-total" style="color:var(--copper); font-size: 0.84rem;">₹0.00</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-convert')">Cancel</button>
+          <button type="submit" class="btn-action-primary">🎉 Finalise & Convert</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL D: CREATE/EDIT EXHIBITOR -->
+  <div class="modal-overlay" id="modal-exhibitor">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="exhibitor-modal-title">Add Exhibitor Profile</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-exhibitor')">&times;</button>
+      </div>
+      <form id="exhibitor-modal-form" onsubmit="submitExhibitorForm(event)" novalidate>
+        <input type="hidden" id="exhibitor-modal-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="exh-company-input">Company Name *</label>
+              <input type="text" id="exh-company-input" required placeholder="e.g. Tata Clean Energy">
+            </div>
+            <div class="modal-form-group">
+              <label for="exh-gstin-input">GSTIN Number *</label>
+              <input type="text" id="exh-gstin-input" required placeholder="e.g. 36AAAAA1111A1Z1">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="exh-contact-input">Contact Person *</label>
+              <input type="text" id="exh-contact-input" required placeholder="e.g. Harish Kumar">
+            </div>
+            <div class="modal-form-group">
+              <label for="exh-phone-input">Phone Number *</label>
+              <input type="tel" id="exh-phone-input" required placeholder="e.g. 9849400000">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="exh-email-input">Email Address *</label>
+              <input type="email" id="exh-email-input" required placeholder="e.g. support@tata.com">
+            </div>
+            <div class="modal-form-group">
+              <label for="exh-web-input">Website URL</label>
+              <input type="url" id="exh-web-input" placeholder="e.g. https://tata.com">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="exh-category-input">Category Tier *</label>
+              <select id="exh-category-input" required>
+                <option value="Solar EPC Partner">Solar EPC Partner</option>
+                <option value="EV OEM Manufacturer">EV OEM Manufacturer</option>
+                <option value="BESS Storage Integrator">BESS Storage Integrator</option>
+                <option value="Government Department">Government Department</option>
+                <option value="MSME Supplier">MSME Supplier</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="exh-stall-input">Assigned Stall Booth *</label>
+              <select id="exh-stall-input" required>
+                <!-- Dynamically populated -->
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="exh-address-input">Full Office Address</label>
+            <textarea id="exh-address-input" placeholder="Type full postal address..."></textarea>
+          </div>
+
+          <div class="modal-form-group">
+            <label>Upload Document Assets (PDF/Image)</label>
+            <input type="file" accept=".pdf,image/*" onchange="uploadExhibitorDocFromModal(this)" style="font-size:0.75rem;">
+            <div class="uploaded-files-list" id="modal-exh-files-list">
+              <!-- Files listed dynamically -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-exhibitor')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Save Exhibitor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL E: RECORD / MANAGE PAYMENTS -->
+  <div class="modal-overlay" id="modal-payment">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Record Payment Transaction</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-payment')">&times;</button>
+      </div>
+      <form id="payment-modal-form" onsubmit="submitPaymentTransaction(event)" novalidate>
+        <input type="hidden" id="payment-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label>Exhibitor Partner</label>
+              <input type="text" id="payment-company-display" readonly style="background:#eee; font-weight:700;">
+            </div>
+            <div class="modal-form-group">
+              <label>Assigned Booth</label>
+              <input type="text" id="payment-stall-display" readonly style="background:#eee;">
+            </div>
+          </div>
+
+          <div style="background:var(--bg-section); padding: 10px; border-radius:6px; border:1px solid var(--border-cu); margin-bottom:12px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.72rem; font-weight:700; color:var(--text-dim);">
+              <span>Total Invoice Amount (Gross):</span>
+              <span id="payment-gross-invoiced">₹0</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.72rem; font-weight:700; color:var(--text-dim); margin-top:3px;">
+              <span>Balance Paid to Date:</span>
+              <span id="payment-balance-paid" style="color:var(--status-available);">₹0</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.72rem; font-weight:700; color:var(--text); margin-top:3px; border-top:1px dashed rgba(0,0,0,0.1); padding-top:4px;">
+              <span>Net Receivable Balance:</span>
+              <span id="payment-receivable-deficit" style="color:var(--status-sold);">₹0</span>
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="payment-record-amount">Transaction Amount (INR) *</label>
+              <input type="number" id="payment-record-amount" required placeholder="e.g. 50000">
+            </div>
+            <div class="modal-form-group">
+              <label for="payment-record-method">Payment Mode *</label>
+              <select id="payment-record-method" required>
+                <option value="UPI / QR">UPI / QR Transfer</option>
+                <option value="NEFT / RTGS">Bank NEFT/RTGS</option>
+                <option value="Credit / Debit Card">Credit / Debit Card</option>
+                <option value="Cheque Clearance">Bank Cheque</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="payment-record-date">Transaction Date *</label>
+              <input type="date" id="payment-record-date" required>
+            </div>
+            <div class="modal-form-group">
+              <label for="payment-record-ref">Bank Reference / Txn ID *</label>
+              <input type="text" id="payment-record-ref" required placeholder="e.g. TXN10293847">
+            </div>
+          </div>
+
+          <div style="margin-top: 10px;">
+            <span style="font-size:0.68rem; font-weight:700; text-transform:uppercase; color:var(--text-dim); display:block; margin-bottom:5px;">Ledger History Logs</span>
+            <div class="uploaded-files-list" id="payment-ledger-history-list" style="max-height: 120px; overflow-y:auto;">
+              <!-- History logs in list -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-payment')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Commit Transaction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL F: CREATE / EDIT VISITOR (MODULE 1) -->
+  <div class="modal-overlay" id="modal-visitor">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="visitor-modal-title">Register Visitor Pass</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-visitor')">&times;</button>
+      </div>
+      <form id="visitor-modal-form" onsubmit="submitVisitorForm(event)" novalidate>
+        <input type="hidden" id="visitor-modal-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="v-name-input">Visitor Full Name *</label>
+              <input type="text" id="v-name-input" required placeholder="e.g. Harish Kumar">
+            </div>
+            <div class="modal-form-group">
+              <label for="v-company-input">Company Name *</label>
+              <input type="text" id="v-company-input" required placeholder="e.g. Reliance Clean PV">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="v-phone-input">Phone Number *</label>
+              <input type="tel" id="v-phone-input" required placeholder="e.g. 9849400000">
+            </div>
+            <div class="modal-form-group">
+              <label for="v-email-input">Email Address *</label>
+              <input type="email" id="v-email-input" required placeholder="e.g. name@reliance.com">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="v-desig-input">Designation *</label>
+              <input type="text" id="v-desig-input" required placeholder="e.g. Director, Engineer">
+            </div>
+            <div class="modal-form-group">
+              <label for="v-type-input">Visitor Category *</label>
+              <select id="v-type-input" required>
+                <option value="Government">Government Delegate</option>
+                <option value="Corporate">Corporate Visitor</option>
+                <option value="MSME">MSME Industrialist</option>
+                <option value="Student">Academic / Student</option>
+                <option value="General Public">General Public</option>
+                <option value="Investor">Investor Partner</option>
+                <option value="Dealer">Equipment Dealer</option>
+                <option value="Distributor">Distributor</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="v-city-input">City *</label>
+              <input type="text" id="v-city-input" required placeholder="e.g. Hyderabad">
+            </div>
+            <div class="modal-form-group">
+              <label for="v-state-input">State *</label>
+              <input type="text" id="v-state-input" required placeholder="e.g. Telangana">
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="v-status-input">Attendance Status *</label>
+            <select id="v-status-input" required>
+              <option value="registered">Registered</option>
+              <option value="checked_in">Checked-In</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-visitor')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Save Visitor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL G: QR PASS VIEW TICKET (MODULE 2) -->
+  <div class="modal-overlay" id="modal-qr-pass">
+    <div class="visitor-pass-modal-box">
+      <div class="visitor-pass-top">
+        <button class="modal-close-btn" style="position:absolute; top:10px; right:12px; color:#fff;" onclick="closeModal('modal-qr-pass')">&times;</button>
+        <div style="font-size:1.15rem; width:28px; height:28px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold-lt); margin: 0 auto 5px;">⚡</div>
+        <h4 style="font-family:var(--font-display); font-size:0.85rem; font-weight:800;">IRE EXPO HYDERABAD 2026</h4>
+        <span style="font-size:8px; color:var(--gold-lt); font-weight:800; text-transform:uppercase; letter-spacing:1px;">Visitor Entry Pass</span>
+      </div>
+      <div class="visitor-pass-body">
+        <div class="visitor-pass-qr">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <rect width="100" height="100" fill="#fff" />
+            <rect x="8" y="8" width="28" height="28" fill="#000" />
+            <rect x="12" y="12" width="20" height="20" fill="#fff" />
+            <rect x="16" y="16" width="12" height="12" fill="#000" />
+            <rect x="64" y="8" width="28" height="28" fill="#000" />
+            <rect x="68" y="12" width="20" height="20" fill="#fff" />
+            <rect x="72" y="16" width="12" height="12" fill="#000" />
+            <rect x="8" y="64" width="28" height="28" fill="#000" />
+            <rect x="12" y="68" width="20" height="20" fill="#fff" />
+            <rect x="16" y="72" width="12" height="12" fill="#000" />
+            <rect x="72" y="72" width="8" height="8" fill="#000" />
+            <rect x="74" y="74" width="4" height="4" fill="#fff" />
+            <rect x="75" y="75" width="2" height="2" fill="#000" />
+            <rect x="40" y="8" width="4" height="8" fill="#000" />
+            <rect x="48" y="12" width="8" height="4" fill="#000" />
+            <rect x="44" y="24" width="12" height="8" fill="#000" />
+            <rect x="8" y="40" width="8" height="4" fill="#000" />
+            <rect x="20" y="44" width="4" height="12" fill="#000" />
+          </svg>
+        </div>
+        
+        <div style="font-family:monospace; font-size:0.9rem; font-weight:800; color:var(--copper); background:var(--bg-section); padding:2px 10px; border-radius:4px;" id="pass-ticket-id">IRE-V-1002</div>
+        
+        <table class="visitor-pass-table">
+          <tr>
+            <td>Name</td>
+            <td id="pass-ticket-name">-</td>
+          </tr>
+          <tr>
+            <td>Company</td>
+            <td id="pass-ticket-company">-</td>
+          </tr>
+          <tr>
+            <td>Designation</td>
+            <td id="pass-ticket-designation">-</td>
+          </tr>
+          <tr>
+            <td>Category</td>
+            <td id="pass-ticket-category" style="color:var(--copper);">-</td>
+          </tr>
+        </table>
+        
+        <button class="btn-action-primary" style="width:100%; justify-content:center; font-size:11px;" onclick="window.print()">🖨️ Download Pass PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL H: CHECK-IN SCANNER SIMULATOR (MODULE 2) -->
+  <div class="modal-overlay" id="modal-scanner">
+    <div class="modal-box" style="max-width:400px;">
+      <div class="modal-header">
+        <h3>Gate QR Scanner Simulator</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-scanner')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">ℹ️ Search for a registration pass ID or select a pending visitor from the list to simulate check-in scanner feedback.</p>
+        
+        <div class="modal-form-group" style="margin-bottom:15px;">
+          <label for="scanner-lookup-id">Key in Registration ID</label>
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="scanner-lookup-id" placeholder="e.g. IRE-V-1002" style="padding:5px;">
+            <button class="btn-action-primary" onclick="lookupScannerVisitor(document.getElementById('scanner-lookup-id').value)">Lookup</button>
+          </div>
+        </div>
+
+        <div class="modal-form-group">
+          <label for="scanner-visitor-select">Select Pending Visitor from list</label>
+          <select id="scanner-visitor-select" onchange="lookupScannerVisitor(this.value)">
+            <!-- filled dynamically -->
+          </select>
+        </div>
+
+        <!-- Scanner result preview card -->
+        <div id="scanner-preview-card" style="display:none; background:#e8f5e9; border:1px solid rgba(46,125,50,0.25); border-radius:6px; padding:12px; margin-top:15px;">
+          <div style="font-size:0.65rem; font-weight:800; color:var(--status-available); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:5px;">✓ PASS SCANNED SUCCESSFULLY</div>
+          <div id="scanner-visitor-details">
+            <!-- details -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-action-outline" onclick="closeModal('modal-scanner')">Cancel</button>
+        <button class="btn-action-primary" onclick="submitScannerCheckIn()">⚡ Confirm Gate Check-In</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL I: CREATE/EDIT SPONSOR (MODULE 3) -->
+  <div class="modal-overlay" id="modal-sponsor">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="sponsor-modal-title">Add Sponsor Package</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-sponsor')">&times;</button>
+      </div>
+      <form id="sponsor-modal-form" onsubmit="submitSponsorForm(event)" novalidate>
+        <input type="hidden" id="sponsor-modal-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="s-company-input">Company Name *</label>
+              <input type="text" id="s-company-input" required placeholder="e.g. Goldi Solars">
+            </div>
+            <div class="modal-form-group">
+              <label for="s-type-input">Sponsor Tier *</label>
+              <select id="s-type-input" required>
+                <option value="Title Sponsor">Title Sponsor</option>
+                <option value="Powered By">Powered By</option>
+                <option value="Platinum">Platinum Partner</option>
+                <option value="Gold">Gold Partner</option>
+                <option value="Silver">Silver Partner</option>
+                <option value="Associate Partner">Associate Partner</option>
+                <option value="Knowledge Partner">Knowledge Partner</option>
+                <option value="Media Partner">Media Partner</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="s-contact-input">Contact Person *</label>
+              <input type="text" id="s-contact-input" required placeholder="e.g. Harish Roy">
+            </div>
+            <div class="modal-form-group">
+              <label for="s-phone-input">Phone Number *</label>
+              <input type="tel" id="s-phone-input" required placeholder="e.g. 9849400000">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="s-email-input">Email Address *</label>
+              <input type="email" id="s-email-input" required placeholder="e.g. info@company.com">
+            </div>
+            <div class="modal-form-group">
+              <label for="s-amount-input">Package Amount (INR) *</label>
+              <input type="number" id="s-amount-input" required placeholder="e.g. 1500000">
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="s-benefits-input">Benefits Included</label>
+            <textarea id="s-benefits-input" placeholder="e.g. Logo on all visitor badges, VIP booth..."></textarea>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="s-status-input">Contract Status *</label>
+              <select id="s-status-input" required>
+                <option value="interested">Interested</option>
+                <option value="negotiation">Negotiation</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="paid">Paid</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label>Agreement Document File</label>
+              <input type="file" accept=".pdf,image/*" onchange="uploadSponsorAgreement(this)" style="font-size:10px;">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-sponsor')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Save Sponsor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL J: CREATE/EDIT PROGRAM SESSION (MODULE 4) -->
+  <div class="modal-overlay" id="modal-session">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="session-modal-title">Create Program Session</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-session')">&times;</button>
+      </div>
+      <form id="session-modal-form" onsubmit="submitSessionForm(event)" novalidate>
+        <input type="hidden" id="session-modal-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label for="ses-title-input">Session Title *</label>
+            <input type="text" id="ses-title-input" required placeholder="e.g. Inaugration & Keynote address">
+          </div>
+
+          <div class="modal-form-group">
+            <label for="ses-desc-input">Session Description</label>
+            <textarea id="ses-desc-input" placeholder="Type topic parameters..."></textarea>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="ses-speaker-input">Assigned Speaker🎙️</label>
+              <select id="ses-speaker-input">
+                <!-- dynamic -->
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="ses-venue-input">Conference Venue Hall *</label>
+              <input type="text" id="ses-venue-input" required placeholder="e.g. Hall A Conference Stage">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="ses-day-input">Exhibition Day *</label>
+              <select id="ses-day-input" required>
+                <option value="1">Day 1 — 3rd July</option>
+                <option value="2">Day 2 — 4th July</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="ses-type-input">Session Type *</label>
+              <select id="ses-type-input" required>
+                <option value="Keynote">Keynote Address</option>
+                <option value="Panel Discussion">Panel Discussion</option>
+                <option value="Workshop">Technical Workshop</option>
+                <option value="Product Launch">Product Launch</option>
+                <option value="Networking">Networking Mixer</option>
+                <option value="Award Ceremony">Award Ceremony</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="ses-start-input">Start Time *</label>
+              <input type="text" id="ses-start-input" required placeholder="e.g. 09:00 AM">
+            </div>
+            <div class="modal-form-group">
+              <label for="ses-end-input">End Time *</label>
+              <input type="text" id="ses-end-input" required placeholder="e.g. 10:00 AM">
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="ses-pub-input">Timetable visibility *</label>
+            <select id="ses-pub-input" required>
+              <option value="true">Published (Live on Website)</option>
+              <option value="false">Draft (Organiser only)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-session')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Save Session</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL K: CREATE/EDIT SPEAKER PROFILE (MODULE 5) -->
+  <div class="modal-overlay" id="modal-speaker">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="speaker-modal-title">Add Speaker profile</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-speaker')">&times;</button>
+      </div>
+      <form id="speaker-modal-form" onsubmit="submitSpeakerForm(event)" novalidate>
+        <input type="hidden" id="speaker-modal-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="spk-name-input">Speaker Name *</label>
+              <input type="text" id="spk-name-input" required placeholder="e.g. Dr. Girish">
+            </div>
+            <div class="modal-form-group">
+              <label for="spk-desig-input">Designation *</label>
+              <input type="text" id="spk-desig-input" required placeholder="e.g. Secretary MNRE">
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="spk-org-input">Institution / Org *</label>
+              <input type="text" id="spk-org-input" required placeholder="e.g. Ministry of Power">
+            </div>
+            <div class="modal-form-group">
+              <label for="spk-linkedin-input">LinkedIn URL</label>
+              <input type="url" id="spk-linkedin-input" placeholder="e.g. https://linkedin.com/in/...">
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="spk-bio-input">Professional Biography</label>
+            <textarea id="spk-bio-input" placeholder="Type brief speaker summary bio..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-speaker')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Save Speaker</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL L: CREATE MARKETING CAMPAIGN (MODULE 6) -->
+  <div class="modal-overlay" id="modal-campaign">
+    <div class="modal-box" style="max-width:450px;">
+      <div class="modal-header">
+        <h3>Create Marketing Campaign</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-campaign')">&times;</button>
+      </div>
+      <form id="campaign-modal-form" onsubmit="submitCampaignForm(event)" novalidate>
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label for="c-name-input">Campaign Name *</label>
+            <input type="text" id="c-name-input" required placeholder="e.g. WhatsApp June Delegate invites">
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="c-type-input">Marketing Channel *</label>
+              <select id="c-type-input" required>
+                <option value="Email">Email Marketing</option>
+                <option value="WhatsApp">WhatsApp Business API</option>
+                <option value="LinkedIn">LinkedIn Campaigns</option>
+                <option value="Facebook">Facebook Ads</option>
+                <option value="Instagram">Instagram Reels</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="c-sent-input">Recipient Volume count *</label>
+              <input type="number" id="c-sent-input" required placeholder="e.g. 3000">
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="c-aud-input">Audience Target criteria *</label>
+            <input type="text" id="c-aud-input" required placeholder="e.g. Past visitor databases and lead lists">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-campaign')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Deploy Campaign</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL M: REPLY TO WEBSITE B2B INQUIRY (MODULE 7) -->
+  <div class="modal-overlay" id="modal-inq-reply">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Respond to website B2B Inquiry</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-inq-reply')">&times;</button>
+      </div>
+      <form id="inq-reply-modal-form" onsubmit="submitInquiryReply(event)" novalidate>
+        <input type="hidden" id="inq-reply-id-hidden">
+        <div class="modal-body">
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label>Company Sender</label>
+              <input type="text" id="inq-reply-company-display" readonly style="background:#eee; font-weight:700;">
+            </div>
+            <div class="modal-form-group">
+              <label for="inq-reply-owner">Assign Sales Owner *</label>
+              <select id="inq-reply-owner" required>
+                <!-- populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-form-group">
+            <label for="inq-reply-to">Send Reply Email to</label>
+            <input type="email" id="inq-reply-to" readonly style="background:#eee;">
+          </div>
+
+          <div class="modal-form-group">
+            <label for="inq-reply-body">Email Message Body *</label>
+            <textarea id="inq-reply-body" required style="min-height:140px;"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-inq-reply')">Cancel</button>
+          <button type="submit" class="btn-action-primary">✉️ Dispatch Email Reply</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL N: CRM TIMELINE (MODULE 3 & 15) -->
+  <div class="modal-overlay" id="modal-crm-timeline">
+    <div class="modal-box" style="max-width:550px;">
+      <div class="modal-header">
+        <h3>Lead Communication CRM Timeline</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-crm-timeline')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4 id="crm-timeline-company" style="font-family:var(--font-display); font-size:1.3rem; font-weight:800; color:var(--copper); margin-bottom:1rem;">Company Name</h4>
+        <div id="crm-timeline-list" style="display:flex; flex-direction:column; gap:12px; max-height:300px; overflow-y:auto; padding-right:5px;">
+          <!-- timeline entries -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-action-outline" onclick="closeModal('modal-crm-timeline')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL O: CREATE/EDIT TASK (MODULE 8) -->
+  <div class="modal-overlay" id="modal-task">
+    <div class="modal-box" style="max-width:400px;">
+      <div class="modal-header">
+        <h3 id="task-modal-title">Create Organiser Task</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-task')">&times;</button>
+      </div>
+      <form id="task-modal-form" onsubmit="submitTaskForm(event)" novalidate>
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label for="task-title-input">Task Title *</label>
+            <input type="text" id="task-title-input" required placeholder="e.g. Verify Block C floor markings">
+          </div>
+          
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="task-priority-input">Priority *</label>
+              <select id="task-priority-input" required>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="task-deadline-input">Deadline *</label>
+              <input type="date" id="task-deadline-input" required>
+            </div>
+          </div>
+
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="task-user-input">Assign Staff *</label>
+              <select id="task-user-input" required>
+                <option value="Hari Prasad">Hari Prasad</option>
+                <option value="Suprabha Manager">Suprabha Manager</option>
+                <option value="Raju Kumar">Raju Kumar (Sales Exec)</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="task-category-input">Category *</label>
+              <select id="task-category-input" required>
+                <option value="Sales">Sales</option>
+                <option value="Venue">Venue</option>
+                <option value="Sponsor">Sponsor</option>
+                <option value="Marketing">Marketing</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-task')">Cancel</button>
+          <button type="submit" class="btn-action-primary">⚡ Save Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL P: PRINT CERTIFICATE (MODULE 16) -->
+  <div class="modal-overlay" id="modal-certificate">
+    <div class="modal-box" style="max-width:650px; background:#fff; color:#000; border:10px double var(--copper);">
+      <div class="modal-header" style="border-bottom:none;">
+        <button class="modal-close-btn" onclick="closeModal('modal-certificate')">&times;</button>
+      </div>
+      <div class="modal-body" id="certificate-print-area" style="text-align:center; padding:3rem 2rem; font-family:Georgia, serif;">
+        <!-- generated certificate content -->
+      </div>
+      <div class="modal-footer" style="border-top:none;">
+        <button type="button" class="btn-action-primary" onclick="printCertificateElement()">🖨️ Print / Save PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOAD JS SCRIPTS -->
+  <script src="js/admin.js"></script>
+</body>
+</html>

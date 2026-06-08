@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitor Registration | IRE Expo 2026</title>
+  <meta name="description" content="Register as a visitor for the India Renewable Energy Expo 2026. Quick registration with Google Sheets storage integration.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── REGISTER SPECIFIC STYLES ── */
+    .register-container {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+    
+    .register-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .register-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .register-header h1 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .register-header p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Steps and Pass Styles */
+    .register-success-view {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Google Apps Script configuration drawer */
+    .integration-guide {
+      margin-top: 2rem;
+      border: 1px solid var(--border-cu);
+      border-radius: var(--radius-sm);
+      background: rgba(184, 115, 51, 0.03);
+      overflow: hidden;
+    }
+
+    .guide-trigger {
+      padding: 1rem 1.5rem;
+      background: rgba(184, 115, 51, 0.06);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--copper-dk);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .guide-content {
+      padding: 1.5rem;
+      display: none;
+      border-top: 1px solid var(--border-cu);
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    .guide-content ol {
+      margin-left: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .code-box {
+      background: #0E2314;
+      color: #FFFDF8;
+      font-family: monospace;
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      overflow-x: auto;
+      margin: 0.8rem 0;
+      border: 1.5px solid var(--copper);
+    }
+
+    .script-url-input-container {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #fff;
+      border: 1px dashed var(--border-cu);
+      border-radius: 6px;
+    }
+
+    /* Visitor Ticket Pass */
+    .visitor-pass {
+      width: 330px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(14, 31, 18, 0.08);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: inline-flex;
+      flex-direction: column;
+      margin: 2rem auto;
+      text-align: left;
+    }
+
+    .pass-stripe {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(to bottom, var(--copper), var(--gold));
+    }
+
+    .pass-top {
+      background: #112A18;
+      padding: 1.5rem 1.5rem 1.2rem 1.8rem;
+      color: #FFFDF8;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .pass-top h3 {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .pass-top .sub {
+      font-size: 0.62rem;
+      color: var(--gold-lt);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .pass-perf {
+      height: 16px;
+      border-top: 1.5px dashed rgba(17, 42, 24, 0.15);
+      position: relative;
+    }
+
+    .pass-perf::before, .pass-perf::after {
+      content: '';
+      position: absolute;
+      top: -9px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+    .pass-perf::before { left: -9px; }
+    .pass-perf::after { right: -9px; }
+
+    .pass-bottom {
+      padding: 1.2rem 1.5rem 1.5rem 1.8rem;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pass-id {
+      font-family: monospace;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--copper);
+      background: var(--bg-section);
+      border: 1px solid rgba(184, 115, 51, 0.15);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+    }
+
+    .pass-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.5rem;
+    }
+
+    .pass-table td {
+      padding: 0.35rem 0;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    .pass-table tr td:first-child {
+      font-weight: 500;
+    }
+
+    .pass-table tr td:last-child {
+      text-align: right;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .pass-table tr {
+      border-bottom: 1px dashed rgba(45, 90, 45, 0.06);
+    }
+
+    .pass-qr {
+      background: #fff;
+      padding: 6px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      width: 100px;
+      height: 100px;
+    }
+
+    /* Print styling */
+    @media print {
+      body * { display: none !important; }
+      #print-area, #print-area * { display: block !important; visibility: visible !important; }
+      #print-area {
+        position: absolute;
+        left: 50%;
+        top: 5cm;
+        transform: translateX(-50%);
+        width: 100%;
+        display: flex !important;
+        justify-content: center !important;
+      }
+      .visitor-pass {
+        box-shadow: none !important;
+        border: 1.5px solid #000 !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .register-card { padding: 1.8rem; }
+    }
+  </style>
+</head>
+<body data-page="register">
+
+  <div id="nav-placeholder"></div>
+
+  <!-- MAIN REGISTER PAGE -->
+  <div class="register-container">
+    <div class="register-card">
+      
+      <!-- STEP 1: FORM VIEW -->
+      <div id="form-view">
+        <div class="register-header">
+          <div class="section-tag" style="margin-bottom: 0.4rem;">IRE Expo 2026</div>
+          <h1>Visitor Registration</h1>
+          <p>Register online to skip the queues, receive your digital entry pass, and connect with 75+ clean energy exhibitors.</p>
+        </div>
+
+        <form id="visitor-reg-form" onsubmit="submitVisitorReg(event)" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-name">Full Name *</label>
+              <input type="text" id="reg-name" required placeholder="e.g. Hari Prasad">
+            </div>
+            <div class="form-group">
+              <label for="reg-company">Company / Institution *</label>
+              <input type="text" id="reg-company" required placeholder="e.g. Win-Dhan Solars">
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 0.5rem;">
+            <div class="form-group">
+              <label for="reg-email">Email Address *</label>
+              <input type="email" id="reg-email" required placeholder="e.g. name@company.com">
+            </div>
+            <div class="form-group">
+              <label for="reg-phone">Phone Number *</label>
+              <input type="tel" id="reg-phone" required pattern="^[6-9]\d{9}$" placeholder="10-digit mobile number">
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 0.5rem;">
+            <div class="form-group">
+              <label for="reg-designation">Designation *</label>
+              <input type="text" id="reg-designation" required placeholder="e.g. Director, Engineer, Student">
+            </div>
+            <div class="form-group">
+              <label for="reg-type">Attendance Category *</label>
+              <select id="reg-type" required>
+                <option value="" disabled selected>Select category</option>
+                <option value="Corporate Visitor">Corporate Visitor</option>
+                <option value="Government Delegate">Government Delegate</option>
+                <option value="Exhibitor Representative">Exhibitor Representative</option>
+                <option value="Academic / Student">Academic / Student</option>
+                <option value="Media Partner">Media Partner</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 0.5rem;">
+            <div class="form-group">
+              <label for="reg-city">City *</label>
+              <input type="text" id="reg-city" required placeholder="e.g. Hyderabad">
+            </div>
+            <div class="form-group">
+              <label for="reg-state">State *</label>
+              <input type="text" id="reg-state" required placeholder="e.g. Telangana">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 0.5rem;">
+            <label for="reg-sector">Clean Energy Area of Interest *</label>
+            <select id="reg-sector" required>
+              <option value="" disabled selected>Select primary interest</option>
+              <option value="Solar Energy & EPC">Solar PV & Storage (EPC)</option>
+              <option value="Electric Vehicles & Infrastructure">EVs & Charging Infrastructure</option>
+              <option value="BESS / Battery Pack Assembly">Battery Storage (BESS)</option>
+              <option value="Wind & Hydel Energy">Wind & Hydel Energy</option>
+              <option value="Green Hydrogen">Green Hydrogen</option>
+              <option value="General Interest">General Smart Grids / Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem; font-size: 14px; padding: 0.9rem;">
+            ⚡ Submit Registration & Get Entry Pass
+          </button>
+        </form>
+
+        <!-- Google Sheet Integration Accordion -->
+        <div class="integration-guide">
+          <div class="guide-trigger" onclick="toggleGuide()">
+            <span>⚙️ Google Sheet Integration Settings (Optional for Admin)</span>
+            <span id="guide-arrow">▼</span>
+          </div>
+          <div class="guide-content" id="guide-content">
+            <p style="margin-bottom: 1rem;">This form runs dynamically. By default, it simulates saving and generates your PDF badge instantly. To save registration records directly in your Google Sheet:</p>
+            <ol>
+              <li>Create a new Google Sheet and name your columns: <strong>Timestamp, Name, Email, Phone, Company, Designation, Sector, Category</strong>.</li>
+              <li>Go to <strong>Extensions &gt; Apps Script</strong>.</li>
+              <li>Delete any template code and paste the script code below:</li>
+            </ol>
+            <div class="code-box">function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date(),
+    data.name,
+    data.email,
+    data.phone,
+    data.company,
+    data.designation,
+    data.sector,
+    data.type
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({status: 'success'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}</div>
+            <ol start="4">
+              <li>Click <strong>Deploy &gt; New Deployment</strong>. Select <strong>Web App</strong>. Set "Who has access" to <strong>Anyone</strong>. Click Deploy.</li>
+              <li>Copy the generated <strong>Web App URL</strong> and paste it in the field below:</li>
+            </ol>
+            <div class="script-url-input-container">
+              <label style="font-size: 11px; font-weight: 700; color: var(--copper); text-transform: uppercase;">Google Apps Script Web App URL</label>
+              <input type="url" id="sheet-api-url" placeholder="https://script.google.com/macros/s/..." style="width:100%; margin-top: 0.35rem; padding: 0.5rem; border: 1px solid var(--border); border-radius: 4px; font-size: 0.8rem;" oninput="saveApiUrl(this.value)">
+              <p style="font-size: 10px; color: var(--text-muted); margin-top: 0.3rem;">This URL is saved locally in your browser's localStorage for convenient mock-testing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: SUCCESS VIEW (TICKET PASS) -->
+      <div id="success-view" class="register-success-view">
+        <span style="font-size: 3rem;">🎉</span>
+        <h2 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; margin-top: 0.5rem; color: var(--text);">Registration Confirmed</h2>
+        <p style="color: var(--text-dim); font-size: 0.88rem; max-width: 420px; margin: 0.4rem auto 1.5rem;">Your B2B Entry badge is generated below. Please download or print this pass for registration desk access at the venue.</p>
+
+        <!-- PRINT AREA WRAPPER -->
+        <div id="print-area">
+          <div class="visitor-pass">
+            <div class="pass-stripe"></div>
+            
+            <div class="pass-top">
+              <div style="font-size: 1.2rem; width: 32px; height: 32px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-lt);">⚡</div>
+              <div>
+                <h3>IRE EXPO HYDERABAD 2026</h3>
+                <p class="sub">Visitor Entry Pass</p>
+              </div>
+            </div>
+            
+            <div class="pass-perf"></div>
+            
+            <div class="pass-bottom">
+              <div class="pass-id" id="ticket-pass-id">IRE-V-XXXX</div>
+              
+              <table class="pass-table">
+                <tr>
+                  <td>Visitor Name</td>
+                  <td id="ticket-name">-</td>
+                </tr>
+                <tr>
+                  <td>Company</td>
+                  <td id="ticket-company">-</td>
+                </tr>
+                <tr>
+                  <td>Designation</td>
+                  <td id="ticket-designation">-</td>
+                </tr>
+                <tr>
+                  <td>Interest Sector</td>
+                  <td id="ticket-sector">-</td>
+                </tr>
+                <tr>
+                  <td>Pass Category</td>
+                  <td id="ticket-type" style="color: var(--copper);">Visitor</td>
+                </tr>
+              </table>
+              
+              <div class="pass-qr">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <rect width="100" height="100" fill="#fff" />
+                  <rect x="8" y="8" width="28" height="28" fill="#000" />
+                  <rect x="12" y="12" width="20" height="20" fill="#fff" />
+                  <rect x="16" y="16" width="12" height="12" fill="#000" />
+                  <rect x="64" y="8" width="28" height="28" fill="#000" />
+                  <rect x="68" y="12" width="20" height="20" fill="#fff" />
+                  <rect x="72" y="16" width="12" height="12" fill="#000" />
+                  <rect x="8" y="64" width="28" height="28" fill="#000" />
+                  <rect x="12" y="68" width="20" height="20" fill="#fff" />
+                  <rect x="16" y="72" width="12" height="12" fill="#000" />
+                  <rect x="72" y="72" width="8" height="8" fill="#000" />
+                  <rect x="74" y="74" width="4" height="4" fill="#fff" />
+                  <rect x="75" y="75" width="2" height="2" fill="#000" />
+                  <rect x="40" y="8" width="4" height="8" fill="#000" />
+                  <rect x="48" y="12" width="8" height="4" fill="#000" />
+                  <rect x="44" y="24" width="12" height="8" fill="#000" />
+                  <rect x="8" y="40" width="8" height="4" fill="#000" />
+                  <rect x="20" y="44" width="4" height="12" fill="#000" />
+                </svg>
+              </div>
+              
+              <div style="font-size: 0.6rem; color: var(--text-muted); opacity: 0.8; text-anchor: middle; margin-top: 4px;">
+                Show pass at entrance to redeem physical delegate card.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; justify-content: center;">
+          <button class="btn-primary" onclick="window.print()">🖨️ Print / Save Pass</button>
+          <button class="btn-outline" onclick="resetForm()">Register Another</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- Confetti Canvas for success animation -->
+  <canvas id="reg-confetti" style="position: fixed; inset: 0; pointer-events: none; z-index: 9999; display: none;"></canvas>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Load saved API URL on startup and check registration limits
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedUrl = localStorage.getItem('google_sheet_api_url');
+      if (savedUrl) {
+        document.getElementById('sheet-api-url').value = savedUrl;
+      }
+      
+      // Hide integration settings from public users if URL is already saved, unless accessed via ?admin=true
+      const isAdmin = new URLSearchParams(window.location.search).get('admin') === 'true';
+      const integrationGuide = document.querySelector('.integration-guide');
+      if (integrationGuide) {
+        if (savedUrl && !isAdmin) {
+          integrationGuide.style.display = 'none';
+        } else {
+          integrationGuide.style.display = 'block';
+        }
+      }
+      
+      // Dynamic open/close and visitor limit check
+      const regOpen = localStorage.getItem('ire_reg_open') !== 'false';
+      const visitors = JSON.parse(localStorage.getItem('ire_db_visitors')) || [];
+      const regLimit = parseInt(localStorage.getItem('ire_reg_limit')) || 5000;
+      
+      const form = document.getElementById('visitor-reg-form');
+      const header = document.querySelector('.register-header');
+      
+      if (!regOpen) {
+        replaceFormWithMessage("Registration is Closed", "The online visitor registration portal for IRE Expo 2026 is currently closed by the administrator. Please check back later.");
+      } else if (visitors.length >= regLimit) {
+        replaceFormWithMessage("Visitor Capacity Reached", `Online registration is closed as visitor capacity has reached its limit of ${regLimit} delegates. Contact support@win-dhan.com for offline passes.`);
+      }
+    });
+
+    function replaceFormWithMessage(title, msg) {
+      const card = document.querySelector('.register-card');
+      const formView = document.getElementById('form-view');
+      if (formView) {
+        formView.innerHTML = `
+          <div style="text-align:center; padding: 2rem 0;">
+            <div style="font-size:3rem; margin-bottom:1rem;">⚠️</div>
+            <h1 style="font-family: var(--font-display); font-size:2rem; font-weight:800; color:var(--text); margin-bottom:0.5rem;">${title}</h1>
+            <p style="color:var(--text-dim); font-size:0.95rem; max-width:500px; margin:0 auto 1.5rem; line-height:1.6;">${msg}</p>
+            <a href="ire.html" class="btn-outline" style="padding:0.75rem 2rem;">← Back to Expo Portal</a>
+          </div>
+        `;
+      }
+    }
+
+    function saveApiUrl(val) {
+      localStorage.setItem('google_sheet_api_url', val.trim());
+    }
+
+    function toggleGuide() {
+      const content = document.getElementById('guide-content');
+      const arrow = document.getElementById('guide-arrow');
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+        arrow.textContent = '▼';
+      } else {
+        content.style.display = 'block';
+        arrow.textContent = '▲';
+      }
+    }
+
+    async function submitVisitorReg(e) {
+      e.preventDefault();
+      
+      const form = document.getElementById('visitor-reg-form');
+      const name = document.getElementById('reg-name');
+      const company = document.getElementById('reg-company');
+      const email = document.getElementById('reg-email');
+      const phone = document.getElementById('reg-phone');
+      const designation = document.getElementById('reg-designation');
+      const type = document.getElementById('reg-type');
+      const sector = document.getElementById('reg-sector');
+      const city = document.getElementById('reg-city');
+      const state = document.getElementById('reg-state');
+
+      // Clear any past errors
+      document.querySelectorAll('.form-group .err').forEach(el => el.remove());
+      [name, company, email, phone, designation, type, sector, city, state].forEach(el => {
+        el.style.borderColor = ''; el.style.boxShadow = '';
+      });
+
+      let valid = true;
+      function showErr(el, msg) {
+        valid = false;
+        el.style.borderColor = '#c0392b';
+        el.style.boxShadow = '0 0 0 3px rgba(192,57,43,0.1)';
+        const d = document.createElement('div');
+        d.className = 'err';
+        d.style.cssText = 'color:#c0392b;font-size:.72rem;font-weight:700;margin-top:.25rem;';
+        d.textContent = msg;
+        el.parentNode.appendChild(d);
+      }
+
+      if (!name.value.trim()) showErr(name, 'Full Name is required');
+      if (!company.value.trim()) showErr(company, 'Company / School is required');
+      if (!designation.value.trim()) showErr(designation, 'Designation is required');
+      if (!type.value) showErr(type, 'Please select an attendance category');
+      if (!sector.value) showErr(sector, 'Please select a clean energy sector');
+      if (!city.value.trim()) showErr(city, 'City is required');
+      if (!state.value.trim()) showErr(state, 'State is required');
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim()) showErr(email, 'Email Address is required');
+      else if (!emailRegex.test(email.value.trim())) showErr(email, 'Enter a valid email address');
+      
+      const phoneRegex = /^[6-9]\d{9}$/;
+      if (!phone.value.trim()) showErr(phone, 'Phone Number is required');
+      else if (!phoneRegex.test(phone.value.trim())) showErr(phone, 'Enter a valid 10-digit mobile number');
+
+      if (!valid) return;
+
+      const payload = {
+        name: name.value.trim(),
+        company: company.value.trim(),
+        email: email.value.trim(),
+        phone: phone.value.trim(),
+        designation: designation.value.trim(),
+        type: type.value.replace('Corporate Visitor', 'Corporate').replace('Academic / Student', 'Student').replace('Government Delegate', 'Government').replace('Media Partner', 'General Public'),
+        sector: sector.value,
+        city: city.value.trim(),
+        state: state.value.trim()
+      };
+
+      try {
+        const res = await fetch('/api/visitors/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || 'Failed to complete registration on server.');
+        }
+
+        // Show ticket pass with backend returned pass ID
+        showPass(payload, data.passId);
+
+      } catch (err) {
+        console.error('Registration API error:', err);
+        alert('❌ Error: ' + err.message);
+      }
+    }
+
+    function showPass(data, passId) {
+      // Set pass details
+      document.getElementById('ticket-pass-id').textContent = passId;
+      document.getElementById('ticket-name').textContent = data.name;
+      document.getElementById('ticket-company').textContent = data.company;
+      document.getElementById('ticket-designation').textContent = data.designation;
+      document.getElementById('ticket-sector').textContent = data.sector;
+      document.getElementById('ticket-type').textContent = data.type;
+
+      // Swap view grids
+      document.getElementById('form-view').style.display = 'none';
+      document.getElementById('success-view').style.display = 'block';
+
+      // Confetti trigger
+      triggerRegConfetti();
+    }
+
+    function resetForm() {
+      document.getElementById('visitor-reg-form').reset();
+      document.getElementById('success-view').style.display = 'none';
+      document.getElementById('form-view').style.display = 'block';
+    }
+
+    // Confetti effect inside register pass
+    function triggerRegConfetti() {
+      const canvas = document.getElementById('reg-confetti');
+      if (!canvas) return;
+      canvas.style.display = 'block';
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      const colors = ['#B87333', '#C9A84C', '#A8A9AD', '#112A18', '#2D4735', '#D4956A'];
+      const particles = [];
+      
+      // Bottom left burst
+      for (let i = 0; i < 40; i++) {
+        particles.push({
+          x: 0,
+          y: canvas.height,
+          vx: Math.random() * 10 + 3,
+          vy: -Math.random() * 18 - 8,
+          r: Math.random() * 4 + 3,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          opacity: 1
+        });
+      }
+      
+      // Bottom right burst
+      for (let i = 0; i < 40; i++) {
+        particles.push({
+          x: canvas.width,
+          y: canvas.height,
+          vx: -Math.random() * 10 - 3,
+          vy: -Math.random() * 18 - 8,
+          r: Math.random() * 4 + 3,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          opacity: 1
+        });
+      }
+      
+      let animId;
+      function run() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+        
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.35; // gravity
+          p.vx *= 0.98;
+          p.rotation += p.rotationSpeed;
+          p.opacity -= 0.01;
+          
+          if (p.opacity > 0 && p.x >= 0 && p.x <= canvas.width && p.y <= canvas.height) {
+            active = true;
+            ctx.save();
+            ctx.globalAlpha = p.opacity;
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation * Math.PI / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.r * 1.5, -p.r / 2, p.r * 3, p.r);
+            ctx.restore();
+          }
+        });
+        
+        if (active) {
+          animId = requestAnimationFrame(run);
+        } else {
+          canvas.style.display = 'none';
+          cancelAnimationFrame(animId);
+        }
+      }
+      
+      run();
+    }
+  </script>
+</body>
+</html>

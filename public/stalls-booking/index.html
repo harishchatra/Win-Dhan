@@ -1,0 +1,4197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRE 2026 | Expo Stall Booking Portal</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ── DESIGN SYSTEM & VARIABLE TOKENS ── */
+    :root {
+      /* Dhan Win Branding Colors */
+      --bg-dark: #F5FAF6;          /* Light Mint Background */
+      --bg-card: #FFFFFF;          /* White Card */
+      --bg-card-solid: #FFFFFF;    /* Solid White Card */
+      --border-color: rgba(45, 90, 45, 0.13);  /* Soft Green Border */
+      --border-hover: rgba(184, 115, 51, 0.4);  /* Copper Border Hover */
+      
+      --color-gold: #B87333;       /* Dhan Win Copper */
+      --color-gold-glow: #C9A84C;  /* Dhan Win Gold */
+      --color-navy-lt: #EEF5F0;    /* Light Mint Green Accent */
+      --color-text: #112A18;       /* Deep Forest Green Text */
+      --color-text-dim: #2D4735;   /* Medium Green Text */
+      
+      /* Curated Block Palette (UX colors) */
+      --color-block-a: #D4873A;    /* Warm Amber - Block A */
+      --color-block-b: #4A9E8A;    /* Muted Teal - Block B */
+      --color-block-c: #C47B6A;    /* Dusty Rose - Block C */
+      --color-block-d: #5B7FA6;    /* Slate Blue - Block D */
+      --color-block-e-entry: #7A9E5A; /* Soft Olive - Block E Entry */
+      --color-block-e-vip: #6255A4;   /* Rich Indigo - Block E VIP */
+      --color-booked: #9CA3AF;     /* Neutral Gray - Booked */
+      --color-selected: #E05C2A;   /* Vibrant Orange - Selected */
+      
+      --font-family: 'Outfit', sans-serif;
+      --font-display: 'Playfair Display', serif;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --radius-pill: 50px;
+      --shadow: 0 4px 20px rgba(14, 31, 18, 0.06);
+      --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(45, 90, 45, 0.02) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(184, 115, 51, 0.02) 0%, transparent 40%);
+      background-attachment: fixed;
+      color: var(--color-text);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--color-gold), var(--color-gold-glow));
+      border-radius: 3px;
+    }
+
+    /* ── LAYOUT STRUCTURE ── */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── TOP HEADER BAR (48px) ── */
+    header.top-header-bar {
+      height: 48px;
+      padding: 0 1.5rem;
+      background: #FFFFFF;
+      border-top: 3px solid var(--color-gold);
+      border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(14, 31, 18, 0.03);
+    }
+    
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .slim-logo {
+      width: 48px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+    
+    .logo-title-text {
+      font-family: var(--font-family);
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--color-text);
+      letter-spacing: 0.3px;
+    }
+    
+    .stall-counter-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+    
+    .selection-badge {
+      background: var(--color-navy-lt);
+      border: 1px solid var(--border-color);
+      color: var(--color-text);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.74rem;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .clear-all-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 138, 138, 0.4);
+      color: #D35400;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .clear-all-btn:hover {
+      background: rgba(255, 138, 138, 0.1);
+      border-color: #E05C2A;
+      color: #E05C2A;
+    }
+    
+    .confirm-tooltip {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem;
+      box-shadow: var(--shadow);
+      z-index: 110;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      width: 160px;
+      margin-top: 5px;
+    }
+    
+    .confirm-tooltip p {
+      font-size: 0.72rem;
+      color: var(--color-text);
+      font-weight: 600;
+      text-anchor: middle;
+      text-align: center;
+    }
+    
+    .confirm-buttons {
+      display: flex;
+      gap: 6px;
+    }
+    
+    .confirm-btn {
+      flex: 1;
+      padding: 0.2rem 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+    
+    .confirm-btn.yes {
+      background: #FF8A8A;
+      color: white;
+    }
+    
+    .confirm-btn.no {
+      background: var(--color-navy-lt);
+      color: var(--color-text);
+      border: 1px solid var(--border-color);
+    }
+    
+    .confirm-btn.yes:hover {
+      background: #E06060;
+    }
+    
+    .confirm-btn.no:hover {
+      background: #E2ECE5;
+    }
+
+    /* ── STICKY TOP INFO RIBBON ── */
+    .info-ribbon {
+      background: var(--color-navy-lt);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.45rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 90;
+      position: sticky;
+      top: 48px;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+    
+    .info-ribbon-content {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.74rem;
+      color: var(--color-text-dim);
+      font-weight: 600;
+      align-items: center;
+    }
+    
+    .info-ribbon-content .separator {
+      opacity: 0.3;
+      color: var(--color-gold);
+    }
+    
+    .close-ribbon-btn {
+      background: transparent;
+      border: none;
+      color: var(--color-text-dim);
+      font-size: 1.1rem;
+      cursor: pointer;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      opacity: 0.7;
+    }
+    
+    .close-ribbon-btn:hover {
+      opacity: 1;
+      color: #FF8A8A;
+    }
+
+    /* ── MAIN CONTENT TWO-COLUMN GRID ── */
+    .main-content {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── MAP PANEL (LEFT SIDE) ── */
+    .map-pane {
+      flex: 1;
+      min-width: 560px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding: 1.25rem;
+      overflow: hidden;
+      border-right: 1px solid var(--border-color);
+      background: var(--color-navy-lt);
+      opacity: 0;
+      animation: mapFadeIn 400ms ease forwards;
+    }
+
+    @keyframes mapFadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Map Controls Bar */
+    .map-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      z-index: 10;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--color-text-dim);
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: var(--shadow);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      background: #FFFFFF;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--color-gold), var(--color-gold-glow));
+      color: #FFFFFF;
+      border-color: var(--color-gold);
+      box-shadow: 0 4px 10px rgba(184, 115, 51, 0.2);
+    }
+
+    /* Interactive Floor Canvas */
+    .map-canvas-container {
+      flex: 1;
+      position: relative;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      background-color: #FAF9F6;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .map-canvas-container:active {
+      cursor: grabbing;
+    }
+
+    svg#floor-plan {
+      width: 100%;
+      height: 100%;
+      user-select: none;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    /* SVG Map Styles */
+    .grid-lines {
+      stroke: rgba(45, 90, 45, 0.04);
+      stroke-width: 0.8;
+    }
+
+    .hall-border {
+      fill: none;
+      stroke: var(--color-text);
+      stroke-width: 2.2;
+    }
+
+    .hall-border-inner {
+      fill: none;
+      stroke: rgba(184, 115, 51, 0.35);
+      stroke-width: 0.8;
+      stroke-dasharray: 4 3;
+    }
+
+    .corridor-shading {
+      fill: url(#corridorPattern);
+    }
+
+    .corridor-line {
+      stroke: rgba(184, 115, 51, 0.18);
+      stroke-dasharray: 3 3;
+      stroke-width: 0.8;
+    }
+
+    .corridor-label {
+      font-size: 9px;
+      fill: var(--color-text-dim);
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
+
+    /* SVG Stall Styles & Animations */
+    .stall {
+      stroke-width: 1.2;
+      stroke-linejoin: round;
+      cursor: pointer;
+      transform-origin: center;
+      transition: transform 150ms ease, stroke 150ms ease, fill 150ms ease, stroke-width 150ms ease;
+    }
+
+    .stall.block-a { fill: url(#grad-block-a); stroke: var(--color-block-a); }
+    .stall.block-b { fill: url(#grad-block-b); stroke: var(--color-block-b); }
+    .stall.block-c { fill: url(#grad-block-c); stroke: var(--color-block-c); }
+    .stall.block-d { fill: url(#grad-block-d); stroke: var(--color-block-d); }
+    .stall.block-e-entry { fill: url(#grad-block-e-entry); stroke: var(--color-block-e-entry); }
+    .stall.block-e-vip { fill: url(#grad-block-e-vip); stroke: var(--color-block-e-vip); }
+
+    .stall:hover {
+      transform: scale(1.03);
+      filter: url(#shadowFilter) brightness(0.98);
+      stroke-width: 1.6px;
+    }
+    
+    .stall.selected {
+      transform: scale(1.03);
+      fill: url(#grad-selected) !important;
+      stroke: var(--color-selected) !important;
+      stroke-width: 2px !important;
+      filter: url(#selectedShadow) !important;
+    }
+
+    .stall.booked {
+      fill: url(#bookedPattern) !important;
+      stroke: var(--color-booked) !important;
+      cursor: not-allowed;
+      filter: opacity(0.65);
+      pointer-events: none;
+    }
+
+    .stall-label {
+      font-size: 8px;
+      fill: var(--color-text);
+      font-weight: 700;
+      font-family: var(--font-family);
+      text-anchor: middle;
+      dominant-baseline: central;
+      pointer-events: none;
+      letter-spacing: -0.1px;
+    }
+
+    .stall.selected + .stall-label {
+      fill: #D35400;
+      font-weight: 800;
+    }
+
+    .stall.booked + .stall-label {
+      fill: #8E8E93;
+      font-weight: 500;
+      opacity: 0.55;
+    }
+
+    /* Pulse cues for un-interacted stalls */
+    @keyframes stallPulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.65; }
+      100% { opacity: 1; }
+    }
+    
+    .stall.pulse-active {
+      animation: stallPulse 1.8s ease-in-out 3;
+    }
+
+    /* ── MAP LEGEND BELOW CANVAS ── */
+    .map-legend {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--color-text-dim);
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 1px solid transparent;
+      flex-shrink: 0;
+    }
+
+    .legend-dot.a { background: var(--color-block-a); }
+    .legend-dot.b { background: var(--color-block-b); }
+    .legend-dot.c { background: var(--color-block-c); }
+    .legend-dot.d { background: var(--color-block-d); }
+    .legend-dot.e-entry { background: var(--color-block-e-entry); }
+    .legend-dot.e-vip { background: var(--color-block-e-vip); }
+    .legend-dot.bk { background: var(--color-booked); }
+    .legend-dot.sl { background: var(--color-selected); }
+
+    /* ── DYNAMIC CURSOR TOOLTIP ── */
+    .map-tooltip {
+      position: fixed;
+      background: rgba(17, 42, 24, 0.95);
+      color: #FFFFFF;
+      padding: 0.6rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.72rem;
+      font-weight: 500;
+      border: 1px solid rgba(184, 115, 51, 0.4);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      pointer-events: none;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      backdrop-filter: blur(8px);
+      transition: opacity 0.15s ease;
+      opacity: 0;
+    }
+    
+    .map-tooltip h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-gold-glow);
+    }
+    
+    .map-tooltip .tooltip-price {
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    /* ── DYNAMIC BLUEPRINT MINI-MAP ── */
+    .minimap-container {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: 160px;
+      height: 140px;
+      background: rgba(255, 253, 248, 0.85);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      z-index: 50;
+      padding: 6px;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: var(--transition);
+      opacity: 0.85;
+    }
+    
+    .minimap-container:hover {
+      opacity: 1;
+      background: #FFFFFF;
+    }
+    
+    #minimap-svg {
+      pointer-events: none;
+    }
+
+    /* ── FLOATING ZOOM PILL ── */
+    .floating-zoom-controls {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      padding: 4px;
+      box-shadow: var(--shadow);
+      z-index: 50;
+      gap: 2px;
+    }
+    
+    .floating-zoom-btn {
+      width: 32px;
+      height: 32px;
+      background: transparent;
+      border: none;
+      color: var(--color-gold);
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+    
+    .floating-zoom-btn:hover {
+      background: var(--color-navy-lt);
+      color: var(--color-gold-glow);
+    }
+    
+    .floating-zoom-btn.reset {
+      font-size: 0.95rem;
+    }
+
+    /* ── CHECKOUT PANEL (RIGHT SIDE - 400px) ── */
+    .checkout-pane {
+      width: 400px;
+      flex-shrink: 0;
+      background: var(--bg-card-solid);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+      border-left: 1px solid var(--border-color);
+      transform: translateX(100%);
+      animation: sidebarSlideIn 300ms cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+
+    @keyframes sidebarSlideIn {
+      to { transform: translateX(0); }
+    }
+
+    .sheet-handle {
+      display: none;
+    }
+
+    /* Checkout Wizard Steps */
+    .wizard-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+
+    .wizard-steps {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .wizard-steps::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 10px;
+      right: 10px;
+      height: 2px;
+      background: rgba(45, 90, 45, 0.08);
+      z-index: 1;
+    }
+
+    .step-indicator {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 2px solid rgba(45, 90, 45, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-text-dim);
+      position: relative;
+      z-index: 2;
+      transition: var(--transition);
+    }
+
+    .step-indicator.active {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      background: #FFFFFF;
+      box-shadow: 0 0 8px rgba(184, 115, 51, 0.15);
+    }
+
+    .step-indicator.completed {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+      color: #FFFFFF;
+    }
+
+    /* Wizard Content Sections */
+    .wizard-body {
+      padding: 1.5rem;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .wizard-section {
+      display: none;
+      animation: sectionFadeIn 0.35s ease forwards;
+    }
+
+    .wizard-section.active {
+      display: block;
+    }
+
+    @keyframes sectionFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 0.4rem;
+    }
+    
+    .section-desc {
+      font-size: 0.78rem;
+      color: var(--color-text-dim);
+      margin-bottom: 1.25rem;
+    }
+
+    /* Empty state */
+    .empty-cart-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--color-text-dim);
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.35;
+    }
+
+    /* Cart Selected Items */
+    .cart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .cart-item {
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cart-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+    }
+
+    .cart-item.block-a::before { background-color: var(--color-block-a); }
+    .cart-item.block-b::before { background-color: var(--color-block-b); }
+    .cart-item.block-c::before { background-color: var(--color-block-c); }
+    .cart-item.block-d::before { background-color: var(--color-block-d); }
+    .cart-item.block-e::before { background-color: var(--color-block-e-entry); }
+
+    .cart-item-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .cart-block-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cart-item-details h4 {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .cart-item-details p {
+      font-size: 0.72rem;
+      color: var(--color-text-dim);
+    }
+
+    .cart-item-price {
+      text-align: right;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-item-val {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--color-gold);
+    }
+
+    .remove-item-btn {
+      background: transparent;
+      color: var(--color-text-dim);
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .remove-item-btn:hover {
+      color: #FF8A8A;
+      transform: scale(1.15);
+    }
+
+    /* Coupon Field */
+    .coupon-box {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.25rem;
+    }
+
+    .coupon-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--color-text);
+      padding: 0.45rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    .coupon-box button {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--color-gold);
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      text-transform: uppercase;
+    }
+
+    .coupon-box button:hover {
+      background: var(--color-gold);
+      color: #FFFFFF;
+    }
+
+    .coupon-status {
+      font-size: 0.74rem;
+      margin-top: -1rem;
+      margin-bottom: 1rem;
+      padding-left: 0.4rem;
+      display: none;
+    }
+    
+    .coupon-status.success { color: var(--color-block-b); display: block; }
+    .coupon-status.error { color: #C47B6A; display: block; }
+
+    /* Cart Summary Totals */
+    .summary-totals {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--color-text-dim);
+    }
+
+    .total-row.grand {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--color-text);
+      border-top: 1px dashed var(--border-color);
+      padding-top: 0.6rem;
+      margin-top: 0.3rem;
+    }
+
+    .total-row.grand span:last-child {
+      color: var(--color-gold);
+    }
+
+    /* ── STYLISH ACCESSIBLE INPUTS (FLOATING LABELS) ── */
+    .form-section-group {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.1rem;
+      box-shadow: 0 2px 10px rgba(14, 31, 18, 0.03);
+    }
+    
+    .form-section-title {
+      font-size: 0.82rem;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 1.2rem;
+      border-left: 3px solid var(--color-gold);
+      padding-left: 8px;
+    }
+
+    .floating-group {
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+    
+    .floating-input {
+      width: 100%;
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 0.9rem 0.65rem 0.9rem;
+      font-family: inherit;
+      color: var(--color-text);
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    
+    .floating-input:focus {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 10px rgba(184, 115, 51, 0.12);
+    }
+    
+    .floating-label {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-dim);
+      font-size: 0.85rem;
+      pointer-events: none;
+      transition: transform 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+      font-weight: 500;
+    }
+    
+    .floating-input:focus ~ .floating-label,
+    .floating-input:not(:placeholder-shown) ~ .floating-label {
+      transform: translateY(-130%);
+      font-size: 0.68rem;
+      color: var(--color-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    /* Dynamic GSTIN feedback style */
+    .gstin-val-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 800;
+      font-size: 0.95rem;
+      pointer-events: none;
+      z-index: 5;
+    }
+    
+    .gstin-val-icon.valid {
+      color: var(--color-block-b);
+    }
+    
+    .gstin-val-icon.invalid {
+      color: var(--color-block-c);
+    }
+    
+    .gstin-error {
+      display: none;
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-top: 4px;
+      padding-left: 4px;
+    }
+    
+    .gstin-error.active {
+      display: block;
+      color: var(--color-block-c);
+    }
+
+    /* Sector & Date Chips Grid */
+    .form-group-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    
+    .chips-group-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--color-text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .chip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem;
+    }
+    
+    .toggle-chip {
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      color: var(--color-text);
+      padding: 0.5rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .toggle-chip:hover {
+      border-color: var(--color-gold);
+      background: #FFFFFF;
+    }
+    
+    .toggle-chip.active {
+      background: var(--color-gold) !important;
+      color: #FFFFFF !important;
+      border-color: var(--color-gold) !important;
+      box-shadow: 0 4px 10px rgba(184, 115, 51, 0.15);
+    }
+    
+    .chip-grid-dates {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    
+    .toggle-chip.date {
+      padding: 0.55rem;
+      text-align: center;
+    }
+    
+    .toggle-chip.date h5 {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    
+    .toggle-chip.date p {
+      font-size: 0.64rem;
+      opacity: 0.8;
+    }
+
+    /* ── STICKY BOTTOM CTA BAR ── */
+    .sidebar-cta-bar {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+      flex-shrink: 0;
+      box-shadow: 0 -4px 15px rgba(14, 31, 18, 0.03);
+      z-index: 10;
+    }
+    
+    .cta-total-details {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .cta-total-label {
+      font-size: 0.65rem;
+      color: var(--color-text-dim);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    
+    .cta-total-amt {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-gold);
+    }
+    
+    .cta-btn {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    
+    .cta-btn-primary {
+      background: linear-gradient(135deg, var(--color-gold), var(--color-gold-glow));
+      color: white;
+      box-shadow: 0 4px 12px rgba(184, 115, 51, 0.2);
+    }
+    
+    .cta-btn-primary:hover:not(:disabled) {
+      box-shadow: 0 6px 18px rgba(184, 115, 51, 0.3);
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+    
+    .cta-btn-primary:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+    
+    .cta-btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--color-text);
+      flex: 0;
+      padding: 0.8rem;
+    }
+    
+    .cta-btn-secondary:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      background: var(--color-navy-lt);
+    }
+
+    /* ── STALL DETAILS DRAWER / SLIDE-IN PANEL ── */
+    .drawer-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(14, 31, 18, 0.35);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 380px;
+      background: var(--bg-card-solid);
+      border-left: 1px solid var(--border-color);
+      box-shadow: -4px 0 24px rgba(14, 31, 18, 0.08);
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .close-drawer-btn {
+      width: 28px;
+      height: 28px;
+      background: var(--color-navy-lt);
+      border: 1px solid var(--border-color);
+      color: var(--color-text-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .close-drawer-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+    }
+
+    .drawer-body {
+      padding: 1.5rem;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    /* Stall Info Cards */
+    .drawer-block-indicator {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 1rem;
+    }
+
+    .drawer-block-indicator.a { background: rgba(212, 135, 58, 0.15); color: var(--color-block-a); border: 1px solid var(--color-block-a); }
+    .drawer-block-indicator.b { background: rgba(74, 158, 138, 0.15); color: var(--color-block-b); border: 1px solid var(--color-block-b); }
+    .drawer-block-indicator.c { background: rgba(196, 123, 106, 0.15); color: var(--color-block-c); border: 1px solid var(--color-block-c); }
+    .drawer-block-indicator.d { background: rgba(91, 127, 166, 0.15); color: var(--color-block-d); border: 1px solid var(--color-block-d); }
+    .drawer-block-indicator.e-entry { background: rgba(122, 158, 90, 0.15); color: var(--color-block-e-entry); border: 1px solid var(--color-block-e-entry); }
+    .drawer-block-indicator.e-vip { background: rgba(98, 85, 164, 0.15); color: var(--color-block-e-vip); border: 1px solid var(--color-block-e-vip); }
+
+    .drawer-spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .spec-item {
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem;
+    }
+
+    .spec-label {
+      font-size: 0.7rem;
+      color: var(--color-text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .spec-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .spec-value.gold {
+      color: var(--color-gold);
+    }
+
+    .availability-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding: 0.6rem 0.9rem;
+      border-radius: var(--radius-sm);
+    }
+    
+    .availability-tag.available { background: rgba(74, 158, 138, 0.1); color: var(--color-block-b); }
+    .availability-tag.booked { background: rgba(156, 163, 175, 0.15); color: var(--color-booked); }
+    .availability-tag.vip { background: rgba(98, 85, 164, 0.1); color: var(--color-block-e-vip); }
+
+    .booked-by-card {
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .booked-by-card h5 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-dim);
+      margin-bottom: 0.35rem;
+    }
+
+    .booked-by-card p {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    /* ── TRUSTWORTHY RAZORPAY PAYMENT MODAL OVERHAUL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(14, 31, 18, 0.35);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .rzp-modal {
+      width: 440px;
+      background: #FFFFFF;
+      border: 1px solid rgba(184, 115, 51, 0.25);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 48px rgba(14, 31, 18, 0.12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: modalSlide 0.35s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+
+    @keyframes modalSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .rzp-header {
+      background: #F6F3EC;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(184, 115, 51, 0.15);
+    }
+
+    .rzp-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rzp-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--color-gold);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .rzp-title h4 {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      font-weight: 700;
+    }
+
+    .rzp-title p {
+      font-size: 0.7rem;
+      color: var(--color-text-dim);
+    }
+
+    .rzp-header-amt {
+      text-align: right;
+    }
+
+    .rzp-header-amt .amt-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+    }
+
+    .rzp-header-amt .amt-val {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-gold);
+    }
+
+    .rzp-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .rzp-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 1.2rem;
+    }
+    
+    .rzp-tab {
+      flex: 1;
+      padding: 0.6rem;
+      background: transparent;
+      border: none;
+      color: var(--color-text-dim);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: var(--transition);
+    }
+    
+    .rzp-tab:hover {
+      color: var(--color-gold);
+    }
+    
+    .rzp-tab.active {
+      color: var(--color-gold);
+      border-bottom-color: var(--color-gold);
+    }
+    
+    .rzp-tab-panel {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: tabFadeIn 0.3s ease;
+    }
+    
+    .rzp-tab-panel.active {
+      display: flex;
+    }
+
+    @keyframes tabFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Countdown ring style */
+    .qr-countdown-container {
+      position: relative;
+      width: 125px;
+      height: 125px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .countdown-ring {
+      position: absolute;
+      transform: rotate(-90deg);
+    }
+    
+    .qr-box-wrapper {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(14, 31, 18, 0.08);
+      background: white;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .rzp-timer-text {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      margin-top: 0.8rem;
+    }
+    
+    /* Card input styles */
+    .card-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    
+    .card-input-row.double {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    
+    .rzp-field {
+      width: 100%;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.9rem;
+      font-family: inherit;
+      color: var(--color-text);
+      font-size: 0.82rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    
+    .rzp-field:focus {
+      border-color: var(--color-gold);
+    }
+    
+    /* Net Banking Bank select styles */
+    .nb-banks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      width: 100%;
+    }
+    
+    .bank-opt {
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .bank-opt:hover {
+      border-color: var(--color-gold);
+      background: #FFFFFF;
+    }
+    
+    .bank-opt.active {
+      border-color: var(--color-gold);
+      background: rgba(184, 115, 51, 0.08);
+      color: var(--color-gold);
+    }
+    
+    .rzp-trust-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.65rem;
+      color: var(--color-text-dim);
+      opacity: 0.75;
+      margin-top: 1.5rem;
+      font-weight: 600;
+    }
+
+    .rzp-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 2rem 0;
+      display: none;
+      width: 100%;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(45, 90, 45, 0.08);
+      border-top-color: var(--color-gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── REDESIGNED TICKET PASS SCREEN ── */
+    .ticket-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0.5rem 0;
+    }
+
+    .expo-pass-overhaul {
+      width: 330px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(14, 31, 18, 0.08);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .pass-vertical-stripe {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background-color: var(--color-gold);
+    }
+    
+    .pass-top-half {
+      background: #112A18;
+      padding: 1.5rem 1.5rem 1.2rem 1.8rem;
+      color: #FFFDF8;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    
+    .pass-badge-logo {
+      font-size: 1.4rem;
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1.5px solid var(--color-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold-glow);
+    }
+    
+    .pass-event-details h3 {
+      font-family: var(--font-family);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: #FFFFFF;
+    }
+    
+    .pass-subtitle {
+      font-size: 0.62rem;
+      color: var(--color-gold-glow);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+    
+    .pass-date-venue {
+      font-size: 0.64rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+    
+    /* Perforation separator style */
+    .pass-perforation {
+      height: 16px;
+      background: transparent;
+      position: relative;
+      border-top: 1.5px dashed rgba(17, 42, 24, 0.15);
+      margin: 0;
+    }
+    
+    .pass-perforation::before,
+    .pass-perforation::after {
+      content: '';
+      position: absolute;
+      top: -9px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg-card-solid);
+      border: 1px solid var(--border-color);
+      z-index: 5;
+    }
+    
+    .pass-perforation::before {
+      left: -9px;
+      box-shadow: inset -3px 0 5px rgba(0,0,0,0.02);
+    }
+    
+    .pass-perforation::after {
+      right: -9px;
+      box-shadow: inset 3px 0 5px rgba(0,0,0,0.02);
+    }
+    
+    .pass-bottom-half {
+      padding: 1.2rem 1.5rem 1.5rem 1.8rem;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .pass-ticket-id {
+      font-family: monospace;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--color-gold);
+      background: var(--color-navy-lt);
+      border: 1px solid rgba(184, 115, 51, 0.15);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+    }
+    
+    .pass-details-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .pass-details-table td {
+      padding: 0.35rem 0;
+      font-size: 0.72rem;
+      color: var(--color-text-dim);
+    }
+    
+    .pass-details-table tr td:first-child {
+      font-weight: 500;
+    }
+    
+    .pass-details-table tr td:last-child {
+      text-align: right;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    
+    .pass-details-table tr {
+      border-bottom: 1px dashed rgba(45, 90, 45, 0.06);
+    }
+    
+    .pass-details-table tr:last-child {
+      border-bottom: none;
+    }
+    
+    .pass-details-table tr.pass-price-row {
+      border-top: 1px solid var(--border-color);
+      margin-top: 4px;
+    }
+    
+    .ticket-qr-container {
+      background: #fff;
+      padding: 6px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 6px;
+    }
+    
+    .pass-footer-note {
+      font-size: 0.64rem;
+      color: var(--color-text-dim);
+      opacity: 0.7;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* ── SELECTION TOAST ALERTS ── */
+    .toast-container {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 3000;
+      pointer-events: none;
+    }
+    
+    .toast-msg {
+      background: rgba(17, 42, 24, 0.95);
+      color: #FFFFFF;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid var(--color-gold);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      animation: toastSlideUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+    
+    @keyframes toastSlideUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ADAPTATIONS & MOBILE BOTTOM SHEET ── */
+    .mobile-toggle-sheet-btn {
+      display: none;
+    }
+
+    @media (max-width: 820px) {
+      .main-content {
+        flex-direction: column;
+        position: relative;
+      }
+      
+      .map-pane {
+        width: 100% !important;
+        height: 100% !important;
+        border-right: none !important;
+        min-width: 0 !important;
+      }
+      
+      /* Collapsible bottom sheet for checkout */
+      .checkout-pane {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100% !important;
+        height: 80% !important;
+        z-index: 1050;
+        border-left: none !important;
+        border-top: 1px solid var(--border-color);
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: 0 -10px 30px rgba(14, 31, 18, 0.15);
+        transform: translateY(100%) !important;
+        animation: none !important;
+        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        background: #FFFFFF !important;
+      }
+      
+      .checkout-pane.sheet-open {
+        transform: translateY(0) !important;
+      }
+      
+      .sheet-handle {
+        display: block;
+        width: 40px;
+        height: 4px;
+        background: rgba(45, 90, 45, 0.15);
+        border-radius: 2px;
+        margin: 8px auto 0 auto;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .mobile-toggle-sheet-btn {
+        display: flex !important;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        background: linear-gradient(135deg, var(--color-gold), var(--color-gold-glow));
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 0.8rem 1.4rem;
+        font-weight: 700;
+        font-size: 0.85rem;
+        box-shadow: 0 4px 15px rgba(184, 115, 51, 0.4);
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .fab-badge {
+        background: white;
+        color: var(--color-gold);
+        width: 18px;
+        height: 18px;
+        font-size: 0.68rem;
+        font-weight: 800;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .drawer {
+        width: 100%;
+        height: 450px;
+        top: auto;
+        left: 0;
+        bottom: 0;
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        transform: translateY(100%);
+      }
+
+      .drawer.active {
+        transform: translateY(0);
+      }
+      
+      .info-ribbon-content {
+        gap: 0.75rem;
+        font-size: 0.65rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .chip-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .chip-grid-dates {
+        grid-template-columns: 1fr;
+      }
+      
+      .rzp-modal {
+        width: 90%;
+      }
+    }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+      }
+      .app-container * {
+        display: none !important;
+      }
+      #print-area-wrapper, #print-area-wrapper * {
+        display: block !important;
+        visibility: visible !important;
+      }
+      #print-area-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        display: flex !important;
+        justify-content: center !important;
+        padding-top: 1.5cm;
+      }
+      .expo-pass-overhaul {
+        box-shadow: none !important;
+        border: 1.5px solid #000000 !important;
+        width: 100% !important;
+        max-width: 12cm !important;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .pass-vertical-stripe {
+        display: block !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .pass-top-half {
+        background: #112A18 !important;
+        color: #FFFDF8 !important;
+        display: flex !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .pass-top-half * {
+        display: block !important;
+        color: #FFFFFF !important;
+      }
+      .pass-top-half .pass-subtitle {
+        color: #C9A84C !important;
+      }
+      .pass-perforation {
+        display: block !important;
+        border-top: 1.5px dashed #000000 !important;
+      }
+      .pass-bottom-half {
+        background: #FFFFFF !important;
+        display: flex !important;
+      }
+      .pass-details-table {
+        display: table !important;
+      }
+      .pass-details-table tr {
+        display: table-row !important;
+        border-bottom: 1px dashed #cccccc !important;
+      }
+      .pass-details-table td {
+        display: table-cell !important;
+      }
+      .ticket-qr-container {
+        display: flex !important;
+        border: 1px solid #000000 !important;
+      }
+      .qr-svg {
+        display: block !important;
+      }
+    }
+
+    /* Google Sheet Integration settings drawer */
+    .integration-guide {
+      margin-top: 2rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: rgba(184, 115, 51, 0.03);
+      overflow: hidden;
+    }
+    
+    .guide-trigger {
+      padding: 1rem 1.5rem;
+      background: rgba(184, 115, 51, 0.06);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    
+    .guide-content {
+      padding: 1.5rem;
+      display: none;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.82rem;
+      color: var(--color-text-dim);
+    }
+    
+    .guide-content ol {
+      margin-left: 1.25rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .code-box {
+      background: #0E2314;
+      color: #FFFDF8;
+      font-family: monospace;
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      overflow-x: auto;
+      margin: 0.8rem 0;
+      border: 1.5px solid var(--color-gold);
+    }
+    
+    .script-url-input-container {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #fff;
+      border: 1px dashed var(--color-gold);
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DYNAMIC TOAST CONTAINER -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- DYNAMIC HOVER TOOLTIP -->
+  <div id="map-tooltip" class="map-tooltip" style="display: none;"></div>
+
+  <div class="app-container">
+    
+    <!-- HEADER (48px sticky) -->
+    <header class="top-header-bar">
+      <div class="header-left">
+        <a href="../ire.html" class="header-logo">
+          <!-- Slim logo SVG matching Dhan Win -->
+          <svg class="slim-logo" viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg">
+            <rect width="86" height="52" rx="11" fill="#1A3A1A"/>
+            <rect width="86" height="52" rx="11" fill="none" stroke="rgba(184,115,51,0.45)" stroke-width="1.2"/>
+            <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#C9A84C">W</text>
+            <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#B87333">IN</text>
+            <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(201,168,76,0.65)" letter-spacing="1.5">DHAN</text>
+            <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(184,115,51,0.35)" stroke-width="1"/>
+            <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#B87333">D</text>
+            <circle cx="55" cy="24" r="4" fill="#C9A84C"/>
+            <circle cx="55" cy="24" r="2.2" fill="#B87333"/>
+            <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#C9A84C">E</text>
+          </svg>
+          <span class="logo-title-text">IRE Expo 2026</span>
+        </a>
+      </div>
+      <div class="header-right">
+        <div class="stall-counter-container">
+          <button id="clear-all-btn" class="clear-all-btn" style="display: none;" onclick="showClearConfirm(event)">Clear All</button>
+          <div id="clear-confirm-tooltip" class="confirm-tooltip">
+            <p>Clear all selected stalls?</p>
+            <div class="confirm-buttons">
+              <button onclick="confirmClearAll(event)" class="confirm-btn yes">Yes</button>
+              <button onclick="hideClearConfirm(event)" class="confirm-btn no">No</button>
+            </div>
+          </div>
+          <span class="selection-badge" id="selection-badge">0 stalls selected</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- STICKY TOP INFO RIBBON -->
+    <div class="info-ribbon" id="info-ribbon">
+      <div class="info-ribbon-content">
+        <span>📅 <strong>Dates:</strong> 3 & 4 July 2026</span>
+        <span class="separator">|</span>
+        <span>📍 <strong>Venue:</strong> Hyderabad Exhibition Centre</span>
+        <span class="separator">|</span>
+        <span>🏪 <strong>Available Stalls:</strong> <strong id="ribbon-available-count">75</strong></span>
+      </div>
+      <button class="close-ribbon-btn" onclick="dismissRibbon()" aria-label="Dismiss banner">&times;</button>
+    </div>
+
+    <!-- MAIN BODY -->
+    <div class="main-content">
+      
+      <!-- MAP PANEL (LEFT) -->
+      <div class="map-pane">
+        
+        <div class="map-controls">
+          <div class="filter-group">
+            <button class="filter-btn active" onclick="filterStalls('all')">All Blocks</button>
+            <button class="filter-btn" onclick="filterStalls('block-a')"><span style="color:var(--color-block-a)">●</span> Top Wall (A)</button>
+            <button class="filter-btn" onclick="filterStalls('block-b')"><span style="color:var(--color-block-b)">●</span> Left Wall (B)</button>
+            <button class="filter-btn" onclick="filterStalls('block-c')"><span style="color:var(--color-block-c)">●</span> Right Wall (C)</button>
+            <button class="filter-btn" onclick="filterStalls('block-d')"><span style="color:var(--color-block-d)">●</span> Centre (D)</button>
+            <button class="filter-btn" onclick="filterStalls('block-e')"><span style="color:var(--color-block-e-entry)">●</span> Entry / VIP (E)</button>
+          </div>
+        </div>
+
+        <!-- SVG Map Container -->
+        <div class="map-canvas-container" id="canvas-container">
+          <svg id="floor-plan" viewBox="0 0 900 800" preserveAspectRatio="xMidYMid meet">
+            
+            <!-- Map Viewport Group for Pan & Zoom -->
+            <g id="viewport" transform="translate(0, 0) scale(1)">
+              
+              <defs>
+                <pattern id="gridPattern" width="30" height="30" patternUnits="userSpaceOnUse">
+                  <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(45, 90, 45, 0.05)" stroke-width="0.5"/>
+                </pattern>
+                
+                <pattern id="bookedPattern" width="12" height="12" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                  <rect width="12" height="12" fill="#EDEDED" />
+                  <line x1="0" y1="0" x2="0" y2="12" stroke="#DFDFDF" stroke-width="2" />
+                </pattern>
+
+                <pattern id="corridorPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <rect width="20" height="20" fill="rgba(45, 90, 45, 0.012)" />
+                  <circle cx="10" cy="10" r="0.8" fill="rgba(184, 115, 51, 0.15)" />
+                </pattern>
+                
+                <!-- Gradients for Stalls -->
+                <linearGradient id="grad-block-a" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFFDF7" />
+                  <stop offset="100%" stop-color="#FFEEDC" />
+                </linearGradient>
+                <linearGradient id="grad-block-b" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#F3FAF9" />
+                  <stop offset="100%" stop-color="#E2F2EE" />
+                </linearGradient>
+                <linearGradient id="grad-block-c" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFFBF9" />
+                  <stop offset="100%" stop-color="#FCECE9" />
+                </linearGradient>
+                <linearGradient id="grad-block-d" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#F6F9FC" />
+                  <stop offset="100%" stop-color="#E5ECF4" />
+                </linearGradient>
+                <linearGradient id="grad-block-e-entry" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#F7FAF5" />
+                  <stop offset="100%" stop-color="#E7EFE0" />
+                </linearGradient>
+                <linearGradient id="grad-block-e-vip" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#F8F7FC" />
+                  <stop offset="100%" stop-color="#E9E7F6" />
+                </linearGradient>
+                <linearGradient id="grad-selected" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFF4F0" />
+                  <stop offset="100%" stop-color="#FFD6C7" />
+                </linearGradient>
+
+                <filter id="shadowFilter" x="-15%" y="-15%" width="130%" height="130%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#112A18" flood-opacity="0.12"/>
+                </filter>
+              </defs>
+              <rect width="900" height="800" fill="url(#gridPattern)"/>
+              
+              <rect x="5" y="5" width="890" height="790" class="hall-border" rx="10"/>
+              <rect x="9" y="9" width="882" height="782" class="hall-border-inner" rx="8"/>
+
+              <g transform="translate(780, 80)" opacity="0.65">
+                <circle cx="12" cy="12" r="11" fill="none" stroke="rgba(184, 115, 51, 0.4)" stroke-width="0.8"/>
+                <line x1="12" y1="1" x2="12" y2="23" stroke="rgba(184, 115, 51, 0.3)" stroke-width="0.6"/>
+                <line x1="1" y1="12" x2="23" y2="12" stroke="rgba(184, 115, 51, 0.3)" stroke-width="0.6"/>
+                <polygon points="12,2 14.5,12 12,10.5" fill="var(--color-gold)"/>
+                <polygon points="12,2 9.5,12 12,10.5" fill="rgba(184, 115, 51, 0.5)"/>
+                <polygon points="12,22 14,12 12,13.5" fill="var(--color-text-dim)" opacity="0.4"/>
+                <polygon points="12,22 10,12 12,13.5" fill="var(--color-text-dim)" opacity="0.2"/>
+                <text x="12" y="0" font-size="5.5px" font-weight="800" fill="var(--color-gold)" text-anchor="middle">N</text>
+              </g>
+
+              <rect x="90" y="380" width="720" height="40" class="corridor-shading"/>
+              <line x1="90" y1="400" x2="810" y2="400" class="corridor-line"/>
+              <text x="450" y="403" class="corridor-label" text-anchor="middle">4m Visitor Corridor</text>
+
+              <rect x="90" y="110" width="720" height="30" class="corridor-shading"/>
+              <rect x="90" y="670" width="720" height="30" class="corridor-shading"/>
+              <rect x="90" y="140" width="30" height="530" class="corridor-shading"/>
+              <rect x="780" y="140" width="30" height="530" class="corridor-shading"/>
+
+              <line x1="90" y1="100" x2="90" y2="700" class="corridor-line" stroke-dasharray="3 3"/>
+              <line x1="810" y1="100" x2="810" y2="700" class="corridor-line" stroke-dasharray="3 3"/>
+              <text x="100" y="300" class="corridor-label" transform="rotate(-90 100 300)" text-anchor="middle">2.5m AI Sleeve</text>
+              <text x="800" y="300" class="corridor-label" transform="rotate(90 800 300)" text-anchor="middle">2.5m AI Sleeve & Traffic C</text>
+
+              <g transform="translate(300, 785)">
+                <rect x="0" y="0" width="300" height="15" fill="var(--bg-dark)" stroke="var(--color-gold)" stroke-width="1.5" rx="4"/>
+                <text x="150" y="11" fill="var(--color-gold)" font-size="8px" font-weight="800" letter-spacing="2px" text-anchor="middle" text-transform="uppercase">Main Entry Access Road & Registration Gate (90m)</text>
+              </g>
+
+              <g transform="translate(370, 715)">
+                <rect x="0" y="0" width="160" height="50" fill="rgba(0, 203, 198, 0.08)" stroke="var(--color-block-e-vip)" stroke-dasharray="4 2" stroke-width="1" rx="6"/>
+                <text x="80" y="24" fill="var(--color-block-e-vip)" font-size="10px" font-weight="700" text-anchor="middle">MAIN STAGE</text>
+                <text x="80" y="38" fill="var(--color-text-dim)" font-size="7.5px" text-anchor="middle">6.1m × 6.1m (400 SFT)</text>
+              </g>
+
+              <g transform="translate(20, 715)">
+                <rect x="0" y="0" width="150" height="50" fill="rgba(45, 90, 45, 0.03)" stroke="var(--border-color)" stroke-width="1" rx="6"/>
+                <text x="75" y="24" fill="var(--color-text-dim)" font-size="10px" font-weight="700" text-anchor="middle">🍲 FOOD COURT</text>
+                <text x="75" y="38" fill="var(--color-text-dim)" font-size="7.5px" text-anchor="middle">Visitor Amenities</text>
+              </g>
+
+              <text x="260" y="745" fill="var(--color-text-dim)" opacity="0.45" font-size="9px" font-weight="600" text-anchor="middle">Open Space (~28m)</text>
+              <text x="640" y="745" fill="var(--color-text-dim)" opacity="0.45" font-size="9px" font-weight="600" text-anchor="middle">Open Space (~28m)</text>
+
+              <g id="stalls-group">
+              </g>
+
+            </g>
+          </svg>
+        </div>
+
+        <div class="map-legend">
+          <div class="legend-item"><div class="legend-dot a"></div><span>Block A (Gold) · ₹7.5L</span></div>
+          <div class="legend-item"><div class="legend-dot b"></div><span>Block B (Standard) · ₹1.36L</span></div>
+          <div class="legend-item"><div class="legend-dot c"></div><span>Block C (Standard) · ₹2.0L</span></div>
+          <div class="legend-item"><div class="legend-dot d"></div><span>Block D (Diamond) · ₹1.0L</span></div>
+          <div class="legend-item"><div class="legend-dot e-entry"></div><span>Block E (Entry) · ₹1.36L</span></div>
+          <div class="legend-item"><div class="legend-dot e-vip"></div><span>Block E (VIP) · ₹2.5L</span></div>
+          <div class="legend-item"><div class="legend-dot bk"></div><span>Booked</span></div>
+          <div class="legend-item"><div class="legend-dot sl"></div><span>Selected</span></div>
+        </div>
+
+        <div class="minimap-container">
+          <svg id="minimap-svg" viewBox="0 0 900 800" width="100%" height="100%">
+            <rect x="5" y="5" width="890" height="790" fill="none" stroke="rgba(184, 115, 51, 0.35)" stroke-width="2" rx="10"/>
+            <rect x="90" y="380" width="720" height="40" fill="rgba(184, 115, 51, 0.08)"/>
+            <rect x="10" y="10" width="880" height="57" fill="rgba(212, 135, 58, 0.15)" stroke="#D4873A" stroke-width="1"/>
+            <rect x="10" y="100" width="80" height="600" fill="rgba(74, 158, 138, 0.15)" stroke="#4A9E8A" stroke-width="1"/>
+            <rect x="810" y="100" width="80" height="600" fill="rgba(196, 123, 106, 0.15)" stroke="#C47B6A" stroke-width="1"/>
+            <rect x="160" y="160" width="580" height="430" fill="none" stroke="#5B7FA6" stroke-width="0.8" stroke-dasharray="2 2"/>
+            <rect x="645" y="710" width="240" height="60" fill="rgba(98, 85, 164, 0.15)" stroke="#6255A4" stroke-width="1"/>
+            <rect id="minimap-viewport-rect" x="0" y="0" width="900" height="800" fill="none" stroke="#E05C2A" stroke-width="2.5"/>
+          </svg>
+        </div>
+
+        <div class="floating-zoom-controls">
+          <button class="floating-zoom-btn" onclick="zoom(1.25)" title="Zoom In">+</button>
+          <button class="floating-zoom-btn" onclick="zoom(0.8)" title="Zoom Out">−</button>
+          <button class="floating-zoom-btn reset" onclick="resetZoom()" title="Reset Zoom">⟲</button>
+        </div>
+
+      </div>
+
+      <div class="checkout-pane" id="checkout-pane">
+        
+        <div class="sheet-handle" onclick="closeMobileSheet()"></div>
+        
+        <div class="wizard-header">
+          <div class="wizard-steps">
+            <div class="step-indicator active" id="step-ind-1">1</div>
+            <div class="step-indicator" id="step-ind-2">2</div>
+            <div class="step-indicator" id="step-ind-3">3</div>
+          </div>
+        </div>
+
+        <div class="wizard-body">
+          
+          <div class="wizard-section active" id="wizard-step-1">
+            <h3 class="section-title">Select Stalls</h3>
+            <p class="section-desc">Click on the interactive map to select your preferred exhibition spaces. You can book multiple stalls.</p>
+            
+            <div class="empty-cart-state" id="empty-cart-view">
+              <div class="empty-icon">🏪</div>
+              <p>No stalls selected yet.<br>Click on available stalls in the floor plan to start booking.</p>
+            </div>
+
+            <div id="cart-content-view" style="display: none;">
+              <h4 class="form-group"><label>Selected Stalls</label></h4>
+              <div class="cart-list" id="selected-stalls-list">
+              </div>
+
+              <div class="coupon-box">
+                <input type="text" id="coupon-input" placeholder="Enter coupon code (e.g. EARLYBIRD10)" autocomplete="off">
+                <button type="button" onclick="applyCoupon()">Apply</button>
+              </div>
+              <div class="coupon-status" id="coupon-msg"></div>
+
+              <div class="summary-totals">
+                <div class="total-row">
+                  <span>Subtotal (Base Price)</span>
+                  <span id="summary-subtotal">₹0</span>
+                </div>
+                <div class="total-row" id="discount-row" style="display: none; color: var(--color-block-b);">
+                  <span>Promo Discount</span>
+                  <span id="summary-discount">₹0</span>
+                </div>
+                <div class="total-row">
+                  <span>GST (18%)</span>
+                  <span id="summary-gst">₹0</span>
+                </div>
+                <div class="total-row grand">
+                  <span>Grand Total</span>
+                  <span id="summary-total">₹0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-section" id="wizard-step-2">
+            <h3 class="section-title">Company Registration</h3>
+            <p class="section-desc">Provide company and representative contact details to generate your provisional allotment pass.</p>
+            
+            <form id="booking-details-form" onsubmit="submitDetailsForm(event)" novalidate>
+              
+              <div class="form-section-group">
+                <h4 class="form-section-title">Company Details</h4>
+                
+                <div class="floating-group">
+                  <input type="text" id="company-name" class="floating-input" placeholder=" " required>
+                  <label for="company-name" class="floating-label">Company Name</label>
+                </div>
+                
+                <div class="floating-group">
+                  <input type="text" id="gstin" class="floating-input" placeholder=" " oninput="validateGstinInline(this)" aria-describedby="gstin-error-msg">
+                  <label for="gstin" class="floating-label">GSTIN (Optional)</label>
+                  <span id="gstin-validation-icon" class="gstin-val-icon"></span>
+                  <span id="gstin-error-msg" class="gstin-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group-chips">
+                  <label class="chips-group-label">Primary Clean Energy Sector</label>
+                  <div class="chip-grid" id="sector-chips">
+                    <div class="toggle-chip" data-value="Solar PV" onclick="selectSectorChip(this)">Solar Energy</div>
+                    <div class="toggle-chip" data-value="Electric Vehicles" onclick="selectSectorChip(this)">EV & Hybrids</div>
+                    <div class="toggle-chip" data-value="Energy Storage / BESS" onclick="selectSectorChip(this)">Battery Storage</div>
+                    <div class="toggle-chip" data-value="Wind Energy" onclick="selectSectorChip(this)">Wind Power</div>
+                    <div class="toggle-chip" data-value="Green Hydrogen" onclick="selectSectorChip(this)">Green Hydrogen</div>
+                    <div class="toggle-chip" data-value="Smart Grid" onclick="selectSectorChip(this)">Smart Grid Support</div>
+                  </div>
+                  <input type="hidden" id="energy-sector" required>
+                </div>
+                
+                <div class="floating-group file-uploader-group" style="margin-top: 1.25rem;">
+                  <label for="company-brochure" style="font-size: 0.72rem; font-weight: 700; color: var(--color-text-dim); display: block; margin-bottom: 0.3rem;">Company Profile / Brochure *</label>
+                  <input type="file" id="company-brochure" required style="font-size: 0.72rem; color: var(--color-text-dim); width: 100%; border: 1.5px dashed var(--border-color); padding: 10px; border-radius: 6px; background: rgba(45, 90, 45, 0.02);">
+                </div>
+              </div>
+
+              <div class="form-section-group" style="margin-top: 1.25rem;">
+                <h4 class="form-section-title">Representative Details</h4>
+                
+                <div class="floating-group">
+                  <input type="text" id="contact-name" class="floating-input" placeholder=" " required>
+                  <label for="contact-name" class="floating-label">Contact Person</label>
+                </div>
+                
+                <div class="floating-group">
+                  <input type="tel" id="contact-phone" class="floating-input" placeholder=" " pattern="^[6-9]\d{9}$" required>
+                  <label for="contact-phone" class="floating-label">Phone Number</label>
+                </div>
+                
+                <div class="floating-group">
+                  <input type="email" id="contact-email" class="floating-input" placeholder=" " required>
+                  <label for="contact-email" class="floating-label">Email Address</label>
+                </div>
+
+                <div class="form-group-chips">
+                  <label class="chips-group-label">Select Attendance Dates</label>
+                  <div class="chip-grid-dates">
+                    <div class="toggle-chip date active" id="chip-date-both" onclick="setDateChipSelection('both')">
+                      <h5>Both Days</h5>
+                      <p>3 & 4 July 2026</p>
+                    </div>
+                    <div class="toggle-chip date" id="chip-date-single" onclick="setDateChipSelection('single')">
+                      <h5>Day 1 Only</h5>
+                      <p>3 July 2026</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <!-- Google Sheet Integration Accordion -->
+            <div class="integration-guide">
+              <div class="guide-trigger" onclick="toggleGuide()">
+                <span>⚙️ Google Sheet Integration Settings (Optional for Admin)</span>
+                <span id="guide-arrow">▼</span>
+              </div>
+              <div class="guide-content" id="guide-content">
+                <p style="margin-bottom: 1rem;">This portal runs dynamically. By default, it simulates saving and generates your PDF pass. To save stall booking records directly in your Google Sheet:</p>
+                <ol>
+                  <li>Create a new Google Sheet and name your columns: <strong>Timestamp, Pass ID, Company, GSTIN, Contact Name, Phone, Email, Sector, Stalls, Amount</strong>.</li>
+                  <li>Go to <strong>Extensions &gt; Apps Script</strong>.</li>
+                  <li>Delete any template code and paste the script code below:</li>
+                </ol>
+                <div class="code-box">function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date(),
+    data.passId,
+    data.company,
+    data.gstin,
+    data.contactName,
+    data.contactPhone,
+    data.contactEmail,
+    data.sector,
+    data.stalls,
+    data.amount
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({status: 'success'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}</div>
+                <ol start="4">
+                  <li>Click <strong>Deploy &gt; New Deployment</strong>. Select <strong>Web App</strong>. Set "Who has access" to <strong>Anyone</strong>. Click Deploy.</li>
+                  <li>Copy the generated <strong>Web App URL</strong> and paste it in the field below:</li>
+                </ol>
+                <div class="script-url-input-container">
+                  <label style="font-size: 11px; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">Google Apps Script Web App URL</label>
+                  <input type="url" id="sheet-api-url" placeholder="https://script.google.com/macros/s/..." style="width:100%; margin-top: 0.35rem; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.8rem;" oninput="saveApiUrl(this.value)">
+                  <p style="font-size: 10px; color: var(--color-text-dim); margin-top: 0.3rem; opacity: 0.8;">This URL is saved locally in your browser's localStorage for convenient mock-testing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-section" id="wizard-step-3">
+            <h3 class="section-title">Provisional Allotment Pass</h3>
+            <p class="section-desc">Your booking is complete. Keep this pass to enter the registration counter and collect your keys at the venue.</p>
+            
+            <div id="print-area-wrapper">
+              <div class="ticket-container">
+                <div class="expo-pass-overhaul" id="allotment-pass">
+                  <div class="pass-vertical-stripe" id="pass-stripe"></div>
+                  
+                  <div class="pass-top-half">
+                    <div class="pass-badge-logo">⚡</div>
+                    <div class="pass-event-details">
+                      <h3>INDIAN RENEWABLE ENERGY EXPO</h3>
+                      <p class="pass-subtitle">IRE EXPO 2026 · HYDERABAD</p>
+                      <p class="pass-date-venue">📅 3 & 4 July 2026 · 📍 Exhibition Centre</p>
+                    </div>
+                  </div>
+                  
+                  <div class="pass-perforation"></div>
+                  
+                  <div class="pass-bottom-half">
+                    <div class="pass-ticket-id" id="ticket-pass-id">IRE-26-XXXX</div>
+                    
+                    <table class="pass-details-table">
+                      <tr>
+                        <td>Allotment Holder</td>
+                        <td id="ticket-company-name">-</td>
+                      </tr>
+                      <tr>
+                        <td>GSTIN</td>
+                        <td id="ticket-gstin">-</td>
+                      </tr>
+                      <tr>
+                        <td>Sector Category</td>
+                        <td id="ticket-sector">-</td>
+                      </tr>
+                      <tr>
+                        <td>Stall(s) Allotted</td>
+                        <td id="ticket-stalls-allotted" style="color: var(--color-gold); font-weight: 800;">-</td>
+                      </tr>
+                      <tr>
+                        <td>Total Floor Area</td>
+                        <td id="ticket-total-area" style="font-weight: 700;">-</td>
+                      </tr>
+                      <tr>
+                        <td>Exhibition Dates</td>
+                        <td id="ticket-dates">-</td>
+                      </tr>
+                      <tr class="pass-price-row">
+                        <td>Total Paid (Net)</td>
+                        <td id="ticket-price" style="color: var(--color-text); font-weight: 800; font-size: 0.92rem;">-</td>
+                      </tr>
+                    </table>
+                    
+                    <div class="ticket-qr-container">
+                      <svg class="qr-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="#fff" />
+                        <rect x="8" y="8" width="28" height="28" fill="#000" />
+                        <rect x="12" y="12" width="20" height="20" fill="#fff" />
+                        <rect x="16" y="16" width="12" height="12" fill="#000" />
+                        <rect x="64" y="8" width="28" height="28" fill="#000" />
+                        <rect x="68" y="12" width="20" height="20" fill="#fff" />
+                        <rect x="72" y="16" width="12" height="12" fill="#000" />
+                        <rect x="8" y="64" width="28" height="28" fill="#000" />
+                        <rect x="12" y="68" width="20" height="20" fill="#fff" />
+                        <rect x="16" y="72" width="12" height="12" fill="#000" />
+                        <rect x="72" y="72" width="8" height="8" fill="#000" />
+                        <rect x="74" y="74" width="4" height="4" fill="#fff" />
+                        <rect x="75" y="75" width="2" height="2" fill="#000" />
+                        <rect x="40" y="8" width="4" height="8" fill="#000" />
+                        <rect x="48" y="12" width="8" height="4" fill="#000" />
+                        <rect x="44" y="24" width="12" height="8" fill="#000" />
+                        <rect x="8" y="40" width="8" height="4" fill="#000" />
+                        <rect x="20" y="44" width="4" height="12" fill="#000" />
+                        <rect x="44" y="88" width="8" height="8" fill="#000" />
+                        <rect x="60" y="88" width="4" height="4" fill="#000" />
+                        <rect x="68" y="84" width="16" height="8" fill="#000" />
+                      </svg>
+                    </div>
+                    
+                    <div class="pass-footer-note">
+                      Show this pass at registration desk for hall entry keys.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-cta-bar" id="cta-bar">
+          <button class="cta-btn cta-btn-secondary" id="cta-prev-btn" onclick="prevStep()" disabled style="display: none;">←</button>
+          <div class="cta-total-details">
+            <span class="cta-total-label">Grand Total</span>
+            <span class="cta-total-amt" id="cta-total-val">₹0</span>
+          </div>
+          <button class="cta-btn cta-btn-primary" id="cta-next-btn" onclick="nextStep()" disabled>Proceed</button>
+        </div>
+
+      </div> <!-- Close checkout-pane -->
+    </div> <!-- Close main-content -->
+  </div> <!-- Close app-container -->
+
+  <!-- CONFETTI CANVAS -->
+  <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; display: none;"></canvas>
+
+  <!-- MOBILE FLOATING ACTION TRIGGER -->
+  <button id="mobile-sheet-trigger" class="mobile-toggle-sheet-btn" onclick="toggleMobileSheet()">
+    <span>View Cart & Checkout</span>
+    <span class="fab-badge" id="mobile-badge-count">0</span>
+  </button>
+
+  <!-- STALL DETAILS DRAWER -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <h3 id="drawer-stall-id">Stall Details</h3>
+      <button class="close-drawer-btn" onclick="closeDrawer()" aria-label="Close details">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div id="drawer-block-indicator" class="drawer-block-indicator">Block A</div>
+      
+      <div class="drawer-spec-grid">
+        <div class="spec-item">
+          <div class="spec-label">Dimensions</div>
+          <div class="spec-value" id="drawer-dimensions">-</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Total Area</div>
+          <div class="spec-value" id="drawer-area">-</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Pricing Tier</div>
+          <div class="spec-value" id="drawer-tier">-</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Base Price</div>
+          <div class="spec-value gold" id="drawer-price">-</div>
+        </div>
+      </div>
+      
+      <div id="drawer-availability" class="availability-tag">
+        <span id="drawer-availability-text">-</span>
+      </div>
+      
+      <div id="drawer-booked-by-card" class="booked-by-card" style="display: none;">
+        <h5>Booked By</h5>
+        <p id="drawer-booked-by-name">-</p>
+      </div>
+      
+      <div id="drawer-action-container">
+        <!-- Dynamic selection buttons -->
+      </div>
+    </div>
+  </div>
+
+  <!-- RAZORPAY PAYMENT OVERLAY -->
+  <div class="modal-overlay" id="rzp-overlay">
+    <div class="rzp-modal" style="position: relative;">
+      <button class="rzp-close-btn" onclick="cancelRzpPayment()" style="background: transparent; border: none; color: var(--color-text-dim); font-size: 1.2rem; cursor: pointer; position: absolute; top: 15px; right: 15px; font-weight: 800; z-index: 10;">&times;</button>
+      <div class="rzp-header">
+        <div class="rzp-brand">
+          <div class="rzp-icon">R</div>
+          <div class="rzp-title">
+            <h4>Razorpay Checkout</h4>
+            <p>IRE Expo 2026 Allotment</p>
+          </div>
+        </div>
+        <div class="rzp-header-amt">
+          <div class="amt-label">Total Amount</div>
+          <div class="amt-val" id="rzp-amount">₹0</div>
+        </div>
+      </div>
+
+      <div class="rzp-body">
+        <div class="rzp-tabs">
+          <button class="rzp-tab active" id="tab-btn-upi" onclick="switchPayTab('upi')">⚡ UPI</button>
+          <button class="rzp-tab" id="tab-btn-card" onclick="switchPayTab('card')">💳 Card</button>
+          <button class="rzp-tab" id="tab-btn-nb" onclick="switchPayTab('nb')">🏛️ Net Banking</button>
+        </div>
+
+        <div class="rzp-tab-panel active" id="pay-panel-upi">
+          <div class="qr-countdown-container">
+            <svg class="countdown-ring" width="120" height="120">
+              <circle class="countdown-ring-bg" cx="60" cy="60" r="50" fill="none" stroke="rgba(184, 115, 51, 0.1)" stroke-width="4"/>
+              <circle class="countdown-ring-bar" id="countdown-ring-circle" cx="60" cy="60" r="50" fill="none" stroke="var(--color-gold)" stroke-width="4" stroke-dasharray="314.15" stroke-dashoffset="0"/>
+            </svg>
+            <div class="qr-box-wrapper">
+              <div class="qr-box">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                  <rect width="100" height="100" fill="#fff" />
+                  <rect x="5" y="5" width="25" height="25" fill="#000" />
+                  <rect x="8" y="8" width="19" height="19" fill="#fff" />
+                  <rect x="11" y="11" width="13" height="13" fill="#000" />
+                  <rect x="70" y="5" width="25" height="25" fill="#000" />
+                  <rect x="73" y="8" width="19" height="19" fill="#fff" />
+                  <rect x="76" y="11" width="13" height="13" fill="#000" />
+                  <rect x="5" y="70" width="25" height="25" fill="#000" />
+                  <rect x="8" y="73" width="19" height="19" fill="#fff" />
+                  <rect x="11" y="76" width="13" height="13" fill="#000" />
+                  <rect x="40" y="10" width="15" height="5" fill="#000" />
+                  <rect x="45" y="20" width="8" height="12" fill="#000" />
+                  <rect x="10" y="45" width="12" height="10" fill="#000" />
+                  <rect x="25" y="35" width="25" height="8" fill="#000" />
+                  <rect x="40" y="50" width="20" height="20" fill="#000" />
+                  <rect x="70" y="40" width="15" height="25" fill="#000" />
+                  <rect x="80" y="70" width="15" height="15" fill="#000" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="rzp-timer-text" id="rzp-timer-text">Expires in 05:00</div>
+          <p style="font-size: 0.72rem; color: var(--color-text-dim); margin-top: 0.5rem; font-weight: 500;">Scan QR using GPay, PhonePe, or BHIM</p>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; font-size: 0.76rem;" onclick="simulatePaymentScan()">Simulate QR Scan Payment</button>
+        </div>
+
+        <div class="rzp-tab-panel" id="pay-panel-card">
+          <div class="card-form">
+            <input type="text" placeholder="Card Number" class="rzp-field" maxlength="19" oninput="formatCardNumber(this)">
+            <div class="card-input-row double">
+              <input type="text" placeholder="Expiry (MM/YY)" class="rzp-field" maxlength="5" oninput="formatExpiry(this)">
+              <input type="password" placeholder="CVV" class="rzp-field" maxlength="3">
+            </div>
+            <input type="text" placeholder="Name on Card" class="rzp-field">
+          </div>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; font-size: 0.76rem;" onclick="startRzpPayment('card')">Pay Securely</button>
+        </div>
+
+        <div class="rzp-tab-panel" id="pay-panel-nb">
+          <div class="nb-banks-grid">
+            <div class="bank-opt" onclick="selectBank(this, 'SBI')">🏛️ SBI</div>
+            <div class="bank-opt" onclick="selectBank(this, 'HDFC')">🏛️ HDFC</div>
+            <div class="bank-opt" onclick="selectBank(this, 'ICICI')">🏛️ ICICI</div>
+            <div class="bank-opt" onclick="selectBank(this, 'AXIS')">🏛️ Axis</div>
+          </div>
+          <select class="rzp-field" id="other-bank-select" style="margin-top: 0.8rem;" onchange="selectDropdownBank(this)">
+            <option disabled selected>Select Other Bank</option>
+            <option>Kotak Mahindra Bank</option>
+            <option>Punjab National Bank</option>
+            <option>Bank of Baroda</option>
+          </select>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem; font-size: 0.76rem;" onclick="startRzpPayment('nb')">Proceed to Net Banking</button>
+        </div>
+
+        <div class="rzp-loader" id="rzp-loader">
+          <div class="spinner"></div>
+          <p id="rzp-loader-text" style="font-size: 0.75rem; color: var(--color-text-dim); font-weight: 600; margin-top: 10px;"></p>
+        </div>
+
+      </div> <!-- Close rzp-body -->
+    </div> <!-- Close rzp-modal -->
+  </div> <!-- Close rzp-overlay -->
+
+  <!-- JS SCRIPT LOGIC -->
+  <script>
+    
+    /* ── STALL DATABASE (Real-time DB Sync) ── */
+    const stallsData = [];
+    
+    // Helper to add a stall record
+    function createStall(id, block, sizeSft, basePrice, dimStr, status = 'available', bookedBy = '') {
+      stallsData.push({ id, block, sizeSft, basePrice, dimStr, status, bookedBy });
+    }
+
+    function initializeLocalFallbackStalls() {
+      stallsData.length = 0;
+      // Populate BLOCK A (10 stalls, Top Wall)
+      for (let i = 1; i <= 10; i++) {
+        createStall(`A-${i}`, 'block-a', 552, 750000, '9m × 5.7m', 'available', '');
+      }
+
+      // Populate BLOCK B (18 stalls, Left Wall)
+      for (let i = 1; i <= 18; i++) {
+        createStall(`B-${i}`, 'block-b', 100, 136000, '10ft × 10ft', 'available', '');
+      }
+
+      // Populate BLOCK C (12 stalls, Right Wall)
+      for (let i = 1; i <= 12; i++) {
+        createStall(`C-${i}`, 'block-c', 200, 200000, '10ft × 20ft', 'available', '');
+      }
+
+      // Populate BLOCK D (36 stalls, Centre Floor)
+      const dStallLetters = ['a', 'b', 'c', 'd', 'e', 'f'];
+      for (let unit = 1; unit <= 6; unit++) {
+        dStallLetters.forEach(letter => {
+          let id = `D-${unit}-${letter}`;
+          createStall(id, 'block-d', 64, 100000, '8ft × 8ft', 'available', '');
+        });
+      }
+
+      // Populate BLOCK E (9 stalls, Entry Level / VIP)
+      for (let i = 1; i <= 9; i++) {
+        let basePrice = i <= 5 ? 136000 : 250000;
+        createStall(`E-${i}`, 'block-e', 64, basePrice, '8ft × 8ft', 'available', '');
+      }
+    }
+
+    async function loadStallsFromServer() {
+      try {
+        const res = await fetch('/api/stalls');
+        if (!res.ok) throw new Error('Server returned error status');
+        const dbStalls = await res.json();
+        
+        stallsData.length = 0;
+        dbStalls.forEach(s => {
+          let blockVal = 'block-' + s.block.toLowerCase();
+          let statusVal = 'available';
+          if (s.status === 'sold') statusVal = 'booked';
+          else if (s.status === 'reserved') statusVal = 'vip';
+          else if (s.status === 'payment_pending') statusVal = 'booked';
+          else if (s.status === 'under_review') statusVal = 'vip';
+          
+          let sizeSftVal = 100;
+          if (s.block === 'A') sizeSftVal = 552;
+          else if (s.block === 'B') sizeSftVal = 100;
+          else if (s.block === 'C') sizeSftVal = 200;
+          else if (s.block === 'D') sizeSftVal = 64;
+          else if (s.block === 'E') sizeSftVal = 64;
+
+          createStall(s.id, blockVal, sizeSftVal, s.price, s.size, statusVal, s.assigned_company || '');
+        });
+      } catch (err) {
+        console.warn('Backend not accessible, falling back to local simulation:', err);
+        initializeLocalFallbackStalls();
+      }
+      
+      const availableCountEl = document.getElementById('ribbon-available-count');
+      if (availableCountEl) {
+        availableCountEl.textContent = stallsData.filter(s => s.status === 'available').length;
+      }
+      drawStalls();
+      updateCartSummary();
+      setTimeout(updateMinimap, 100);
+    }
+
+    /* ── MAP GENERATION (SVG Rendering) ── */
+    const stallsGroup = document.getElementById('stalls-group');
+    
+    function drawStalls() {
+      // Clear existing elements in the SVG stalls container
+      stallsGroup.innerHTML = '';
+      
+      // 1. Render Block A (Top Wall, A-1 to A-10)
+      const aWidth = 880 / 10;
+      for (let i = 0; i < 10; i++) {
+        const stallInfo = stallsData.find(s => s.id === `A-${i+1}`);
+        const x = 10 + i * aWidth;
+        const y = 10;
+        const width = aWidth - 4;
+        const height = 57;
+        createSvgStall(x, y, width, height, stallInfo, `A-${i+1}`);
+      }
+
+      // 2. Render Block B (Left Wall, B-1 to B-18)
+      const bHeight = 600 / 18;
+      for (let i = 0; i < 18; i++) {
+        const stallInfo = stallsData.find(s => s.id === `B-${i+1}`);
+        const x = 10;
+        const y = 100 + i * bHeight;
+        const width = 80 - 4;
+        const height = bHeight - 3;
+        createSvgStall(x, y, width, height, stallInfo, `B-${i+1}`);
+      }
+
+      // 3. Render Block C (Right Wall, C-1 to C-12)
+      const cHeight = 600 / 12;
+      for (let i = 0; i < 12; i++) {
+        const stallInfo = stallsData.find(s => s.id === `C-${i+1}`);
+        const x = 810;
+        const y = 100 + i * cHeight;
+        const width = 80 - 4;
+        const height = cHeight - 4;
+        createSvgStall(x, y, width, height, stallInfo, `C-${i+1}`);
+      }
+
+      // 4. Render Block D (Centre Floor Units D-1 to D-6)
+      const dWidth = 160;
+      const dHeight = 180;
+      const colGaps = 50;
+      const rowGap = 70;
+      
+      const unitPositions = [
+        { x: 160, y: 160 }, // D-1
+        { x: 160 + dWidth + colGaps, y: 160 }, // D-2
+        { x: 160 + (dWidth + colGaps)*2, y: 160 }, // D-3
+        { x: 160, y: 160 + dHeight + rowGap }, // D-4
+        { x: 160 + dWidth + colGaps, y: 160 + dHeight + rowGap }, // D-5
+        { x: 160 + (dWidth + colGaps)*2, y: 160 + dHeight + rowGap }  // D-6
+      ];
+
+      unitPositions.forEach((pos, idx) => {
+        const unitNum = idx + 1;
+        
+        // Draw outline border for the Unit cluster block
+        const clusterBorder = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        clusterBorder.setAttribute("x", pos.x - 4);
+        clusterBorder.setAttribute("y", pos.y - 4);
+        clusterBorder.setAttribute("width", dWidth + 8);
+        clusterBorder.setAttribute("height", dHeight + 8);
+        clusterBorder.setAttribute("fill", "none");
+        clusterBorder.setAttribute("stroke", "rgba(201, 168, 76, 0.1)");
+        clusterBorder.setAttribute("stroke-width", "1");
+        clusterBorder.setAttribute("rx", "4");
+        stallsGroup.appendChild(clusterBorder);
+        
+        // Label the cluster block
+        const clusterText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        clusterText.setAttribute("x", pos.x + dWidth/2);
+        clusterText.setAttribute("y", pos.y - 8);
+        clusterText.setAttribute("fill", "rgba(201, 168, 76, 0.4)");
+        clusterText.setAttribute("font-size", "7.5px");
+        clusterText.setAttribute("font-weight", "800");
+        clusterText.setAttribute("text-anchor", "middle");
+        clusterText.textContent = `CLUSTER D-${unitNum}`;
+        stallsGroup.appendChild(clusterText);
+
+        const subW = dWidth / 2;
+        const subH = dHeight / 3;
+        
+        const subStalls = [
+          { l: 'a', dx: 0, dy: 0 },
+          { l: 'b', dx: subW, dy: 0 },
+          { l: 'c', dx: 0, dy: subH },
+          { l: 'd', dx: subW, dy: subH },
+          { l: 'e', dx: 0, dy: subH * 2 },
+          { l: 'f', dx: subW, dy: subH * 2 }
+        ];
+
+        subStalls.forEach(sub => {
+          const stallId = `D-${unitNum}-${sub.l}`;
+          const stallInfo = stallsData.find(s => s.id === stallId);
+          const x = pos.x + sub.dx;
+          const y = pos.y + sub.dy;
+          const w = subW - 3;
+          const h = subH - 3;
+          createSvgStall(x, y, w, h, stallInfo, stallId);
+        });
+      });
+
+      // 5. Render Block E (VIP Lounge & 9 VIP Stalls E-1 to E-9)
+      const eWidth = 230 / 9;
+      
+      // Draw VIP lounge frame border
+      const vipFrame = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      vipFrame.setAttribute("x", 645);
+      vipFrame.setAttribute("y", 710);
+      vipFrame.setAttribute("width", 240);
+      vipFrame.setAttribute("height", 60);
+      vipFrame.setAttribute("fill", "rgba(0, 203, 198, 0.03)");
+      vipFrame.setAttribute("stroke", "rgba(0, 203, 198, 0.2)");
+      vipFrame.setAttribute("stroke-width", "1.5");
+      vipFrame.setAttribute("rx", "6");
+      stallsGroup.appendChild(vipFrame);
+
+      const vipText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      vipText.setAttribute("x", 765);
+      vipText.setAttribute("y", 705);
+      vipText.setAttribute("fill", "var(--color-block-e-vip)");
+      vipText.setAttribute("font-size", "8px");
+      vipText.setAttribute("font-weight", "800");
+      vipText.setAttribute("text-anchor", "middle");
+      vipText.textContent = "VIP LOUNGE ZONE (BLOCK E)";
+      stallsGroup.appendChild(vipText);
+
+      for (let i = 0; i < 9; i++) {
+        const stallInfo = stallsData.find(s => s.id === `E-${i+1}`);
+        const x = 650 + i * eWidth;
+        const y = 715;
+        const width = eWidth - 2;
+        const height = 50;
+        createSvgStall(x, y, width, height, stallInfo, `E-${i+1}`);
+      }
+    }
+
+    // SVG Helper to create rect + text elements
+    function createSvgStall(x, y, w, h, data, labelText) {
+      if (!data) return;
+      
+      const isSelected = selectedStalls.includes(data.id);
+      
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("x", x);
+      rect.setAttribute("y", y);
+      rect.setAttribute("width", w);
+      rect.setAttribute("height", h);
+      rect.setAttribute("rx", "3");
+      rect.setAttribute("id", `rect-${data.id}`);
+      
+      // Determine the precise block color class
+      let blockClass = data.block;
+      if (blockClass === 'block-e') {
+        blockClass = data.basePrice === 250000 ? 'block-e-vip' : 'block-e-entry';
+      }
+      
+      let classList = `stall ${blockClass}`;
+      if (data.status === 'booked' || data.status === 'vip') {
+        classList += ' booked';
+      } else {
+        if (isSelected) {
+          classList += ' selected';
+        } else {
+          classList += ' pulse-active';
+        }
+      }
+      rect.setAttribute("class", classList);
+      
+      // Accessibility attributes
+      rect.setAttribute("tabindex", "0");
+      rect.setAttribute("role", "button");
+      
+      let priceText = `₹${data.basePrice.toLocaleString('en-IN')}`;
+      let statusDesc = data.status === 'booked' ? `Booked by ${data.bookedBy}` : (data.status === 'vip' ? 'Reserved' : 'Available');
+      let ariaLabel = `Stall ${data.id}, ${data.dimStr}, ${data.sizeSft} SFT, Price: ${priceText}, Status: ${statusDesc}`;
+      rect.setAttribute("aria-label", ariaLabel);
+      
+      // Keyboard navigation
+      rect.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openStallDetails(data.id);
+        }
+      });
+      
+      // Click Handlers
+      rect.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openStallDetails(data.id);
+      });
+
+      // Hover Tooltip Handlers
+      rect.addEventListener('mouseenter', (e) => {
+        showTooltip(e, data);
+      });
+      rect.addEventListener('mousemove', (e) => {
+        moveTooltip(e);
+      });
+      rect.addEventListener('mouseleave', () => {
+        hideTooltip();
+      });
+
+      // Simple label inside the stall
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", x + w / 2);
+      text.setAttribute("y", y + h / 2 + 1); // 1px visual nudge
+      text.setAttribute("class", "stall-label");
+      text.textContent = labelText;
+      
+      // Adjust text size dynamically if standard width is narrow
+      if (w < 20) {
+        text.setAttribute("font-size", "5.5px");
+      } else if (w < 35) {
+        text.setAttribute("font-size", "7px");
+      }
+
+      g.appendChild(rect);
+      g.appendChild(text);
+      stallsGroup.appendChild(g);
+    }
+
+    /* ── APP STATE MANAGEMENT ── */
+    let selectedStalls = [];
+    let currentOpenStallId = null;
+    let couponDiscountRate = 0;
+    let currentCouponCode = '';
+    let currentStep = 1;
+    let exhibitionDatesMode = 'both'; // 'both' or 'single'
+
+    // Initial load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load stalls from backend in real-time
+      loadStallsFromServer();
+      
+      // Google Sheet setup
+      const isAdmin = new URLSearchParams(window.location.search).get('admin') === 'true';
+      const integrationGuide = document.querySelector('.integration-guide');
+      if (isAdmin) {
+        if (integrationGuide) integrationGuide.style.display = 'block';
+        fetch('/api/settings')
+          .then(res => res.json())
+          .then(settings => {
+            if (settings && settings.google_sheet_booking_url) {
+              const urlInput = document.getElementById('sheet-api-url');
+              if (urlInput) urlInput.value = settings.google_sheet_booking_url;
+            }
+          })
+          .catch(err => console.error(err));
+      } else {
+        if (integrationGuide) integrationGuide.style.display = 'none';
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      updateMinimap();
+    });
+
+    /* ── SELECTION DRAWER SYSTEM ── */
+    const drawer = document.getElementById('drawer');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+
+    function openStallDetails(stallId) {
+      const data = stallsData.find(s => s.id === stallId);
+      if (!data) return;
+
+      currentOpenStallId = stallId;
+      
+      // Update drawer text fields
+      document.getElementById('drawer-stall-id').textContent = `Stall ${data.id}`;
+      
+      // Setup Block Badge
+      const blockInd = document.getElementById('drawer-block-indicator');
+      
+      let blockClass = data.block;
+      if (blockClass === 'block-e') {
+        blockClass = data.basePrice === 250000 ? 'block-e-vip' : 'block-e-entry';
+      }
+      
+      blockInd.className = `drawer-block-indicator ${blockClass.replace('block-', '')}`;
+      let blockLabel = '';
+      switch (blockClass) {
+        case 'block-a': blockLabel = 'Block A (Top Wall)'; break;
+        case 'block-b': blockLabel = 'Block B (Left Wall)'; break;
+        case 'block-c': blockLabel = 'Block C (Right Wall)'; break;
+        case 'block-d': blockLabel = 'Block D (Centre Floor)'; break;
+        case 'block-e-entry': blockLabel = 'Block E (Entry Level)'; break;
+        case 'block-e-vip': blockLabel = 'Block E (VIP Lounge)'; break;
+      }
+      blockInd.textContent = blockLabel;
+      
+      // Setup details
+      document.getElementById('drawer-dimensions').textContent = data.dimStr;
+      document.getElementById('drawer-area').textContent = `${data.sizeSft} SFT`;
+      
+      let tierStr = 'Standard Tier';
+      if (data.block === 'block-a') tierStr = 'Gold Tier';
+      if (data.block === 'block-d') tierStr = 'Diamond Tier';
+      if (data.block === 'block-e') {
+        tierStr = data.basePrice === 250000 ? 'VIP / Platinum Tier' : 'Entry Level Tier';
+      }
+      document.getElementById('drawer-tier').textContent = tierStr;
+      document.getElementById('drawer-price').textContent = `₹${data.basePrice.toLocaleString('en-IN')}`;
+
+      // Availability check
+      const availTag = document.getElementById('drawer-availability');
+      const bookedCard = document.getElementById('drawer-booked-by-card');
+      const actionContainer = document.getElementById('drawer-action-container');
+      
+      // Reset
+      bookedCard.style.display = 'none';
+      
+      if (data.status === 'booked') {
+        availTag.className = "availability-tag booked";
+        availTag.querySelector('#drawer-availability-text').textContent = "Unavailable / Booked";
+        bookedCard.style.display = 'block';
+        document.getElementById('drawer-booked-by-name').textContent = data.bookedBy;
+        actionContainer.innerHTML = `<button class="cta-btn" style="width:100%; background: #E5E7EB; color: #9CA3AF; cursor: not-allowed;" disabled>Stall Occupied</button>`;
+      } else if (data.status === 'vip') {
+        availTag.className = "availability-tag vip";
+        availTag.querySelector('#drawer-availability-text').textContent = "Reserved / VIP Lounge";
+        bookedCard.style.display = 'block';
+        document.getElementById('drawer-booked-by-name').textContent = "Reserved for Govt / VIP Delegates";
+        actionContainer.innerHTML = `<button class="cta-btn" style="width:100%; background: #E5E7EB; color: #9CA3AF; cursor: not-allowed;" disabled>VIP Access Only</button>`;
+      } else {
+        availTag.className = "availability-tag available";
+        availTag.querySelector('#drawer-availability-text').textContent = "Available for Booking";
+        
+        const isAlreadySelected = selectedStalls.includes(stallId);
+        if (isAlreadySelected) {
+          actionContainer.innerHTML = `
+            <button class="cta-btn" style="width: 100%; border: 1px solid #FF8A8A; color: #FF8A8A; background: transparent;" onclick="toggleStallSelection('${stallId}')">
+              Remove Selection
+            </button>`;
+        } else {
+          actionContainer.innerHTML = `
+            <button class="cta-btn cta-btn-primary" style="width: 100%;" onclick="toggleStallSelection('${stallId}')">
+              Select Stall
+            </button>`;
+        }
+      }
+
+      // Show drawer & overlay
+      drawer.classList.add('active');
+      drawerOverlay.classList.add('active');
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('active');
+      drawerOverlay.classList.remove('active');
+      currentOpenStallId = null;
+    }
+
+    function toggleStallSelection(stallId) {
+      const idx = selectedStalls.indexOf(stallId);
+      let action = '';
+      if (idx > -1) {
+        selectedStalls.splice(idx, 1);
+        action = 'removed';
+      } else {
+        selectedStalls.push(stallId);
+        action = 'selected';
+      }
+      
+      // Update SVG class
+      const rect = document.getElementById(`rect-${stallId}`);
+      if (rect) {
+        const isSelected = selectedStalls.includes(stallId);
+        rect.classList.toggle('selected', isSelected);
+        rect.classList.remove('pulse-active');
+      }
+      
+      closeDrawer();
+      updateCartSummary();
+      
+      showToast(`Stall ${stallId} ${action === 'selected' ? 'added to' : 'removed from'} selection`);
+    }
+
+    /* ── CART CALCULATIONS & SUMMARY ── */
+    const emptyCartView = document.getElementById('empty-cart-view');
+    const cartContentView = document.getElementById('cart-content-view');
+    const selectedStallsList = document.getElementById('selected-stalls-list');
+    
+    function updateCartSummary() {
+      const selectionBadge = document.getElementById('selection-badge');
+      const mobileBadgeCount = document.getElementById('mobile-badge-count');
+      const clearAllBtn = document.getElementById('clear-all-btn');
+      const trigger = document.getElementById('mobile-sheet-trigger');
+      
+      const count = selectedStalls.length;
+      
+      if (selectionBadge) {
+        selectionBadge.textContent = `${count} stall${count !== 1 ? 's' : ''} selected`;
+      }
+      if (mobileBadgeCount) {
+        mobileBadgeCount.textContent = count;
+      }
+      if (clearAllBtn) {
+        clearAllBtn.style.display = count > 0 ? 'inline-block' : 'none';
+      }
+      if (trigger) {
+        trigger.style.display = count > 0 ? 'flex' : 'none';
+      }
+      
+      const nextBtn = document.getElementById('cta-next-btn');
+      
+      if (count === 0) {
+        emptyCartView.style.display = 'block';
+        cartContentView.style.display = 'none';
+        if (nextBtn) {
+          nextBtn.disabled = true;
+          if (currentStep === 1) {
+            nextBtn.textContent = 'Proceed';
+          }
+        }
+        
+        document.getElementById('summary-subtotal').textContent = '₹0';
+        document.getElementById('summary-gst').textContent = '₹0';
+        document.getElementById('summary-total').textContent = '₹0';
+        document.getElementById('cta-total-val').textContent = '₹0';
+        return;
+      }
+      
+      emptyCartView.style.display = 'none';
+      cartContentView.style.display = 'block';
+      if (nextBtn) {
+        nextBtn.disabled = false;
+      }
+
+      // Load cart items list
+      selectedStallsList.innerHTML = '';
+      let subtotal = 0;
+      
+      selectedStalls.forEach(stallId => {
+        const data = stallsData.find(s => s.id === stallId);
+        if (!data) return;
+        
+        subtotal += data.basePrice;
+        
+        let blockClass = data.block;
+        if (blockClass === 'block-e') {
+          blockClass = data.basePrice === 250000 ? 'block-e-vip' : 'block-e-entry';
+        }
+        
+        const itemDiv = document.createElement('div');
+        itemDiv.className = `cart-item ${data.block}`;
+        itemDiv.innerHTML = `
+          <div class="cart-item-left">
+            <div class="cart-block-dot" style="background-color: var(--color-${blockClass});"></div>
+            <div class="cart-item-details">
+              <h4 style="font-size: 0.8rem; font-weight: 700;">Stall ${data.id}</h4>
+              <p style="font-size: 0.68rem; color: var(--color-text-dim);">${data.sizeSft} SFT · ${data.dimStr}</p>
+            </div>
+          </div>
+          <div class="cart-item-price" style="display: flex; align-items: center; gap: 8px;">
+            <span class="cart-item-val" style="font-size: 0.78rem; font-weight: 700;">₹${data.basePrice.toLocaleString('en-IN')}</span>
+            <button class="remove-item-btn" onclick="toggleStallSelection('${data.id}')" title="Remove" style="background: transparent; border: none; font-size: 1.1rem; color: #FF8A8A; cursor: pointer;">×</button>
+          </div>
+        `;
+        selectedStallsList.appendChild(itemDiv);
+      });
+
+      calculateBilling(subtotal);
+    }
+
+    function calculateBilling(subtotal) {
+      let discount = subtotal * couponDiscountRate;
+      let netSubtotal = subtotal - discount;
+      let gstVal = netSubtotal * 0.18;
+      let grandTotal = netSubtotal + gstVal;
+
+      document.getElementById('summary-subtotal').textContent = `₹${Math.round(subtotal).toLocaleString('en-IN')}`;
+      
+      const discRow = document.getElementById('discount-row');
+      if (discount > 0) {
+        discRow.style.display = 'flex';
+        document.getElementById('summary-discount').textContent = `- ₹${Math.round(discount).toLocaleString('en-IN')}`;
+      } else {
+        discRow.style.display = 'none';
+      }
+
+      document.getElementById('summary-gst').textContent = `₹${Math.round(gstVal).toLocaleString('en-IN')}`;
+      
+      const roundedGrandTotal = Math.round(grandTotal);
+      const formattedGrandTotal = `₹${roundedGrandTotal.toLocaleString('en-IN')}`;
+      document.getElementById('summary-total').textContent = formattedGrandTotal;
+      document.getElementById('cta-total-val').textContent = formattedGrandTotal;
+      
+      // Update checkout screen label
+      document.getElementById('rzp-amount').textContent = formattedGrandTotal;
+    }
+
+    /* ── COUPON SYSTEM ── */
+    function applyCoupon() {
+      const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+      const status = document.getElementById('coupon-msg');
+      
+      status.className = "coupon-status";
+      
+      if (!code) {
+        status.textContent = "Please enter a valid promo code.";
+        status.classList.add('error');
+        return;
+      }
+      
+      if (code === 'EARLYBIRD10') {
+        couponDiscountRate = 0.10;
+        currentCouponCode = code;
+        status.textContent = "🎉 Code applied successfully! 10% Discount applied.";
+        status.classList.add('success');
+      } else if (code === 'EXPOIRE15') {
+        couponDiscountRate = 0.15;
+        currentCouponCode = code;
+        status.textContent = "🎉 Code applied successfully! 15% VIP Discount applied.";
+        status.classList.add('success');
+      } else {
+        couponDiscountRate = 0;
+        currentCouponCode = '';
+        status.textContent = "Invalid coupon code. Try 'EARLYBIRD10'.";
+        status.classList.add('error');
+      }
+      
+      updateCartSummary();
+    }
+
+    /* ── WIZARD STEP SYSTEM ── */
+    function nextStep() {
+      if (currentStep === 1) {
+        currentStep = 2;
+        updateStepIndicator();
+        document.getElementById('wizard-step-1').classList.remove('active');
+        document.getElementById('wizard-step-2').classList.add('active');
+        
+        const prevBtn = document.getElementById('cta-prev-btn');
+        if (prevBtn) {
+          prevBtn.disabled = false;
+          prevBtn.style.display = 'block';
+        }
+        const nextBtn = document.getElementById('cta-next-btn');
+        if (nextBtn) {
+          nextBtn.textContent = 'Confirm & Pay';
+        }
+      } else if (currentStep === 2) {
+        // Validate form before proceeding
+        const form = document.getElementById('booking-details-form');
+        
+        const sectorInput = document.getElementById('energy-sector');
+        if (!sectorInput.value) {
+          sectorInput.setCustomValidity('Please select a clean energy sector.');
+        } else {
+          sectorInput.setCustomValidity('');
+        }
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        
+        openRzpModal();
+      }
+    }
+
+    function prevStep() {
+      if (currentStep === 2) {
+        currentStep = 1;
+        updateStepIndicator();
+        document.getElementById('wizard-step-2').classList.remove('active');
+        document.getElementById('wizard-step-1').classList.add('active');
+        
+        const prevBtn = document.getElementById('cta-prev-btn');
+        if (prevBtn) {
+          prevBtn.disabled = true;
+          prevBtn.style.display = 'none';
+        }
+        const nextBtn = document.getElementById('cta-next-btn');
+        if (nextBtn) {
+          nextBtn.textContent = 'Proceed';
+        }
+      }
+    }
+
+    function updateStepIndicator() {
+      document.querySelectorAll('.step-indicator').forEach((el, index) => {
+        el.className = 'step-indicator';
+        if (index + 1 < currentStep) {
+          el.classList.add('completed');
+          el.innerHTML = '✓';
+        } else {
+          el.innerHTML = index + 1;
+          if (index + 1 === currentStep) {
+            el.classList.add('active');
+          }
+        }
+      });
+    }
+
+    function selectSectorChip(chip) {
+      const parent = chip.closest('#sector-chips');
+      parent.querySelectorAll('.toggle-chip').forEach(c => c.classList.remove('active'));
+      
+      chip.classList.add('active');
+      
+      const hiddenInput = document.getElementById('energy-sector');
+      hiddenInput.value = chip.getAttribute('data-value');
+      hiddenInput.setCustomValidity('');
+    }
+
+    function setDateChipSelection(mode) {
+      exhibitionDatesMode = mode;
+      document.getElementById('chip-date-both').classList.toggle('active', mode === 'both');
+      document.getElementById('chip-date-single').classList.toggle('active', mode === 'single');
+    }
+
+    /* ── RAZORPAY MOCKUP MODAL ── */
+    const rzpOverlay = document.getElementById('rzp-overlay');
+    const rzpLoader = document.getElementById('rzp-loader');
+    const rzpLoaderText = document.getElementById('rzp-loader-text');
+    let paymentTimer = null;
+    let timeRemaining = 300;
+    const totalTime = 300;
+
+    function openRzpModal() {
+      rzpOverlay.classList.add('active');
+      switchPayTab('upi');
+      
+      if (paymentTimer) clearInterval(paymentTimer);
+      timeRemaining = totalTime;
+      updateTimerDisplay();
+      
+      paymentTimer = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        
+        if (timeRemaining <= 0) {
+          clearInterval(paymentTimer);
+          cancelRzpPayment();
+          showToast("Payment session expired. Please try again.");
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const timerText = document.getElementById('rzp-timer-text');
+      const ringCircle = document.getElementById('countdown-ring-circle');
+      
+      const min = Math.floor(timeRemaining / 60);
+      const sec = timeRemaining % 60;
+      if (timerText) {
+        timerText.textContent = `Expires in ${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+      }
+      
+      if (ringCircle) {
+        const offset = ((totalTime - timeRemaining) / totalTime) * 314.15;
+        ringCircle.setAttribute('stroke-dashoffset', offset);
+      }
+    }
+
+    function cancelRzpPayment() {
+      if (paymentTimer) clearInterval(paymentTimer);
+      rzpOverlay.classList.remove('active');
+    }
+
+    function switchPayTab(tabName) {
+      document.getElementById('pay-panel-upi').classList.remove('active');
+      document.getElementById('pay-panel-card').classList.remove('active');
+      document.getElementById('pay-panel-nb').classList.remove('active');
+      
+      document.getElementById('tab-btn-upi').classList.remove('active');
+      document.getElementById('tab-btn-card').classList.remove('active');
+      document.getElementById('tab-btn-nb').classList.remove('active');
+      
+      rzpLoader.style.display = 'none';
+      
+      // Make sure the panel content is visible when switching tabs
+      document.getElementById('pay-panel-upi').style.display = tabName === 'upi' ? 'flex' : 'none';
+      document.getElementById('pay-panel-card').style.display = tabName === 'card' ? 'block' : 'none';
+      document.getElementById('pay-panel-nb').style.display = tabName === 'nb' ? 'block' : 'none';
+      
+      if (tabName === 'upi') {
+        document.getElementById('pay-panel-upi').classList.add('active');
+        document.getElementById('tab-btn-upi').classList.add('active');
+      } else if (tabName === 'card') {
+        document.getElementById('pay-panel-card').classList.add('active');
+        document.getElementById('tab-btn-card').classList.add('active');
+      } else if (tabName === 'nb') {
+        document.getElementById('pay-panel-nb').classList.add('active');
+        document.getElementById('tab-btn-nb').classList.add('active');
+      }
+    }
+
+    function simulatePaymentScan() {
+      document.getElementById('pay-panel-upi').style.display = 'none';
+      rzpLoader.style.display = 'flex';
+      if (rzpLoaderText) rzpLoaderText.textContent = "Processing payment with banking partner...";
+      
+      setTimeout(() => {
+        if (rzpLoaderText) rzpLoaderText.textContent = "Securing allocation on grid server...";
+        setTimeout(() => {
+          completeBooking();
+        }, 1500);
+      }, 2500);
+    }
+
+    let selectedBankName = '';
+    function selectBank(elem, bankCode) {
+      document.querySelectorAll('.bank-opt').forEach(opt => opt.classList.remove('active'));
+      elem.classList.add('active');
+      selectedBankName = bankCode;
+      
+      const select = document.getElementById('other-bank-select');
+      if (select) select.selectedIndex = 0;
+    }
+
+    function selectDropdownBank(select) {
+      document.querySelectorAll('.bank-opt').forEach(opt => opt.classList.remove('active'));
+      selectedBankName = select.value;
+    }
+
+    function formatCardNumber(input) {
+      let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      let formatted = '';
+      for (let i = 0; i < value.length; i++) {
+        if (i > 0 && i % 4 === 0) {
+          formatted += ' ';
+        }
+        formatted += value[i];
+      }
+      input.value = formatted;
+    }
+
+    function formatExpiry(input) {
+      let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      if (value.length > 2) {
+        input.value = value.slice(0, 2) + '/' + value.slice(2, 4);
+      } else {
+        input.value = value;
+      }
+    }
+
+    function startRzpPayment(type) {
+      if (type === 'card') {
+        const fields = document.querySelectorAll('#pay-panel-card .rzp-field');
+        let valid = true;
+        fields.forEach(f => {
+          if (!f.value.trim()) {
+            f.style.borderColor = '#FF8A8A';
+            valid = false;
+          } else {
+            f.style.borderColor = 'var(--border-color)';
+          }
+        });
+        if (!valid) {
+          showToast("Please fill in all card details.");
+          return;
+        }
+      } else if (type === 'nb') {
+        if (!selectedBankName) {
+          showToast("Please select a bank.");
+          return;
+        }
+      }
+
+      document.getElementById('pay-panel-' + type).style.display = 'none';
+      rzpLoader.style.display = 'flex';
+      if (rzpLoaderText) rzpLoaderText.textContent = "Connecting to secure bank gateway...";
+      
+      setTimeout(() => {
+        if (rzpLoaderText) rzpLoaderText.textContent = "Authorizing transaction...";
+        setTimeout(() => {
+          completeBooking();
+        }, 1500);
+      }, 2000);
+    }
+
+    async function completeBooking() {
+      if (paymentTimer) clearInterval(paymentTimer);
+      rzpOverlay.classList.remove('active');
+      
+      // Reset modal panels display
+      document.getElementById('pay-panel-upi').style.display = 'block';
+      document.getElementById('pay-panel-card').style.display = 'block';
+      document.getElementById('pay-panel-nb').style.display = 'block';
+      
+      const company = document.getElementById('company-name').value;
+      const gstin = document.getElementById('gstin').value || 'Not Provided';
+      const sector = document.getElementById('energy-sector').value || 'General Clean Energy';
+      const contactName = document.getElementById('contact-name').value;
+      const contactPhone = document.getElementById('contact-phone').value;
+      const contactEmail = document.getElementById('contact-email').value;
+      const grandAmt = document.getElementById('summary-total').textContent;
+
+      // Prepare Multipart FormData
+      const formData = new FormData();
+      formData.append('company', company);
+      formData.append('gstin', gstin);
+      formData.append('sector', sector);
+      formData.append('contactName', contactName);
+      formData.append('contactPhone', contactPhone);
+      formData.append('contactEmail', contactEmail);
+      formData.append('stalls', selectedStalls.join(', '));
+      formData.append('amount', grandAmt);
+
+      const brochureFile = document.getElementById('company-brochure');
+      if (brochureFile && brochureFile.files && brochureFile.files[0]) {
+        formData.append('brochure', brochureFile.files[0]);
+      }
+
+      try {
+        // Show loading/saving state
+        if (rzpLoaderText) rzpLoaderText.textContent = "Securing booking on server...";
+        rzpOverlay.classList.add('active'); // show loader again
+        
+        const res = await fetch('/api/bookings/checkout', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await res.json();
+        rzpOverlay.classList.remove('active');
+
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || 'Failed to complete booking on server');
+        }
+
+        triggerConfetti();
+
+        const totalSft = selectedStalls.reduce((acc, sId) => {
+          const s = stallsData.find(st => st.id === sId);
+          return acc + (s ? s.sizeSft : 0);
+        }, 0);
+        
+        const datesStr = exhibitionDatesMode === 'both' ? '3 & 4 July 2026' : '3 July 2026';
+        
+        // Use returned passId from backend!
+        const pId = data.passId;
+        document.getElementById('ticket-pass-id').textContent = pId;
+        document.getElementById('ticket-company-name').textContent = company;
+        document.getElementById('ticket-gstin').textContent = gstin;
+        document.getElementById('ticket-stalls-allotted').textContent = selectedStalls.join(', ');
+        document.getElementById('ticket-total-area').textContent = `${totalSft} SFT`;
+        document.getElementById('ticket-dates').textContent = datesStr;
+        document.getElementById('ticket-sector').textContent = sector;
+        document.getElementById('ticket-price').textContent = grandAmt;
+
+        // Update vertical stripe color based on first selected block
+        const stripe = document.getElementById('pass-stripe');
+        if (stripe && selectedStalls.length > 0) {
+          const firstStall = stallsData.find(s => s.id === selectedStalls[0]);
+          if (firstStall) {
+            let blockClass = firstStall.block;
+            if (blockClass === 'block-e') {
+              blockClass = firstStall.basePrice === 250000 ? 'block-e-vip' : 'block-e-entry';
+            }
+            stripe.style.backgroundColor = `var(--color-${blockClass})`;
+          }
+        }
+
+        // Update local state in wizard page
+        selectedStalls.forEach(sId => {
+          const s = stallsData.find(st => st.id === sId);
+          if (s) {
+            s.status = 'booked';
+            s.bookedBy = company;
+          }
+        });
+        
+        currentStep = 3;
+        updateStepIndicator();
+        
+        document.getElementById('wizard-step-1').classList.remove('active');
+        document.getElementById('wizard-step-2').classList.remove('active');
+        document.getElementById('wizard-step-3').classList.add('active');
+        
+        const prevBtn = document.getElementById('cta-prev-btn');
+        if (prevBtn) prevBtn.style.display = 'none';
+        
+        const nextBtn = document.getElementById('cta-next-btn');
+        if (nextBtn) {
+          nextBtn.textContent = '🖨️ Download / Print Pass';
+          nextBtn.disabled = false;
+          nextBtn.onclick = () => window.print();
+        }
+
+        // Update available count in info ribbon
+        const availableCountEl = document.getElementById('ribbon-available-count');
+        if (availableCountEl) {
+          availableCountEl.textContent = stallsData.filter(s => s.status === 'available').length;
+        }
+
+        // Refresh map layout
+        selectedStalls = [];
+        drawStalls();
+        updateCartSummary();
+        
+        showToast("Booking Confirmed Successfully!");
+
+      } catch (err) {
+        rzpOverlay.classList.remove('active');
+        console.error('Booking checkout error:', err);
+        alert('❌ Error: ' + err.message);
+      }
+    }
+
+    /* ── MAP VIEWPORT PAN & ZOOM SYSTEM ── */
+    const svg = document.getElementById('floor-plan');
+    const viewport = document.getElementById('viewport');
+    const container = document.getElementById('canvas-container');
+
+    let currentScale = 1;
+    let translateX = 0;
+    let translateY = 0;
+    let isDragging = false;
+    let startX, startY;
+
+    function zoom(factor) {
+      currentScale *= factor;
+      currentScale = Math.min(Math.max(currentScale, 0.75), 4);
+      updateViewportTransform();
+    }
+
+    function resetZoom() {
+      currentScale = 1;
+      translateX = 0;
+      translateY = 0;
+      updateViewportTransform();
+    }
+
+    function updateViewportTransform() {
+      viewport.setAttribute('transform', `translate(${translateX}, ${translateY}) scale(${currentScale})`);
+      updateMinimap();
+    }
+
+    container.addEventListener('mousedown', (e) => {
+      if (e.target.classList.contains('stall') || e.target.closest('#drawer')) return;
+      isDragging = true;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      translateX = e.clientX - startX;
+      translateY = e.clientY - startY;
+      updateViewportTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    container.addEventListener('touchstart', (e) => {
+      if (e.target.classList.contains('stall')) return;
+      if (e.touches.length === 1) {
+        isDragging = true;
+        startX = e.touches[0].clientX - translateX;
+        startY = e.touches[0].clientY - translateY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      if (e.touches.length === 1) {
+        translateX = e.touches[0].clientX - startX;
+        translateY = e.touches[0].clientY - startY;
+        updateViewportTransform();
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    /* ── DYNAMIC BLUEPRINT MINI-MAP ── */
+    function updateMinimap() {
+      const mmRect = document.getElementById('minimap-viewport-rect');
+      if (!mmRect) return;
+
+      const svgEl = document.getElementById('floor-plan');
+      const containerEl = document.getElementById('canvas-container');
+      if (!svgEl || !containerEl) return;
+
+      const w_c = containerEl.clientWidth;
+      const h_c = containerEl.clientHeight;
+      
+      if (w_c === 0 || h_c === 0) return;
+
+      const vbW = 900;
+      const vbH = 800;
+
+      const ar_c = w_c / h_c;
+      const ar_vb = vbW / vbH;
+
+      let visibleVbW = vbW;
+      let visibleVbH = vbH;
+
+      if (ar_c > ar_vb) {
+        visibleVbW = vbH * ar_c;
+      } else {
+        visibleVbH = vbW / ar_c;
+      }
+
+      const w = Math.min(vbW, visibleVbW / currentScale);
+      const h = Math.min(vbH, visibleVbH / currentScale);
+
+      let offsetX = 0;
+      let offsetY = 0;
+      if (ar_c > ar_vb) {
+        offsetX = (visibleVbW - vbW) / 2;
+      } else {
+        offsetY = (visibleVbH - vbH) / 2;
+      }
+
+      const x = -translateX / currentScale - offsetX / currentScale;
+      const y = -translateY / currentScale - offsetY / currentScale;
+
+      const constrainedX = Math.max(0, Math.min(vbW - 5, x));
+      const constrainedY = Math.max(0, Math.min(vbH - 5, y));
+      const constrainedW = Math.min(vbW - constrainedX, w);
+      const constrainedH = Math.min(vbH - constrainedY, h);
+
+      mmRect.setAttribute('x', constrainedX);
+      mmRect.setAttribute('y', constrainedY);
+      mmRect.setAttribute('width', constrainedW);
+      mmRect.setAttribute('height', constrainedH);
+    }
+
+    /* ── MAP CATEGORY FILTER PILLS ── */
+    function filterStalls(block) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(block));
+      });
+
+      const allRects = document.querySelectorAll('.stall');
+      
+      allRects.forEach(rect => {
+        const id = rect.id.replace('rect-', '');
+        const data = stallsData.find(s => s.id === id);
+        
+        if (!data) return;
+        
+        let match = false;
+        if (block === 'all') {
+          match = true;
+        } else if (block === 'block-e') {
+          match = data.block === 'block-e';
+        } else {
+          match = data.block === block;
+        }
+        
+        if (match) {
+          rect.style.opacity = '1';
+          if (rect.nextElementSibling) rect.nextElementSibling.style.opacity = '1';
+        } else {
+          rect.style.opacity = '0.12';
+          if (rect.nextElementSibling) rect.nextElementSibling.style.opacity = '0.1';
+        }
+      });
+    }
+
+    /* ── DYNAMIC CURSOR TOOLTIP ── */
+    const tooltipEl = document.getElementById('map-tooltip');
+
+    function showTooltip(e, data) {
+      if (!tooltipEl || !data) return;
+      
+      let statusText = 'Available';
+      let statusColor = 'var(--color-block-b)';
+      if (data.status === 'booked') {
+        statusText = `Booked by ${data.bookedBy}`;
+        statusColor = 'var(--color-booked)';
+      } else if (data.status === 'vip') {
+        statusText = 'Reserved for VIP Lounge';
+        statusColor = 'var(--color-block-e-vip)';
+      }
+      
+      let tierLabel = 'Standard Tier';
+      if (data.block === 'block-a') tierLabel = 'Gold Tier';
+      if (data.block === 'block-d') tierLabel = 'Diamond Tier';
+      if (data.block === 'block-e') {
+        tierLabel = data.basePrice === 250000 ? 'VIP / Platinum Tier' : 'Entry Level Tier';
+      }
+
+      tooltipEl.innerHTML = `
+        <h4 style="font-size: 0.78rem; font-weight: 700; color: var(--color-gold-glow); margin: 0 0 2px 0;">Stall ${data.id}</h4>
+        <div style="font-size: 0.68rem; color: #E0E0E0; margin-top: 2px;">
+          Size: <strong>${data.sizeSft} SFT</strong> (${data.dimStr})
+        </div>
+        <div style="font-size: 0.68rem; color: #E0E0E0;">
+          Tier: <strong>${tierLabel}</strong>
+        </div>
+        <div class="tooltip-price" style="margin-top: 4px; font-weight: 700; color: #FFFFFF;">
+          Price: ₹${data.basePrice.toLocaleString('en-IN')}
+        </div>
+        <div style="font-size: 0.65rem; color: ${statusColor}; font-weight: 700; margin-top: 2px;">
+          ● ${statusText}
+        </div>
+      `;
+      
+      tooltipEl.style.display = 'flex';
+      tooltipEl.style.opacity = '1';
+      moveTooltip(e);
+    }
+
+    function moveTooltip(e) {
+      if (!tooltipEl || tooltipEl.style.display === 'none') return;
+      
+      const offset = 15;
+      let x = e.clientX + offset;
+      let y = e.clientY + offset;
+      
+      const rect = tooltipEl.getBoundingClientRect();
+      if (x + rect.width > window.innerWidth) {
+        x = e.clientX - rect.width - offset;
+      }
+      if (y + rect.height > window.innerHeight) {
+        y = e.clientY - rect.height - offset;
+      }
+      
+      tooltipEl.style.left = `${x}px`;
+      tooltipEl.style.top = `${y}px`;
+    }
+
+    function hideTooltip() {
+      if (tooltipEl) {
+        tooltipEl.style.opacity = '0';
+        tooltipEl.style.display = 'none';
+      }
+    }
+
+    /* ── SELECTION TOAST ALERTS ── */
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      
+      const toast = document.createElement('div');
+      toast.className = 'toast-msg';
+      toast.textContent = message;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.transition = 'opacity 0.5s ease';
+        toast.style.opacity = '0';
+        setTimeout(() => {
+          if (toast.parentNode === container) {
+            container.removeChild(toast);
+          }
+        }, 500);
+      }, 2500);
+    }
+
+    /* ── CLEAR ALL CONFIRM TOOLTIP ── */
+    function showClearConfirm(e) {
+      e.stopPropagation();
+      const tooltip = document.getElementById('clear-confirm-tooltip');
+      if (tooltip) {
+        tooltip.style.display = 'flex';
+      }
+    }
+
+    function hideClearConfirm(e) {
+      if (e) e.stopPropagation();
+      const tooltip = document.getElementById('clear-confirm-tooltip');
+      if (tooltip) {
+        tooltip.style.display = 'none';
+      }
+    }
+
+    function confirmClearAll(e) {
+      if (e) e.stopPropagation();
+      
+      selectedStalls.forEach(stallId => {
+        const rect = document.getElementById(`rect-${stallId}`);
+        if (rect) rect.classList.remove('selected');
+      });
+      selectedStalls = [];
+      
+      hideClearConfirm();
+      updateCartSummary();
+      drawStalls();
+      
+      showToast("Cleared all selected stalls");
+    }
+
+    document.addEventListener('click', (e) => {
+      const tooltip = document.getElementById('clear-confirm-tooltip');
+      const btn = document.getElementById('clear-all-btn');
+      if (tooltip && tooltip.style.display === 'flex' && !tooltip.contains(e.target) && e.target !== btn) {
+        tooltip.style.display = 'none';
+      }
+    });
+
+    /* ── STICKY TOP INFO RIBBON ── */
+    function dismissRibbon() {
+      const ribbon = document.getElementById('info-ribbon');
+      if (ribbon) {
+        ribbon.style.display = 'none';
+      }
+    }
+
+    /* ── MOBILE COLLAPSIBLE BOTTOM SHEET ── */
+    function openMobileSheet() {
+      const pane = document.getElementById('checkout-pane');
+      if (pane) pane.classList.add('sheet-open');
+    }
+
+    function closeMobileSheet() {
+      const pane = document.getElementById('checkout-pane');
+      if (pane) pane.classList.remove('sheet-open');
+    }
+
+    function toggleMobileSheet() {
+      const pane = document.getElementById('checkout-pane');
+      if (pane) pane.classList.toggle('sheet-open');
+    }
+
+    /* ── INLINE GSTIN VALIDATOR ── */
+    function validateGtinInline(input) {
+      const gstin = input.value.trim().toUpperCase();
+      const valIcon = document.getElementById('gstin-validation-icon');
+      const errMsg = document.getElementById('gstin-error-msg');
+      
+      if (!gstin) {
+        if (valIcon) {
+          valIcon.textContent = '';
+          valIcon.className = 'gstin-val-icon';
+        }
+        if (errMsg) {
+          errMsg.textContent = '';
+          errMsg.className = 'gstin-error';
+        }
+        input.style.borderColor = 'var(--border-color)';
+        input.setCustomValidity('');
+        return;
+      }
+      
+      const gstinRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+      if (gstinRegex.test(gstin)) {
+        if (valIcon) {
+          valIcon.textContent = '✓';
+          valIcon.className = 'gstin-val-icon valid';
+        }
+        if (errMsg) {
+          errMsg.textContent = '';
+          errMsg.className = 'gstin-error';
+        }
+        input.style.borderColor = '#4A9E8A';
+        input.setCustomValidity('');
+      } else {
+        if (valIcon) {
+          valIcon.textContent = '✗';
+          valIcon.className = 'gstin-val-icon invalid';
+        }
+        if (errMsg) {
+          errMsg.textContent = 'Invalid GSTIN format (e.g. 36AAAAA1111A1Z1)';
+          errMsg.className = 'gstin-error active';
+        }
+        input.style.borderColor = '#FF8A8A';
+        input.setCustomValidity('Invalid GSTIN format');
+      }
+    }
+
+    /* ── PURE CANVAS-BASED CONFETTI ── */
+    function triggerConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      canvas.style.display = 'block';
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      const colors = ['#D4873A', '#4A9E8A', '#C47B6A', '#5B7FA6', '#7A9E5A', '#6255A4', '#B87333', '#C9A84C', '#E05C2A'];
+      const particles = [];
+      
+      // Left side fountain
+      for (let i = 0; i < 70; i++) {
+        particles.push({
+          x: 0,
+          y: canvas.height,
+          vx: Math.random() * 12 + 4,
+          vy: -Math.random() * 20 - 10,
+          r: Math.random() * 5 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 15,
+          opacity: 1
+        });
+      }
+      
+      // Right side fountain
+      for (let i = 0; i < 70; i++) {
+        particles.push({
+          x: canvas.width,
+          y: canvas.height,
+          vx: -Math.random() * 12 - 4,
+          vy: -Math.random() * 20 - 10,
+          r: Math.random() * 5 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 15,
+          opacity: 1
+        });
+      }
+      
+      let animationId;
+      function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+        
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.35; // gravity
+          p.vx *= 0.98; // friction
+          p.rotation += p.rotationSpeed;
+          p.opacity -= 0.008; // slow fade
+          
+          if (p.opacity > 0 && p.x >= 0 && p.x <= canvas.width && p.y <= canvas.height) {
+            active = true;
+            ctx.save();
+            ctx.globalAlpha = p.opacity;
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation * Math.PI / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.r * 1.5, -p.r / 2, p.r * 3, p.r);
+            ctx.restore();
+          }
+        });
+        
+        if (active) {
+          animationId = requestAnimationFrame(update);
+        } else {
+          canvas.style.display = 'none';
+          cancelAnimationFrame(animationId);
+        }
+      }
+      
+      update();
+    }
+
+    function toggleGuide() {
+      const content = document.getElementById('guide-content');
+      const arrow = document.getElementById('guide-arrow');
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+        arrow.textContent = '▼';
+      } else {
+        content.style.display = 'block';
+        arrow.textContent = '▲';
+      }
+    }
+
+    function saveApiUrl(val) {
+      fetch('/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ google_sheet_booking_url: val.trim() })
+      })
+      .then(res => {
+        if (res.ok) showToast("⚙️ Webhook URL saved securely on server.");
+      })
+      .catch(err => console.error(err));
+    }
+
+  </script>
+</body>
+</html>
