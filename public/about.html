@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Dhan Enterprise</title>
+<meta name="description" content="Learn about Dhan Enterprise — 10+ years of renewable energy expertise, our R&D initiatives, academic collaborations, and career opportunities in Hyderabad.">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+.about-story-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center; }
+.story-img { border-radius: var(--radius); overflow: hidden; height: 420px; border: 1px solid var(--border); }
+.story-img img { width:100%; height:100%; object-fit: cover; }
+.timeline { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.5rem; }
+.tl-item { display: flex; gap: 1.1rem; align-items: flex-start; }
+.tl-dot { width: 38px; height: 38px; background: linear-gradient(135deg, var(--copper-dk), var(--copper)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 700; flex-shrink: 0; box-shadow: 0 3px 10px rgba(184,115,51,0.2); }
+.tl-body h4 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 0.15rem; }
+.tl-body p { font-size: 0.83rem; color: var(--text-dim); line-height: 1.55; }
+
+.rnd-card { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg-card); box-shadow: var(--shadow-sm); transition: all 0.3s; }
+.rnd-card:hover { border-color: var(--border-cu); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.rnd-img { height: 175px; overflow: hidden; }
+.rnd-img img { width:100%; height:100%; object-fit:cover; transition: transform 0.5s; }
+.rnd-card:hover .rnd-img img { transform: scale(1.05); }
+.rnd-body { padding: 1.3rem; }
+.rnd-body .tag { font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); font-weight: 700; margin-bottom: 0.4rem; }
+.rnd-body h3 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+.rnd-body p { font-size: 0.83rem; color: var(--text-dim); line-height: 1.6; }
+
+.career-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow-sm); transition: border-color 0.25s; }
+.career-card:hover { border-color: var(--border-cu); }
+.career-card .role { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+.career-card .dept { font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); font-weight: 700; margin-bottom: 0.6rem; }
+.career-card p { font-size: 0.84rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1rem; }
+
+@media (max-width:900px) { .about-story-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="about">
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1800&q=80');"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Est. 2014 · Hyderabad, India</div>
+    <h1>About <span>Dhan Enterprise</span></h1>
+    <p class="page-hero-desc">A decade of renewable energy innovation — consulting, R&D, trade and education, all from the heart of Hyderabad.</p>
+  </div>
+</div>
+
+<!-- OUR STORY -->
+<section class="section reveal" id="story">
+  <div class="about-story-grid">
+    <div>
+      <div class="section-tag">Our Story</div>
+      <h2 class="section-title">A Decade of <span>Clean Energy</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Founded in 2014, Dhan Enterprise has grown from a boutique EV consulting practice into one of South India's most connected renewable energy firms.</p>
+      <p style="font-size:0.92rem;color:var(--text-dim);margin-bottom:1.5rem;line-height:1.7;">We operate across EV systems, Solar PV, Battery Energy Storage, Wind, Green Hydrogen, and international trade — serving private companies, government bodies, and startups. Our headquarters in Begumpet, Hyderabad serves as the nerve centre for a 22-state network of 120+ partner organisations.</p>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot">14</div><div class="tl-body"><h4>Founded 2014</h4><p>Started as EV consulting practice in Hyderabad.</p></div></div>
+        <div class="tl-item"><div class="tl-dot">18</div><div class="tl-body"><h4>Solar Expansion 2018</h4><p>Extended into Solar PV and BESS advisory services.</p></div></div>
+        <div class="tl-item"><div class="tl-dot">22</div><div class="tl-body"><h4>22 States 2022</h4><p>Built a 120+ partner network across India.</p></div></div>
+        <div class="tl-item"><div class="tl-dot">26</div><div class="tl-body"><h4>IRE 2026</h4><p>Co-organising India's premier clean energy expo — 3 &amp; 4 July 2026, Hyderabad.</p></div></div>
+      </div>
+    </div>
+    <div class="story-img">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80" alt="Dhan Enterprise office Hyderabad">
+    </div>
+  </div>
+</section>
+
+<!-- KEY NUMBERS -->
+<div class="section-wide reveal">
+  <div class="section-inner">
+    <div class="section-tag">By The Numbers</div>
+    <h2 class="section-title">Our <span>Impact</span></h2>
+    <div class="divider"></div>
+    <div class="grid-4">
+      <div class="stat-card"><div class="val">10+</div><div class="lbl">Years of Expertise</div></div>
+      <div class="stat-card"><div class="val">120+</div><div class="lbl">Partner Organisations</div></div>
+      <div class="stat-card"><div class="val">22</div><div class="lbl">States Covered</div></div>
+      <div class="stat-card"><div class="val">500+</div><div class="lbl">IRE 2026 Delegates</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- R&D -->
+<section class="section reveal" id="rnd">
+  <div class="section-tag">Innovation &amp; Technology</div>
+  <h2 class="section-title">Research &amp; <span>Development</span></h2>
+  <div class="divider"></div>
+  <p class="section-sub">Driving next-generation clean energy solutions through applied research, technology partnerships, and indigenous innovation — from laboratory to deployment.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:3rem;">
+    <div style="position:relative;border-radius:var(--radius);overflow:hidden;height:360px;border:1px solid var(--border);">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="R&D Lab" style="width:100%;height:100%;object-fit:cover;opacity:0.78;">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,24,12,0.85) 0%,rgba(10,24,12,0.1) 100%);"></div>
+      <div style="position:absolute;bottom:1.5rem;left:1.5rem;">
+        <div style="font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--copper-lt);margin-bottom:5px;">Our Focus</div>
+        <div style="font-family:var(--font-display);font-size:1.3rem;color:#fff;font-weight:700;">Pioneering Clean<br>Energy Technologies</div>
+      </div>
+    </div>
+    <div>
+      <p style="color:var(--text-dim);line-height:1.75;margin-bottom:1.2rem;font-size:0.93rem;">At Dhan Enterprise, R&D is the cornerstone of our long-term vision. We collaborate with national laboratories, IITs, MNRE-funded institutions, and global technology partners to develop, test, and commercialise cutting-edge renewable energy solutions suited to Indian conditions.</p>
+      <div class="grid-2" style="gap:0.9rem;">
+        <div class="stat-card"><div class="val">12+</div><div class="lbl">Active R&D Projects</div></div>
+        <div class="stat-card"><div class="val">8</div><div class="lbl">Technology Partners</div></div>
+        <div class="stat-card"><div class="val">3</div><div class="lbl">Patent Applications</div></div>
+        <div class="stat-card"><div class="val">IIT</div><div class="lbl">Academic Collaborations</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid-3">
+    <div class="rnd-card">
+      <div class="rnd-img"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="Next-gen solar"></div>
+      <div class="rnd-body"><div class="tag">Solar Technology</div><h3>Next-Gen Photovoltaics</h3><p>Perovskite solar cells, bifacial modules, and high-efficiency thin-film technologies — targeting 30%+ module efficiency.</p></div>
+    </div>
+    <div class="rnd-card">
+      <div class="rnd-img"><img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&q=80" alt="Battery R&D"></div>
+      <div class="rnd-body"><div class="tag">Energy Storage</div><h3>Advanced Battery Chemistry</h3><p>Solid-state battery research, sodium-ion cells, and indigenous BMS optimised for tropical temperatures.</p></div>
+    </div>
+    <div class="rnd-card">
+      <div class="rnd-img"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80" alt="AI Energy"></div>
+      <div class="rnd-body"><div class="tag">Digital Intelligence</div><h3>AI-Powered Energy Management</h3><p>Machine learning for solar yield forecasting, real-time grid load balancing, and autonomous BESS dispatch.</p></div>
+    </div>
+    <div class="rnd-card">
+      <div class="rnd-img"><img src="https://images.unsplash.com/photo-1548337138-e87d889cc369?w=600&q=80" alt="Wind R&D"></div>
+      <div class="rnd-body"><div class="tag">Wind Technology</div><h3>Low-Wind Turbine Design</h3><p>Compact, low-cut-in-speed turbines for Deccan Plateau and coastal Andhra conditions.</p></div>
+    </div>
+    <div class="rnd-card">
+      <div class="rnd-img"><img src="https://images.unsplash.com/photo-1568952433726-3896e3881c65?w=600&q=80" alt="Green Hydrogen"></div>
+      <div class="rnd-body"><div class="tag">Green Hydrogen</div><h3>Electrolyser Innovation</h3><p>PEM and alkaline electrolyser R&D for cost-competitive green hydrogen — targeting below ₹150/kg by 2030.</p></div>
+    </div>
+    <div class="rnd-card">
+      <div class="rnd-img"><img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&q=80" alt="Microgrid"></div>
+      <div class="rnd-body"><div class="tag">Smart Systems</div><h3>Hybrid Microgrid Systems</h3><p>Self-sufficient solar-wind-BESS microgrids for rural electrification — plug-and-play with remote monitoring.</p></div>
+    </div>
+  </div>
+  <div class="cta-banner" style="margin-top:2rem;">
+    <div><h4>Collaborate on R&D with Dhan Enterprise</h4><p>We welcome partnerships with research institutions, startups, and corporates working on clean energy innovation.</p></div>
+    <a href="contact.html" class="btn-primary">Partner With Us →</a>
+  </div>
+</section>
+
+<!-- ACADEMICS -->
+<div class="section-wide reveal" id="academics">
+  <div class="section-inner">
+    <div class="section-tag">Knowledge &amp; Learning</div>
+    <h2 class="section-title">Academic <span>Programmes</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Bridging industry and academia — training programmes, internships, and knowledge partnerships for the next generation of renewable energy professionals.</p>
+    <div class="grid-3">
+      <div class="info-card">
+        <div style="font-size:1.8rem;margin-bottom:0.7rem;">🎓</div>
+        <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;">Industry Training</h3>
+        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;">Short-term industry certification programmes in EV technology, solar installation, BESS commissioning, and energy auditing — in collaboration with IITs and NITs.</p>
+      </div>
+      <div class="info-card">
+        <div style="font-size:1.8rem;margin-bottom:0.7rem;">🔬</div>
+        <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;">Research Internships</h3>
+        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;">Semester-long internships for engineering and MBA students in renewable energy project management, R&D labs, and trade operations.</p>
+      </div>
+      <div class="info-card">
+        <div style="font-size:1.8rem;margin-bottom:0.7rem;">🏫</div>
+        <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;">University Partnerships</h3>
+        <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;">MoUs with Osmania University, JNTU Hyderabad, and two IITs for joint curriculum development in clean energy engineering.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CAREERS -->
+<section class="section reveal" id="careers">
+  <div class="section-tag">Join Our Team</div>
+  <h2 class="section-title">Current <span>Openings</span></h2>
+  <div class="divider"></div>
+  <p class="section-sub">We're growing our team of clean energy professionals across consulting, R&D, trade, and events. Build your career at the forefront of India's energy revolution.</p>
+  <div class="grid-3">
+    <div class="career-card">
+      <div class="dept">EV Consulting</div>
+      <div class="role">EV Systems Engineer</div>
+      <p>Lead technical consulting for EV drivetrain projects, BMS integration, and charging infrastructure planning across South India.</p>
+      <a href="contact.html" class="btn-primary" style="font-size:12.5px;padding:0.6rem 1.4rem;">Apply →</a>
+    </div>
+    <div class="career-card">
+      <div class="dept">Solar &amp; BESS</div>
+      <div class="role">Solar Project Manager</div>
+      <p>Oversee rooftop and ground-mount solar projects from feasibility through commissioning, managing EPC contractors and clients.</p>
+      <a href="contact.html" class="btn-primary" style="font-size:12.5px;padding:0.6rem 1.4rem;">Apply →</a>
+    </div>
+    <div class="career-card">
+      <div class="dept">Trade &amp; Operations</div>
+      <div class="role">Trade Operations Executive</div>
+      <p>Handle import-export documentation, supplier relations, and logistics coordination for renewable energy equipment across 40+ countries.</p>
+      <a href="contact.html" class="btn-primary" style="font-size:12.5px;padding:0.6rem 1.4rem;">Apply →</a>
+    </div>
+  </div>
+  <div class="cta-banner" style="margin-top:2rem;">
+    <div><h4>Don't see a suitable role?</h4><p>Send us your CV — we're always looking for talented people passionate about clean energy.</p></div>
+    <a href="contact.html" class="btn-outline">Send Your CV →</a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/script.js"></script>
+</body>
+</html>

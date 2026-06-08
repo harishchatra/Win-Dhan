@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRE Expo 2026 | Staff &amp; Exhibitor Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --copper:        #B87333;
+      --copper-lt:     #D4956A;
+      --copper-pale:   #F0C99A;
+      --copper-dk:     #8B5E2A;
+      --gold:          #C9A84C;
+      --gold-lt:       #E8C97A;
+      --bg-dark:       #112A18; /* Deep Forest Green */
+      --bg-card:       rgba(255, 255, 255, 0.03);
+      --text-light:    #F5FAF6;
+      --text-muted:    #A3B8A9;
+      --font:          'Outfit', sans-serif;
+      --font-display:  'Playfair Display', serif;
+      --radius:        16px;
+      --radius-sm:     8px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font);
+      background: linear-gradient(135deg, #09190e 0%, #112A18 50%, #183d23 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Decorative Grid / Particles Background */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(184, 115, 51, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184, 115, 51, 0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    body::after {
+      content: '';
+      position: absolute;
+      top: -10%; right: -10%;
+      width: 40vw;
+      height: 40vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 115, 51, 0.1) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-logo-area {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .brand-logo {
+      width: 86px;
+      height: 52px;
+      margin: 0 auto 1rem;
+      display: block;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    .brand-title span {
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-family: var(--font);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: block;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .login-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(184, 115, 51, 0.15);
+      border-radius: var(--radius);
+      padding: 2.2rem;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--copper), var(--gold), var(--copper-lt));
+    }
+
+    .login-header {
+      margin-bottom: 1.8rem;
+    }
+
+    .login-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .login-header p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-input-wrap {
+      position: relative;
+    }
+
+    .form-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem 0.75rem 2.2rem;
+      font-size: 0.85rem;
+      color: #fff;
+      font-family: var(--font);
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .form-input:focus {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .error-container {
+      background: rgba(198, 40, 40, 0.15);
+      border: 1px solid rgba(198, 40, 40, 0.3);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 1rem;
+      font-size: 0.78rem;
+      color: #ff8a80;
+      margin-bottom: 1.25rem;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--copper), var(--gold));
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.78rem;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(184, 115, 51, 0.2);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(184, 115, 51, 0.3);
+    }
+
+    .btn-submit:active {
+      transform: translateY(1px);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .login-footer-info {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .login-footer-info a {
+      color: var(--gold-lt);
+      text-decoration: underline;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="brand-logo-area">
+      <svg class="brand-logo" viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg">
+        <rect width="86" height="52" rx="11" fill="#1A3A1A"/>
+        <rect width="86" height="52" rx="11" fill="none" stroke="rgba(184,115,51,0.45)" stroke-width="1.2"/>
+        <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#C9A84C">W</text>
+        <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#B87333">IN</text>
+        <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(201,168,76,0.65)" letter-spacing="1.5">DHAN</text>
+        <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(184,115,51,0.35)" stroke-width="1"/>
+        <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#B87333">D</text>
+        <circle cx="55" cy="24" r="4" fill="#C9A84C"/>
+        <circle cx="55" cy="24" r="2.2" fill="#B87333"/>
+        <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#C9A84C">E</text>
+      </svg>
+      <div class="brand-title">
+        IRE Expo 2026
+        <span>Management Portal</span>
+      </div>
+    </div>
+
+    <div class="login-card">
+      <div class="login-header">
+        <h2>Operations Login</h2>
+        <p>Access the unified event and sales CRM dashboard</p>
+      </div>
+
+      <div class="error-container" id="error-box">
+        <span>⚠️</span>
+        <span id="error-message">Invalid credentials. Please try again.</span>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <div class="form-input-wrap">
+            <span class="input-icon">👤</span>
+            <input type="text" id="username" class="form-input" placeholder="e.g. hari" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="form-input-wrap">
+            <span class="input-icon">🔑</span>
+            <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submit-btn">
+          <span class="spinner" id="btn-spinner"></span>
+          <span id="btn-text">Authenticate Securely</span>
+        </button>
+      </form>
+
+      <div style="margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.72rem; color: var(--text-muted);">
+        <p><strong>Demo Accounts:</strong></p>
+        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 4px; margin-top: 6px; font-family: monospace;">
+          <span>hari / hari123</span> <span>(Super Admin)</span>
+          <span>manager / manager123</span> <span>(Admin)</span>
+          <span>raju / raju123</span> <span>(Sales Exec)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-footer-info">
+      <p>© 2026 Dhan Enterprise. All rights reserved.</p>
+      <p><a href="ire.html">Return to Public Expo Website</a></p>
+    </div>
+  </div>
+
+  <script>
+    // Perform a session check: if already authenticated, redirect to admin.html
+    fetch('/api/auth/session')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = '/admin.html';
+        }
+      })
+      .catch(() => {});
+
+    const form = document.getElementById('login-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const btnText = document.getElementById('btn-text');
+    const errorBox = document.getElementById('error-box');
+    const errorMsg = document.getElementById('error-message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      // Reset states
+      errorBox.style.display = 'none';
+      submitBtn.disabled = true;
+      btnSpinner.style.display = 'inline-block';
+      btnText.textContent = 'Verifying...';
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          btnText.textContent = 'Authenticated!';
+          // Store active role in sessionStorage as well to match existing admin.js framework
+          sessionStorage.setItem('active_role', data.user.role);
+          // Redirect
+          setTimeout(() => {
+            window.location.href = '/admin.html';
+          }, 600);
+        } else {
+          showError(data.error || 'Authentication failed. Please check your username and password.');
+        }
+      } catch (err) {
+        showError('Network error. Could not connect to the backend server.');
+        console.error(err);
+      } finally {
+        if (btnText.textContent !== 'Authenticated!') {
+          submitBtn.disabled = false;
+          btnSpinner.style.display = 'none';
+          btnText.textContent = 'Authenticate Securely';
+        }
+      }
+    });
+
+    function showError(message) {
+      errorMsg.textContent = message;
+      errorBox.style.display = 'flex';
+    }
+  </script>
+</body>
+</html>

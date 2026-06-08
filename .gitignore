@@ -1,0 +1,9 @@
+# Git Ignore Configuration
+node_modules/
+.env
+ire_expo.db
+uploads/
+scratch/
+.gemini/
+*.log
+.system_generated/

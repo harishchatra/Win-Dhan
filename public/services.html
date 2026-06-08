@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Dhan Enterprise</title>
+<meta name="description" content="Dhan Enterprise services: EV Consulting, Hybrid Systems, Solar Energy, BESS, Wind Energy, Spares &amp; Components — comprehensive renewable energy consultancy.">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+.services-hero-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.svc-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.svc-detail.reverse { direction: rtl; }
+.svc-detail.reverse > * { direction: ltr; }
+.svc-img-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-md); }
+.svc-img-wrap img { width:100%; height:100%; object-fit: cover; }
+.svc-features { display: flex; flex-direction: column; gap: 0.7rem; margin: 1.2rem 0; }
+.svc-feat { display: flex; gap: 0.7rem; align-items: flex-start; padding: 0.7rem 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.svc-feat .ico { font-size: 1.1rem; flex-shrink: 0; }
+.svc-feat div { font-size: 0.86rem; color: var(--text-dim); line-height: 1.55; }
+.svc-feat strong { color: var(--text); font-weight: 700; display: block; margin-bottom: 0.1rem; }
+hr.section-sep { border: none; border-top: 1px solid var(--border); margin: 0; }
+@media (max-width:900px){ .services-hero-grid { grid-template-columns:1fr; } .svc-detail, .svc-detail.reverse { grid-template-columns:1fr; direction:ltr; } }
+</style>
+</head>
+<body data-page="services">
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1800&q=80');"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">10+ Years of Expertise</div>
+    <h1>Our <span>Services</span></h1>
+    <p class="page-hero-desc">End-to-end renewable energy consultancy — from EV systems and Solar PV to BESS, Wind, and Green Hydrogen.</p>
+  </div>
+</div>
+
+<!-- SERVICES OVERVIEW CARDS -->
+<section class="section reveal">
+  <div class="section-tag">What We Do</div>
+  <h2 class="section-title">Comprehensive Energy <span>Solutions</span></h2>
+  <div class="divider"></div>
+  <div class="services-hero-grid">
+    <div class="service-card">
+      <div class="sc-img" style="background-image:url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80')"></div>
+      <div class="sc-overlay"></div>
+      <div class="sc-body"><div class="sc-tag">EV &amp; Hybrid</div><h3>Electric Vehicle Systems</h3><p>Drivetrains, BMS, charging infrastructure, fleet electrification.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="sc-img" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80')"></div>
+      <div class="sc-overlay"></div>
+      <div class="sc-body"><div class="sc-tag">Solar Energy</div><h3>Solar PV Projects</h3><p>Rooftop, ground-mount, floating solar — kW to MW scale.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="sc-img" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80')"></div>
+      <div class="sc-overlay"></div>
+      <div class="sc-body"><div class="sc-tag">Storage</div><h3>BESS &amp; Storage</h3><p>Lithium-ion, flow battery, containerised energy storage.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="sc-img" style="background-image:url('https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&q=80')"></div>
+      <div class="sc-overlay"></div>
+      <div class="sc-body"><div class="sc-tag">Wind</div><h3>Wind Energy</h3><p>Onshore wind, low-wind turbines, hybrid microgrids.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="sc-img" style="background-image:url('https://images.unsplash.com/photo-1568952433726-3896e3881c65?w=800&q=80')"></div>
+      <div class="sc-overlay"></div>
+      <div class="sc-body"><div class="sc-tag">Green Hydrogen</div><h3>Hydrogen Systems</h3><p>PEM and alkaline electrolysers, green hydrogen production.</p></div>
+    </div>
+    <div class="service-card">
+      <div class="sc-img" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80')"></div>
+      <div class="sc-overlay"></div>
+      <div class="sc-body"><div class="sc-tag">Components</div><h3>Spares &amp; Components</h3><p>OEM and aftermarket spares supply for EV, solar and wind systems.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-sep">
+
+<!-- EV CONSULTING DETAIL -->
+<section class="section reveal" id="ev">
+  <div class="svc-detail">
+    <div>
+      <div class="section-tag">EV &amp; Hybrid Systems</div>
+      <h2 class="section-title">Electric Vehicle <span>Consulting</span></h2>
+      <div class="divider"></div>
+      <p style="font-size:0.93rem;color:var(--text-dim);line-height:1.75;margin-bottom:1.5rem;">Dhan Enterprise is one of South India's most experienced EV consultancies — supporting OEMs, fleet operators, charge point operators, and state government bodies in the complete EV ecosystem transition.</p>
+      <div class="svc-features">
+        <div class="svc-feat"><div class="ico">⚡</div><div><strong>EV Drivetrain Engineering</strong>Motor selection, inverter sizing, powertrain integration for 2W, 3W, and 4W applications.</div></div>
+        <div class="svc-feat"><div class="ico">🔋</div><div><strong>Battery Management Systems</strong>BMS design, cell balancing, thermal management, and safety standards compliance.</div></div>
+        <div class="svc-feat"><div class="ico">🔌</div><div><strong>Charging Infrastructure</strong>AC/DC charger selection, site assessment, grid connection, and CPO management.</div></div>
+        <div class="svc-feat"><div class="ico">🚌</div><div><strong>Fleet Electrification</strong>TCO analysis, route optimisation, charging scheduling, and fleet management systems.</div></div>
+        <div class="svc-feat"><div class="ico">📋</div><div><strong>Policy &amp; Incentive Advisory</strong>FAME scheme, state subsidies, PLI applications, and regulatory compliance.</div></div>
+      </div>
+      <a href="contact.html" class="btn-primary">Get EV Consulting →</a>
+    </div>
+    <div class="svc-img-wrap" style="height:480px;">
+      <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80" alt="EV Consulting">
+    </div>
+  </div>
+</section>
+
+<hr class="section-sep">
+
+<!-- SOLAR DETAIL -->
+<section class="section reveal" id="solar">
+  <div class="svc-detail reverse">
+    <div class="svc-img-wrap" style="height:480px;">
+      <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80" alt="Solar Energy">
+    </div>
+    <div>
+      <div class="section-tag">Solar Energy</div>
+      <h2 class="section-title">Solar PV <span>Services</span></h2>
+      <div class="divider"></div>
+      <p style="font-size:0.93rem;color:var(--text-dim);line-height:1.75;margin-bottom:1.5rem;">From feasibility study to commissioning and O&amp;M, we support every stage of your solar journey — residential, commercial, industrial, and utility scale.</p>
+      <div class="svc-features">
+        <div class="svc-feat"><div class="ico">☀️</div><div><strong>Feasibility &amp; DPR</strong>Solar resource assessment, financial modelling, and detailed project reports for bankable proposals.</div></div>
+        <div class="svc-feat"><div class="ico">🏗️</div><div><strong>EPC Coordination</strong>Vendor selection, contract management, and project supervision for timely commissioning.</div></div>
+        <div class="svc-feat"><div class="ico">🏠</div><div><strong>Rooftop Solar</strong>Grid-tied, off-grid, and hybrid rooftop systems — residential to industrial.</div></div>
+        <div class="svc-feat"><div class="ico">🌊</div><div><strong>Floating Solar</strong>Waterbody solar feasibility, anchor design, and O&amp;M advisory.</div></div>
+        <div class="svc-feat"><div class="ico">📊</div><div><strong>O&amp;M &amp; Performance</strong>Asset monitoring, PR analysis, preventive maintenance planning.</div></div>
+      </div>
+      <a href="contact.html" class="btn-primary">Enquire About Solar →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-sep">
+
+<!-- BESS DETAIL -->
+<section class="section reveal" id="bess">
+  <div class="svc-detail">
+    <div>
+      <div class="section-tag">Battery Energy Storage</div>
+      <h2 class="section-title">BESS &amp; <span>Storage</span></h2>
+      <div class="divider"></div>
+      <p style="font-size:0.93rem;color:var(--text-dim);line-height:1.75;margin-bottom:1.5rem;">Grid-scale and behind-the-meter battery storage solutions — enabling dispatchable renewable power, peak shaving, and grid stability for India's energy transition.</p>
+      <div class="svc-features">
+        <div class="svc-feat"><div class="ico">🔋</div><div><strong>System Sizing &amp; Design</strong>Load profile analysis, chemistry selection (Li-ion, LFP, flow), and BESS architecture design.</div></div>
+        <div class="svc-feat"><div class="ico">⚙️</div><div><strong>Integration &amp; Commissioning</strong>PCS, EMS, and BMS integration; factory acceptance testing and site commissioning.</div></div>
+        <div class="svc-feat"><div class="ico">📡</div><div><strong>Remote Monitoring</strong>SCADA-connected monitoring, performance analytics, and predictive maintenance alerts.</div></div>
+        <div class="svc-feat"><div class="ico">💰</div><div><strong>Revenue Stacking</strong>Arbitrage, ancillary services, and behind-the-meter peak demand reduction strategies.</div></div>
+      </div>
+      <a href="contact.html" class="btn-primary">Explore BESS Solutions →</a>
+    </div>
+    <div class="svc-img-wrap" style="height:420px;">
+      <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80" alt="BESS Storage">
+    </div>
+  </div>
+</section>
+
+<hr class="section-sep">
+
+<!-- WIND DETAIL -->
+<section class="section reveal" id="wind">
+  <div class="svc-detail reverse">
+    <div class="svc-img-wrap" style="height:420px;">
+      <img src="https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&q=80" alt="Wind Energy">
+    </div>
+    <div>
+      <div class="section-tag">Wind Energy</div>
+      <h2 class="section-title">Wind <span>Consulting</span></h2>
+      <div class="divider"></div>
+      <p style="font-size:0.93rem;color:var(--text-dim);line-height:1.75;margin-bottom:1.5rem;">Wind resource assessment, micro-siting, turbine selection, and O&amp;M consulting — with specialisation in the Deccan Plateau and coastal Andhra conditions.</p>
+      <div class="svc-features">
+        <div class="svc-feat"><div class="ico">💨</div><div><strong>Wind Resource Assessment</strong>Anemometry data analysis, P50/P90 energy yield estimation, and bankability reports.</div></div>
+        <div class="svc-feat"><div class="ico">📍</div><div><strong>Micro-Siting</strong>Turbine placement optimisation using terrain analysis and WAsP modelling.</div></div>
+        <div class="svc-feat"><div class="ico">🌀</div><div><strong>Hybrid Wind-Solar</strong>Co-located solar-wind system design for maximised capacity utilisation.</div></div>
+        <div class="svc-feat"><div class="ico">🔧</div><div><strong>O&amp;M Advisory</strong>Condition monitoring, blade inspection protocols, and gearbox maintenance planning.</div></div>
+      </div>
+      <a href="contact.html" class="btn-primary">Wind Energy Enquiry →</a>
+    </div>
+  </div>
+</section>
+
+<!-- INDIA STATS BANNER -->
+<div class="section-wide reveal">
+  <div class="section-inner">
+    <div class="section-tag">India's Energy Landscape 2026</div>
+    <h2 class="section-title">Renewable Energy <span>Milestones</span></h2>
+    <div class="divider"></div>
+    <div class="grid-4">
+      <div class="stat-card" style="background:linear-gradient(135deg,#0D2B17,#1B5E20);border:none;">
+        <div class="val" style="-webkit-text-fill-color:#C9A84C;color:#C9A84C;">82 GW</div>
+        <div class="lbl" style="color:rgba(255,255,255,0.7);">Total Solar Capacity India</div>
+        <div style="font-size:0.72rem;color:#C9A84C;margin-top:3px;">Target: 280 GW by 2030</div>
+      </div>
+      <div class="stat-card" style="background:linear-gradient(135deg,#1B5E20,#2E7D32);border:none;">
+        <div class="val" style="-webkit-text-fill-color:#C9A84C;color:#C9A84C;">6.05 GW</div>
+        <div class="lbl" style="color:rgba(255,255,255,0.7);">Wind Added FY2026</div>
+        <div style="font-size:0.72rem;color:#C9A84C;margin-top:3px;">↑ 46% — Record Year</div>
+      </div>
+      <div class="stat-card" style="background:linear-gradient(135deg,#7A5A00,#C9A84C);border:none;">
+        <div class="val" style="-webkit-text-fill-color:#fff;color:#fff;">$23B</div>
+        <div class="lbl" style="color:rgba(255,255,255,0.8);">FDI in Renewables</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.7);margin-top:3px;">Apr 2020 – Jun 2025</div>
+      </div>
+      <div class="stat-card" style="background:linear-gradient(135deg,#B87333,#C9A84C);border:none;">
+        <div class="val" style="-webkit-text-fill-color:#fff;color:#fff;">74 GW</div>
+        <div class="lbl" style="color:rgba(255,255,255,0.8);">BESS Need by 2032</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.7);margin-top:3px;">₹4.8L Crore Investment</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="section reveal">
+  <div class="cta-banner" style="background:linear-gradient(135deg,#0E1F12,#1B3A20);border-color:rgba(184,115,51,0.3);">
+    <div><h4 style="color:#fff;">Start your project with Dhan Enterprise</h4><p style="color:rgba(255,255,255,0.65);">Tell us about your renewable energy project — we'll provide a free initial consultation.</p></div>
+    <a href="contact.html" class="btn-primary">Get Free Consultation →</a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,2586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRE Expo 2026 | India Renewable Energy Expo</title>
+  <meta name="description" content="India Renewable Energy Expo 2026 — 3rd-4th July, HMDA Grounds, Hyderabad. India's premier gathering for EV, Solar, BESS, Charging Infrastructure, Wind. Co-organised by Dhan Enterprise.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── EXPO LANDING PAGE SPECIFIC STYLES ── */
+    html {
+      scroll-padding-top: 100px; /* Offset for sticky nav scroll alignment */
+    }
+
+    /* Override dynamic navbar setup for custom anchors layout */
+    .expo-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      background: rgba(255,253,248,0.95);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 3px solid var(--copper);
+      border-bottom: 1px solid var(--border-cu);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .expo-nav .menu-toggle {
+      display: none;
+      font-size: 1.6rem;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+    }
+
+    /* Hero Styling */
+    .expo-hero {
+      background: linear-gradient(135deg, #0A1C0F 0%, #16331D 100%);
+      color: #fff;
+      padding: 6rem 4rem;
+      border-bottom: 3.5px solid var(--copper);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .expo-hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1.05fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .expo-hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.2px solid var(--gold);
+      color: var(--gold-lt);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 1.25rem;
+    }
+
+    .expo-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 0.8rem;
+      color: #FFFFFF;
+    }
+
+    .expo-hero-title span {
+      background: linear-gradient(90deg, var(--copper-lt), var(--gold-lt));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .expo-hero-subtitle {
+      font-size: 1.02rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .expo-hero-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.2rem;
+      background: rgba(255,255,255,0.05);
+      padding: 1.25rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .expo-hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+    }
+
+    .expo-hero-meta-item .ico {
+      font-size: 1.1rem;
+      color: var(--gold-lt);
+    }
+
+    .expo-hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .expo-hero-stat-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 1rem 0.5rem;
+      text-align: center;
+    }
+
+    .expo-hero-stat-card .num {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--gold-lt);
+      line-height: 1.1;
+    }
+
+    .expo-hero-stat-card .lbl {
+      font-size: 8px;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    /* Hero Promotion Visual */
+    .expo-hero-visual {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .expo-hero-visual-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1000&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.14;
+      filter: brightness(0.7);
+      z-index: 1;
+    }
+
+    .expo-promo-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(17, 42, 24, 0.85);
+      border: 1.5px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 2rem;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      max-width: 330px;
+    }
+
+    .expo-promo-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    /* About Section Tag Grid */
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.8rem;
+    }
+
+    .tag-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 0.45rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Why Exhibit Cards Grid */
+    .icon-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .icon-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.28s ease;
+    }
+
+    .icon-card:hover {
+      border-color: var(--border-cu);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    .icon-card .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .icon-card h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .icon-card p {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+
+    /* Exhibitor Categories Grid */
+    .cat-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .cat-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      transition: border-color 0.25s;
+    }
+
+    .cat-card:hover {
+      border-color: var(--copper-lt);
+    }
+
+    .cat-card .cat-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .cat-card h4 {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .cat-card p {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Floor Plan Preview Map Box */
+    .floor-plan-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 2rem;
+    }
+
+    .floor-plan-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .floor-zoom-controls {
+      display: flex;
+      gap: 5px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 3px;
+    }
+
+    .floor-zoom-controls button {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: transparent;
+      font-weight: 700;
+      color: var(--copper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .floor-zoom-controls button:hover {
+      background: var(--bg-card);
+    }
+
+    .floor-plan-view-container {
+      width: 100%;
+      height: 480px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: #FAF9F6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .floor-plan-wrapper {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.2s ease;
+      transform-origin: center center;
+    }
+
+    /* Event Highlights */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .highlight-item {
+      background: var(--bg-card);
+      border-left: 3.5px solid var(--copper);
+      padding: 1.2rem;
+      border-radius: 4px;
+      box-shadow: var(--shadow-sm);
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Agenda Timeline Layout */
+    .timeline-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .timeline-day h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--copper);
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border-cu);
+      padding-bottom: 0.5rem;
+    }
+
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      padding-left: 1rem;
+      border-left: 2px dashed var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.45rem;
+      top: 0.35rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--bg-card);
+    }
+
+    .timeline-time {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--copper-lt);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .timeline-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 0.15rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      margin-top: 0.25rem;
+    }
+
+    /* Venue details formatting */
+    .venue-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: stretch;
+    }
+
+    .venue-map-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .venue-map-iframe {
+      width: 100%;
+      height: 250px;
+      border: none;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1.2rem;
+    }
+
+    .venue-photo {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      min-height: 350px;
+    }
+
+    .venue-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Registration Warning Counter Card */
+    .reserve-card {
+      background: linear-gradient(135deg, rgba(184, 115, 51, 0.08), rgba(201, 168, 76, 0.04));
+      border: 1.5px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 3rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .counter-slots {
+      display: inline-block;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-cu);
+      padding: 0.5rem 1.5rem;
+      border-radius: var(--radius-pill);
+      font-weight: 800;
+      color: var(--copper);
+      font-size: 1.05rem;
+      margin: 1rem 0 2rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Mobile adaptations */
+    @media (max-width: 1024px) {
+      .expo-nav .menu-toggle {
+        display: block;
+      }
+      .expo-nav .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        border-bottom: 1px solid var(--border-cu);
+        padding: 1rem 2rem;
+        gap: 0.5rem;
+        box-shadow: var(--shadow-md);
+      }
+      .expo-nav .nav-links.active {
+        display: flex;
+      }
+      .expo-hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .icon-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .cat-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-container { grid-template-columns: 1fr; gap: 2rem; }
+      .venue-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .expo-hero { padding: 4rem 1.5rem; }
+      .expo-hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .icon-cards-grid { grid-template-columns: 1fr; }
+      .cat-cards-grid { grid-template-columns: 1fr; }
+      .highlights-grid { grid-template-columns: 1fr; }
+      .reserve-card { padding: 2rem 1.5rem; }
+    }
+
+    /* Exhibitor Directory Section */
+    .exh-dir-section {
+      background: var(--bg-section);
+      padding: 5rem 2rem;
+    }
+    .dir-search-container {
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      display: flex;
+      gap: 10px;
+    }
+    .dir-search-input {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      color: var(--text);
+      background: #fff;
+      width: 100%;
+    }
+    .dir-search-input:focus {
+      border-color: var(--copper);
+    }
+    .dir-filter-chips {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .dir-chip {
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--radius-pill);
+      background: #fff;
+      border: 1px solid var(--border);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dir-chip.active, .dir-chip:hover {
+      background: var(--copper);
+      color: #fff;
+      border-color: var(--copper);
+    }
+    .dir-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .exh-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .exh-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--copper-pale);
+    }
+    .exh-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
+    .exh-card-icon {
+      font-size: 2rem;
+      width: 48px;
+      height: 48px;
+      background: var(--bg-section);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--copper);
+    }
+    .exh-card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .exh-card-sector {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--copper);
+      margin-bottom: 0.6rem;
+    }
+    .exh-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+    .exh-card-stall {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+    
+    /* Popup Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 42, 24, 0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-box {
+      background: #FFFDF8;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border-cu);
+      box-shadow: var(--shadow-lg);
+      width: 90%;
+      max-width: 500px;
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.22s ease-out;
+    }
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .modal-body {
+      padding: 1.5rem;
+    }
+    .modal-form-group {
+      margin-bottom: 1rem;
+    }
+    .modal-form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-dim);
+      margin-bottom: 0.4rem;
+    }
+    .modal-form-group input, .modal-form-group select, .modal-form-group textarea {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      background: #fff;
+      color: var(--text);
+    }
+    .modal-form-group input:focus, .modal-form-group select:focus, .modal-form-group textarea:focus {
+      border-color: var(--copper);
+    }
+    .modal-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .modal-footer {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      background: var(--bg-section);
+    }
+
+    /* ── DIGNITARIES SECTION (#dignitaries) ── */
+    .dignitaries-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .dignitary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .dignitary-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--copper);
+    }
+    
+    .dignitary-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--bg-section);
+      border: 2px solid var(--border-cu);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--copper-dk);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+    
+    .dignitary-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    
+    .dignitary-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--copper);
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+      line-height: 1.3;
+    }
+    
+    .dignitary-org {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    
+    .tbc-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(184, 115, 51, 0.1);
+      color: var(--copper-dk);
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-cu);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── SPEAKERS SECTION (#speakers) ── */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+      margin-top: 2rem;
+    }
+    
+    .speaker-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .speaker-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--copper);
+    }
+    
+    .speaker-header-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.2rem;
+      width: 100%;
+    }
+    
+    .speaker-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--bg-section);
+      border: 1.5px solid var(--border-cu);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--copper-dk);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .speaker-meta {
+      flex: 1;
+    }
+    
+    .speaker-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    
+    .speaker-org {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    
+    .speaker-topic {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+    
+    .speaker-badges {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: auto;
+      width: 100%;
+    }
+    
+    .day-badge {
+      background: var(--bg-section);
+      color: var(--text);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    
+    .speaker-cta-banner {
+      background: linear-gradient(135deg, rgba(17, 42, 24, 0.95), rgba(45, 90, 45, 0.85));
+      border: 1px solid rgba(184, 115, 51, 0.3);
+      border-radius: var(--radius);
+      padding: 1.8rem 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 3rem;
+      color: #fff;
+    }
+    
+    .speaker-cta-banner h4 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      color: #fff;
+    }
+    
+    .speaker-cta-banner p {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .speaker-cta-banner a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+    .speaker-cta-banner a:hover {
+      color: var(--gold-lt);
+    }
+
+    /* ── AGENDA TABS SYSTEM ── */
+    .agenda-tabs {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    
+    .agenda-tab-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .agenda-tab {
+      background: #fff;
+      border: 1px solid rgba(45, 90, 45, 0.2);
+      color: #2D4735;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 8px 20px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      outline: none;
+    }
+    
+    .agenda-tab:hover {
+      border-color: #B87333;
+      color: #B87333;
+    }
+    
+    .agenda-tab.active {
+      background: #112A18;
+      color: #B87333;
+      border: none;
+    }
+    
+    .agenda-tab-date {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      color: #666;
+      font-weight: 500;
+    }
+    
+    .agenda-view {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+    
+    .agenda-view.active {
+      display: block;
+    }
+    
+    .timeline-list, .agenda-timeline {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .timeline-list::before, .agenda-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 80px;
+      width: 0;
+      border-left: 2px dashed rgba(184, 115, 51, 0.3);
+      z-index: 1;
+    }
+    
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+      width: 100%;
+    }
+    
+    .timeline-time {
+      width: 80px;
+      flex-shrink: 0;
+      text-align: right;
+      padding-right: 15px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      line-height: 1.2;
+    }
+    
+    .time-hour {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #112A18;
+    }
+    
+    .time-ampm {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      color: #2D4735;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      left: 80px;
+      top: 14px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #B87333;
+      border: 2px solid #EEF5F0;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    
+    .timeline-dot.dot-teal {
+      background: #4A9E8A;
+    }
+    
+    .timeline-dot.dot-dark {
+      background: #112A18;
+    }
+    
+    .timeline-content {
+      flex: 1;
+      margin-left: 20px;
+      background: #fff;
+      border: 0.5px solid rgba(45, 90, 45, 0.13);
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: all 0.15s ease;
+      box-sizing: border-box;
+    }
+    
+    /* Session type styling on card left border */
+    .timeline-content.type-ceremony {
+      border-left: 3px solid #112A18;
+    }
+    .timeline-content.type-keynote {
+      border-left: 3px solid #B87333;
+    }
+    .timeline-content.type-panel {
+      border-left: 3px solid #5B7FA6;
+    }
+    .timeline-content.type-technical {
+      border-left: 3px solid #6255A4;
+    }
+    .timeline-content.type-networking {
+      border-left: 3px solid #4A9E8A;
+    }
+    .timeline-content.type-b2b {
+      border-left: 3px solid #4A9E8A;
+    }
+    
+    .timeline-content:hover {
+      border-left-color: #B87333 !important;
+      background: #FDFAF6;
+    }
+    
+    .timeline-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #112A18;
+      margin-bottom: 6px;
+    }
+    
+    .timeline-speaker {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12.5px;
+      color: #2D4735;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .timeline-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .venue-chip {
+      background: #EEF5F0;
+      color: #2D4735;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .session-chip {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    /* Session type chip color system */
+    .session-chip.type-ceremony {
+      background: rgba(17, 42, 24, 0.08);
+      color: #112A18;
+    }
+    .session-chip.type-keynote {
+      background: rgba(184, 115, 51, 0.1);
+      color: #8B5A1A;
+    }
+    .session-chip.type-panel {
+      background: rgba(91, 127, 166, 0.1);
+      color: #2D5A8E;
+    }
+    .session-chip.type-technical {
+      background: rgba(98, 85, 164, 0.1);
+      color: #3D3275;
+    }
+    .session-chip.type-networking {
+      background: rgba(74, 158, 138, 0.1);
+      color: #1F6B5A;
+    }
+    .session-chip.type-b2b {
+      background: rgba(74, 158, 138, 0.1);
+      color: #1F6B5A;
+    }
+
+    /* Horizontal scroll for mobile/tablet */
+    @media (max-width: 768px) {
+      .dignitaries-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 1.2rem;
+        padding-bottom: 1rem;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+      }
+      .dignitary-card {
+        min-width: 250px;
+        scroll-snap-align: center;
+        flex-shrink: 0;
+      }
+      .speakers-grid {
+        grid-template-columns: 1fr;
+      }
+      .agenda-timeline::before, .timeline-list::before {
+        left: 16px;
+      }
+      .timeline-dot {
+        left: 16px;
+        top: 5px;
+      }
+      .timeline-item {
+        flex-direction: column;
+        padding-left: 36px;
+        gap: 0;
+      }
+      .timeline-time {
+        width: auto;
+        text-align: left;
+        align-items: flex-start;
+        padding-right: 0;
+        margin-bottom: 8px;
+      }
+      .timeline-content {
+        width: 100%;
+        margin-left: 0;
+      }
+      .agenda-tabs {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .agenda-tab-wrapper {
+        width: 100%;
+      }
+      .agenda-tab {
+        width: 100%;
+      }
+    }
+
+#ire-subnav {
+  position: sticky;
+  top: 96px; /* utility bar 36px + main nav 60px */
+  z-index: 98;
+  background: #EEF5F0;
+  border-bottom: 0.5px solid rgba(45, 90, 45, 0.18);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 40px;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+#ire-subnav::-webkit-scrollbar { display: none; }
+
+#ire-subnav a {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #2D4735;
+  text-decoration: none;
+  padding: 0 12px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+#ire-subnav a:hover { color: #B87333; }
+#ire-subnav a.active {
+  color: #B87333;
+  border-bottom: 2px solid #B87333;
+}
+
+#ire-subnav .subnav-cta {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 5px 14px;
+  background: #B87333;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+#ire-subnav .subnav-cta:hover { opacity: 0.88; }
+  </style>
+</head>
+<body data-page="ire">
+
+  <div id="nav-placeholder"></div>
+
+  <nav id="ire-subnav">
+    <a href="#about-expo">About Expo</a>
+    <a href="#dignitaries">Dignitaries</a>
+    <a href="#speakers">Speakers</a>
+    <a href="#why-exhibit">Why Exhibit</a>
+    <a href="#categories">Categories</a>
+    <a href="#stall-layout">Stall Layout</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#sponsors">Sponsors</a>
+    <a href="#venue">Venue</a>
+    <a href="#register">Register</a>
+    <a href="stalls-booking/index.html" class="subnav-cta">Book Stall →</a>
+  </nav>
+
+  <!-- SECTION 1: HERO -->
+  <header class="expo-hero">
+    <div class="expo-hero-grid">
+      <div class="expo-hero-text">
+        <div class="expo-hero-badge">⚡ 5th Edition Expo</div>
+        <h1 class="expo-hero-title">India Renewable<br>Energy <span>Expo 2026</span></h1>
+        <p class="expo-hero-subtitle">EV • Solar • Battery Storage • Charging Infrastructure • Renewable Energy</p>
+        
+        <div class="expo-hero-meta">
+          <div class="expo-hero-meta-item">
+            <span class="ico">📅</span> 3rd–4th July 2026
+          </div>
+          <div class="expo-hero-meta-item">
+            <span class="ico">📍</span> HMDA Grounds, Hyderabad
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+          <a href="stalls-booking/index.html" class="btn-primary">🏪 Book Stall</a>
+          <button class="btn-outline" onclick="triggerBrochureDownload()" style="color: #fff; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.25);">Download Brochure</button>
+        </div>
+
+        <!-- Hero Stats -->
+        <div class="expo-hero-stats" style="margin-top: 2.5rem;">
+          <div class="expo-hero-stat-card"><div class="num">75+</div><div class="lbl">Exhibitors</div></div>
+          <div class="expo-hero-stat-card"><div class="num">6000+</div><div class="lbl">Expected Visitors</div></div>
+          <div class="expo-hero-stat-card"><div class="num">2 Days</div><div class="lbl">Event Duration</div></div>
+          <div class="expo-hero-stat-card"><div class="num">10+</div><div class="lbl">Industry Segments</div></div>
+        </div>
+      </div>
+
+      <!-- Hero Promotional Visual Area -->
+      <div class="expo-hero-visual">
+        <div class="expo-hero-visual-bg"></div>
+        <div class="expo-promo-card">
+          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🌎</div>
+          <h4>India's Leading Clean Energy Gathering</h4>
+          <p style="font-size: 0.74rem; color: rgba(255,255,255,0.85); line-height: 1.5; margin-top: 0.4rem;">Co-organised by Dhan Enterprise and Suprabha Trust, showcasing state-of-the-art technologies on a 7,200 sqm floor grid.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 2: ABOUT EXPO -->
+  <section class="section reveal" id="about-expo">
+    <div class="section-tag">Event Overview</div>
+    <h2 class="section-title">About <span>IRE Expo 2026</span></h2>
+    <div class="divider"></div>
+    <div class="grid-2-1">
+      <div>
+        <p style="margin-bottom: 1.2rem; font-size: 0.95rem; line-height: 1.7; color: var(--text-dim);">IRE 2026 is a premier Renewable Energy & Electric Mobility exhibition co-organized by Dhan Enterprise and Suprabha Trust. Designed as a key convergence node, the expo brings together state ministries, nodal bodies, central PSUs, global technology manufacturers, dealers, and corporate investors to network, trade, and exchange insights.</p>
+        <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-dim);">Spanning over two action-packed days in Hyderabad, the event will feature tender announcements, expert policy summits, commercial showcases, and live product launches defining the path of India's green grid transition.</p>
+      </div>
+      <div>
+        <h4 style="font-size: 0.82rem; font-weight: 800; color: var(--copper); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.8rem;">Key Stakeholders & Exhibitors</h4>
+        <div class="tag-grid">
+          <div class="tag-pill">Government Departments</div>
+          <div class="tag-pill">MSME Industrialists</div>
+          <div class="tag-pill">Market Investors</div>
+          <div class="tag-pill">EV Manufacturers</div>
+          <div class="tag-pill">Wind Power Developers</div>
+          <div class="tag-pill">Technology Providers</div>
+          <div class="tag-pill">Equipment Dealers & Distributors</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: CHIEF GUESTS & DIGNITARIES -->
+  <section class="section reveal" id="dignitaries">
+    <div class="section-tag">Dignitaries</div>
+    <h2 class="section-title">Chief Guests &amp; <span>Honoured Dignitaries</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Leading policymakers and administrative heads TBC to grace and inaugurate the expo sessions.</p>
+    
+    <div class="dignitaries-grid">
+      <!-- Dignitary 1 -->
+      <div class="dignitary-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="dignitary-avatar">👤</div>
+        <div class="dignitary-name">Chief Guest</div>
+        <div class="dignitary-title">Hon'ble Minister</div>
+        <div class="dignitary-org">Ministry of New &amp; Renewable Energy, Govt. of India</div>
+      </div>
+      <!-- Dignitary 2 -->
+      <div class="dignitary-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="dignitary-avatar">👤</div>
+        <div class="dignitary-name">Guest of Honour</div>
+        <div class="dignitary-title">Secretary</div>
+        <div class="dignitary-org">Telangana Energy Department</div>
+      </div>
+      <!-- Dignitary 3 -->
+      <div class="dignitary-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="dignitary-avatar">👤</div>
+        <div class="dignitary-name">Special Guest</div>
+        <div class="dignitary-title">CMD</div>
+        <div class="dignitary-org">Convergence Energy Services Ltd. (CESL)</div>
+      </div>
+      <!-- Dignitary 4 -->
+      <div class="dignitary-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="dignitary-avatar">👤</div>
+        <div class="dignitary-name">Guest of Honour</div>
+        <div class="dignitary-title">Director General</div>
+        <div class="dignitary-org">MSME Department, Telangana</div>
+      </div>
+      <!-- Dignitary 5 -->
+      <div class="dignitary-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="dignitary-avatar">👤</div>
+        <div class="dignitary-name">Special Invitee</div>
+        <div class="dignitary-title">Managing Director</div>
+        <div class="dignitary-org">Telangana State Road Transport Corporation (TSRTC)</div>
+      </div>
+      <!-- Dignitary 6 -->
+      <div class="dignitary-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="dignitary-avatar">👤</div>
+        <div class="dignitary-name">Special Invitee</div>
+        <div class="dignitary-title">Commissioner</div>
+        <div class="dignitary-org">Greater Hyderabad Municipal Corporation (GHMC)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: SPEAKERS & SESSIONS -->
+  <section class="section reveal" id="speakers">
+    <div class="section-tag">Keynote &amp; Panelists</div>
+    <h2 class="section-title">Speakers &amp; <span>Industry Leaders</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Leading energy specialists, researchers, and corporate executives TBC to share clean energy insights.</p>
+    
+    <div class="speakers-grid">
+      <!-- Speaker 1 -->
+      <div class="speaker-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="speaker-header-row">
+          <div class="speaker-avatar">🗣️</div>
+          <div class="speaker-meta">
+            <div class="speaker-name">Policy Expert</div>
+            <div class="speaker-org">NITI Aayog</div>
+          </div>
+        </div>
+        <div class="speaker-topic">"EV Policy &amp; Road Ahead 2029: Directives for Fleet and Battery Infrastructure Development"</div>
+        <div class="speaker-badges">
+          <span class="day-badge">Day 1 Session</span>
+        </div>
+      </div>
+      
+      <!-- Speaker 2 -->
+      <div class="speaker-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="speaker-header-row">
+          <div class="speaker-avatar">🗣️</div>
+          <div class="speaker-meta">
+            <div class="speaker-name">Solar Industry Leader</div>
+            <div class="speaker-org">EPC Operations Panel</div>
+          </div>
+        </div>
+        <div class="speaker-topic">"Solar EPC: Opportunities and Scaling Operations for MSMEs in Sub-Megawatt Tenders"</div>
+        <div class="speaker-badges">
+          <span class="day-badge">Day 1 Session</span>
+        </div>
+      </div>
+      
+      <!-- Speaker 3 -->
+      <div class="speaker-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="speaker-header-row">
+          <div class="speaker-avatar">🗣️</div>
+          <div class="speaker-meta">
+            <div class="speaker-name">Energy Storage Specialist</div>
+            <div class="speaker-org">Grid Integrations Labs</div>
+          </div>
+        </div>
+        <div class="speaker-topic">"BESS Technology: Commercial Grid Integration, Peak Load Management &amp; Battery Assembly"</div>
+        <div class="speaker-badges">
+          <span class="day-badge">Day 1 Session</span>
+        </div>
+      </div>
+      
+      <!-- Speaker 4 -->
+      <div class="speaker-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="speaker-header-row">
+          <div class="speaker-avatar">🗣️</div>
+          <div class="speaker-meta">
+            <div class="speaker-name">TSRTC Representative</div>
+            <div class="speaker-org">Telangana Transit Authority</div>
+          </div>
+        </div>
+        <div class="speaker-topic">"EV Bus Ecosystem in Telangana: Grid Charging Stations, Hub Operations &amp; Route Logistics"</div>
+        <div class="speaker-badges">
+          <span class="day-badge">Day 2 Session</span>
+        </div>
+      </div>
+      
+      <!-- Speaker 5 -->
+      <div class="speaker-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="speaker-header-row">
+          <div class="speaker-avatar">🗣️</div>
+          <div class="speaker-meta">
+            <div class="speaker-name">NABARD / Bank Rep</div>
+            <div class="speaker-org">Green Financing Division</div>
+          </div>
+        </div>
+        <div class="speaker-topic">"Financing Green Energy Projects: Capital Mobilisation, Debt Options and MSME Incentives"</div>
+        <div class="speaker-badges">
+          <span class="day-badge">Day 2 Session</span>
+        </div>
+      </div>
+      
+      <!-- Speaker 6 -->
+      <div class="speaker-card">
+        <span class="tbc-badge">TBC</span>
+        <div class="speaker-header-row">
+          <div class="speaker-avatar">🗣️</div>
+          <div class="speaker-meta">
+            <div class="speaker-name">Wind Energy Expert</div>
+            <div class="speaker-org">Small Scale Systems</div>
+          </div>
+        </div>
+        <div class="speaker-topic">"Wind &amp; Hydel: Small Scale Solutions, Hybrid Microgrids, and Off-grid Agri Integration"</div>
+        <div class="speaker-badges">
+          <span class="day-badge">Day 2 Session</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="speaker-cta-banner">
+      <div>
+        <h4>Interested in speaking at IRE 2026?</h4>
+        <p>Join central agency policymakers, commercial heads, and tech innovators on the summit stage.</p>
+      </div>
+      <a href="mailto:hari@win-dhan.in">Submit your proposal &rarr;</a>
+    </div>
+  </section>
+
+  <!-- SECTION 3: WHY EXHIBIT -->
+  <section class="section-wide reveal" id="why-exhibit">
+    <div class="section-inner">
+      <div class="section-tag">Exhibitor Benefits</div>
+      <h2 class="section-title">Why Your Company <span>Should Exhibit</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Showcase your innovations directly to central agencies, commercial buyers, and industry networks to expand your business footprint.</p>
+      
+      <div class="icon-cards-grid">
+        <div class="icon-card">
+          <div class="card-icon">📈</div>
+          <h4>Lead Generation</h4>
+          <p>Collect high-quality sales leads from institutional clients, retailers, and project installers looking for clean technologies.</p>
+        </div>
+        <div class="icon-card">
+          <div class="card-icon">🏷️</div>
+          <h4>Brand Visibility</h4>
+          <p>Establish industry leadership by exhibiting alongside major renewable brands, central ministries, and corporate buyers.</p>
+        </div>
+        <div class="icon-card">
+          <div class="card-icon">🏛️</div>
+          <h4>Government Interaction</h4>
+          <p>Connect with policymakers, state agencies (e.g. TSREDCO), and PSU officials to understand ongoing grid projects and tenders.</p>
+        </div>
+        <div class="icon-card">
+          <div class="card-icon">🤝</div>
+          <h4>Dealer Expansion</h4>
+          <p>Appoint regional distributors, franchisors, and commercial agents to scale up your countrywide retail networks.</p>
+        </div>
+        <div class="icon-card">
+          <div class="card-icon">🚀</div>
+          <h4>Product Launches</h4>
+          <p>Unveil new products, EV models, high-efficiency solar cells, or fast chargers directly to specialized tech media.</p>
+        </div>
+        <div class="icon-card">
+          <div class="card-icon">👥</div>
+          <h4>B2B Networking</h4>
+          <p>Participate in pre-scheduled matchmaking roundtables to secure project partners and supply-chain logistics.</p>
+        </div>
+        <div class="icon-card">
+          <div class="card-icon">💰</div>
+          <h4>Investor Exposure</h4>
+          <p>Present your models to clean energy venture capital funds, commercial banks, and private equity lenders.</p>
+        </div>
+        <div class="icon-card">
+          <div class="card-icon">🌐</div>
+          <h4>Market Expansion</h4>
+          <p>Identify project opportunities in Southern India and co-develop tenders with government nodal offices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: EXHIBITOR CATEGORIES -->
+  <section class="section reveal" id="categories">
+    <div class="section-tag">Exhibition Profiles</div>
+    <h2 class="section-title">Key Industry <span>Categories</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Featuring a comprehensive clean technology ecosystem across 16 major segments.</p>
+    
+    <div class="cat-cards-grid">
+      <div class="cat-card"><div class="cat-icon">🛵</div><div><h4>EV Two Wheelers</h4><p>High-speed commuters and battery swapping models.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🚗</div><div><h4>EV Cars</h4><p>Passenger commercial sedans and utility vehicles.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🛺</div><div><h4>EV Auto</h4><p>Last-mile passenger and freight load rickshaws.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🚌</div><div><h4>EV Bus</h4><p>Municipal public transit and school carrier segments.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🚛</div><div><h4>EV Trucks</h4><p>Medium-duty distribution cargo trucks.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">☀️</div><div><h4>Solar Companies</h4><p>PV wafer, module, and cell manufacturing giants.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🏗️</div><div><h4>Solar EPC</h4><p>Turnkey rooftop and utility-scale solar installers.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🔋</div><div><h4>Battery Manufacturers</h4><p>Lithium-ion, sodium-ion, and solid-state developers.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">⚡</div><div><h4>Battery Storage (BESS)</h4><p>Containerised commercial battery energy solutions.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🔌</div><div><h4>Charging Infrastructure</h4><p>AC/DC fast-charging networks and software.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🛺</div><div><h4>Golf Cart Companies</h4><p>In-campus light EV carriers and golf course carts.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">✈️</div><div><h4>Travel Operators</h4><p>Tour fleets transitioning to electric mobility.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🌀</div><div><h4>Wind Energy</h4><p>Turbine components, blades, and wind farm EPCs.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">💧</div><div><h4>Hydel Energy</h4><p>Small-hydro component systems and generators.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🔥</div><div><h4>PNG Companies</h4><p>Piped natural gas suppliers and alternative fuels.</p></div></div>
+      <div class="cat-card"><div class="cat-icon">🏭</div><div><h4>MSMEs</h4><p>Ancillary component suppliers and component manufacturers.</p></div></div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: STALL LAYOUT & FLOOR PLAN -->
+  <section class="section reveal" id="stall-layout">
+    <div class="section-tag">Blueprint Grid</div>
+    <h2 class="section-title">Hall Layout &amp; <span>Stall Pricing</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Study the layout configuration of the exhibition floor and view block-wise stall rates.</p>
+
+    <!-- Map Blueprint zoom box -->
+    <div class="floor-plan-box">
+      <div class="floor-plan-header">
+        <span style="font-size: 0.8rem; font-weight: 800; color: var(--copper); text-transform: uppercase; letter-spacing: 0.5px;">Hall blueprint layout (Zoom to study details)</span>
+        <div class="floor-zoom-controls">
+          <button onclick="zoomPreview(1.2)" title="Zoom In">+</button>
+          <button onclick="zoomPreview(0.8)" title="Zoom Out">−</button>
+          <button onclick="resetPreviewZoom()" title="Reset Zoom">⟲</button>
+        </div>
+      </div>
+      <div class="floor-plan-view-container">
+        <div class="floor-plan-wrapper" id="preview-wrapper">
+          <svg id="layout-preview-svg" viewBox="0 0 900 800" width="100%" height="100%">
+            <!-- Grid Pattern -->
+            <rect width="900" height="800" fill="none" stroke="rgba(45, 90, 45, 0.05)" stroke-width="2"/>
+            <rect x="5" y="5" width="890" height="790" fill="none" stroke="var(--text)" stroke-width="2" rx="10"/>
+            
+            <!-- Block A -->
+            <rect x="10" y="10" width="880" height="57" fill="rgba(212, 135, 58, 0.15)" stroke="#D4873A" stroke-width="1.5"/>
+            <text x="450" y="44" fill="#D4873A" font-size="14px" font-weight="800" text-anchor="middle">BLOCK A — TOP WALL (Gold Tiers · 9m × 5.7m)</text>
+            
+            <!-- Block B -->
+            <rect x="10" y="100" width="80" height="600" fill="rgba(74, 158, 138, 0.15)" stroke="#4A9E8A" stroke-width="1.5"/>
+            <text x="50" y="400" fill="#4A9E8A" font-size="14px" font-weight="800" text-anchor="middle" transform="rotate(-90 50 400)">BLOCK B — LEFT WALL (10ft × 10ft)</text>
+            
+            <!-- Block C -->
+            <rect x="810" y="100" width="80" height="600" fill="rgba(196, 123, 106, 0.15)" stroke="#C47B6A" stroke-width="1.5"/>
+            <text x="850" y="400" fill="#C47B6A" font-size="14px" font-weight="800" text-anchor="middle" transform="rotate(90 850 400)">BLOCK C — RIGHT WALL (10ft × 20ft)</text>
+            
+            <!-- Block D -->
+            <rect x="160" y="160" width="580" height="430" fill="none" stroke="#5B7FA6" stroke-width="1.5" stroke-dasharray="4 4" rx="6"/>
+            <rect x="190" y="190" width="130" height="150" fill="rgba(91, 127, 166, 0.1)" stroke="#5B7FA6" stroke-width="1" rx="4"/>
+            <rect x="380" y="190" width="130" height="150" fill="rgba(91, 127, 166, 0.1)" stroke="#5B7FA6" stroke-width="1" rx="4"/>
+            <rect x="570" y="190" width="130" height="150" fill="rgba(91, 127, 166, 0.1)" stroke="#5B7FA6" stroke-width="1" rx="4"/>
+            <rect x="190" y="410" width="130" height="150" fill="rgba(91, 127, 166, 0.1)" stroke="#5B7FA6" stroke-width="1" rx="4"/>
+            <rect x="380" y="410" width="130" height="150" fill="rgba(91, 127, 166, 0.1)" stroke="#5B7FA6" stroke-width="1" rx="4"/>
+            <rect x="570" y="410" width="130" height="150" fill="rgba(91, 127, 166, 0.1)" stroke="#5B7FA6" stroke-width="1" rx="4"/>
+            <text x="450" y="380" fill="#5B7FA6" font-size="14px" font-weight="800" text-anchor="middle">BLOCK D — CENTRE CLUSTERS (8ft × 8ft)</text>
+            
+            <!-- Block E -->
+            <rect x="645" y="710" width="240" height="60" fill="rgba(98, 85, 164, 0.15)" stroke="#6255A4" stroke-width="1.5" rx="6"/>
+            <text x="765" y="745" fill="#6255A4" font-size="11px" font-weight="800" text-anchor="middle">BLOCK E — VIP LOUNGE</text>
+            
+            <rect x="100" y="710" width="150" height="60" fill="rgba(122, 158, 90, 0.15)" stroke="#7A9E5A" stroke-width="1.5" rx="6"/>
+            <text x="175" y="745" fill="#7A9E5A" font-size="11px" font-weight="800" text-anchor="middle">BLOCK E — ENTRY LEVEL</text>
+            
+            <!-- Corridors -->
+            <line x1="90" y1="380" x2="810" y2="380" stroke="rgba(184, 115, 51, 0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="90" y1="420" x2="810" y2="420" stroke="rgba(184, 115, 51, 0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="450" y="405" fill="var(--text-dim)" font-size="10px" font-weight="700" text-anchor="middle" opacity="0.6">4m VISITOR CORRIDOR</text>
+          </svg>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem; text-align: center; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+        <button class="btn-primary" onclick="triggerBrochureDownload()">📥 Download Floor Plan (PDF)</button>
+        <a href="stalls-booking/index.html" class="btn-outline">🏪 Open Interactive Booking Portal →</a>
+      </div>
+    </div>
+
+    <!-- Pricing Grid -->
+    <div class="grid-4" style="margin-top: 2rem;">
+      <div class="info-card" style="border-top: 4px solid var(--color-block-a); text-align: center;">
+        <div style="font-weight:800; font-size:1.15rem; margin-bottom: 0.2rem; color: #D4873A;">Block A</div>
+        <p style="font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.8rem;">Top Wall · Gold Tier</p>
+        <div style="font-size: 0.84rem; font-weight:700;">Dimensions: 9m × 5.7m</div>
+        <div style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--copper); margin-top: 0.5rem;">₹7.5 Lakh <span style="font-size: 0.78rem; font-weight:400; color: var(--text-dim);">+ GST</span></div>
+      </div>
+
+      <div class="info-card" style="border-top: 4px solid #4A9E8A; text-align: center;">
+        <div style="font-weight:800; font-size:1.15rem; margin-bottom: 0.2rem; color: #4A9E8A;">Block B</div>
+        <p style="font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.8rem;">Left Wall · Standard Tier</p>
+        <div style="font-size: 0.84rem; font-weight:700;">Dimensions: 10ft × 10ft</div>
+        <div style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--copper); margin-top: 0.5rem;">₹1.36 Lakh <span style="font-size: 0.78rem; font-weight:400; color: var(--text-dim);">+ GST</span></div>
+      </div>
+
+      <div class="info-card" style="border-top: 4px solid #C47B6A; text-align: center;">
+        <div style="font-weight:800; font-size:1.15rem; margin-bottom: 0.2rem; color: #C47B6A;">Block C</div>
+        <p style="font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.8rem;">Right Wall · Standard Tier</p>
+        <div style="font-size: 0.84rem; font-weight:700;">Dimensions: 10ft × 20ft</div>
+        <div style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--copper); margin-top: 0.5rem;">₹2.00 Lakh <span style="font-size: 0.78rem; font-weight:400; color: var(--text-dim);">+ GST</span></div>
+      </div>
+
+      <div class="info-card" style="border-top: 4px solid #5B7FA6; text-align: center;">
+        <div style="font-weight:800; font-size:1.15rem; margin-bottom: 0.2rem; color: #5B7FA6;">Block D</div>
+        <p style="font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.8rem;">Centre Floor · Diamond Tier</p>
+        <div style="font-size: 0.84rem; font-weight:700;">Dimensions: 8ft × 8ft</div>
+        <div style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--copper); margin-top: 0.5rem;">₹1.00 Lakh <span style="font-size: 0.78rem; font-weight:400; color: var(--text-dim);">+ GST</span></div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 1rem;">
+      <div class="info-card" style="border-top: 4px solid #6255A4; text-align: center; min-width: 280px; max-width: 400px;">
+        <div style="font-weight:800; font-size:1.15rem; margin-bottom: 0.2rem; color: #6255A4;">Block E</div>
+        <p style="font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.8rem;">Entry level & VIP Lounge Zones</p>
+        <div style="font-size: 0.84rem; font-weight:700;">Dimensions: 8ft × 8ft</div>
+        <div style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--copper); margin-top: 0.5rem;">₹1.36L - ₹2.50L <span style="font-size: 0.78rem; font-weight:400; color: var(--text-dim);">+ GST</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: EVENT HIGHLIGHTS -->
+  <section class="section reveal">
+    <div class="section-tag">Key Features</div>
+    <h2 class="section-title">Event <span>Highlights</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Dynamic B2B interactions, government support hubs, and new product launch showcases over 2 days.</p>
+    
+    <div class="highlights-grid">
+      <div class="highlight-item">🏛️ Government Participation</div>
+      <div class="highlight-item">⭐ Industry Leaders presence</div>
+      <div class="highlight-item">🚀 New Product Launches</div>
+      <div class="highlight-item">🔧 Live Demonstrations</div>
+      <div class="highlight-item">🤝 Structured B2B Meetings</div>
+      <div class="highlight-item">👥 VIP Networking Sessions</div>
+      <div class="highlight-item">💡 Renewable Innovations</div>
+      <div class="highlight-item">🚗 Future Mobility Showcase</div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: EVENT AGENDA -->
+  <section class="section reveal" id="agenda">
+    <div class="agenda-header-row" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; width: 100%; max-width: 860px; margin-left: auto; margin-right: auto; text-align: left;">
+      <div>
+        <span style="font-size: 11px; font-weight: 700; color: #B87333; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 6px;">EVENT SCHEDULE</span>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 700; color: #112A18; line-height: 1.25; margin: 0 0 8px 0; border: none; padding: 0;">Two Days of Ideas,<br>Connections &amp; Innovation</h2>
+        <p style="font-size: 0.86rem; color: #666; margin: 0; font-family: 'Outfit', sans-serif;">3rd–4th July 2026 · HMDA Grounds, Hyderabad</p>
+      </div>
+      <div style="background: #EEF5F0; color: #2D4735; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 50px; white-space: nowrap; margin-bottom: 4px; display: inline-flex; align-items: center;">
+        85 Sessions &middot; 2 Days &middot; 7 Tracks
+      </div>
+    </div>
+    
+    <div class="timeline-container" id="agenda-display-container">
+      <!-- Generated dynamically from JSON configuration -->
+    </div>
+  </section>
+
+  <!-- SECTION 8: SPONSORS & PARTNERS -->
+  <section class="section-wide reveal" id="sponsors">
+    <div class="section-inner">
+      <div class="section-tag">Partnerships</div>
+      <h2 class="section-title">Sponsors &amp; <span>Co-organisers</span></h2>
+      <div class="divider"></div>
+      
+      <div style="margin-bottom: 2.5rem;">
+        <h4 style="font-size: 0.8rem; font-weight: 800; color: var(--copper); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">Nodal Agencies & Government Support</h4>
+        <div class="grid-3" style="align-items: center; justify-items: center; gap: 2rem;">
+          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">🏛️ Ministry of Power (MNRE)</div>
+          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">🏛️ TSREDCO (Nodal Agency)</div>
+          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">🏛️ IREDA (Green Finance)</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 2.5rem;">
+        <h4 style="font-size: 0.8rem; font-weight: 800; color: var(--copper); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">Co-organising & Trust Partners</h4>
+        <div class="grid-2" style="align-items: center; justify-items: center; gap: 2rem; max-width: 600px; margin: 0 auto;">
+          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">⚡ Dhan Enterprise</div>
+          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">🤝 Suprabha Trust</div>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-size: 0.8rem; font-weight: 800; color: var(--copper); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">Key Sponsors (BESS & Solar PV Industry)</h4>
+        <div class="grid-4" style="align-items: center; justify-items: center; gap: 1.5rem;">
+          <div style="background:#fff; border: 1px solid var(--border); padding: 1rem; border-radius: 6px; font-weight:800; font-size: 0.82rem; text-align:center; color: var(--text-dim); min-width: 160px;">🏆 Tata Motors Green</div>
+          <div style="background:#fff; border: 1px solid var(--border); padding: 1rem; border-radius: 6px; font-weight:800; font-size: 0.82rem; text-align:center; color: var(--text-dim); min-width: 160px;">🏆 Premier Solar Systems</div>
+          <div style="background:#fff; border: 1px solid var(--border); padding: 1rem; border-radius: 6px; font-weight:800; font-size: 0.82rem; text-align:center; color: var(--text-dim); min-width: 160px;">🏆 Waaree PV modules</div>
+          <div style="background:#fff; border: 1px solid var(--border); padding: 1rem; border-radius: 6px; font-weight:800; font-size: 0.82rem; text-align:center; color: var(--text-dim); min-width: 160px;">🏆 Goldi Solar PV</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8.5: EXHIBITOR DIRECTORY -->
+  <section class="section reveal exh-dir-section" id="exhibitors">
+    <div class="section-inner" style="max-width:1200px; margin:0 auto;">
+      <div class="section-tag">Directory</div>
+      <h2 class="section-title">Exhibitor <span>Directory</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Browse confirmed clean energy manufacturers, distributors, and technology developers presenting at the summit.</p>
+      
+      <!-- Search -->
+      <div class="dir-search-container">
+        <input type="text" id="dir-search" class="dir-search-input" placeholder="Search exhibitors by company, product or sector..." oninput="filterDirectory()">
+      </div>
+
+      <!-- Filter chips -->
+      <div class="dir-filter-chips">
+        <button class="dir-chip active" onclick="filterDirectorySector(this, '')">All Sectors</button>
+        <button class="dir-chip" onclick="filterDirectorySector(this, 'Solar')">Solar PV</button>
+        <button class="dir-chip" onclick="filterDirectorySector(this, 'EV')">EV &amp; Charging</button>
+        <button class="dir-chip" onclick="filterDirectorySector(this, 'BESS')">Battery Storage</button>
+        <button class="dir-chip" onclick="filterDirectorySector(this, 'Wind')">Wind Power</button>
+        <button class="dir-chip" onclick="filterDirectorySector(this, 'Hydrogen')">Green Hydrogen</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="dir-grid" id="dir-grid">
+        <!-- populated dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: VENUE -->
+  <section class="section reveal" id="venue">
+    <div class="section-tag">Location Map</div>
+    <h2 class="section-title">Exhibition <span>Venue</span></h2>
+    <div class="divider"></div>
+    
+    <div class="venue-grid">
+      <div class="venue-map-card">
+        <div>
+          <h4 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem;">HMDA Grounds, Hyderabad</h4>
+          <p style="font-size: 0.84rem; color: var(--text-dim); margin-bottom: 1.2rem;">Adjacent to IMAX Theatre & Peoples Plaza, NTR Marg, Hyderabad, Telangana 500004.</p>
+          
+          <iframe class="venue-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.1264267499696!2d78.4682071!3d17.4057262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9746ecf53995%3A0xe54e60ea9b2401f8!2sPeoples%20Plaza!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5;">
+          <p>🚗 <strong>Parking:</strong> Dedicated parking grid at NTR Gardens entry road.</p>
+          <p style="margin-top: 0.3rem;">🏛️ <strong>Nearby Landmarks:</strong> Adjacent to IMAX Prasad's Multiplex, NTR Gardens, Hussain Sagar Lake.</p>
+          <a href="https://maps.app.goo.gl/d2Y8r4fMeb1Y8z7eA" target="_blank" class="btn-primary" style="margin-top: 1rem; width: 100%; justify-content: center; font-size: 12px; padding: 0.65rem;">🗺️ Get Directions in Google Maps</a>
+        </div>
+      </div>
+
+      <div class="venue-photo">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1000&q=80" alt="HMDA Grounds Peoples Plaza Hyderabad">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: REGISTRATION CTA -->
+  <section class="section-wide reveal" id="register">
+    <div class="section-inner">
+      <div class="reserve-card">
+        <div class="section-tag" style="margin-bottom: 0.4rem;">Limited Exhibition Space</div>
+        <h2 class="section-title" style="margin-bottom: 0.2rem;">Reserve Your Stall <span>Before It Sells Out</span></h2>
+        <div class="counter-slots">🛡️ 75 Available Slots for Custom Fabricated Booths</div>
+        
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="stalls-booking/index.html" class="btn-primary" style="font-size: 14px; padding: 0.85rem 2.2rem;">🏪 Book Stall Now</a>
+          <a href="register.html" class="btn-outline" style="font-size: 14px; padding: 0.85rem 2.2rem;">📝 Register as Visitor</a>
+          <a href="javascript:void(0)" onclick="openSponsorModal()" class="btn-outline" style="font-size: 14px; padding: 0.85rem 2.2rem;">⭐ Become a Sponsor</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 11: CONTACT -->
+  <section class="section reveal" id="contact">
+    <div class="section-tag">Get in Touch</div>
+    <h2 class="section-title">Contact <span>Organisers</span></h2>
+    <div class="divider"></div>
+    <div class="grid-2-1">
+      
+      <!-- Inquiry form -->
+      <form class="contact-form" id="expo-inquiry-form" onsubmit="submitInquiryForm(event)" novalidate>
+        <h3>Stall / Sponsor Inquiry</h3>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inq-name">Full Name *</label>
+            <input type="text" id="inq-name" required placeholder="e.g. Hari Prasad">
+          </div>
+          <div class="form-group">
+            <label for="inq-company">Company Name *</label>
+            <input type="text" id="inq-company" required placeholder="e.g. Win-Dhan Solars">
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-top: 0.5rem;">
+          <div class="form-group">
+            <label for="inq-email">Email Address *</label>
+            <input type="email" id="inq-email" required placeholder="e.g. name@company.com">
+          </div>
+          <div class="form-group">
+            <label for="inq-phone">Phone Number *</label>
+            <input type="tel" id="inq-phone" required pattern="^[6-9]\d{9}$" placeholder="10-digit mobile number">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.5rem;">
+          <label for="inq-segment">Primary Clean Energy Segment *</label>
+          <select id="inq-segment" required>
+            <option value="" disabled selected>Select clean energy sector</option>
+            <option value="Solar PV">Solar PV</option>
+            <option value="Electric Vehicles">Electric Vehicles</option>
+            <option value="Battery Storage / BESS">Battery Storage / BESS</option>
+            <option value="Charging Infrastructure">Charging Infrastructure</option>
+            <option value="Wind Energy">Wind Energy</option>
+            <option value="Multiple / General">Multiple / General Partner</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-top: 0.5rem;">
+          <label for="inq-message">Your Inquiry Message *</label>
+          <textarea id="inq-message" required minlength="10" placeholder="Type your B2B inquiry message..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; font-size: 13px; padding: 0.75rem;">
+          ✉️ Send B2B Inquiry
+        </button>
+      </form>
+
+      <!-- Contact details -->
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="ci-icon" style="color: #fff;">📞</div>
+          <div>
+            <h4>Phone Support</h4>
+            <p>+91 98494 46409<br>+91 83319 76555</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon" style="color: #fff;">✉️</div>
+          <div>
+            <h4>Email Inquiry</h4>
+            <p>hari@win-dhan.in<br>support@win-dhan.com</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon" style="color: #fff;">🏢</div>
+          <div>
+            <h4>Office Address</h4>
+            <p>Dhan Enterprise,<br>adjacent to Suprabha Trust Office,<br>NTR Marg, Hyderabad, India.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Expo mobile nav menu toggle
+    function toggleExpoMenu() {
+      const links = document.getElementById('expoNavLinks');
+      if (links) {
+        links.classList.toggle('active');
+      }
+    }
+
+    // Interactive Zoom handler for floor plan preview SVG
+    let previewScale = 1;
+    function zoomPreview(factor) {
+      previewScale *= factor;
+      previewScale = Math.min(Math.max(previewScale, 0.8), 2.5);
+      const svg = document.getElementById('layout-preview-svg');
+      if (svg) {
+        svg.style.transform = `scale(${previewScale})`;
+      }
+    }
+
+    function resetPreviewZoom() {
+      previewScale = 1;
+      const svg = document.getElementById('layout-preview-svg');
+      if (svg) {
+        svg.style.transform = `scale(1)`;
+      }
+    }
+
+    // Mock PDF Brochure download
+    function triggerBrochureDownload() {
+      alert("📥 Download Started: IRE_Expo_2026_Brochure_Floor_Plan.pdf (Brochure contains pricing tiers, B2B schedules, and custom shell schemes details).");
+    }
+
+    // Load and render editable timeline event agenda dynamically
+    const AGENDA_DATA = {
+      day1: [
+        { time: "09:00 AM", title: "Inauguration & Ribbon Cutting", speaker: "Chief Guest + Dignitaries", venue: "Main Stage", type: "Ceremony" },
+        { time: "10:00 AM", title: "Keynote: India's RE Vision 2029", speaker: "Policy Expert, NITI Aayog (TBC)", venue: "Main Stage", type: "Keynote" },
+        { time: "11:30 AM", title: "Panel: EV Policy & Industry Readiness", speaker: "Policy Expert + Industry Leaders (TBC)", venue: "Main Stage", type: "Panel Discussion" },
+        { time: "01:00 PM", title: "Networking Lunch", speaker: "All Attendees", venue: "Exhibition Floor", type: "Networking" },
+        { time: "02:30 PM", title: "Technical Sessions (Parallel Tracks)", speaker: "Technical Speakers (TBC)", venue: "Main Stage + VIP Lounge", type: "Technical Talks" },
+        { time: "04:00 PM", title: "B2B Meetings & Exhibitor Demos", speaker: "Exhibitors & Delegates", venue: "Exhibition Floor", type: "B2B Sessions" },
+        { time: "05:30 PM", title: "Day Close / Networking Sundowner", speaker: "All Attendees", venue: "Exhibition Floor", type: "Networking" }
+      ],
+      day2: [
+        { time: "09:00 AM", title: "Welcome Address & Industry Recap", speaker: "Event Director (TBC)", venue: "Main Stage", type: "Opening" },
+        { time: "10:00 AM", title: "Keynote: EV Bus Ecosystem & Green Transit", speaker: "TSRTC Representative (TBC)", venue: "Main Stage", type: "Keynote" },
+        { time: "11:30 AM", title: "Panel: Small Scale Wind & Hybrid Solutions", speaker: "Wind Energy Expert (TBC)", venue: "Main Stage", type: "Panel Discussion" },
+        { time: "01:00 PM", title: "Networking Lunch", speaker: "All Attendees", venue: "Exhibition Floor", type: "Networking" },
+        { time: "02:30 PM", title: "Panel: Financing Green Energy Projects", speaker: "NABARD / Bank Representative (TBC)", venue: "VIP Lounge", type: "Panel Discussion" },
+        { time: "04:00 PM", title: "B2B Matchmaking & Networking Sessions", speaker: "Exhibitors & Delegates", venue: "Exhibition Floor", type: "B2B Sessions" },
+        { time: "05:30 PM", title: "Expo Close / Valedictory Ceremony", speaker: "Chief Guest + Dignitaries", venue: "Main Stage", type: "Closing" }
+      ]
+    };
+
+    function renderAgenda() {
+      const container = document.getElementById('agenda-display-container');
+      if (!container) return;
+
+      container.innerHTML = `
+        <div class="agenda-tabs">
+          <div class="agenda-tab-wrapper">
+            <button class="agenda-tab active" onclick="switchAgendaTab(1)">Day 1 — 3rd July</button>
+            <span class="agenda-tab-date">3rd July 2026</span>
+          </div>
+          <div class="agenda-tab-wrapper">
+            <button class="agenda-tab" onclick="switchAgendaTab(2)">Day 2 — 4th July</button>
+            <span class="agenda-tab-date">4th July 2026</span>
+          </div>
+        </div>
+        <div class="agenda-view active" id="agenda-day-1">
+          <div class="timeline-list agenda-timeline" id="day-1-timeline"></div>
+        </div>
+        <div class="agenda-view" id="agenda-day-2">
+          <div class="timeline-list agenda-timeline" id="day-2-timeline"></div>
+        </div>
+      `;
+
+      const renderList = (timelineId, items) => {
+        const listEl = document.getElementById(timelineId);
+        if (!listEl) return;
+        items.forEach(item => {
+          const timeParts = item.time.split(' ');
+          const hour = timeParts[0];
+          const ampm = timeParts[1] || '';
+
+          const typeLower = item.type.toLowerCase();
+          let typeClass = 'type-keynote';
+          let dotClass = 'dot-copper';
+
+          if (typeLower.includes('ceremony') || typeLower.includes('opening') || typeLower.includes('closing')) {
+            typeClass = 'type-ceremony';
+            dotClass = 'dot-dark';
+          } else if (typeLower.includes('keynote')) {
+            typeClass = 'type-keynote';
+            dotClass = 'dot-copper';
+          } else if (typeLower.includes('panel')) {
+            typeClass = 'type-panel';
+            dotClass = 'dot-copper';
+          } else if (typeLower.includes('technical') || typeLower.includes('talk')) {
+            typeClass = 'type-technical';
+            dotClass = 'dot-copper';
+          } else if (typeLower.includes('networking')) {
+            typeClass = 'type-networking';
+            dotClass = 'dot-teal';
+          } else if (typeLower.includes('b2b')) {
+            typeClass = 'type-b2b';
+            dotClass = 'dot-teal';
+          }
+
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'timeline-item';
+          itemDiv.innerHTML = `
+            <div class="timeline-time">
+              <span class="time-hour">${hour}</span>
+              <span class="time-ampm">${ampm}</span>
+            </div>
+            <div class="timeline-dot ${dotClass}"></div>
+            <div class="timeline-content ${typeClass}">
+              <div class="timeline-title">${item.title}</div>
+              <div class="timeline-speaker">
+                <i class="ti ti-user" style="font-size: 13px;"></i>
+                <span>${item.speaker}</span>
+              </div>
+              <div class="timeline-chips">
+                <span class="venue-chip">
+                  <i class="ti ti-map-pin" style="font-size: 11px;"></i>
+                  ${item.venue}
+                </span>
+                <span class="session-chip ${typeClass}">${item.type}</span>
+              </div>
+            </div>
+          `;
+          listEl.appendChild(itemDiv);
+        });
+      };
+
+      renderList('day-1-timeline', AGENDA_DATA.day1);
+      renderList('day-2-timeline', AGENDA_DATA.day2);
+    }
+
+    function switchAgendaTab(dayNum) {
+      document.querySelectorAll('.agenda-tab').forEach((tab, idx) => {
+        tab.classList.toggle('active', idx + 1 === dayNum);
+      });
+      document.querySelectorAll('.agenda-view').forEach((view, idx) => {
+        view.classList.toggle('active', idx + 1 === dayNum);
+      });
+    }
+
+    // Submit B2B Inquiry form validation
+    async function submitInquiryForm(e) {
+      e.preventDefault();
+      
+      const form = document.getElementById('expo-inquiry-form');
+      const name = document.getElementById('inq-name');
+      const company = document.getElementById('inq-company');
+      const email = document.getElementById('inq-email');
+      const phone = document.getElementById('inq-phone');
+      const segment = document.getElementById('inq-segment');
+      const message = document.getElementById('inq-message');
+
+      // Clear existing errors
+      document.querySelectorAll('.form-group .err').forEach(el => el.remove());
+      [name, company, email, phone, segment, message].forEach(el => {
+        el.style.borderColor = ''; el.style.boxShadow = '';
+      });
+
+      let valid = true;
+      function showErr(el, msg) {
+        valid = false;
+        el.style.borderColor = '#c0392b';
+        el.style.boxShadow = '0 0 0 3px rgba(192,57,43,0.1)';
+        const d = document.createElement('div');
+        d.className = 'err';
+        d.style.cssText = 'color:#c0392b;font-size:.72rem;font-weight:700;margin-top:.25rem;';
+        d.textContent = msg;
+        el.parentNode.appendChild(d);
+      }
+
+      if (!name.value.trim()) showErr(name, 'Full Name is required');
+      if (!company.value.trim()) showErr(company, 'Company Name is required');
+      if (!segment.value) showErr(segment, 'Please select a clean energy segment');
+      if (!message.value.trim()) showErr(message, 'Message is required');
+      else if (message.value.trim().length < 10) showErr(message, 'Message must be at least 10 characters');
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim()) showErr(email, 'Email Address is required');
+      else if (!emailRegex.test(email.value.trim())) showErr(email, 'Enter a valid email address');
+
+      const phoneRegex = /^[6-9]\d{9}$/;
+      if (!phone.value.trim()) showErr(phone, 'Phone Number is required');
+      else if (!phoneRegex.test(phone.value.trim())) showErr(phone, 'Enter a valid 10-digit mobile number');
+
+      if (valid) {
+        try {
+          const response = await fetch('/api/inquiries', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: name.value.trim(),
+              company: company.value.trim(),
+              email: email.value.trim(),
+              phone: phone.value.trim(),
+              type: 'exhibitor',
+              message: message.value.trim()
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to submit inquiry.');
+          }
+
+          const successBanner = document.createElement('div');
+          successBanner.style.cssText = 'background:#d4edda;color:#155724;border:1px solid #c3e6cb;padding:1rem;border-radius:10px;margin-bottom:1rem;font-size:.9rem;font-weight:700;text-align:center;';
+          successBanner.textContent = '🎉 Thank you! Your inquiry has been sent. Our team will contact you shortly.';
+          form.parentNode.insertBefore(successBanner, form);
+          form.reset();
+          setTimeout(() => successBanner.remove(), 5000);
+        } catch (err) {
+          console.error(err);
+          alert('⚠️ Error submitting inquiry: ' + err.message);
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const [settings, agenda, speakers, exhibitors] = await Promise.all([
+          fetch('/api/settings').then(r => r.json()),
+          fetch('/api/agenda').then(r => r.json()),
+          fetch('/api/speakers').then(r => r.json()),
+          fetch('/api/exhibitors').then(r => r.json())
+        ]);
+
+        // 1. Load dynamic Hero title
+        if (settings && settings.ire_content_hero_title) {
+          const titleEl = document.querySelector('.expo-hero-title');
+          if (titleEl) titleEl.innerHTML = settings.ire_content_hero_title;
+        }
+
+        // 2. Load dynamic About text
+        if (settings && settings.ire_content_about_text) {
+          const aboutSection = document.querySelector('#about-expo p');
+          if (aboutSection) aboutSection.textContent = settings.ire_content_about_text;
+        }
+
+        // 3. Populate exhibitors global list
+        window.exhibitorsDataList = exhibitors || [];
+
+        // 4. Map and render Agenda with Speakers
+        if (agenda && agenda.length > 0) {
+          const activeSpeakers = speakers || [];
+          const mapSession = (s) => {
+            const sp = activeSpeakers.find(speaker => speaker.id === s.speaker_id);
+            const speakerInfo = sp ? `, presenting with ${sp.name} (${sp.designation}, ${sp.org})` : '';
+            return {
+              time: `${s.start_time} - ${s.end_time}`,
+              title: `${s.title} (${s.type})`,
+              speaker: sp ? `${sp.name} (${sp.designation}, ${sp.org})` : (s.speaker_id || 'TBC'),
+              venue: s.venue,
+              type: s.type
+            };
+          };
+
+          // Group sessions by day
+          const day1Items = agenda.filter(s => s.day === 1 && s.published).sort((a,b) => a.sort_order - b.sort_order);
+          const day2Items = agenda.filter(s => s.day === 2 && s.published).sort((a,b) => a.sort_order - b.sort_order);
+
+          AGENDA_DATA.day1 = day1Items.map(mapSession);
+          AGENDA_DATA.day2 = day2Items.map(mapSession);
+        }
+
+        // 5. Render elements
+        renderAgenda();
+        renderExhibitorDirectory();
+
+      } catch (err) {
+        console.error('Error fetching dynamic expo data:', err);
+        // Fallback to offline defaults
+        renderAgenda();
+        renderExhibitorDirectory();
+      }
+    });
+
+    // ── SPONSOR & MEETING MODALS CONTROLLER ──
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.add('active');
+    }
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.remove('active');
+    }
+
+    function openSponsorModal() {
+      document.getElementById('sponsor-apply-form').reset();
+      openModal('modal-sponsor-apply');
+    }
+
+    async function submitSponsorApply(e) {
+      e.preventDefault();
+      const company = document.getElementById('spons-company').value.trim();
+      const contact = document.getElementById('spons-contact').value.trim();
+      const phone = document.getElementById('spons-phone').value.trim();
+      const email = document.getElementById('spons-email').value.trim();
+      const industry = document.getElementById('spons-industry').value.trim();
+      const packagePkg = document.getElementById('spons-package').value;
+
+      if (!company || !contact || !phone || !email || !industry) {
+        alert('Please fill out all required fields.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/sponsor_applications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            company: company,
+            contact_person: contact,
+            phone: phone,
+            email: email,
+            industry: industry,
+            package: packagePkg
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to submit sponsorship request.');
+        }
+
+        closeModal('modal-sponsor-apply');
+        alert('🎉 Thank you! Your sponsorship application has been submitted successfully.');
+      } catch (err) {
+        console.error(err);
+        alert('⚠️ Error submitting sponsorship application: ' + err.message);
+      }
+    }
+
+    let activeSectorFilter = '';
+
+    function renderExhibitorDirectory() {
+      const grid = document.getElementById('dir-grid');
+      if (!grid) return;
+
+      const exhibitors = window.exhibitorsDataList || JSON.parse(localStorage.getItem('ire_db_exhibitors')) || [];
+      const query = document.getElementById('dir-search').value.toLowerCase().trim();
+
+      let filtered = exhibitors.filter(e => {
+        const company = e.company.toLowerCase();
+        const category = e.category.toLowerCase();
+        const stall = e.assigned_stall.toLowerCase();
+        
+        if (activeSectorFilter) {
+          const match = category.includes(activeSectorFilter.toLowerCase()) || e.category.includes(activeSectorFilter);
+          if (!match) return false;
+        }
+
+        if (query) {
+          if (!company.includes(query) && !category.includes(query) && !stall.includes(query)) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align:center; padding:3rem; color:var(--text-muted); font-size:0.9rem;">No exhibitors matching search criteria found.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(e => {
+        return `
+          <div class="exh-card">
+            <div>
+              <div class="exh-card-header">
+                <div class="exh-card-icon">⚡</div>
+                <div class="exh-card-title">${e.company}</div>
+              </div>
+              <div class="exh-card-sector">${e.category}</div>
+              <div class="exh-card-desc">Leading developer and supplier of clean technology products and custom system architectures.</div>
+              <div class="exh-card-stall">📍 Assigned Booth: <strong>Stall ${e.assigned_stall}</strong></div>
+            </div>
+            <button type="button" class="btn-outline" style="font-size:12px; padding:0.6rem; width:100%; justify-content:center; text-align:center;" onclick="openMeetingRequestModal('${e.id}', '${e.company.replace(/'/g, "\\'")}')">📅 Request B2B Meeting</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterDirectory() {
+      renderExhibitorDirectory();
+    }
+
+    function filterDirectorySector(chipEl, sector) {
+      document.querySelectorAll('.dir-chip').forEach(c => c.classList.remove('active'));
+      chipEl.classList.add('active');
+      activeSectorFilter = sector;
+      renderExhibitorDirectory();
+    }
+
+    function openMeetingRequestModal(exhId, companyName) {
+      document.getElementById('meeting-request-form').reset();
+      document.getElementById('meet-exhibitor-id').value = exhId;
+      document.getElementById('meet-exhibitor-name').value = companyName;
+      openModal('modal-meeting-request');
+    }
+
+    async function submitMeetingRequest(e) {
+      e.preventDefault();
+      const exhId = document.getElementById('meet-exhibitor-id').value;
+      const exhName = document.getElementById('meet-exhibitor-name').value;
+      const visitorName = document.getElementById('meet-visitor-name').value.trim();
+      const visitorEmail = document.getElementById('meet-visitor-email').value.trim();
+      const date = document.getElementById('meet-date').value;
+      const time = document.getElementById('meet-time').value;
+      const notes = document.getElementById('meet-notes').value.trim();
+
+      if (!visitorName || !visitorEmail || !notes) {
+        alert('Please fill out all required fields.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/meetings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            visitor_name: visitorName,
+            visitor_email: visitorEmail,
+            exhibitor_id: exhId,
+            exhibitor_name: exhName,
+            date: date,
+            time: time,
+            notes: notes
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to schedule B2B meeting request.');
+        }
+
+        closeModal('modal-meeting-request');
+        alert('📅 Your B2B meeting request has been submitted successfully to the exhibitor.');
+      } catch (err) {
+        console.error(err);
+        alert('⚠️ Error scheduling B2B meeting: ' + err.message);
+      }
+    }
+  </script>
+
+  <!-- MODAL: SPONSOR APPLICATION -->
+  <div class="modal-overlay" id="modal-sponsor-apply">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Submit Sponsorship Request</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-sponsor-apply')">&times;</button>
+      </div>
+      <form id="sponsor-apply-form" onsubmit="submitSponsorApply(event)" novalidate>
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label for="spons-company">Company Name *</label>
+            <input type="text" id="spons-company" required placeholder="e.g. Reliance Solars">
+          </div>
+          <div class="modal-form-group">
+            <label for="spons-contact">Contact Person *</label>
+            <input type="text" id="spons-contact" required placeholder="e.g. Rajesh Kumar">
+          </div>
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="spons-phone">Phone Number *</label>
+              <input type="tel" id="spons-phone" required pattern="^[6-9]\\d{9}$" placeholder="10-digit mobile">
+            </div>
+            <div class="modal-form-group">
+              <label for="spons-email">Email Address *</label>
+              <input type="email" id="spons-email" required placeholder="e.g. contact@company.com">
+            </div>
+          </div>
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="spons-industry">Industry Class *</label>
+              <input type="text" id="spons-industry" required placeholder="e.g. Solar EPC">
+            </div>
+            <div class="modal-form-group">
+              <label for="spons-package">Preferred Package *</label>
+              <select id="spons-package" required>
+                <option value="Title">Title Sponsor (₹15.0L)</option>
+                <option value="Platinum">Platinum Partner (₹8.0L)</option>
+                <option value="Gold">Gold Partner (₹5.0L)</option>
+                <option value="Silver">Silver Partner (₹3.0L)</option>
+                <option value="Associate">Associate Partner (₹2.0L)</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-form-group">
+            <label for="spons-doc">Upload Company Profile (Optional)</label>
+            <input type="file" id="spons-doc" style="font-size:0.75rem;">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-sponsor-apply')">Cancel</button>
+          <button type="submit" class="btn-primary" style="font-size:12px; padding:0.6rem 1.2rem; display: inline-flex; align-items: center; justify-content: center; background: var(--copper); color: #fff; border-radius: var(--radius-sm);">⚡ Submit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: B2B MEETING REQUEST SCHEDULER -->
+  <div class="modal-overlay" id="modal-meeting-request">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Schedule B2B Meeting</h3>
+        <button class="modal-close-btn" onclick="closeModal('modal-meeting-request')">&times;</button>
+      </div>
+      <form id="meeting-request-form" onsubmit="submitMeetingRequest(event)" novalidate>
+        <input type="hidden" id="meet-exhibitor-id">
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label>Meeting with Exhibitor</label>
+            <input type="text" id="meet-exhibitor-name" readonly style="background:#eee; font-weight:700;">
+          </div>
+          <div class="modal-form-group">
+            <label for="meet-visitor-name">Your Full Name *</label>
+            <input type="text" id="meet-visitor-name" required placeholder="e.g. Amit Kumar">
+          </div>
+          <div class="modal-form-group">
+            <label for="meet-visitor-email">Your Email Address *</label>
+            <input type="email" id="meet-visitor-email" required placeholder="e.g. amit@gmail.com">
+          </div>
+          <div class="modal-form-row">
+            <div class="modal-form-group">
+              <label for="meet-date">Meeting Date *</label>
+              <select id="meet-date" required>
+                <option value="3rd July 2026">3rd July 2026 (Day 1)</option>
+                <option value="4th July 2026">4th July 2026 (Day 2)</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="meet-time">Time Slot *</label>
+              <select id="meet-time" required>
+                <option value="10:00 AM">10:00 AM - 10:30 AM</option>
+                <option value="11:30 AM">11:30 AM - 12:00 PM</option>
+                <option value="02:00 PM">02:00 PM - 02:30 PM</option>
+                <option value="03:30 PM">03:30 PM - 04:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-form-group">
+            <label for="meet-notes">Discussion Agenda Notes *</label>
+            <textarea id="meet-notes" required placeholder="Describe what you want to discuss..." style="min-height:80px;"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-action-outline" onclick="closeModal('modal-meeting-request')">Cancel</button>
+          <button type="submit" class="btn-primary" style="font-size:12px; padding:0.6rem 1.2rem; display: inline-flex; align-items: center; justify-content: center; background: var(--copper); color: #fff; border-radius: var(--radius-sm);">📅 Request Meeting</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    const subnavLinks = document.querySelectorAll('#ire-subnav a:not(.subnav-cta)');
+    const sections = [...subnavLinks].map(a => document.querySelector(a.getAttribute('href')));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          subnavLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`#ire-subnav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => { if (s) observer.observe(s); });
+  </script>
+</body>
+</html>
