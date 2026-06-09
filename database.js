@@ -315,9 +315,10 @@ db.serialize(() => {
   db.get(`SELECT COUNT(*) as count FROM agenda`, (err, row) => {
     if (row && row.count === 0) {
       console.log('Seeding initial agendas sessions...');
-      db.run(`INSERT INTO agenda VALUES ('ses-1', 1, 'Inauguration & Ribbon Cutting', 'Opening ceremony address detailing state clean grid transition paths.', 'spk-1', 'Hall A Conference stage', '09:00 AM', '10:00 AM', 'Keynote', 1, 1)`);
-      db.run(`INSERT INTO agenda VALUES ('ses-2', 1, 'EV Fleet Electrification Policies', 'Panel debate on commercial fleet transitions, charger corridors, and grid loads.', 'spk-2', 'Hall A Conference stage', '10:30 AM', '12:30 PM', 'Panel Discussion', 1, 2)`);
-      db.run(`INSERT INTO agenda VALUES ('ses-3', 2, 'BESS Battery Storage Masterclass', 'Technical hands-on session on containerized commercial battery systems.', 'spk-3', 'Workshop room C', '09:30 AM', '11:30 AM', 'Workshop', 1, 1)`);
+      db.run(`INSERT INTO agenda VALUES ('ses-1', 1, 'Exhibition & Technology Showcases', 'Grand exhibition showcasing advanced clean energy systems in EV systems, Hybrid Drivetrains, Solar panels, Wind Turbines, and BESS solutions.', NULL, 'Exhibition Hall & Stalls', '11:00 AM', '06:30 PM', 'Expo Only', 1, 1)`);
+      db.run(`INSERT INTO agenda VALUES ('ses-2', 2, 'Expo Hall Doors Open & Networking', 'Morning networking and open technology showcases across all exhibition sectors.', NULL, 'Exhibition Hall', '11:00 AM', '11:30 AM', 'Networking', 1, 1)`);
+      db.run(`INSERT INTO agenda VALUES ('ses-3', 2, 'Clean Energy Grand Debate', 'Industry-leading panel debate and technical forum addressing BESS, EV, WIND, SOLAR grids, policy paths, and battery storage integrations.', NULL, 'Main Conference Stage', '11:30 AM', '02:00 PM', 'Panel Discussion', 1, 2)`);
+      db.run(`INSERT INTO agenda VALUES ('ses-4', 2, 'Exhibition & B2B Matchmaking Sessions', 'Afternoon technology demonstrations, B2B meetings, investor sessions, and valedictory close.', NULL, 'Exhibition Hall', '02:00 PM', '06:30 PM', 'Networking', 1, 3)`);
     }
   });
 
