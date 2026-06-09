@@ -3,7 +3,8 @@
    (inline string, used by JS)
 ══════════════════════════ */
 
-/* ────  const NAV_HTML = `
+(function () {
+  const NAV_HTML = `
 <header id="mainNav">
   <div class="utility-bar">
     <div class="utility-container">
