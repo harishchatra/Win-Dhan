@@ -449,6 +449,7 @@ h1, h2, h3, h4, h5, h6 {
   .ire-stats { grid-template-columns: 1fr 1fr; }
   .cta-banner { flex-direction: column; text-align: center; padding: 2.5rem 1.5rem; }
 }
+
 @media (max-width: 600px) {
   .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .hero-stats-grid { grid-template-columns: 1fr; }
@@ -456,8 +457,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 </style>
 </head>
-<body data-page="index">
-<div id="nav-placeholder"></div>
 
 <!-- HERO -->
 <section class="hero reveal">
@@ -644,8 +643,86 @@ h1, h2, h3, h4, h5, h6 {
   </div>
 </section>
 
-<div id="footer-placeholder"></div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="name">Dhan Enterprise</div>
+      <div class="sub">Encompassing Energy Revolution</div>
+      <p>India's trusted renewable energy consultancy — EV, Solar, BESS, Wind, and co-organiser of IRE 2026, Hyderabad.</p>
+      <div style="font-size:12px;color:rgba(255,255,255,0.35);">WIN Dhan Enterprise · Est. 2014 · Hyderabad</div>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="trade.html">Global Network</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>IRE 2026</h5>
+      <ul>
+        <li><a href="ire.html">About the Expo</a></li>
+        <li><a href="stalls-booking/index.html">Book a Stall</a></li>
+        <li><a href="ire.html#sponsors">Sponsorship</a></li>
+        <li><a href="ire.html#floor-plan">Floor Plan</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+917981869954">+91 79818 69954</a></li>
+        <li><a href="mailto:ireexpo2026@gmail.com">ireexpo2026@gmail.com</a></li>
+        <li><a href="https://www.win-dhan.com">www.win-dhan.com</a></li>
+        <li style="color:rgba(255,255,255,0.3);font-size:12px;margin-top:6px;">HMDA Grounds, Necklace Road,<br>Hyderabad, Telangana</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 WIN Dhan Enterprise. All rights reserved.</span>
+    <span>Co-organised with <a href="https://www.suprabha-trust.in" target="_blank">Suprabha Trust</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy</a></span>
+  </div>
+</footer>
+
+<!-- ══════════ SCRIPTS ══════════ -->
 <script src="js/script.js"></script>
-<script>startCountdown('countdown');</script>
+<script>
+/* Countdown */
+function startCountdown(containerId) {
+  var target = new Date('2026-07-03T09:00:00+05:30').getTime();
+  function tick() {
+    var now = Date.now();
+    var diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hrs').textContent = '0';
+      document.getElementById('cd-min').textContent = '0';
+      document.getElementById('cd-sec').textContent = '0';
+      return;
+    }
+    document.getElementById('cd-days').textContent = Math.floor(diff / 86400000);
+    document.getElementById('cd-hrs').textContent  = Math.floor((diff % 86400000) / 3600000);
+    document.getElementById('cd-min').textContent  = Math.floor((diff % 3600000)  / 60000);
+    document.getElementById('cd-sec').textContent  = Math.floor((diff % 60000)    / 1000);
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+startCountdown('countdown');
+
+/* Scroll reveal */
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el) { io.observe(el); });
+})();
+</script>
+
 </body>
 </html>
