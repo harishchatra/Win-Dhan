@@ -121,7 +121,7 @@
       box-shadow: 0 10px 30px rgba(14, 31, 18, 0.08);
       position: relative;
       overflow: hidden;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(45, 90, 45, 0.13);
       display: inline-flex;
       flex-direction: column;
       margin: 2rem auto;
@@ -134,7 +134,7 @@
       top: 0;
       bottom: 0;
       width: 5px;
-      background: linear-gradient(to bottom, var(--copper), var(--gold));
+      background: linear-gradient(to bottom, #B87333, #C9A84C);
     }
 
     .pass-top {
@@ -155,7 +155,7 @@
 
     .pass-top .sub {
       font-size: 0.62rem;
-      color: var(--gold-lt);
+      color: #E8C97A;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -174,8 +174,8 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background: var(--bg);
-      border: 1px solid var(--border);
+      background: #F5FAF6;
+      border: 1px solid rgba(45, 90, 45, 0.13);
     }
     .pass-perf::before { left: -9px; }
     .pass-perf::after { right: -9px; }
@@ -193,8 +193,8 @@
       font-family: monospace;
       font-size: 0.9rem;
       font-weight: 800;
-      color: var(--copper);
-      background: var(--bg-section);
+      color: #B87333;
+      background: #EEF5F0;
       border: 1px solid rgba(184, 115, 51, 0.15);
       padding: 0.25rem 0.75rem;
       border-radius: 4px;
@@ -209,7 +209,7 @@
     .pass-table td {
       padding: 0.35rem 0;
       font-size: 0.72rem;
-      color: var(--text-dim);
+      color: #2D4735;
     }
 
     .pass-table tr td:first-child {
@@ -219,7 +219,7 @@
     .pass-table tr td:last-child {
       text-align: right;
       font-weight: 700;
-      color: var(--text);
+      color: #112A18;
     }
 
     .pass-table tr {
@@ -229,10 +229,19 @@
     .pass-qr {
       background: #fff;
       padding: 6px;
-      border: 1.5px solid var(--border);
+      border: 1.5px solid rgba(45, 90, 45, 0.13);
       border-radius: 8px;
       width: 100px;
       height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pass-qr img, .pass-qr canvas {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain;
     }
 
     /* Print styling */
@@ -399,7 +408,7 @@
             <div class="pass-stripe"></div>
             
             <div class="pass-top">
-              <div style="font-size: 1.2rem; width: 32px; height: 32px; border: 1.5px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold-lt);">⚡</div>
+              <div style="font-size: 1.2rem; width: 32px; height: 32px; border: 1.5px solid #C9A84C; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #E8C97A;">⚡</div>
               <div>
                 <h3>IRE EXPO HYDERABAD 2026</h3>
                 <p class="sub">Visitor Entry Pass</p>
@@ -430,42 +439,24 @@
                 </tr>
                 <tr>
                   <td>Pass Category</td>
-                  <td id="ticket-type" style="color: var(--copper);">Visitor</td>
+                  <td id="ticket-type" style="color: #B87333;">Visitor</td>
                 </tr>
               </table>
               
-              <div class="pass-qr">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                  <rect width="100" height="100" fill="#fff" />
-                  <rect x="8" y="8" width="28" height="28" fill="#000" />
-                  <rect x="12" y="12" width="20" height="20" fill="#fff" />
-                  <rect x="16" y="16" width="12" height="12" fill="#000" />
-                  <rect x="64" y="8" width="28" height="28" fill="#000" />
-                  <rect x="68" y="12" width="20" height="20" fill="#fff" />
-                  <rect x="72" y="16" width="12" height="12" fill="#000" />
-                  <rect x="8" y="64" width="28" height="28" fill="#000" />
-                  <rect x="12" y="68" width="20" height="20" fill="#fff" />
-                  <rect x="16" y="72" width="12" height="12" fill="#000" />
-                  <rect x="72" y="72" width="8" height="8" fill="#000" />
-                  <rect x="74" y="74" width="4" height="4" fill="#fff" />
-                  <rect x="75" y="75" width="2" height="2" fill="#000" />
-                  <rect x="40" y="8" width="4" height="8" fill="#000" />
-                  <rect x="48" y="12" width="8" height="4" fill="#000" />
-                  <rect x="44" y="24" width="12" height="8" fill="#000" />
-                  <rect x="8" y="40" width="8" height="4" fill="#000" />
-                  <rect x="20" y="44" width="4" height="12" fill="#000" />
-                </svg>
+              <div class="pass-qr" id="ticket-qr">
               </div>
               
-              <div style="font-size: 0.6rem; color: var(--text-muted); opacity: 0.8; text-anchor: middle; margin-top: 4px;">
+              <div style="font-size: 0.6rem; color: #2D4735; opacity: 0.8; text-anchor: middle; margin-top: 4px;">
                 Show pass at entrance to redeem physical delegate card.
               </div>
             </div>
           </div>
         </div>
 
-        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; justify-content: center;">
-          <button class="btn-primary" onclick="window.print()">🖨️ Print / Save Pass</button>
+        <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+          <button class="btn-primary" id="btn-download-pdf" onclick="downloadPDF()">📥 Download PDF</button>
+          <button class="btn-primary" id="btn-download-img" onclick="downloadImage()">🖼️ Save as Image</button>
+          <button class="btn-outline" onclick="window.print()">🖨️ Print Pass</button>
           <button class="btn-outline" onclick="resetForm()">Register Another</button>
         </div>
       </div>
@@ -478,6 +469,10 @@
   <!-- Confetti Canvas for success animation -->
   <canvas id="reg-confetti" style="position: fixed; inset: 0; pointer-events: none; z-index: 9999; display: none;"></canvas>
 
+  <!-- External Libraries for Ticket QR generation, Canvas image capture and PDF download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="js/script.js"></script>
   <script>
     // Load saved API URL on startup and check registration limits
@@ -636,6 +631,23 @@
       document.getElementById('ticket-sector').textContent = data.sector;
       document.getElementById('ticket-type').textContent = data.type;
 
+      // Generate dynamic QR code containing the passId
+      const qrContainer = document.getElementById('ticket-qr');
+      qrContainer.innerHTML = '';
+      try {
+        new QRCode(qrContainer, {
+          text: passId,
+          width: 100,
+          height: 100,
+          colorDark: "#112A18",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M
+        });
+      } catch (qrError) {
+        console.error("QR Code generation failed:", qrError);
+        qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&color=112a18&data=${encodeURIComponent(passId)}" alt="QR Code" style="width: 100px; height: 100px;">`;
+      }
+
       // Swap view grids
       document.getElementById('form-view').style.display = 'none';
       document.getElementById('success-view').style.display = 'block';
@@ -648,6 +660,63 @@
       document.getElementById('visitor-reg-form').reset();
       document.getElementById('success-view').style.display = 'none';
       document.getElementById('form-view').style.display = 'block';
+    }
+
+    function downloadPDF() {
+      const element = document.querySelector('.visitor-pass');
+      const passId = document.getElementById('ticket-pass-id').textContent;
+      
+      const btn = document.getElementById('btn-download-pdf');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "⏳ Generating...";
+      btn.disabled = true;
+
+      const opt = {
+        margin:       15,
+        filename:     `IRE_Expo_Pass_${passId}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 3, useCORS: true, letterRendering: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().from(element).set(opt).save().then(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }).catch(err => {
+        console.error("PDF generation error:", err);
+        alert("Failed to save PDF. Please try printing the pass or saving as an image.");
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      });
+    }
+
+    function downloadImage() {
+      const element = document.querySelector('.visitor-pass');
+      const passId = document.getElementById('ticket-pass-id').textContent;
+
+      const btn = document.getElementById('btn-download-img');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "⏳ Generating...";
+      btn.disabled = true;
+
+      html2canvas(element, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#FFFFFF'
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `IRE_Expo_Pass_${passId}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }).catch(err => {
+        console.error("Image generation error:", err);
+        alert("Failed to save image. Please try printing the pass or downloading as PDF.");
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      });
     }
 
     // Confetti effect inside register pass
