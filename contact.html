@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Dhan Enterprise</title>
+<meta name="description" content="Contact Dhan Enterprise — Begumpet, Hyderabad. Reach us for EV consulting, solar projects, BESS, IRE 2026 stall bookings, sponsorship, or trade enquiries.">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+.contact-page-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.contact-office-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-md);
+}
+.enquiry-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.enquiry-chip {
+  padding: 0.38rem 0.9rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border-cu);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font);
+}
+.enquiry-chip.selected {
+  background: var(--copper);
+  border-color: var(--copper);
+  color: #fff;
+}
+.enquiry-chip:hover:not(.selected) {
+  border-color: var(--copper);
+  color: var(--copper);
+}
+.map-placeholder {
+  width: 100%;
+  height: 260px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--bg-section);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  position: relative;
+}
+.map-inner {
+  text-align: center;
+  color: var(--text-muted);
+}
+.map-inner .map-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.map-inner p { font-size: 0.85rem; font-weight: 600; }
+.map-inner a { color: var(--copper); font-weight: 700; font-size: 0.85rem; }
+
+/* Quick contact cards at top */
+.quick-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 4rem;
+}
+.qc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+.qc-card:hover {
+  border-color: var(--border-cu);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.qc-card .qc-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.6rem;
+}
+.qc-card .qc-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 0.3rem;
+}
+.qc-card .qc-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .contact-page-grid { grid-template-columns: 1fr; }
+  .quick-contact-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .quick-contact-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body data-page="contact">
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80');"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Hyderabad, India</div>
+    <h1>Contact <span>Dhan Enterprise</span></h1>
+    <p class="page-hero-desc">Reach us for EV consulting, solar projects, BESS, IRE 2026 stall bookings, sponsorship, trade enquiries, or general information.</p>
+  </div>
+</div>
+
+<!-- QUICK CONTACT CARDS -->
+<section class="section reveal">
+  <div class="quick-contact-grid">
+    <a class="qc-card" href="tel:9849446409">
+      <div class="qc-icon">📞</div>
+      <div class="qc-label">Phone</div>
+      <div class="qc-value">9849446409<br>8331976555</div>
+    </a>
+    <a class="qc-card" href="mailto:hari@win-dhan.in">
+      <div class="qc-icon">✉️</div>
+      <div class="qc-label">Email</div>
+      <div class="qc-value">hari@win-dhan.in<br>harishchatra38@win-dhan.in</div>
+    </a>
+    <a class="qc-card" href="https://www.win-dhan.com" target="_blank">
+      <div class="qc-icon">🌐</div>
+      <div class="qc-label">Website</div>
+      <div class="qc-value">www.win-dhan.com</div>
+    </a>
+    <div class="qc-card">
+      <div class="qc-icon">📍</div>
+      <div class="qc-label">Office</div>
+      <div class="qc-value">Prakash Nagar, Begumpet<br>Hyderabad – 500016</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTACT GRID -->
+  <div class="contact-page-grid">
+    <!-- LEFT: Office Info -->
+    <div>
+      <div class="section-tag">Our Offices</div>
+      <h2 class="section-title">Find <span>Us</span></h2>
+      <div class="divider"></div>
+
+      <img class="contact-office-img"
+        src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80"
+        alt="Dhan Enterprise Office Hyderabad">
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <h4>Head Office</h4>
+            <p>Prakash Nagar, Begumpet<br>Hyderabad – 500016, Telangana</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <h4>Branch Office</h4>
+            <p>Vivekanandapuram, Sainikpuri<br>Hyderabad, Telangana</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <h4>Phone</h4>
+            <p><a href="tel:9849446409" style="color:var(--copper);">9849446409</a> &nbsp;|&nbsp; <a href="tel:8331976555" style="color:var(--copper);">8331976555</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <p>
+              <a href="mailto:hari@win-dhan.in" style="color:var(--copper);">hari@win-dhan.in</a><br>
+              <a href="mailto:harishchatra38@win-dhan.in" style="color:var(--copper);">harishchatra38@win-dhan.in</a>
+            </p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">🌐</div>
+          <div>
+            <h4>Website</h4>
+            <p><a href="https://www.win-dhan.com" target="_blank" style="color:var(--copper);">www.win-dhan.com</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Placeholder -->
+      <div class="map-placeholder">
+        <div class="map-inner">
+          <div class="map-icon">🗺️</div>
+          <p>Prakash Nagar, Begumpet, Hyderabad</p>
+          <a href="https://maps.google.com/?q=Prakash+Nagar+Begumpet+Hyderabad" target="_blank">Open in Google Maps →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Contact Form -->
+    <div>
+      <div class="section-tag">Send A Message</div>
+      <h2 class="section-title">Get In <span>Touch</span></h2>
+      <div class="divider"></div>
+
+      <!-- Enquiry type quick selector -->
+      <p style="font-size:0.82rem;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.7rem;">I'm interested in:</p>
+      <div class="enquiry-chips" id="chipContainer">
+        <button class="enquiry-chip" data-val="EV / Hybrid Consulting">⚡ EV Consulting</button>
+        <button class="enquiry-chip" data-val="Solar Project">☀️ Solar</button>
+        <button class="enquiry-chip" data-val="BESS / Storage">🔋 BESS</button>
+        <button class="enquiry-chip" data-val="Wind Energy">💨 Wind</button>
+        <button class="enquiry-chip" data-val="IRE 2026 Stall Booking">🏪 IRE Stall</button>
+        <button class="enquiry-chip" data-val="Sponsorship">⭐ Sponsorship</button>
+        <button class="enquiry-chip" data-val="Import / Export">🚢 Trade</button>
+        <button class="enquiry-chip" data-val="Partnership">🤝 Partnership</button>
+        <button class="enquiry-chip" data-val="General Enquiry">💬 General</button>
+      </div>
+
+      <form class="contact-form" id="contactForm" onsubmit="return validateContactForm(event)">
+        <h3>Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contactName">Full Name</label>
+            <input type="text" id="contactName" placeholder="Your name" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="contactPhone">Phone</label>
+            <input type="tel" id="contactPhone" placeholder="+91 XXXXX XXXXX" autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email</label>
+          <input type="email" id="contactEmail" placeholder="your@email.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="contactEnquiry">Enquiry Type</label>
+          <select id="contactEnquiry">
+            <option>Select enquiry type</option>
+            <option>EV / Hybrid Consulting</option>
+            <option>Solar Project</option>
+            <option>BESS / Storage</option>
+            <option>Wind Energy</option>
+            <option>IRE 2026 Stall Booking</option>
+            <option>Sponsorship</option>
+            <option>Import / Export</option>
+            <option>Partnership</option>
+            <option>General Enquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" placeholder="Tell us about your project or enquiry..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:0.9rem;">
+          Send Message →
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- IRE 2026 QUICK LINKS -->
+<div class="section-wide reveal">
+  <div class="section-inner">
+    <div class="section-tag">IRE 2026</div>
+    <h2 class="section-title">Event <span>Quick Links</span></h2>
+    <div class="divider"></div>
+    <div class="grid-4">
+      <div class="info-card" style="text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">🏪</div>
+        <h4 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:0.4rem;">Book a Stall</h4>
+        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">₹45,000 to ₹2,70,000+ — 4 sizes to choose from</p>
+        <a href="ire.html#stalls" class="btn-primary" style="font-size:12px;padding:0.55rem 1.2rem;">View Stalls →</a>
+      </div>
+      <div class="info-card" style="text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">⭐</div>
+        <h4 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:0.4rem;">Sponsorship</h4>
+        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">Bronze to Associate tiers — ₹5L to ₹35L</p>
+        <a href="ire.html#sponsors" class="btn-primary" style="font-size:12px;padding:0.55rem 1.2rem;">View Tiers →</a>
+      </div>
+      <div class="info-card" style="text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">📋</div>
+        <h4 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:0.4rem;">Tenders</h4>
+        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">50+ active government renewable energy tenders</p>
+        <a href="tenders.html" class="btn-primary" style="font-size:12px;padding:0.55rem 1.2rem;">View Tenders →</a>
+      </div>
+      <div class="info-card" style="text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">🤝</div>
+        <h4 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:0.4rem;">Partnership</h4>
+        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">R&D, trade, or distribution partnerships</p>
+        <a href="about.html#rnd" class="btn-primary" style="font-size:12px;padding:0.55rem 1.2rem;">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="js/script.js"></script>
+<script>
+// Enquiry chip → select sync
+document.querySelectorAll('.enquiry-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.enquiry-chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+    const sel = document.getElementById('contactEnquiry');
+    if (sel) sel.value = chip.dataset.val;
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRE 2026 | Indian Renewable Energy Expo | Dhan Enterprise</title>
+<meta name="description" content="Indian Renewable Energy Expo 2026 — 3 &amp; 4 July, Pearls Capital / Peoples Plaza, Hyderabad. 500+ delegates, 75+ stalls, 4 sponsorship tiers. Co-organised by Dhan Enterprise.">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+/* Countdown hero */
+.ire-hero-strip {
+  background: linear-gradient(135deg, #0E2314, #1A3A20);
+  border-bottom: 3px solid var(--copper);
+  padding: 3rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.ire-hero-text .eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-lt); font-weight: 700; margin-bottom: 0.7rem; }
+.ire-hero-text h2 { font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 900; color: #fff; margin-bottom: 0.5rem; line-height: 1.15; }
+.ire-hero-text p { color: rgba(255,255,255,0.7); font-size: 0.92rem; }
+.ire-location { display: flex; flex-direction: column; gap: 0.4rem; }
+.ire-loc-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+.ire-loc-item .ico { font-size: 1rem; }
+
+/* Sponsor grid - 4 cols */
+.sponsor-grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.4rem; }
+
+/* Stall prices */
+.stall-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; }
+.stall-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; text-align: center; box-shadow: var(--shadow-sm); transition: all 0.3s; }
+.stall-card:hover { border-color: var(--border-cu); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.stall-card .stall-price { font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--copper), var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.stall-card .stall-size { font-size: 0.82rem; color: var(--text-dim); font-weight: 600; margin-top: 0.3rem; }
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: 200px 200px;
+  gap: 1rem;
+}
+.g-item { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); cursor: pointer; position: relative; }
+.g-item.tall { grid-row: span 2; }
+.g-item.wide { grid-column: span 2; }
+.g-item img { width:100%; height:100%; object-fit:cover; transition: transform 0.5s; }
+.g-item:hover img { transform: scale(1.05); }
+.g-item .g-overlay { position:absolute;inset:0;background:rgba(10,28,15,0.6);opacity:0;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(2px); }
+.g-item:hover .g-overlay { opacity:1; }
+.g-item .g-label { color:#fff;font-size:12px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;border-bottom:2px solid var(--gold-lt);padding-bottom:2px; }
+
+/* Network states */
+.network-img { width:100%;height:340px;object-fit:cover;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:2.5rem;box-shadow:var(--shadow-md); }
+
+@media (max-width:1024px) { .sponsor-grid-4 { grid-template-columns:repeat(2,1fr); } .stall-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:768px) {
+  .ire-hero-strip { padding: 2rem 1.5rem; }
+  .gallery-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; }
+  .g-item.tall, .g-item.wide { grid-row:auto; grid-column:auto; }
+  .sponsor-grid-4, .stall-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body data-page="ire">
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1800&q=80');"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">3 &amp; 4 July 2026 · Hyderabad</div>
+    <h1>Indian Renewable<br>Energy <span>Expo 2026</span></h1>
+    <p class="page-hero-desc">India's premier clean energy gathering — 500+ delegates, government bodies, global technology showcases, and networking at Pearls Capital / Peoples Plaza, Hyderabad.</p>
+  </div>
+</div>
+
+<!-- IRE COUNTDOWN HERO STRIP -->
+<div class="ire-hero-strip" id="expo">
+  <div class="ire-hero-text">
+    <div class="eyebrow">Countdown to IRE 2026</div>
+    <h2>3 &amp; 4 July 2026</h2>
+    <p>Pearls Capital / Peoples Plaza, Hyderabad</p>
+  </div>
+  <div class="countdown-panel" style="background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.1);min-width:300px;">
+    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-lt);font-weight:700;margin-bottom:0.5rem;">Time Remaining</div>
+    <div class="countdown-boxes" id="countdown">
+      <div class="cbox"><div class="num" id="cd-days">--</div><div class="unit">Days</div></div>
+      <div class="cbox"><div class="num" id="cd-hrs">--</div><div class="unit">Hrs</div></div>
+      <div class="cbox"><div class="num" id="cd-min">--</div><div class="unit">Min</div></div>
+      <div class="cbox"><div class="num" id="cd-sec">--</div><div class="unit">Sec</div></div>
+    </div>
+  </div>
+  <div class="ire-location">
+    <div class="ire-loc-item"><span class="ico">📍</span>Pearls Capital / Peoples Plaza, Hyderabad</div>
+    <div class="ire-loc-item"><span class="ico">📅</span>3 &amp; 4 July 2026</div>
+    <div class="ire-loc-item"><span class="ico">🏛️</span>Co-organised by Dhan Enterprise &amp; Suprabha Trust</div>
+    <div class="ire-loc-item"><span class="ico">👥</span>500+ Expected Delegates</div>
+  </div>
+</div>
+
+<!-- IRE KEY STATS -->
+<section class="section reveal">
+  <div class="section-tag">IRE 2026 At A Glance</div>
+  <h2 class="section-title">India's Premier <span>Clean Energy Expo</span></h2>
+  <div class="divider"></div>
+  <p class="section-sub">Bringing together government bodies, manufacturers, investors, researchers, and entrepreneurs for two days of showcases, panel discussions, and B2B networking.</p>
+  <div class="grid-4" style="margin-bottom:3rem;">
+    <div class="stat-card"><div class="val">500+</div><div class="lbl">Delegates</div></div>
+    <div class="stat-card"><div class="val">75+</div><div class="lbl">Exhibition Stalls</div></div>
+    <div class="stat-card"><div class="val">4</div><div class="lbl">Sponsorship Tiers</div></div>
+    <div class="stat-card"><div class="val">2</div><div class="lbl">Days of Events</div></div>
+  </div>
+  <div class="grid-3">
+    <div class="info-card">
+      <h4 style="font-family:var(--font-display);font-size:1.05rem;font-weight:700;margin-bottom:0.5rem;">🎤 Panel Discussions</h4>
+      <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;">Expert panels on EV policy, solar financing, BESS grid integration, green hydrogen, and renewable energy trade — moderated by industry leaders.</p>
+    </div>
+    <div class="info-card">
+      <h4 style="font-family:var(--font-display);font-size:1.05rem;font-weight:700;margin-bottom:0.5rem;">🤝 B2B Matchmaking</h4>
+      <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;">Structured one-on-one meetings between manufacturers, buyers, distributors, investors, and government agencies — pre-scheduled via our delegate portal.</p>
+    </div>
+    <div class="info-card">
+      <h4 style="font-family:var(--font-display);font-size:1.05rem;font-weight:700;margin-bottom:0.5rem;">🏛️ Government Pavilion</h4>
+      <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;">MNRE, TSREDCO, NTPC, SECI, BEE, and Telangana EV Policy represented — tender launches, scheme announcements, and policy briefings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSORSHIP TIERS -->
+<div class="section-wide reveal" id="sponsors">
+  <div class="section-inner">
+    <div class="section-tag">IRE 2026 — Sponsorship</div>
+    <h2 class="section-title">Event Slots &amp; <span>Sponsorship</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Position your organisation at the forefront of India's energy revolution. Four exclusive tiers — from Associate Organiser to Bronze General.</p>
+    <div class="sponsor-grid-4" style="margin-bottom:2rem;">
+
+      <!-- ASSOCIATE -->
+      <div class="sponsor-card" style="border-color:#9C27B0;">
+        <div class="sp-head" style="background:linear-gradient(135deg,#6A0080,#9C27B0);">
+          <div class="sp-icon">🌐</div>
+          <div class="sp-tier">Premier Slot</div>
+          <h3>Associate Org</h3>
+          <div class="sp-price">₹35 <span>Lakhs</span></div>
+          <div class="sp-sub">₹35,00,000 · 1 Exclusive Slot</div>
+        </div>
+        <div class="sp-body">
+          <div class="sp-avail">1 Exclusive Slot Only</div>
+          <ul>
+            <li><span class="ck" style="color:#9C27B0;">✓</span>Co-organiser branding across all materials</li>
+            <li><span class="ck" style="color:#9C27B0;">✓</span>Prime exhibition space (72 sqm+)</li>
+            <li><span class="ck" style="color:#9C27B0;">✓</span>Opening ceremony association</li>
+            <li><span class="ck" style="color:#9C27B0;">✓</span>Keynote speaking opportunity</li>
+            <li><span class="ck" style="color:#9C27B0;">✓</span>20 delegate passes</li>
+            <li><span class="ck" style="color:#9C27B0;">✓</span>Full media &amp; press coverage</li>
+            <li><span class="ck" style="color:#9C27B0;">✓</span>Stage backdrop &amp; all banners</li>
+            <li><span class="ck" style="color:#9C27B0;">✓</span>VIP dinner &amp; networking</li>
+          </ul>
+          <a href="contact.html" class="btn-primary" style="display:block;text-align:center;margin-top:1.2rem;background:linear-gradient(135deg,#6A0080,#9C27B0);">Book Associate Slot →</a>
+        </div>
+      </div>
+
+      <!-- GOLD PRIME -->
+      <div class="sponsor-card" style="border-color:var(--gold);position:relative;">
+        <div style="position:absolute;top:0.7rem;right:0.7rem;background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:#000;font-size:9px;font-weight:700;letter-spacing:1px;padding:0.22rem 0.55rem;border-radius:10px;text-transform:uppercase;">Most Popular</div>
+        <div class="sp-head" style="background:linear-gradient(135deg,#7A5A00,var(--gold));">
+          <div class="sp-icon">⭐</div>
+          <div class="sp-tier">Gold Tier</div>
+          <h3>Gold Prime</h3>
+          <div class="sp-price">₹25 <span>Lakhs</span></div>
+          <div class="sp-sub">₹25,00,000</div>
+        </div>
+        <div class="sp-body">
+          <div class="sp-avail">3 Slots · Confirmed: Tata Motors, Premier Solar</div>
+          <ul>
+            <li><span class="ck" style="color:var(--gold);">✓</span>Prime exhibition space (45 sqm)</li>
+            <li><span class="ck" style="color:var(--gold);">✓</span>Logo on all print &amp; digital media</li>
+            <li><span class="ck" style="color:var(--gold);">✓</span>Stage backdrop branding</li>
+            <li><span class="ck" style="color:var(--gold);">✓</span>Panel discussion opportunity</li>
+            <li><span class="ck" style="color:var(--gold);">✓</span>15 delegate passes</li>
+            <li><span class="ck" style="color:var(--gold);">✓</span>Press release mention</li>
+            <li><span class="ck" style="color:var(--gold);">✓</span>VIP networking session</li>
+            <li><span class="ck" style="color:var(--gold);">✓</span>Delegate bag insert</li>
+          </ul>
+          <a href="contact.html" class="btn-primary" style="display:block;text-align:center;margin-top:1.2rem;">Book Gold Prime →</a>
+        </div>
+      </div>
+
+      <!-- SILVER -->
+      <div class="sponsor-card" style="border-color:var(--silver);">
+        <div class="sp-head" style="background:linear-gradient(135deg,#5A5A5A,var(--silver));">
+          <div class="sp-icon">🥈</div>
+          <div class="sp-tier">Silver Tier</div>
+          <h3>Silver</h3>
+          <div class="sp-price">₹10 <span>Lakhs</span></div>
+          <div class="sp-sub">₹10,00,000</div>
+        </div>
+        <div class="sp-body">
+          <div class="sp-avail">5 Slots Available</div>
+          <ul>
+            <li><span class="ck" style="color:var(--silver);">✓</span>Exhibition space (27 sqm)</li>
+            <li><span class="ck" style="color:var(--silver);">✓</span>Logo on banners &amp; website</li>
+            <li><span class="ck" style="color:var(--silver);">✓</span>Social media spotlight</li>
+            <li><span class="ck" style="color:var(--silver);">✓</span>8 delegate passes</li>
+            <li><span class="ck" style="color:var(--silver);">✓</span>Newsletter feature</li>
+            <li><span class="ck" style="color:var(--silver);">✓</span>Networking session access</li>
+            <li><span class="ck" style="color:var(--silver);">✓</span>Expo catalogue listing</li>
+          </ul>
+          <a href="contact.html" class="btn-primary" style="display:block;text-align:center;margin-top:1.2rem;background:linear-gradient(135deg,#5A5A5A,var(--silver));">Book Silver Slot →</a>
+        </div>
+      </div>
+
+      <!-- BRONZE -->
+      <div class="sponsor-card" style="border-color:var(--copper-dk);">
+        <div class="sp-head" style="background:linear-gradient(135deg,#5C3A1A,var(--copper-dk));">
+          <div class="sp-icon">🥉</div>
+          <div class="sp-tier">Bronze Tier</div>
+          <h3>Bronze General</h3>
+          <div class="sp-price">₹5 <span>Lakhs</span></div>
+          <div class="sp-sub">₹5,00,000</div>
+        </div>
+        <div class="sp-body">
+          <div class="sp-avail">10 Slots Available</div>
+          <ul>
+            <li><span class="ck" style="color:var(--copper-dk);">✓</span>Exhibition space (12 sqm)</li>
+            <li><span class="ck" style="color:var(--copper-dk);">✓</span>Logo on website &amp; catalogue</li>
+            <li><span class="ck" style="color:var(--copper-dk);">✓</span>Social media mention</li>
+            <li><span class="ck" style="color:var(--copper-dk);">✓</span>5 delegate passes</li>
+            <li><span class="ck" style="color:var(--copper-dk);">✓</span>B2B networking access</li>
+            <li><span class="ck" style="color:var(--copper-dk);">✓</span>Expo listing</li>
+          </ul>
+          <a href="contact.html" class="btn-primary" style="display:block;text-align:center;margin-top:1.2rem;background:linear-gradient(135deg,#5C3A1A,var(--copper-dk));">Book Bronze Slot →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STALL BOOKING -->
+<section class="section reveal" id="stalls">
+  <div class="section-tag">Exhibition Stalls</div>
+  <h2 class="section-title">Book a <span>Stall</span></h2>
+  <div class="divider"></div>
+  <p class="section-sub">Showcase your products and technologies to 500+ delegates, government buyers, and global partners. Four stall sizes to suit every budget.</p>
+  <div class="stall-grid" style="margin-bottom:2rem;">
+    <div class="stall-card">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem;">🏪</div>
+      <div class="stall-price">₹45,000</div>
+      <div style="font-weight:700;margin:0.4rem 0;">Standard Stall</div>
+      <div class="stall-size">3 × 3 m · 9 sqm</div>
+    </div>
+    <div class="stall-card" style="border-color:var(--border-cu);">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem;">⭐</div>
+      <div class="stall-price">₹80,000</div>
+      <div style="font-weight:700;margin:0.4rem 0;">Premium Stall</div>
+      <div class="stall-size">3 × 6 m · 18 sqm</div>
+    </div>
+    <div class="stall-card" style="border-color:var(--gold);">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem;">🏆</div>
+      <div class="stall-price">₹1,35,000</div>
+      <div style="font-weight:700;margin:0.4rem 0;">Double Stall</div>
+      <div class="stall-size">6 × 6 m · 36 sqm</div>
+    </div>
+    <div class="stall-card" style="border-color:var(--gold);background:linear-gradient(160deg,rgba(201,168,76,0.06),#fff);">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem;">💎</div>
+      <div class="stall-price">₹2,70,000+</div>
+      <div style="font-weight:700;margin:0.4rem 0;">Platinum Stall</div>
+      <div class="stall-size">6 × 12 m+ · 72 sqm+</div>
+    </div>
+  </div>
+  <div style="text-align:center;">
+    <a href="contact.html" class="btn-primary" style="font-size:15px;padding:0.9rem 2.5rem;">Book Your Stall Now →</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="section-wide reveal" id="gallery">
+  <div class="section-inner">
+    <div class="section-tag">Past Highlights</div>
+    <h2 class="section-title">Event <span>Gallery</span></h2>
+    <div class="divider"></div>
+    <div class="gallery-grid">
+      <div class="g-item tall"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" alt="Expo hall"><div class="g-overlay"><span class="g-label">Expo Hall</span></div></div>
+      <div class="g-item wide"><img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80" alt="Panel discussion"><div class="g-overlay"><span class="g-label">Panel Discussion</span></div></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80" alt="Networking"><div class="g-overlay"><span class="g-label">Networking</span></div></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&q=80" alt="Stalls"><div class="g-overlay"><span class="g-label">Exhibition Stalls</span></div></div>
+      <div class="g-item"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80" alt="Keynote"><div class="g-overlay"><span class="g-label">Keynote Address</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- NETWORK -->
+<section class="section reveal" id="network">
+  <div class="section-tag">Pan-India Presence</div>
+  <h2 class="section-title">Our Distribution <span>Network</span></h2>
+  <div class="divider"></div>
+  <p class="section-sub">120+ partner organisations across 22 states — India's most connected renewable energy consultancy network.</p>
+  <img class="network-img" src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1400&q=80" alt="India renewable energy network">
+  <div class="states-grid">
+    <div class="state-pill">Telangana</div><div class="state-pill">Andhra Pradesh</div>
+    <div class="state-pill">Maharashtra</div><div class="state-pill">Karnataka</div>
+    <div class="state-pill">Tamil Nadu</div><div class="state-pill">Kerala</div>
+    <div class="state-pill">Gujarat</div><div class="state-pill">Rajasthan</div>
+    <div class="state-pill">Madhya Pradesh</div><div class="state-pill">Uttar Pradesh</div>
+    <div class="state-pill">Delhi NCR</div><div class="state-pill">Punjab</div>
+    <div class="state-pill">Haryana</div><div class="state-pill">West Bengal</div>
+    <div class="state-pill">Odisha</div><div class="state-pill">Jharkhand</div>
+    <div class="state-pill">Bihar</div><div class="state-pill">Chhattisgarh</div>
+    <div class="state-pill">Goa</div><div class="state-pill">Assam</div>
+    <div class="state-pill">Himachal Pradesh</div><div class="state-pill">Uttarakhand</div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/script.js"></script>
+<script>startCountdown('countdown');</script>
+</body>
+</html>
