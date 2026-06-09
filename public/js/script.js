@@ -6,135 +6,111 @@
 (function () {
   const NAV_HTML = `
 <header id="mainNav">
-  <div class="utility-bar">
-    <div class="utility-container">
-      <div class="utility-left">
-        3rd–4th July 2026 · HMDA Grounds, Necklace Road, Hyderabad
-      </div>
-      <div class="utility-right">
-        <a href="tel:+917981869954">+91 79818 69954</a>
-        <span class="utility-sep">·</span>
-        <a href="mailto:ireexpo2026@gmail.com">ireexpo2026@gmail.com</a>
-        <span class="utility-sep">·</span>
-        <a href="contact.html">Contact</a>
+  <div class="topbar" style="background:#0F2E1F; font-family:'Inter',sans-serif; font-size:11.5px; color:rgba(255,255,255,0.65); min-height:40px; display:flex; align-items:center; padding:0 20px;">
+    <div style="width:100%; max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div>IRE 2026 · 3–4 July 2026 · HMDA Grounds, Necklace Road, Hyderabad</div>
+      <div style="display:flex; gap:15px;">
+        <a href="tel:+917981869954" style="color:rgba(255,255,255,0.65); text-decoration:none;">phone</a>
+        <span>|</span>
+        <a href="mailto:ireexpo2026@gmail.com" style="color:rgba(255,255,255,0.65); text-decoration:none;">email</a>
+        <span>|</span>
+        <a href="contact.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Contact</a>
       </div>
     </div>
   </div>
-  <div class="main-navbar">
-    <div class="nav-container">
-      <a class="nav-logo" href="index.html">
-        <div class="logo-mark">
-          <svg viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg">
-            <rect width="86" height="52" rx="11" fill="#1A3A1A"/>
-            <rect width="86" height="52" rx="11" fill="none" stroke="rgba(184,115,51,0.45)" stroke-width="1.2"/>
-            <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#C9A84C">W</text>
-            <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#B87333">IN</text>
-            <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(201,168,76,0.65)" letter-spacing="1.5">DHAN</text>
-            <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(184,115,51,0.35)" stroke-width="1"/>
-            <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#B87333">D</text>
-            <circle cx="55" cy="24" r="4" fill="#C9A84C"/>
-            <circle cx="55" cy="24" r="2.2" fill="#B87333"/>
-            <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#C9A84C">E</text>
-          </svg>
+  <div class="main-navbar" style="background:#FFFFFF; border-bottom:1px solid #E2E2E2; box-shadow:0 1px 4px rgba(0,0,0,0.06); height:68px; display:flex; align-items:center; padding:0 20px;">
+    <div style="width:100%; max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center;">
+      <a class="nav-logo" href="index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <div style="width:42px; height:42px; background:#1A4731; border-radius:4px; display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1;">
+          <div style="color:#C9943A; font-family:'Playfair Display',serif; font-weight:800; font-size:14px;">WIN</div>
+          <div style="color:#FFFFFF; font-family:'Playfair Display',serif; font-weight:800; font-size:14px;">DE</div>
         </div>
         <div class="logo-text">
-          <div class="brand">Dhan Enterprise</div>
-          <div class="tagline">Encompassing Energy Revolution</div>
+          <div style="font-family:'Playfair Display',serif; font-size:20px; font-weight:800; color:#111111; line-height:1.1;">Dhan Enterprise</div>
+          <div style="font-family:'Inter',sans-serif; font-size:9px; color:#555555; letter-spacing:1px; text-transform:uppercase; font-weight:600; margin-top:2px;">ENCOMPASSING ENERGY REVOLUTION</div>
         </div>
       </a>
       
-      <!-- Hamburger Toggle Button -->
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
         <i class="ti ti-menu-2"></i>
       </button>
 
-      <!-- Navigation links drawer -->
       <nav class="nav-links" id="navLinks" role="dialog" aria-modal="true" aria-label="Navigation menu">
         <button class="nav-close" id="navClose" aria-label="Close navigation menu"><i class="ti ti-x"></i></button>
         <a href="index.html" data-page="index">Home</a>
         <div class="nav-group">
           <span class="nav-btn" data-page="about">About ▾</span>
           <div class="nav-dropdown">
-            <a href="about.html#story"><i class="ti ti-book-open"></i> Our Story</a>
-            <a href="about.html#team"><i class="ti ti-users"></i> Team</a>
-            <a href="about.html#certifications"><i class="ti ti-certificate"></i> Certifications</a>
+            <a href="about.html#story">Our Story</a>
+            <a href="about.html#team">Team</a>
+            <a href="about.html#certifications">Certifications</a>
           </div>
         </div>
         <a href="services.html" data-page="services">Services</a>
         <div class="nav-group">
           <span class="nav-btn" data-page="ire"><span class="live-badge">LIVE</span>IRE 2026 ▾</span>
           <div class="nav-dropdown">
-            <a href="ire.html#stall-layout"><i class="ti ti-map"></i> Floor Plan</a>
-            <a href="ire.html#agenda"><i class="ti ti-calendar-event"></i> Agenda</a>
-            <a href="ire.html#exhibitors"><i class="ti ti-building-store"></i> Exhibitors</a>
-            <a href="ire.html#venue"><i class="ti ti-map-pin"></i> Venue</a>
+            <a href="ire.html#stall-layout">Floor Plan</a>
+            <a href="ire.html#agenda">Agenda</a>
+            <a href="ire.html#exhibitors">Exhibitors</a>
+            <a href="ire.html#venue">Venue</a>
             <div class="nav-drop-divider"></div>
-            <a href="stalls-booking/index.html" style="color: #B87333; font-weight: 700;"><i class="ti ti-ticket"></i> Book a Stall →</a>
+            <a href="stalls-booking/index.html" style="color:var(--green); font-weight: 700;">Book a Stall →</a>
           </div>
         </div>
         <div class="nav-group">
           <span class="nav-btn" data-page="trade">Trade ▾</span>
           <div class="nav-dropdown">
-            <a href="trade.html#directory"><i class="ti ti-folder"></i> Trade Directory</a>
-            <a href="tenders.html"><i class="ti ti-file-text"></i> Tenders</a>
+            <a href="trade.html#directory">Trade Directory</a>
+            <a href="tenders.html">Tenders</a>
           </div>
         </div>
         <span class="nav-separator"></span>
-        <a href="register.html" class="btn-register">Register</a>
-        <a href="stalls-booking/index.html" class="btn-book-stall">Book a Stall →</a>
+        <a href="register.html" class="btn-ghost">Register</a>
+        <a href="stalls-booking/index.html" class="btn-primary">Book a Stall →</a>
       </nav>
     </div>
   </div>
 </header>`;
 
   const FOOTER_HTML = `
-<footer>
-  <div class="footer-grid">
+<footer style="background:#1C1C1C; color:#CCCCCC; padding:4rem 20px; font-family:'Inter',sans-serif;">
+  <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:2rem;">
     <div class="footer-brand">
-      <div class="logo-mark" style="width:80px;height:48px;margin-bottom:0.9rem;">
-        <svg viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg" width="80" height="48">
-          <rect width="86" height="52" rx="11" fill="#1A3A1A"/>
-          <rect width="86" height="52" rx="11" fill="none" stroke="rgba(184,115,51,0.45)" stroke-width="1.2"/>
-          <text x="2" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#C9A84C">W</text>
-          <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#B87333">IN</text>
-          <text x="3" y="41" font-family="Arial,sans-serif" font-size="6.5" fill="rgba(201,168,76,0.65)" letter-spacing="1.5">DHAN</text>
-          <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(184,115,51,0.35)" stroke-width="1"/>
-          <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#B87333">D</text>
-          <circle cx="55" cy="24" r="4" fill="#C9A84C"/>
-          <circle cx="55" cy="24" r="2.2" fill="#B87333"/>
-          <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#C9A84C">E</text>
-        </svg>
+      <div style="width:42px; height:42px; background:#1A4731; border-radius:4px; display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1; margin-bottom:1rem;">
+        <div style="color:#C9943A; font-family:'Playfair Display',serif; font-weight:800; font-size:14px;">WIN</div>
+        <div style="color:#FFFFFF; font-family:'Playfair Display',serif; font-weight:800; font-size:14px;">DE</div>
       </div>
-      <p>Dhan Enterprise — Encompassing Energy Revolution.<br>10+ years of renewable energy expertise from Hyderabad, India.</p>
+      <p style="font-size:0.9rem; line-height:1.6; color:#888888;">Dhan Enterprise — Encompassing Energy Revolution.<br>10+ years of renewable energy expertise from Hyderabad, India.</p>
     </div>
-    <div class="footer-col">
-      <h5>Services</h5>
-      <a href="services.html">EV Consulting</a>
-      <a href="services.html">Solar Energy</a>
-      <a href="services.html">BESS &amp; Storage</a>
-      <a href="services.html">Wind Energy</a>
-      <a href="trade.html">Import / Export</a>
+    <div class="footer-col" style="display:flex; flex-direction:column; gap:0.5rem;">
+      <h5 style="color:#FFFFFF; font-size:1rem; font-weight:600; margin-bottom:1rem;">Services</h5>
+      <a href="services.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">EV Consulting</a>
+      <a href="services.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">Solar Energy</a>
+      <a href="services.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">BESS &amp; Storage</a>
+      <a href="services.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">Wind Energy</a>
+      <a href="trade.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">Import / Export</a>
     </div>
-    <div class="footer-col">
-      <h5>IRE 2026</h5>
-      <a href="ire.html">About IRE Expo</a>
-      <a href="stalls-booking/index.html">Book a Stall</a>
-      <a href="register.html">Visitor Registration</a>
-      <a href="admin.html">Admin Dashboard</a>
-      <a href="ire.html#sponsors">Sponsors & Partners</a>
-      <a href="tenders.html">Gov Tenders</a>
+    <div class="footer-col" style="display:flex; flex-direction:column; gap:0.5rem;">
+      <h5 style="color:#FFFFFF; font-size:1rem; font-weight:600; margin-bottom:1rem;">IRE 2026</h5>
+      <a href="ire.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">About IRE Expo</a>
+      <a href="stalls-booking/index.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">Book a Stall</a>
+      <a href="register.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">Visitor Registration</a>
+      <a href="admin.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">Admin Dashboard</a>
+      <a href="ire.html#sponsors" style="color:#888888; text-decoration:none; font-size:0.9rem;">Sponsors & Partners</a>
+      <a href="tenders.html" style="color:#888888; text-decoration:none; font-size:0.9rem;">Gov Tenders</a>
     </div>
-    <div class="footer-col">
-      <h5>Contact</h5>
-      <a href="tel:9849446409">9849446409</a>
-      <a href="tel:8331976555">8331976555</a>
-      <a href="mailto:hari@win-dhan.in">hari@win-dhan.in</a>
-      <a href="https://www.win-dhan.com" target="_blank">www.win-dhan.com</a>
+    <div class="footer-col" style="display:flex; flex-direction:column; gap:0.5rem;">
+      <h5 style="color:#FFFFFF; font-size:1rem; font-weight:600; margin-bottom:1rem;">Contact</h5>
+      <a href="tel:9849446409" style="color:#888888; text-decoration:none; font-size:0.9rem;">9849446409</a>
+      <a href="tel:8331976555" style="color:#888888; text-decoration:none; font-size:0.9rem;">8331976555</a>
+      <a href="mailto:hari@win-dhan.in" style="color:#888888; text-decoration:none; font-size:0.9rem;">hari@win-dhan.in</a>
+      <a href="https://www.win-dhan.com" target="_blank" style="color:#888888; text-decoration:none; font-size:0.9rem;">www.win-dhan.com</a>
     </div>
   </div>
-  <div class="footer-bottom">
+  <div style="max-width:1200px; margin:2rem auto 0; padding-top:2rem; border-top:1px solid #333333; display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; color:#888888; font-size:0.8rem;">
     <p>© 2026 Dhan Enterprise. Co-organizer: Suprabha Trust. All rights reserved.</p>
-    <p style="color:var(--copper-lt);">Hyderabad · India</p>
+    <p>Hyderabad · India</p>
   </div>
 </footer>`;
 

@@ -8,23 +8,23 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     /* ── DESIGN SYSTEM & VARIABLE TOKENS ── */
     :root {
       /* Dhan Win Branding Colors */
-      --bg-dark: #F5FAF6;          /* Light Mint Background */
+      --bg-dark: #F7F7F7;          /* Light Mint Background */
       --bg-card: #FFFFFF;          /* White Card */
       --bg-card-solid: #FFFFFF;    /* Solid White Card */
-      --border-color: rgba(45, 90, 45, 0.13);  /* Soft Green Border */
-      --border-hover: rgba(184, 115, 51, 0.4);  /* Copper Border Hover */
+      --border-color: #E2E2E2;  /* Soft Green Border */
+      --border-hover: rgba(26, 71, 49, 0.4);  /* Copper Border Hover */
       
-      --color-gold: #B87333;       /* Dhan Win Copper */
-      --color-gold-glow: #C9A84C;  /* Dhan Win Gold */
-      --color-navy-lt: #EEF5F0;    /* Light Mint Green Accent */
-      --color-text: #112A18;       /* Deep Forest Green Text */
-      --color-text-dim: #2D4735;   /* Medium Green Text */
+      --color-gold: #C9943A;       /* Dhan Win Copper */
+      --color-gold-glow: #E8B55A;  /* Dhan Win Gold */
+      --color-navy-lt: #EAF3EE;    /* Light Mint Green Accent */
+      --color-text: #111111;       /* Deep Forest Green Text */
+      --color-text-dim: #555555;   /* Medium Green Text */
       
       /* Curated Block Palette (UX colors) */
       --color-block-a: #D4873A;    /* Warm Amber - Block A */
@@ -36,7 +36,7 @@
       --color-booked: #9CA3AF;     /* Neutral Gray - Booked */
       --color-selected: #E05C2A;   /* Vibrant Orange - Selected */
       
-      --font-family: 'Outfit', sans-serif;
+      --font-family: 'Inter', sans-serif;
       --font-display: 'Playfair Display', serif;
       --radius: 14px;
       --radius-sm: 8px;
@@ -947,20 +947,20 @@
     
     .floating-input {
       width: 100%;
-      background-color: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 0.85rem 0.9rem 0.65rem 0.9rem;
+      background-color: var(--bg-card);
+      border: 1px solid #E2E2E2;
+      border-radius: 4px;
+      padding: 10px 14px;
       font-family: inherit;
       color: var(--color-text);
-      font-size: 0.85rem;
+      font-size: 14px;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     
     .floating-input:focus {
-      border-color: var(--color-gold);
-      box-shadow: 0 0 10px rgba(184, 115, 51, 0.12);
+      border-color: #1A4731;
+      box-shadow: 0 0 0 2px rgba(26, 71, 49, 0.1);
     }
     
     .floating-label {
@@ -1146,14 +1146,18 @@
     }
     
     .cta-btn-primary {
-      background: linear-gradient(135deg, var(--color-gold), var(--color-gold-glow));
+      background: #1A4731;
       color: white;
-      box-shadow: 0 4px 12px rgba(184, 115, 51, 0.2);
+      padding: 11px 22px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 13.5px;
+      box-shadow: 0 4px 12px rgba(26, 71, 49, 0.15);
     }
     
     .cta-btn-primary:hover:not(:disabled) {
-      box-shadow: 0 6px 18px rgba(184, 115, 51, 0.3);
-      filter: brightness(1.08);
+      background: #2C6248;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
       transform: translateY(-1px);
     }
     

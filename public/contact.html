@@ -6,119 +6,388 @@
 <title>Contact | Dhan Enterprise</title>
 <meta name="description" content="Contact Dhan Enterprise — Begumpet, Hyderabad. Reach us for EV consulting, solar projects, BESS, IRE 2026 stall bookings, sponsorship, or trade enquiries.">
 <link rel="stylesheet" href="css/styles.css">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
+/* Corporate Light Tokens & Specific Styles */
+:root {
+  --green: #1A4731;
+  --green-dk: #0F2E1F;
+  --green-lt: #2C6248;
+  --green-pale: #EAF3EE;
+  --gold: #C9943A;
+  --gold-lt: #E8B55A;
+  --gold-pale: #FDF5E8;
+  --black: #111111;
+  --gray-60: #555555;
+  --gray-40: #888888;
+  --gray-20: #CCCCCC;
+  --gray-10: #EEEEEE;
+  --gray-05: #F7F7F7;
+  --white: #FFFFFF;
+  --border: #E2E2E2;
+}
+
+/* Page Grid structure */
 .contact-page-grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: start;
 }
+
 .contact-office-img {
   width: 100%;
   height: 280px;
   object-fit: cover;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-md);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
 }
-.enquiry-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-}
-.enquiry-chip {
-  padding: 0.38rem 0.9rem;
-  border-radius: var(--radius-pill);
-  border: 1.5px solid var(--border-cu);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-dim);
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: var(--font);
-}
-.enquiry-chip.selected {
-  background: var(--copper);
-  border-color: var(--copper);
-  color: #fff;
-}
-.enquiry-chip:hover:not(.selected) {
-  border-color: var(--copper);
-  color: var(--copper);
-}
-.map-placeholder {
-  width: 100%;
-  height: 260px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  background: var(--bg-section);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-  position: relative;
-}
-.map-inner {
-  text-align: center;
-  color: var(--text-muted);
-}
-.map-inner .map-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-.map-inner p { font-size: 0.85rem; font-weight: 600; }
-.map-inner a { color: var(--copper); font-weight: 700; font-size: 0.85rem; }
 
-/* Quick contact cards at top */
+/* Corporate Light Section Patterns */
+.eyebrow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.eyebrow::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--gold);
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+.section-title span {
+  color: var(--green);
+}
+.section-rule {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  margin-bottom: 1.2rem;
+}
+
+/* Page Hero */
+.page-hero {
+  position: relative;
+  padding: 8rem 2rem 5rem;
+  background-color: var(--green-dk);
+  color: var(--white);
+  text-align: center;
+  overflow: hidden;
+}
+.page-hero-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: 0;
+}
+.page-hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(15,46,31,0.8), rgba(15,46,31,1));
+  z-index: 1;
+}
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.page-hero .eyebrow {
+  justify-content: center;
+}
+.page-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--white);
+  margin: 1rem 0;
+}
+.page-hero h1 span {
+  color: var(--gold);
+}
+.page-hero p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: var(--gray-20);
+  line-height: 1.6;
+}
+
+/* Quick Contact Cards */
 .quick-contact-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.2rem;
+  gap: 1.5rem;
   margin-bottom: 4rem;
 }
 .qc-card {
-  background: var(--bg-card);
+  background: var(--white);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
   text-align: center;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
   transition: all 0.25s;
   text-decoration: none;
   display: block;
   color: inherit;
 }
 .qc-card:hover {
-  border-color: var(--border-cu);
+  border-color: var(--green);
+  box-shadow: 0 10px 30px rgba(26,71,49,0.08);
   transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
 }
 .qc-card .qc-icon {
   font-size: 1.8rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
 }
 .qc-card .qc-label {
-  font-size: 9.5px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--copper);
-  margin-bottom: 0.3rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
 }
 .qc-card .qc-value {
-  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.5;
+}
+
+/* Form Styling */
+.contact-form-wrapper {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border: 1px solid var(--border);
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-group label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--gray-60);
+  margin-bottom: 0.5rem;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 14px;
+  background: var(--white);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--green);
+}
+
+.enquiry-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.enquiry-chip {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-60);
+  background: var(--gray-05);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.enquiry-chip.selected {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+.enquiry-chip:hover:not(.selected) {
+  border-color: var(--green-lt);
+  color: var(--green-lt);
+  background: var(--green-pale);
+}
+
+/* Contact Info Styling */
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.ci-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--green-pale);
+  color: var(--green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.contact-item h4 {
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
-  color: var(--text);
-  line-height: 1.4;
+  font-size: 15px;
+  color: var(--black);
+  margin-bottom: 0.3rem;
+  margin-top: 0;
+}
+.contact-item p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--gray-60);
+  line-height: 1.5;
+  margin: 0;
+}
+.contact-item a {
+  color: var(--green);
+  text-decoration: none;
+  font-weight: 600;
+}
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 260px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--gray-05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 2rem;
+}
+.map-inner {
+  text-align: center;
+  color: var(--gray-60);
+}
+.map-inner .map-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.map-inner p { font-size: 14px; font-weight: 600; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;}
+.map-inner a { color: var(--green); font-weight: 700; font-size: 14px; text-decoration: none;}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--green);
+  color: var(--white);
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 1px solid var(--green);
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--green-lt);
+  border-color: var(--green-lt);
+}
+
+/* Grid 4 for Quick Links */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.info-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  transition: all 0.3s;
+}
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+  border-color: var(--green);
+}
+.info-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--black);
+}
+.info-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--gray-60);
+  margin-bottom: 1.5rem;
 }
 
 @media (max-width: 1024px) {
   .contact-page-grid { grid-template-columns: 1fr; }
   .quick-contact-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
   .quick-contact-grid { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* Reveal Animation */
+.reveal {
+  opacity: 1; /* Replace with your actual reveal logic */
 }
 </style>
 </head>
@@ -130,197 +399,204 @@
   <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80');"></div>
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
-    <div class="page-hero-eyebrow">Hyderabad, India</div>
+    <div class="eyebrow">Hyderabad, India</div>
     <h1>Contact <span>Dhan Enterprise</span></h1>
     <p class="page-hero-desc">Reach us for EV consulting, solar projects, BESS, IRE 2026 stall bookings, sponsorship, trade enquiries, or general information.</p>
   </div>
 </div>
 
 <!-- QUICK CONTACT CARDS -->
-<section class="section reveal">
-  <div class="quick-contact-grid">
-    <a class="qc-card" href="tel:9849446409">
-      <div class="qc-icon">📞</div>
-      <div class="qc-label">Phone</div>
-      <div class="qc-value">9849446409<br>8331976555</div>
-    </a>
-    <a class="qc-card" href="mailto:hari@win-dhan.in">
-      <div class="qc-icon">✉️</div>
-      <div class="qc-label">Email</div>
-      <div class="qc-value">hari@win-dhan.in<br>harishchatra38@win-dhan.in</div>
-    </a>
-    <a class="qc-card" href="https://www.win-dhan.com" target="_blank">
-      <div class="qc-icon">🌐</div>
-      <div class="qc-label">Website</div>
-      <div class="qc-value">www.win-dhan.com</div>
-    </a>
-    <div class="qc-card">
-      <div class="qc-icon">📍</div>
-      <div class="qc-label">Office</div>
-      <div class="qc-value">Prakash Nagar, Begumpet<br>Hyderabad – 500016</div>
-    </div>
-  </div>
-
-  <!-- MAIN CONTACT GRID -->
-  <div class="contact-page-grid">
-    <!-- LEFT: Office Info -->
-    <div>
-      <div class="section-tag">Our Offices</div>
-      <h2 class="section-title">Find <span>Us</span></h2>
-      <div class="divider"></div>
-
-      <img class="contact-office-img"
-        src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80"
-        alt="Dhan Enterprise Office Hyderabad">
-
-      <div class="contact-info">
-        <div class="contact-item">
-          <div class="ci-icon">📍</div>
-          <div>
-            <h4>Head Office</h4>
-            <p>Prakash Nagar, Begumpet<br>Hyderabad – 500016, Telangana</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="ci-icon">📍</div>
-          <div>
-            <h4>Branch Office</h4>
-            <p>Vivekanandapuram, Sainikpuri<br>Hyderabad, Telangana</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="ci-icon">📞</div>
-          <div>
-            <h4>Phone</h4>
-            <p><a href="tel:9849446409" style="color:var(--copper);">9849446409</a> &nbsp;|&nbsp; <a href="tel:8331976555" style="color:var(--copper);">8331976555</a></p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="ci-icon">✉️</div>
-          <div>
-            <h4>Email</h4>
-            <p>
-              <a href="mailto:hari@win-dhan.in" style="color:var(--copper);">hari@win-dhan.in</a><br>
-              <a href="mailto:harishchatra38@win-dhan.in" style="color:var(--copper);">harishchatra38@win-dhan.in</a>
-            </p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="ci-icon">🌐</div>
-          <div>
-            <h4>Website</h4>
-            <p><a href="https://www.win-dhan.com" target="_blank" style="color:var(--copper);">www.win-dhan.com</a></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Map Placeholder -->
-      <div class="map-placeholder">
-        <div class="map-inner">
-          <div class="map-icon">🗺️</div>
-          <p>Prakash Nagar, Begumpet, Hyderabad</p>
-          <a href="https://maps.google.com/?q=Prakash+Nagar+Begumpet+Hyderabad" target="_blank">Open in Google Maps →</a>
-        </div>
+<section class="section reveal" style="padding: 5rem 2rem; background: var(--white);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="quick-contact-grid">
+      <a class="qc-card" href="tel:9849446409">
+        <div class="qc-icon">📞</div>
+        <div class="qc-label">Phone</div>
+        <div class="qc-value">9849446409<br>8331976555</div>
+      </a>
+      <a class="qc-card" href="mailto:hari@win-dhan.in">
+        <div class="qc-icon">✉️</div>
+        <div class="qc-label">Email</div>
+        <div class="qc-value">hari@win-dhan.in<br>harishchatra38@win-dhan.in</div>
+      </a>
+      <a class="qc-card" href="https://www.win-dhan.com" target="_blank">
+        <div class="qc-icon">🌐</div>
+        <div class="qc-label">Website</div>
+        <div class="qc-value">www.win-dhan.com</div>
+      </a>
+      <div class="qc-card">
+        <div class="qc-icon">📍</div>
+        <div class="qc-label">Office</div>
+        <div class="qc-value">Prakash Nagar, Begumpet<br>Hyderabad – 500016</div>
       </div>
     </div>
 
-    <!-- RIGHT: Contact Form -->
-    <div>
-      <div class="section-tag">Send A Message</div>
-      <h2 class="section-title">Get In <span>Touch</span></h2>
-      <div class="divider"></div>
+    <!-- MAIN CONTACT GRID -->
+    <div class="contact-page-grid">
+      
+      <!-- LEFT: Contact Form -->
+      <div>
+        <div class="eyebrow">Send A Message</div>
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+        <div class="section-rule"></div>
+        <p style="font-family: 'Inter', sans-serif; font-size: 15px; color: var(--gray-60); margin-bottom: 2rem;">We would love to hear from you. Please fill out the form below and we will get back to you shortly.</p>
 
-      <!-- Enquiry type quick selector -->
-      <p style="font-size:0.82rem;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.7rem;">I'm interested in:</p>
-      <div class="enquiry-chips" id="chipContainer">
-        <button class="enquiry-chip" data-val="EV / Hybrid Consulting">⚡ EV Consulting</button>
-        <button class="enquiry-chip" data-val="Solar Project">☀️ Solar</button>
-        <button class="enquiry-chip" data-val="BESS / Storage">🔋 BESS</button>
-        <button class="enquiry-chip" data-val="Wind Energy">💨 Wind</button>
-        <button class="enquiry-chip" data-val="IRE 2026 Stall Booking">🏪 IRE Stall</button>
-        <button class="enquiry-chip" data-val="Sponsorship">⭐ Sponsorship</button>
-        <button class="enquiry-chip" data-val="Import / Export">🚢 Trade</button>
-        <button class="enquiry-chip" data-val="Partnership">🤝 Partnership</button>
-        <button class="enquiry-chip" data-val="General Enquiry">💬 General</button>
+        <div class="contact-form-wrapper">
+          <!-- Enquiry type quick selector -->
+          <p style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: var(--gray-40); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.7rem;">I'm interested in:</p>
+          <div class="enquiry-chips" id="chipContainer">
+            <button class="enquiry-chip" data-val="EV / Hybrid Consulting">⚡ EV Consulting</button>
+            <button class="enquiry-chip" data-val="Solar Project">☀️ Solar</button>
+            <button class="enquiry-chip" data-val="BESS / Storage">🔋 BESS</button>
+            <button class="enquiry-chip" data-val="Wind Energy">💨 Wind</button>
+            <button class="enquiry-chip" data-val="IRE 2026 Stall Booking">🏪 IRE Stall</button>
+            <button class="enquiry-chip" data-val="Sponsorship">⭐ Sponsorship</button>
+            <button class="enquiry-chip" data-val="Import / Export">🚢 Trade</button>
+            <button class="enquiry-chip" data-val="Partnership">🤝 Partnership</button>
+            <button class="enquiry-chip" data-val="General Enquiry">💬 General</button>
+          </div>
+
+          <form class="contact-form" id="contactForm" onsubmit="return validateContactForm(event)" style="padding:0; border:none; box-shadow:none;">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--black); margin-bottom: 1.5rem;">Send Us a Message</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactName">Full Name</label>
+                <input type="text" id="contactName" placeholder="Your name" autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="contactPhone">Phone</label>
+                <input type="tel" id="contactPhone" placeholder="+91 XXXXX XXXXX" autocomplete="tel">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Email</label>
+              <input type="email" id="contactEmail" placeholder="your@email.com" autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="contactEnquiry">Enquiry Type</label>
+              <select id="contactEnquiry">
+                <option>Select enquiry type</option>
+                <option>EV / Hybrid Consulting</option>
+                <option>Solar Project</option>
+                <option>BESS / Storage</option>
+                <option>Wind Energy</option>
+                <option>IRE 2026 Stall Booking</option>
+                <option>Sponsorship</option>
+                <option>Import / Export</option>
+                <option>Partnership</option>
+                <option>General Enquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" placeholder="Tell us about your project or enquiry..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;font-size:15px;padding:0.9rem;">
+              Send Message →
+            </button>
+          </form>
+        </div>
       </div>
 
-      <form class="contact-form" id="contactForm" onsubmit="return validateContactForm(event)">
-        <h3>Send Us a Message</h3>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="contactName">Full Name</label>
-            <input type="text" id="contactName" placeholder="Your name" autocomplete="name">
+      <!-- RIGHT: Office Info -->
+      <div>
+        <div class="eyebrow">Our Offices</div>
+        <h2 class="section-title">Find <span>Us</span></h2>
+        <div class="section-rule"></div>
+        <p style="font-family: 'Inter', sans-serif; font-size: 15px; color: var(--gray-60); margin-bottom: 2rem;">Visit us at our headquarters or branch office.</p>
+
+        <img class="contact-office-img"
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80"
+          alt="Dhan Enterprise Office Hyderabad">
+
+        <div class="contact-info-wrapper">
+          <div class="contact-item">
+            <div class="ci-icon">📍</div>
+            <div>
+              <h4>Head Office</h4>
+              <p>Prakash Nagar, Begumpet<br>Hyderabad – 500016, Telangana</p>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="contactPhone">Phone</label>
-            <input type="tel" id="contactPhone" placeholder="+91 XXXXX XXXXX" autocomplete="tel">
+          <div class="contact-item">
+            <div class="ci-icon">📍</div>
+            <div>
+              <h4>Branch Office</h4>
+              <p>Vivekanandapuram, Sainikpuri<br>Hyderabad, Telangana</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon">📞</div>
+            <div>
+              <h4>Phone</h4>
+              <p><a href="tel:9849446409">9849446409</a> &nbsp;|&nbsp; <a href="tel:8331976555">8331976555</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon">✉️</div>
+            <div>
+              <h4>Email</h4>
+              <p>
+                <a href="mailto:hari@win-dhan.in">hari@win-dhan.in</a><br>
+                <a href="mailto:harishchatra38@win-dhan.in">harishchatra38@win-dhan.in</a>
+              </p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon">🌐</div>
+            <div>
+              <h4>Website</h4>
+              <p><a href="https://www.win-dhan.com" target="_blank">www.win-dhan.com</a></p>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label for="contactEmail">Email</label>
-          <input type="email" id="contactEmail" placeholder="your@email.com" autocomplete="email">
+
+        <!-- Map Placeholder -->
+        <div class="map-placeholder">
+          <div class="map-inner">
+            <div class="map-icon">🗺️</div>
+            <p>Prakash Nagar, Begumpet, Hyderabad</p>
+            <a href="https://maps.google.com/?q=Prakash+Nagar+Begumpet+Hyderabad" target="_blank">Open in Google Maps →</a>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="contactEnquiry">Enquiry Type</label>
-          <select id="contactEnquiry">
-            <option>Select enquiry type</option>
-            <option>EV / Hybrid Consulting</option>
-            <option>Solar Project</option>
-            <option>BESS / Storage</option>
-            <option>Wind Energy</option>
-            <option>IRE 2026 Stall Booking</option>
-            <option>Sponsorship</option>
-            <option>Import / Export</option>
-            <option>Partnership</option>
-            <option>General Enquiry</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="contactMessage">Message</label>
-          <textarea id="contactMessage" placeholder="Tell us about your project or enquiry..."></textarea>
-        </div>
-        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:0.9rem;">
-          Send Message →
-        </button>
-      </form>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- IRE 2026 QUICK LINKS -->
-<div class="section-wide reveal">
-  <div class="section-inner">
-    <div class="section-tag">IRE 2026</div>
+<section class="section reveal" style="padding: 5rem 2rem; background: var(--gray-05);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="eyebrow">IRE 2026</div>
     <h2 class="section-title">Event <span>Quick Links</span></h2>
-    <div class="divider"></div>
+    <div class="section-rule"></div>
     <div class="grid-4">
-      <div class="info-card" style="text-align:center;">
-        <div style="font-size:1.5rem;margin-bottom:0.5rem;">🏪</div>
-        <h4 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:0.4rem;">Book a Stall</h4>
-        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">₹45,000 to ₹2,70,000+ — 4 sizes to choose from</p>
-        <a href="ire.html#stalls" class="btn-primary" style="font-size:12px;padding:0.55rem 1.2rem;">View Stalls →</a>
+      <div class="info-card">
+        <div style="font-size:1.8rem;margin-bottom:1rem;color:var(--green);">🏪</div>
+        <h4>Book a Stall</h4>
+        <p>₹45,000 to ₹2,70,000+ — 4 sizes to choose from</p>
+        <a href="ire.html#stalls" class="btn-primary" style="font-size:13px;padding:0.6rem 1.2rem;">View Stalls →</a>
       </div>
-      <div class="info-card" style="text-align:center;">
-        <div style="font-size:1.5rem;margin-bottom:0.5rem;">⭐</div>
-        <h4 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:0.4rem;">Sponsorship</h4>
-        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">Bronze to Associate tiers — ₹5L to ₹35L</p>
-        <a href="ire.html#sponsors" class="btn-primary" style="font-size:12px;padding:0.55rem 1.2rem;">View Tiers →</a>
+      <div class="info-card">
+        <div style="font-size:1.8rem;margin-bottom:1rem;color:var(--green);">⭐</div>
+        <h4>Sponsorship</h4>
+        <p>Bronze to Associate tiers — ₹5L to ₹35L</p>
+        <a href="ire.html#sponsors" class="btn-primary" style="font-size:13px;padding:0.6rem 1.2rem;">View Tiers →</a>
       </div>
-      <div class="info-card" style="text-align:center;">
-        <div style="font-size:1.5rem;margin-bottom:0.5rem;">📋</div>
-        <h4 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:0.4rem;">Tenders</h4>
-        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">50+ active government renewable energy tenders</p>
-        <a href="tenders.html" class="btn-primary" style="font-size:12px;padding:0.55rem 1.2rem;">View Tenders →</a>
+      <div class="info-card">
+        <div style="font-size:1.8rem;margin-bottom:1rem;color:var(--green);">📋</div>
+        <h4>Tenders</h4>
+        <p>50+ active government renewable energy tenders</p>
+        <a href="tenders.html" class="btn-primary" style="font-size:13px;padding:0.6rem 1.2rem;">View Tenders →</a>
       </div>
-      <div class="info-card" style="text-align:center;">
-        <div style="font-size:1.5rem;margin-bottom:0.5rem;">🤝</div>
-        <h4 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:0.4rem;">Partnership</h4>
-        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">R&D, trade, or distribution partnerships</p>
-        <a href="about.html#rnd" class="btn-primary" style="font-size:12px;padding:0.55rem 1.2rem;">Learn More →</a>
+      <div class="info-card">
+        <div style="font-size:1.8rem;margin-bottom:1rem;color:var(--green);">🤝</div>
+        <h4>Partnership</h4>
+        <p>R&D, trade, or distribution partnerships</p>
+        <a href="about.html#rnd" class="btn-primary" style="font-size:13px;padding:0.6rem 1.2rem;">Learn More →</a>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <div id="footer-placeholder"></div>
 <script src="js/script.js"></script>

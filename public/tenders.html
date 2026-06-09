@@ -6,35 +6,365 @@
 <title>Government Tenders | Dhan Enterprise</title>
 <meta name="description" content="Curated government renewable energy tenders — SECI, NTPC, TSREDCO, MNRE, IREDA. Solar, wind, EV charging, BESS procurement opportunities across India. Updated daily.">
 <link rel="stylesheet" href="css/styles.css">
+<!-- DIRECTION 3 CORPORATE LIGHT STYLES -->
+<style>
+  :root {
+    --green:       #1A4731;
+    --green-dk:    #0F2E1F;
+    --green-lt:    #2C6248;
+    --green-pale:  #EAF3EE;
+    --gold:        #C9943A;
+    --gold-lt:     #E8B55A;
+    --gold-pale:   #FDF5E8;
+    --black:       #111111;
+    --gray-60:     #555555;
+    --gray-40:     #888888;
+    --gray-20:     #CCCCCC;
+    --gray-10:     #EEEEEE;
+    --gray-05:     #F7F7F7;
+    --white:       #FFFFFF;
+    --border:      #E2E2E2;
+  }
+
+  /* GLOBAL OVERRIDES FOR DIRECTION 3 */
+  body[data-page="tenders"] {
+    background: var(--white);
+    color: var(--gray-60);
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* SECTION PATTERN */
+  .section-dir3 {
+    padding: 4rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-dir3.bg-gray {
+    background-color: var(--gray-05);
+    max-width: 100%;
+  }
+  .section-dir3.bg-gray .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .eyebrow-dir3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .eyebrow-dir3::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+  .title-dir3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--black);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .title-dir3 span {
+    color: var(--green);
+  }
+  .rule-dir3 {
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    margin-bottom: 1.2rem;
+  }
+  .subtitle-dir3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--gray-60);
+    margin-bottom: 2rem;
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    background: var(--green);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid var(--green);
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover { background: var(--green-lt); border-color: var(--green-lt); color: var(--white); }
+  
+  .btn-outline {
+    background: transparent;
+    color: var(--green);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid var(--green);
+    transition: all 0.3s ease;
+  }
+  .btn-outline:hover { background: var(--green-pale); color: var(--green); }
+  
+  .btn-ghost {
+    background: transparent;
+    color: var(--green);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  .btn-ghost:hover { background: var(--green-pale); }
+  
+  .btn-gold {
+    background: var(--gold);
+    color: var(--white);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid var(--gold);
+    transition: all 0.3s ease;
+  }
+  .btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); color: var(--white); }
+
+  /* PAGE HERO */
+  .page-hero-dir3 {
+    position: relative;
+    padding: 8rem 1.5rem 6rem 1.5rem;
+    color: var(--white);
+    background-color: var(--green-dk);
+    overflow: hidden;
+  }
+  .page-hero-dir3-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+  }
+  .page-hero-dir3-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--green-dk) 30%, transparent 100%);
+  }
+  .page-hero-dir3-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .page-hero-dir3-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  .page-hero-dir3-title span {
+    color: var(--gold);
+  }
+  .page-hero-dir3-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--gray-10);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* CARDS */
+  .grid-4-dir3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .card-dir3 {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-dir3:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+  }
+
+  /* STATS */
+  .stat-card-dir3 {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    padding: 2rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+  .stat-val-dir3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+  }
+  .stat-lbl-dir3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--gray-60);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* TENDERS */
+  .filter-pills-dir3 {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .filter-pills-dir3 .pill {
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--gray-60);
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-pills-dir3 .pill.active, .filter-pills-dir3 .pill:hover {
+    background: var(--green);
+    color: var(--white);
+    border-color: var(--green);
+  }
+
+  .tender-row-dir3 {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 0.8rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .tender-row-dir3:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.04);
+  }
+  .t-badge-dir3 {
+    background: var(--green-pale);
+    color: var(--green);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    min-width: 110px;
+    border: 1px solid rgba(26,71,49,0.1);
+  }
+  .t-badge-dir3.gold {
+    background: var(--gold-pale);
+    color: var(--gold);
+    border-color: rgba(201,148,58,0.2);
+  }
+  .t-badge-dir3.gray {
+    background: var(--gray-05);
+    color: var(--gray-60);
+    border-color: var(--border);
+  }
+  .tb-org-dir3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; }
+  .tb-sub-dir3 { font-family: 'Inter', sans-serif; font-size: 0.75rem; text-transform: uppercase; margin-top: 0.2rem; color: var(--gray-60); }
+  
+  .t-info-dir3 { flex: 1; min-width: 250px; }
+  .t-title-dir3 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.25rem; color: var(--black); margin-bottom: 0.4rem; }
+  .t-meta-dir3 { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--gray-60); }
+  
+  .t-val-box-dir3 { text-align: right; min-width: 120px; }
+  .t-value-dir3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.25rem; color: var(--black); }
+  .t-vl-dir3 { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--gray-40); text-transform: uppercase; margin-top: 0.2rem; }
+
+  /* CTA BANNER */
+  .cta-banner-dir3 {
+    background: var(--green-dk);
+    border-radius: 8px;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    color: var(--white);
+    margin-top: 4rem;
+  }
+  .cta-banner-dir3 h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+  .cta-banner-dir3 p {
+    font-family: 'Inter', sans-serif;
+    color: var(--gray-20);
+    max-width: 550px;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+</style>
 </head>
 <body data-page="tenders">
 <div id="nav-placeholder"></div>
 
 <!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=80');"></div>
-  <div class="page-hero-overlay"></div>
-  <div class="page-hero-content">
-    <div class="page-hero-eyebrow">Procurement &amp; Opportunities</div>
-    <h1>Government <span>Tenders</span></h1>
-    <p class="page-hero-desc">Curated renewable energy government tenders from central and state agencies — updated regularly. Solar, wind, EV charging, BESS, and smart grid opportunities across India.</p>
+<div class="page-hero-dir3 reveal">
+  <div class="page-hero-dir3-bg" style="background-image:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=80');"></div>
+  <div class="page-hero-dir3-overlay"></div>
+  <div class="page-hero-dir3-content">
+    <div class="eyebrow-dir3">Procurement &amp; Opportunities</div>
+    <h1 class="page-hero-dir3-title">Government <span>Tenders</span></h1>
+    <p class="page-hero-dir3-desc">Curated renewable energy government tenders from central and state agencies — updated regularly. Solar, wind, EV charging, BESS, and smart grid opportunities across India.</p>
   </div>
 </div>
 
-<!-- STATS -->
-<section class="section reveal">
-  <div class="grid-4" style="margin-bottom:3rem;">
-    <div class="stat-card"><div class="val">50+</div><div class="lbl">Active Tenders</div></div>
-    <div class="stat-card"><div class="val">₹8,000Cr+</div><div class="lbl">Total Value</div></div>
-    <div class="stat-card"><div class="val">Daily</div><div class="lbl">Updates</div></div>
-    <div class="stat-card"><div class="val">8+</div><div class="lbl">Agencies</div></div>
+<!-- STATS & FILTER -->
+<section class="section-dir3 reveal">
+  <div class="grid-4-dir3" style="margin-bottom:4rem;">
+    <div class="stat-card-dir3"><div class="stat-val-dir3">50+</div><div class="stat-lbl-dir3">Active Tenders</div></div>
+    <div class="stat-card-dir3"><div class="stat-val-dir3">₹8,000Cr+</div><div class="stat-lbl-dir3">Total Value</div></div>
+    <div class="stat-card-dir3"><div class="stat-val-dir3">Daily</div><div class="stat-lbl-dir3">Updates</div></div>
+    <div class="stat-card-dir3"><div class="stat-val-dir3">8+</div><div class="stat-lbl-dir3">Agencies</div></div>
   </div>
 
-  <!-- FILTER PILLS -->
-  <div class="section-tag">Live Tenders</div>
-  <h2 class="section-title">Active <span>Opportunities</span></h2>
-  <div class="divider"></div>
-  <div class="filter-pills">
+  <div class="eyebrow-dir3">Live Tenders</div>
+  <h2 class="title-dir3">Active <span>Opportunities</span></h2>
+  <div class="rule-dir3"></div>
+  
+  <div class="filter-pills-dir3">
     <button class="pill active" data-cat="all">All</button>
     <button class="pill" data-cat="solar">Solar</button>
     <button class="pill" data-cat="wind">Wind</button>
@@ -44,154 +374,182 @@
   </div>
 
   <!-- TENDER ROWS -->
-  <div style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2.5rem;">
+  <div style="display:flex;flex-direction:column;">
 
-    <div class="tender-row" data-cat="solar">
-      <div class="tender-badge" style="background:rgba(46,139,87,0.12);border:1px solid rgba(46,139,87,0.35);">
-        <div class="tb-org" style="color:#2E8B57;">SECI</div>
-        <div class="tb-sub">Central</div>
+    <div class="tender-row-dir3 reveal" data-cat="solar">
+      <div class="t-badge-dir3">
+        <div class="tb-org-dir3">SECI</div>
+        <div class="tb-sub-dir3">Central</div>
       </div>
-      <div>
-        <div class="t-title">500 MW Solar PV — Grid-Connected, Rajasthan</div>
-        <div class="t-meta">Solar Energy Corporation of India · Bid Due: 28 July 2026 · EMD: ₹2.5 Cr</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">500 MW Solar PV — Grid-Connected, Rajasthan</div>
+        <div class="t-meta-dir3">Solar Energy Corporation of India · Bid Due: 28 July 2026 · EMD: ₹2.5 Cr</div>
       </div>
-      <div><div class="t-value">₹1,800 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹1,800 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
-    <div class="tender-row" data-cat="ev">
-      <div class="tender-badge" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);">
-        <div class="tb-org" style="color:var(--gold);">TSREDCO</div>
-        <div class="tb-sub">Telangana</div>
+    <div class="tender-row-dir3 reveal" data-cat="ev">
+      <div class="t-badge-dir3 gold">
+        <div class="tb-org-dir3">TSREDCO</div>
+        <div class="tb-sub-dir3">Telangana</div>
       </div>
-      <div>
-        <div class="t-title">EV Charging Stations — 200 Locations, Telangana</div>
-        <div class="t-meta">TSREDCO · Bid Due: 15 July 2026 · EMD: ₹25 Lakh</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">EV Charging Stations — 200 Locations, Telangana</div>
+        <div class="t-meta-dir3">TSREDCO · Bid Due: 15 July 2026 · EMD: ₹25 Lakh</div>
       </div>
-      <div><div class="t-value">₹120 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹120 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
-    <div class="tender-row" data-cat="bess">
-      <div class="tender-badge" style="background:rgba(46,139,87,0.12);border:1px solid rgba(46,139,87,0.35);">
-        <div class="tb-org" style="color:#2E8B57;">NTPC</div>
-        <div class="tb-sub">Central</div>
+    <div class="tender-row-dir3 reveal" data-cat="bess">
+      <div class="t-badge-dir3">
+        <div class="tb-org-dir3">NTPC</div>
+        <div class="tb-sub-dir3">Central</div>
       </div>
-      <div>
-        <div class="t-title">1 GWh Battery Energy Storage System — Andhra Pradesh</div>
-        <div class="t-meta">NTPC Green Energy · Bid Due: 10 August 2026 · EMD: ₹5 Cr</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">1 GWh Battery Energy Storage System — Andhra Pradesh</div>
+        <div class="t-meta-dir3">NTPC Green Energy · Bid Due: 10 August 2026 · EMD: ₹5 Cr</div>
       </div>
-      <div><div class="t-value">₹3,200 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹3,200 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
-    <div class="tender-row" data-cat="solar">
-      <div class="tender-badge" style="background:rgba(184,115,51,0.12);border:1px solid rgba(184,115,51,0.35);">
-        <div class="tb-org" style="color:var(--copper);">MNRE</div>
-        <div class="tb-sub">Central</div>
+    <div class="tender-row-dir3 reveal" data-cat="solar">
+      <div class="t-badge-dir3 gray">
+        <div class="tb-org-dir3">MNRE</div>
+        <div class="tb-sub-dir3">Central</div>
       </div>
-      <div>
-        <div class="t-title">PM Surya Ghar — Rooftop Solar, Telangana District</div>
-        <div class="t-meta">MNRE / DISCOM · Bid Due: 5 July 2026 · EMD: ₹10 Lakh</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">PM Surya Ghar — Rooftop Solar, Telangana District</div>
+        <div class="t-meta-dir3">MNRE / DISCOM · Bid Due: 5 July 2026 · EMD: ₹10 Lakh</div>
       </div>
-      <div><div class="t-value">₹85 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹85 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
-    <div class="tender-row" data-cat="wind">
-      <div class="tender-badge" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);">
-        <div class="tb-org" style="color:var(--gold);">APSPDCL</div>
-        <div class="tb-sub">Andhra</div>
+    <div class="tender-row-dir3 reveal" data-cat="wind">
+      <div class="t-badge-dir3 gold">
+        <div class="tb-org-dir3">APSPDCL</div>
+        <div class="tb-sub-dir3">Andhra</div>
       </div>
-      <div>
-        <div class="t-title">300 MW Wind Power — Kurnool, Andhra Pradesh</div>
-        <div class="t-meta">APSPDCL · Bid Due: 22 August 2026 · EMD: ₹1.5 Cr</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">300 MW Wind Power — Kurnool, Andhra Pradesh</div>
+        <div class="t-meta-dir3">APSPDCL · Bid Due: 22 August 2026 · EMD: ₹1.5 Cr</div>
       </div>
-      <div><div class="t-value">₹1,400 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹1,400 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
-    <div class="tender-row" data-cat="solar">
-      <div class="tender-badge" style="background:rgba(46,139,87,0.12);border:1px solid rgba(46,139,87,0.35);">
-        <div class="tb-org" style="color:#2E8B57;">IREDA</div>
-        <div class="tb-sub">Central</div>
+    <div class="tender-row-dir3 reveal" data-cat="solar">
+      <div class="t-badge-dir3">
+        <div class="tb-org-dir3">IREDA</div>
+        <div class="tb-sub-dir3">Central</div>
       </div>
-      <div>
-        <div class="t-title">Agri-Solar Hybrid — 200 MW, Maharashtra</div>
-        <div class="t-meta">IREDA · Bid Due: 18 August 2026 · EMD: ₹1 Cr</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">Agri-Solar Hybrid — 200 MW, Maharashtra</div>
+        <div class="t-meta-dir3">IREDA · Bid Due: 18 August 2026 · EMD: ₹1 Cr</div>
       </div>
-      <div><div class="t-value">₹900 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹900 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
-    <div class="tender-row" data-cat="bess">
-      <div class="tender-badge" style="background:rgba(184,115,51,0.12);border:1px solid rgba(184,115,51,0.35);">
-        <div class="tb-org" style="color:var(--copper);">SECI</div>
-        <div class="tb-sub">Central</div>
+    <div class="tender-row-dir3 reveal" data-cat="bess">
+      <div class="t-badge-dir3 gray">
+        <div class="tb-org-dir3">SECI</div>
+        <div class="tb-sub-dir3">Central</div>
       </div>
-      <div>
-        <div class="t-title">Welspun — 500 MWh Storage-Linked PPA (ISTS Grid)</div>
-        <div class="t-meta">SECI PPA · Bid Due: 30 July 2026 · Tariff: ₹2.86/kWh</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">Welspun — 500 MWh Storage-Linked PPA (ISTS Grid)</div>
+        <div class="t-meta-dir3">SECI PPA · Bid Due: 30 July 2026 · Tariff: ₹2.86/kWh</div>
       </div>
-      <div><div class="t-value">₹2,400 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹2,400 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
-    <div class="tender-row" data-cat="ev">
-      <div class="tender-badge" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);">
-        <div class="tb-org" style="color:var(--gold);">TSREDCO</div>
-        <div class="tb-sub">Telangana</div>
+    <div class="tender-row-dir3 reveal" data-cat="ev">
+      <div class="t-badge-dir3 gold">
+        <div class="tb-org-dir3">TSREDCO</div>
+        <div class="tb-sub-dir3">Telangana</div>
       </div>
-      <div>
-        <div class="t-title">Electric Buses — 100 Units, TSRTC Fleet Electrification</div>
-        <div class="t-meta">TSRTC / TSREDCO · Bid Due: 12 August 2026 · EMD: ₹50 Lakh</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">Electric Buses — 100 Units, TSRTC Fleet Electrification</div>
+        <div class="t-meta-dir3">TSRTC / TSREDCO · Bid Due: 12 August 2026 · EMD: ₹50 Lakh</div>
       </div>
-      <div><div class="t-value">₹180 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹180 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
-    <div class="tender-row" data-cat="hydrogen">
-      <div class="tender-badge" style="background:rgba(46,139,87,0.12);border:1px solid rgba(46,139,87,0.35);">
-        <div class="tb-org" style="color:#2E8B57;">NTPC</div>
-        <div class="tb-sub">Central</div>
+    <div class="tender-row-dir3 reveal" data-cat="hydrogen">
+      <div class="t-badge-dir3">
+        <div class="tb-org-dir3">NTPC</div>
+        <div class="tb-sub-dir3">Central</div>
       </div>
-      <div>
-        <div class="t-title">Green Hydrogen Electrolyser — 10 MW Pilot, Gujarat</div>
-        <div class="t-meta">NTPC Green Energy · Bid Due: 5 September 2026 · EMD: ₹75 Lakh</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">Green Hydrogen Electrolyser — 10 MW Pilot, Gujarat</div>
+        <div class="t-meta-dir3">NTPC Green Energy · Bid Due: 5 September 2026 · EMD: ₹75 Lakh</div>
       </div>
-      <div><div class="t-value">₹350 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹350 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
-    <div class="tender-row" data-cat="solar">
-      <div class="tender-badge" style="background:rgba(184,115,51,0.12);border:1px solid rgba(184,115,51,0.35);">
-        <div class="tb-org" style="color:var(--copper);">KREDL</div>
-        <div class="tb-sub">Karnataka</div>
+    <div class="tender-row-dir3 reveal" data-cat="solar">
+      <div class="t-badge-dir3 gray">
+        <div class="tb-org-dir3">KREDL</div>
+        <div class="tb-sub-dir3">Karnataka</div>
       </div>
-      <div>
-        <div class="t-title">1000 MW Solar — Karnataka Solar Power Policy</div>
-        <div class="t-meta">KREDL · Bid Due: 9 September 2026 · EMD: ₹2 Cr</div>
+      <div class="t-info-dir3">
+        <div class="t-title-dir3">1000 MW Solar — Karnataka Solar Power Policy</div>
+        <div class="t-meta-dir3">KREDL · Bid Due: 9 September 2026 · EMD: ₹2 Cr</div>
       </div>
-      <div><div class="t-value">₹3,800 Cr</div><div class="t-vl">Est. Value</div></div>
+      <div class="t-val-box-dir3"><div class="t-value-dir3">₹3,800 Cr</div><div class="t-vl-dir3">Est. Value</div></div>
     </div>
 
   </div>
 
-  <div class="cta-banner">
-    <div><h4>Get Tender Alerts</h4><p>Register to receive curated renewable energy tenders from SECI, NTPC, TSREDCO, IREDA, and state DISCOMs directly in your inbox.</p></div>
-    <a href="contact.html" class="btn-primary">Subscribe to Tenders →</a>
+  <div class="cta-banner-dir3 reveal">
+    <div>
+      <h4>Get Tender Alerts</h4>
+      <p>Register to receive curated renewable energy tenders from SECI, NTPC, TSREDCO, IREDA, and state DISCOMs directly in your inbox.</p>
+    </div>
+    <a href="contact.html" class="btn-gold">Subscribe to Tenders →</a>
   </div>
 </section>
 
 <!-- AGENCIES LIST -->
-<div class="section-wide reveal">
+<section class="section-dir3 bg-gray reveal">
   <div class="section-inner">
-    <div class="section-tag">Procurement Agencies</div>
-    <h2 class="section-title">Key <span>Agencies</span></h2>
-    <div class="divider"></div>
-    <div class="grid-4">
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">SECI</h4><p style="font-size:0.83rem;color:var(--text-dim);">Solar Energy Corporation of India — utility-scale solar and wind auctions</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">NTPC Green</h4><p style="font-size:0.83rem;color:var(--text-dim);">NTPC's renewable energy arm — solar, wind, BESS, and green hydrogen</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">IREDA</h4><p style="font-size:0.83rem;color:var(--text-dim);">Indian Renewable Energy Development Agency — financing and project tenders</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">TSREDCO</h4><p style="font-size:0.83rem;color:var(--text-dim);">Telangana State Renewable Energy Development Corporation</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">APSPDCL</h4><p style="font-size:0.83rem;color:var(--text-dim);">Andhra Pradesh Southern Power Distribution Company — solar and wind</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">KREDL</h4><p style="font-size:0.83rem;color:var(--text-dim);">Karnataka Renewable Energy Development Ltd — solar policy auctions</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">MNRE</h4><p style="font-size:0.83rem;color:var(--text-dim);">Ministry of New &amp; Renewable Energy — PM Surya Ghar and policy schemes</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">BEE</h4><p style="font-size:0.83rem;color:var(--text-dim);">Bureau of Energy Efficiency — PAT scheme and ECBC compliance tenders</p></div>
+    <div class="eyebrow-dir3">Procurement Agencies</div>
+    <h2 class="title-dir3">Key <span>Agencies</span></h2>
+    <div class="rule-dir3"></div>
+    
+    <div class="grid-4-dir3">
+      <div class="card-dir3">
+        <h4 style="font-family:'Playfair Display', serif; font-weight:900; font-size:1.4rem; color:var(--black); margin-bottom:0.5rem;">SECI</h4>
+        <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:var(--gray-60); line-height:1.5;">Solar Energy Corporation of India — utility-scale solar and wind auctions</p>
+      </div>
+      <div class="card-dir3">
+        <h4 style="font-family:'Playfair Display', serif; font-weight:900; font-size:1.4rem; color:var(--black); margin-bottom:0.5rem;">NTPC Green</h4>
+        <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:var(--gray-60); line-height:1.5;">NTPC's renewable energy arm — solar, wind, BESS, and green hydrogen</p>
+      </div>
+      <div class="card-dir3">
+        <h4 style="font-family:'Playfair Display', serif; font-weight:900; font-size:1.4rem; color:var(--black); margin-bottom:0.5rem;">IREDA</h4>
+        <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:var(--gray-60); line-height:1.5;">Indian Renewable Energy Development Agency — financing and project tenders</p>
+      </div>
+      <div class="card-dir3">
+        <h4 style="font-family:'Playfair Display', serif; font-weight:900; font-size:1.4rem; color:var(--black); margin-bottom:0.5rem;">TSREDCO</h4>
+        <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:var(--gray-60); line-height:1.5;">Telangana State Renewable Energy Development Corporation</p>
+      </div>
+      <div class="card-dir3">
+        <h4 style="font-family:'Playfair Display', serif; font-weight:900; font-size:1.4rem; color:var(--black); margin-bottom:0.5rem;">APSPDCL</h4>
+        <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:var(--gray-60); line-height:1.5;">Andhra Pradesh Southern Power Distribution Company — solar and wind</p>
+      </div>
+      <div class="card-dir3">
+        <h4 style="font-family:'Playfair Display', serif; font-weight:900; font-size:1.4rem; color:var(--black); margin-bottom:0.5rem;">KREDL</h4>
+        <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:var(--gray-60); line-height:1.5;">Karnataka Renewable Energy Development Ltd — solar policy auctions</p>
+      </div>
+      <div class="card-dir3">
+        <h4 style="font-family:'Playfair Display', serif; font-weight:900; font-size:1.4rem; color:var(--black); margin-bottom:0.5rem;">MNRE</h4>
+        <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:var(--gray-60); line-height:1.5;">Ministry of New &amp; Renewable Energy — PM Surya Ghar and policy schemes</p>
+      </div>
+      <div class="card-dir3">
+        <h4 style="font-family:'Playfair Display', serif; font-weight:900; font-size:1.4rem; color:var(--black); margin-bottom:0.5rem;">BEE</h4>
+        <p style="font-family:'Inter', sans-serif; font-size:0.9rem; color:var(--gray-60); line-height:1.5;">Bureau of Energy Efficiency — PAT scheme and ECBC compliance tenders</p>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <div id="footer-placeholder"></div>
 <script src="js/script.js"></script>
