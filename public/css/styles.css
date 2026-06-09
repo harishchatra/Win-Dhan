@@ -325,6 +325,14 @@
     box-shadow: var(--shadow-sm);
   }
 
+  .nav-hidden #mainNav {
+    transform: translateY(-100%);
+  }
+
+  .nav-shrunk #mainNav {
+    transform: translateY(calc(-36px - env(safe-area-inset-top)));
+  }
+
   #ire-subnav {
     position: sticky;
     top: calc(96px + env(safe-area-inset-top)) !important;
@@ -333,6 +341,10 @@
 
   .nav-hidden #ire-subnav {
     top: 0 !important;
+  }
+
+  .nav-shrunk #ire-subnav {
+    top: 60px !important;
   }
   
   .utility-bar {

@@ -229,16 +229,21 @@
     if (!nav) return;
 
     const currentScrollY = window.scrollY;
+    const html = document.documentElement;
     
     // Toggle scrolled state shadow
     nav.classList.toggle('scrolled', currentScrollY > 40);
 
     // Slide navbar out of view when scrolling down, slide back when scrolling up
     if (navLinks && !navLinks.classList.contains('open')) {
-      if (currentScrollY > lastScrollY && currentScrollY > 120) {
-        nav.style.transform = 'translateY(-100%)';
-      } else {
-        nav.style.transform = 'translateY(0)';
+      if (currentScrollY <= 40) {
+        html.classList.remove('nav-hidden', 'nav-shrunk');
+      } else if (currentScrollY > lastScrollY && currentScrollY > 120) {
+        html.classList.remove('nav-shrunk');
+        html.classList.add('nav-hidden');
+      } else if (currentScrollY < lastScrollY) {
+        html.classList.remove('nav-hidden');
+        html.classList.add('nav-shrunk');
       }
     }
     lastScrollY = currentScrollY;
