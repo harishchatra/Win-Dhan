@@ -9,199 +9,1128 @@
 <meta property="og:title" content="Dhan Enterprise | Encompassing Energy Revolution">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.win-dhan.com">
-<link rel="stylesheet" href="css/styles.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-/* ── HOME-ONLY STYLES ── */
-.hero {
-  position: relative;
-  min-height: 60vh;
+/* ═══════════════════════════════════════════
+   DIRECTION 3 — CORPORATE LIGHT
+   Palette: Forest Green #1A4731 | Gold #C9943A | White #FFFFFF | Near-black #111111
+   ═══════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:       #1A4731;
+  --green-dk:    #0F2E1F;
+  --green-lt:    #2C6248;
+  --green-pale:  #EAF3EE;
+  --gold:        #C9943A;
+  --gold-lt:     #E8B55A;
+  --gold-pale:   #FDF5E8;
+  --black:       #111111;
+  --gray-90:     #1C1C1C;
+  --gray-60:     #555555;
+  --gray-40:     #888888;
+  --gray-20:     #CCCCCC;
+  --gray-10:     #EEEEEE;
+  --gray-05:     #F7F7F7;
+  --white:       #FFFFFF;
+  --border:      #E2E2E2;
+  --border-dk:   #C8C8C8;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  --radius-sm: 4px;
+  --radius:    8px;
+  --radius-lg: 12px;
+
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.14);
+
+  --nav-h: 68px;
+  --topbar-h: 40px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--green-dk);
+  height: var(--topbar-h);
   display: flex;
   align-items: center;
-  overflow: hidden;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.hero::after {
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.01em;
+}
+.topbar-left .dot {
+  width: 5px; height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin: 0 6px;
+  flex-shrink: 0;
+}
+.topbar-left strong { color: var(--white); font-weight: 600; }
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.55);
+}
+.topbar-right a {
+  color: rgba(255,255,255,0.55);
+  transition: color 0.2s;
+}
+.topbar-right a:hover { color: var(--gold-lt); }
+.topbar-sep { color: rgba(255,255,255,0.2); }
+
+/* ── NAVBAR ── */
+.navbar {
+  background: var(--white);
+  height: var(--nav-h);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  position: sticky;
+  top: var(--topbar-h);
+  z-index: 999;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.nav-logo-mark {
+  width: 42px; height: 42px;
+  background: var(--green);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1px;
+}
+.nav-logo-mark .win {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  line-height: 1;
+}
+.nav-logo-mark .de {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+.nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+.nav-logo-text .name {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.nav-logo-text .tagline {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--gray-40);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+}
+.nav-links li { position: relative; }
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--gray-60);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  transition: all 0.18s;
+}
+.nav-links a:hover { color: var(--green); background: var(--green-pale); }
+.nav-links a.active { color: var(--green); font-weight: 600; }
+.nav-links .chevron { font-size: 10px; color: var(--gray-40); }
+
+/* Dropdown */
+.nav-links .dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 200px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: all 0.2s;
+  z-index: 100;
+  padding: 6px 0;
+}
+.nav-links li:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.dropdown a {
+  display: block;
+  padding: 9px 16px;
+  font-size: 13px;
+  color: var(--gray-60);
+  border-radius: 0;
+}
+.dropdown a:hover { color: var(--green); background: var(--green-pale); }
+
+/* Live badge */
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 7px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+.live-badge::before {
   content: '';
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(45,90,45,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(45,90,45,0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none; z-index: 1;
+  width: 5px; height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  animation: livepulse 1.4s ease-in-out infinite;
 }
-.hero-bg {
-  position: absolute; inset: 0;
-  background: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1800&q=80') center/cover no-repeat;
-  filter: brightness(0.88);
+@keyframes livepulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.4; transform:scale(0.7); }
 }
-.hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(140deg, rgba(10,32,16,0.93) 0%, rgba(10,32,16,0.65) 55%, rgba(10,32,16,0.18) 100%);
-  z-index: 1;
+
+.nav-ctas {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
-.hero-content {
-  position: relative; z-index: 2;
-  padding: 5rem 4rem;
-  max-width: 820px;
+.btn-ghost {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green);
+  padding: 8px 16px;
+  border: 1.5px solid var(--green);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-ghost:hover { background: var(--green-pale); }
+.btn-solid {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  padding: 8px 18px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--green);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-solid:hover { background: var(--green-lt); }
+
+/* ── HERO ── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - var(--topbar-h) - var(--nav-h));
+  border-bottom: 1px solid var(--border);
+}
+
+/* Left panel */
+.hero-left {
+  padding: 5rem 3.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
 }
 .hero-eyebrow {
-  font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--gold-lt); font-weight: 700; margin-bottom: 1.4rem;
-  display: flex; align-items: center; gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
 }
-.hero-eyebrow::before { content: ''; width: 32px; height: 2px; background: var(--copper-lt); }
+.hero-eyebrow::before {
+  content: '';
+  width: 28px; height: 2px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 5vw, 4.8rem);
-  font-weight: 900; color: #fff; line-height: 1.13;
-  margin-bottom: 1.4rem; letter-spacing: -0.5px;
+  font-size: clamp(2.6rem, 4vw, 3.8rem);
+  font-weight: 900;
+  color: var(--black);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
 }
-.hero h1 span {
-  background: linear-gradient(90deg, var(--copper-lt), var(--gold-lt), var(--copper-pale));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+.hero h1 em {
+  font-style: normal;
+  color: var(--green);
 }
 .hero-desc {
-  font-size: 1.1rem; color: rgba(255,255,255,0.84);
-  font-weight: 500; max-width: 500px; margin-bottom: 2.2rem;
+  font-size: 15px;
+  color: var(--gray-60);
+  line-height: 1.75;
+  max-width: 440px;
+  margin-bottom: 2.2rem;
 }
-.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-.hero-stats {
-  position: absolute; bottom: 3rem; right: 4rem;
-  display: flex; gap: 1.2rem; z-index: 2;
+.hero-ctas {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
-.hero-stat {
-  text-align: center; padding: 1rem 1.4rem;
-  background: rgba(255,255,255,0.92);
-  border: 1px solid rgba(45,90,45,0.12);
-  border-radius: var(--radius);
-  backdrop-filter: blur(10px);
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green);
+  color: var(--white);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover { background: var(--green-lt); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--green);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--green);
+  cursor: pointer;
+  transition: all 0.18s;
+  letter-spacing: 0.01em;
+}
+.btn-outline:hover { background: var(--green-pale); transform: translateY(-1px); }
+
+/* Trust marks */
+.trust-marks {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: var(--gray-60);
+}
+.trust-icon {
+  width: 20px; height: 20px;
+  background: var(--green-pale);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+/* Right panel — stat grid */
+.hero-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.hero-stat-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 2.2rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.hero-stat-cell:hover { background: var(--gray-05); }
+.hero-stat-cell:nth-child(even) { border-right: none; }
+.hero-stat-cell:nth-child(3),
+.hero-stat-cell:nth-child(4) { border-bottom: none; }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-num sup {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold);
+  vertical-align: super;
+  margin-left: 1px;
+}
+.stat-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-40);
+  margin-bottom: 8px;
+}
+.stat-desc {
+  font-size: 12px;
+  color: var(--gray-60);
+  line-height: 1.5;
+  max-width: 160px;
+}
+
+/* ── SECTION COMMONS ── */
+.section {
+  padding: 5rem 2.5rem;
+}
+.section-wide {
+  padding: 5rem 0;
+  background: var(--gray-05);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+.section-narrow {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.section-eyebrow::before {
+  content: '';
+  width: 20px; height: 1.5px;
+  background: var(--gold);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 900;
+  color: var(--black);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.section-title span { color: var(--green); }
+.section-rule {
+  width: 48px; height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--gold));
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+}
+.section-sub {
+  font-size: 15px;
+  color: var(--gray-60);
+  line-height: 1.75;
+  max-width: 560px;
+  margin-bottom: 2.5rem;
+}
+
+/* ── SERVICES ── */
+.services-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.services-intro { padding-top: 0.5rem; }
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.service-card {
+  background: var(--white);
+  padding: 2rem 1.6rem;
+  transition: all 0.22s;
+  position: relative;
+}
+.service-card:hover { background: var(--green-pale); }
+.service-card:hover .sc-arrow { opacity: 1; transform: translateX(0); }
+.sc-icon {
+  width: 44px; height: 44px;
+  background: var(--green-pale);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  font-size: 20px;
+}
+.service-card:hover .sc-icon { background: var(--white); }
+.service-card h3 {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+.service-card p {
+  font-size: 12.5px;
+  color: var(--gray-60);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+.sc-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: var(--green-pale);
+  padding: 3px 9px;
+  border-radius: 20px;
+  margin-bottom: 0.8rem;
+}
+.service-card:hover .sc-tag { background: var(--white); }
+.sc-arrow {
+  position: absolute;
+  bottom: 1.4rem; right: 1.4rem;
+  font-size: 18px;
+  color: var(--green);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.22s;
+}
+.services-cta {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  text-align: right;
+}
+
+/* ── IRE 2026 ── */
+.ire-section {
+  padding: 5rem 2.5rem;
+  background: var(--white);
+}
+.ire-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.ire-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin: 1.8rem 0;
+}
+.ire-stat {
+  background: var(--white);
+  padding: 1.4rem 1.4rem;
+}
+.ire-stat .val {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--green);
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+.ire-stat .lbl {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-40);
+}
+
+/* Countdown */
+.countdown-panel {
+  background: var(--green-dk);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.6rem;
+  margin: 1.5rem 0;
+}
+.countdown-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.countdown-boxes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.cbox {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: var(--radius-sm);
+  padding: 12px 6px;
+  text-align: center;
+}
+.cbox .num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+}
+.cbox .unit {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-top: 4px;
+}
+.ire-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+/* IRE image stack */
+.ire-img-stack {
+  position: relative;
+  height: 440px;
+}
+.ire-img-1 {
+  position: absolute;
+  top: 0; left: 0;
+  width: 84%; height: 72%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--white);
+  box-shadow: var(--shadow-lg);
+}
+.ire-img-2 {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 58%; height: 50%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--white);
+  box-shadow: var(--shadow-lg);
+}
+.ire-badge {
+  position: absolute;
+  top: 48%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--green-dk);
+  color: var(--white);
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  width: 76px; height: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   box-shadow: var(--shadow-md);
+  z-index: 10;
 }
-.hero-stat .num {
-  font-family: var(--font-display); font-size: 1.9rem; font-weight: 900;
-  background: linear-gradient(90deg, var(--copper), var(--gold));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1;
+.ire-badge .year {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1.1;
 }
-.hero-stat .lbl { font-size: 9.5px; color: var(--text-dim); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 3px; }
-
-/* Services grid */
-.svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-
-/* IRE preview */
-.ire-preview {
-  display: grid; grid-template-columns: 1.15fr 1fr; gap: 4rem; align-items: center;
+.ire-badge .event {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
 }
-.ire-info-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin: 1.5rem 0; }
-.ire-img-stack { position: relative; height: 420px; }
-.ire-img-1 { position: absolute; top: 0; left: 0; width: 82%; height: 72%; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); }
-.ire-img-2 { position: absolute; bottom: 0; right: 0; width: 58%; height: 52%; object-fit: cover; border-radius: var(--radius); border: 2px solid var(--bg); box-shadow: var(--shadow-md); }
 
-/* Sectors */
+/* ── SECTORS ── */
+.sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
 .sector-card {
-  border: 1px solid var(--border); border-radius: var(--radius);
-  overflow: hidden; background: var(--bg-card); box-shadow: var(--shadow-sm);
-  transition: all 0.35s;
+  background: var(--white);
+  transition: all 0.22s;
+  overflow: hidden;
 }
-.sector-card:hover { border-color: var(--border-cu); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.sector-img { height: 165px; overflow: hidden; }
-.sector-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-.sector-card:hover .sector-img img { transform: scale(1.06); }
-.sector-body { padding: 1.3rem; border-top: 1px solid var(--border); }
-.sector-body h4 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
-.sector-body p { font-size: 0.83rem; color: var(--text-dim); line-height: 1.6; }
+.sector-card:hover { background: var(--gray-05); }
+.sector-img {
+  height: 160px;
+  overflow: hidden;
+}
+.sector-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.sector-card:hover .sector-img img { transform: scale(1.07); }
+.sector-body {
+  padding: 1.3rem 1.4rem;
+  border-top: 1px solid var(--border);
+}
+.sector-body h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.4rem;
+}
+.sector-body p {
+  font-size: 12px;
+  color: var(--gray-60);
+  line-height: 1.6;
+}
+
+/* ── CTA BANNER ── */
+.cta-section {
+  padding: 5rem 2.5rem;
+  background: var(--green-dk);
+  border-top: 4px solid var(--gold);
+}
+.cta-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.cta-text h4 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+.cta-text p {
+  font-size: 14.5px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.65;
+  max-width: 500px;
+}
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 13px 28px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+.btn-gold:hover { background: var(--gold-lt); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,148,58,0.35); }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--gray-90);
+  color: rgba(255,255,255,0.55);
+  padding: 4rem 2.5rem 2rem;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-brand .name {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.footer-brand .sub {
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.footer-brand p {
+  font-size: 12.5px;
+  line-height: 1.7;
+  max-width: 260px;
+  margin-bottom: 1.2rem;
+}
+.footer-col h5 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 8px; }
+.footer-col a {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.45);
+  transition: color 0.18s;
+}
+.footer-col a:hover { color: var(--gold-lt); }
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.3);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.footer-bottom a { color: rgba(255,255,255,0.3); }
+.footer-bottom a:hover { color: var(--gold); }
+
+/* ── REVEAL ANIMATION ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── MOBILE NAV TOGGLE ── */
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--black); border-radius: 2px; margin: 5px 0;
+  transition: all 0.22s;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .services-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .svc-grid { grid-template-columns: repeat(3, 1fr); }
+}
 
 @media (max-width: 900px) {
-  .hero-stats { display: none; }
-  .svc-grid { grid-template-columns: 1fr 1fr; }
-  .ire-preview { grid-template-columns: 1fr; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 4rem 2rem; border-right: none; border-bottom: 1px solid var(--border); }
+  .hero-right { grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr; }
+  .hero-stat-cell { padding: 1.8rem 1.2rem; border-bottom: none; }
+  .hero-stat-cell:nth-child(even) { border-right: 1px solid var(--border); }
+  .hero-stat-cell:nth-child(3) { border-bottom: none; }
+  .stat-num { font-size: 2.2rem; }
+  .ire-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .ire-img-stack { height: 320px; }
+  .sectors-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .nav-links, .nav-ctas { display: none; }
+  .nav-toggle { display: block; }
+  .navbar { padding: 0 1.5rem; }
+  .topbar { padding: 0 1.5rem; }
+  .topbar-right { display: none; }
+  .cta-inner { flex-direction: column; text-align: center; }
+  .cta-text p { margin: 0 auto; }
 }
+
 @media (max-width: 600px) {
-  .hero-content { padding: 4rem 1.5rem; }
+  .hero-left { padding: 3rem 1.5rem; }
+  .hero-right { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, auto); }
+  .hero-stat-cell:nth-child(2) { border-right: none; }
+  .hero-stat-cell:nth-child(1),
+  .hero-stat-cell:nth-child(2) { border-bottom: 1px solid var(--border); }
   .svc-grid { grid-template-columns: 1fr; }
+  .section, .ire-section, .cta-section { padding: 3.5rem 1.5rem; }
+  .section-wide { padding: 3.5rem 0; }
+  .section-inner { padding: 0 1.5rem; }
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .footer { padding: 3rem 1.5rem 2rem; }
+  .topbar { display: none; }
+  :root { --topbar-h: 0px; }
 }
 </style>
 </head>
-<body data-page="index">
-<div id="nav-placeholder"></div>
 
-<!-- HERO -->
+<body data-page="index">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <strong>IRE 2026</strong>
+    <span class="dot"></span>
+    <span>3–4 July 2026 · HMDA Grounds, Necklace Road, Hyderabad</span>
+  </div>
+  <div class="topbar-right">
+    <a href="tel:+917981869954">+91 79818 69954</a>
+    <span class="topbar-sep">·</span>
+    <a href="mailto:ireexpo2026@gmail.com">ireexpo2026@gmail.com</a>
+    <span class="topbar-sep">·</span>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">
+      <span class="win">WIN</span>
+      <span class="de">DE</span>
+    </div>
+    <div class="nav-logo-text">
+      <span class="name">Dhan Enterprise</span>
+      <span class="tagline">Encompassing Energy Revolution</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li>
+      <a href="about.html">About <span class="chevron">▾</span></a>
+      <div class="dropdown">
+        <a href="about.html">About Us</a>
+        <a href="about.html#team">Our Team</a>
+        <a href="about.html#network">Global Network</a>
+      </div>
+    </li>
+    <li><a href="services.html">Services</a></li>
+    <li>
+      <a href="ire.html"><span class="live-badge">LIVE</span>&nbsp; IRE 2026 <span class="chevron">▾</span></a>
+      <div class="dropdown">
+        <a href="ire.html">About IRE 2026</a>
+        <a href="stalls-booking/index.html">Book a Stall</a>
+        <a href="ire.html#sponsors">Sponsorship</a>
+        <a href="ire.html#floor-plan">Floor Plan</a>
+      </div>
+    </li>
+    <li>
+      <a href="trade.html">Trade <span class="chevron">▾</span></a>
+      <div class="dropdown">
+        <a href="trade.html">Brand Data Bank</a>
+        <a href="trade.html#network">Partner Network</a>
+      </div>
+    </li>
+  </ul>
+
+  <div class="nav-ctas">
+    <a href="ire.html#register" class="btn-ghost">Register</a>
+    <a href="stalls-booking/index.html" class="btn-solid">Book a Stall →</a>
+  </div>
+
+  <button class="nav-toggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
+  <!-- LEFT: headline + CTA -->
+  <div class="hero-left">
     <div class="hero-eyebrow">Est. 2014 · Hyderabad, India</div>
-    <h1>Encompassing<br><span>Energy Revolution</span></h1>
-    <p class="hero-desc">10+ years of renewable energy expertise — EV, Solar, BESS, Wind, and Green Hydrogen. Now co-organising IRE 2026, India's premier clean energy expo.</p>
-    <div class="hero-btns">
+    <h1>Encompassing<br><em>Energy</em> Revolution</h1>
+    <p class="hero-desc">12+ years of renewable energy expertise — EV, Solar, BESS, Wind, and Green Hydrogen. Now co-organising IRE 2026, India's premier clean energy expo.</p>
+    <div class="hero-ctas">
       <a href="services.html" class="btn-primary">Our Services →</a>
-      <a href="ire.html" class="btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);">IRE 2026 Expo</a>
+      <a href="ire.html" class="btn-outline">IRE 2026 Expo</a>
+    </div>
+    <div class="trust-marks">
+      <div class="trust-item">
+        <div class="trust-icon">✓</div>
+        <span>10+ States served</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">✓</div>
+        <span>Govt. empanelled</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">✓</div>
+        <span>10 countries</span>
+      </div>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="num">10+</div><div class="lbl">Years Active</div></div>
-    <div class="hero-stat"><div class="num">22</div><div class="lbl">States</div></div>
-    <div class="hero-stat"><div class="num">120+</div><div class="lbl">Partners</div></div>
-    <div class="hero-stat"><div class="num">500+</div><div class="lbl">IRE Delegates</div></div>
+
+  <!-- RIGHT: stat grid -->
+  <div class="hero-right">
+    <div class="hero-stat-cell">
+      <div class="stat-num">10<sup>+</sup></div>
+      <div class="stat-label">Years Active</div>
+      <div class="stat-desc">Established 2014, Hyderabad</div>
+    </div>
+    <div class="hero-stat-cell">
+      <div class="stat-num">22</div>
+      <div class="stat-label">States</div>
+      <div class="stat-desc">Pan-India project presence</div>
+    </div>
+    <div class="hero-stat-cell">
+      <div class="stat-num">120<sup>+</sup></div>
+      <div class="stat-label">Partners</div>
+      <div class="stat-desc">10 countries, 120+ active partners</div>
+    </div>
+    <div class="hero-stat-cell">
+      <div class="stat-num">500<sup>+</sup></div>
+      <div class="stat-label">IRE Delegates</div>
+      <div class="stat-desc">Expected at IRE 2026, Hyderabad</div>
+    </div>
   </div>
 </section>
 
-<!-- SERVICES PREVIEW -->
+<!-- ══════════ SERVICES ══════════ -->
 <div class="section-wide reveal">
   <div class="section-inner">
-    <div class="section-tag">What We Do</div>
-    <h2 class="section-title">Renewable Energy <span>Services</span></h2>
-    <div class="divider"></div>
-    <p class="section-sub">From EV consultancy to grid-scale solar, BESS, and wind — we provide end-to-end expertise for India's clean energy transition.</p>
-    <div class="svc-grid">
-      <div class="service-card">
-        <div class="sc-img" style="background-image:url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80')"></div>
-        <div class="sc-overlay"></div>
-        <div class="sc-body">
-          <div class="sc-tag">EV &amp; Hybrid</div>
-          <h3>Electric Vehicle Systems</h3>
-          <p>Comprehensive EV consulting — drivetrains, BMS, charging infrastructure, and fleet electrification.</p>
+    <div class="services-layout">
+      <div class="services-intro">
+        <div class="section-eyebrow">What We Do</div>
+        <h2 class="section-title">Renewable Energy <span>Services</span></h2>
+        <div class="section-rule"></div>
+        <p class="section-sub">End-to-end expertise for India's clean energy transition — from EV drivetrains to grid-scale solar and wind.</p>
+        <a href="services.html" class="btn-outline" style="margin-top:0.5rem;">View All Services →</a>
+      </div>
+
+      <div>
+        <div class="svc-grid">
+          <div class="service-card">
+            <div class="sc-tag">EV &amp; Hybrid</div>
+            <div class="sc-icon">⚡</div>
+            <h3>Electric Vehicle Systems</h3>
+            <p>Drivetrains, BMS, charging infrastructure, and fleet electrification consulting.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+          <div class="service-card">
+            <div class="sc-tag">Solar &amp; BESS</div>
+            <div class="sc-icon">☀️</div>
+            <h3>Solar &amp; Energy Storage</h3>
+            <p>Rooftop, ground-mount, floating solar and BESS — from kW to MW scale.</p>
+            <span class="sc-arrow">→</span>
+          </div>
+          <div class="service-card">
+            <div class="sc-tag">Wind &amp; Hybrid</div>
+            <div class="sc-icon">🌬</div>
+            <h3>Wind Energy</h3>
+            <p>Resource assessment, turbine selection, hybrid microgrid design, and O&amp;M.</p>
+            <span class="sc-arrow">→</span>
+          </div>
         </div>
       </div>
-      <div class="service-card">
-        <div class="sc-img" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80')"></div>
-        <div class="sc-overlay"></div>
-        <div class="sc-body">
-          <div class="sc-tag">Solar &amp; BESS</div>
-          <h3>Solar &amp; Energy Storage</h3>
-          <p>Rooftop, ground-mount, floating solar and battery storage systems — from kW to MW scale.</p>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="sc-img" style="background-image:url('https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&q=80')"></div>
-        <div class="sc-overlay"></div>
-        <div class="sc-body">
-          <div class="sc-tag">Wind &amp; Hybrid</div>
-          <h3>Wind Energy</h3>
-          <p>Wind resource assessment, turbine selection, hybrid microgrid design, and O&amp;M consulting.</p>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:2rem;text-align:center;">
-      <a href="services.html" class="btn-outline">View All Services →</a>
     </div>
   </div>
 </div>
 
-<!-- IRE 2026 PREVIEW -->
-<section class="section reveal">
-  <div class="ire-preview">
+<!-- ══════════ IRE 2026 ══════════ -->
+<section class="ire-section reveal">
+  <div class="ire-layout">
     <div>
-      <div class="section-tag">3 &amp; 4 July 2026 · Hyderabad</div>
+      <div class="section-eyebrow">3 &amp; 4 July 2026 · Hyderabad</div>
       <h2 class="section-title">Indian Renewable<br>Energy <span>Expo 2026</span></h2>
-      <div class="divider"></div>
-      <p class="section-sub">India's premier clean energy expo — 500+ delegates, 75+ stalls, government bodies, and global technology showcases. Co-organised by Dhan Enterprise &amp; Suprabha Trust.</p>
+      <div class="section-rule"></div>
+      <p class="section-sub" style="margin-bottom:0;">India's premier clean energy expo — 500+ delegates, 85 stalls, government bodies, and global technology showcases. Co-organised by Dhan Enterprise &amp; Suprabha Trust.</p>
+
       <div class="ire-info-grid">
-        <div class="stat-card"><div class="val">500+</div><div class="lbl">Delegates</div></div>
-        <div class="stat-card"><div class="val">75+</div><div class="lbl">Stalls</div></div>
-        <div class="stat-card"><div class="val">4</div><div class="lbl">Sponsor Tiers</div></div>
-        <div class="stat-card"><div class="val">2</div><div class="lbl">Days</div></div>
+        <div class="ire-stat"><div class="val">500+</div><div class="lbl">Delegates</div></div>
+        <div class="ire-stat"><div class="val">85</div><div class="lbl">Stalls</div></div>
+        <div class="ire-stat"><div class="val">4</div><div class="lbl">Sponsor Tiers</div></div>
+        <div class="ire-stat"><div class="val">2</div><div class="lbl">Days</div></div>
       </div>
-      <div class="countdown-panel" style="margin-top:1.5rem;">
-        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--copper);font-weight:700;">Countdown to IRE 2026</div>
+
+      <div class="countdown-panel">
+        <div class="countdown-label">Countdown to IRE 2026</div>
         <div class="countdown-boxes" id="countdown">
           <div class="cbox"><div class="num" id="cd-days">--</div><div class="unit">Days</div></div>
           <div class="cbox"><div class="num" id="cd-hrs">--</div><div class="unit">Hrs</div></div>
@@ -209,25 +1138,31 @@
           <div class="cbox"><div class="num" id="cd-sec">--</div><div class="unit">Sec</div></div>
         </div>
       </div>
-      <div style="margin-top:1.5rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
+
+      <div class="ire-btns">
         <a href="ire.html" class="btn-primary">Explore IRE 2026 →</a>
         <a href="stalls-booking/index.html" class="btn-outline">Book a Stall</a>
       </div>
     </div>
+
     <div class="ire-img-stack">
       <img class="ire-img-1" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Renewable energy expo hall">
       <img class="ire-img-2" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80" alt="Expo stalls">
+      <div class="ire-badge">
+        <span class="year">IRE<br>2026</span>
+        <span class="event">Hyderabad</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SECTORS GRID -->
+<!-- ══════════ SECTORS ══════════ -->
 <div class="section-wide reveal">
   <div class="section-inner">
-    <div class="section-tag">Sectors We Serve</div>
+    <div class="section-eyebrow">Sectors We Serve</div>
     <h2 class="section-title">Clean Energy <span>Sectors</span></h2>
-    <div class="divider"></div>
-    <div class="grid-4">
+    <div class="section-rule"></div>
+    <div class="sectors-grid">
       <div class="sector-card">
         <div class="sector-img"><img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&q=80" alt="EV"></div>
         <div class="sector-body"><h4>Electric Vehicles</h4><p>Two-wheelers, three-wheelers, buses, commercial fleets — full EV ecosystem.</p></div>
@@ -248,19 +1183,97 @@
   </div>
 </div>
 
-<!-- CTA STRIP -->
-<section class="section reveal">
-  <div class="cta-banner" style="background:linear-gradient(135deg,#0E1F12,#1B3A20);border:1px solid rgba(184,115,51,0.3);">
-    <div>
-      <h4 style="color:#fff;font-size:1.4rem;">Ready to power your renewable energy journey?</h4>
-      <p style="color:rgba(255,255,255,0.7);">Talk to our team about EV consulting, solar projects, BESS, or IRE 2026 stall bookings.</p>
+<!-- ══════════ CTA STRIP ══════════ -->
+<section class="cta-section reveal">
+  <div class="cta-inner">
+    <div class="cta-text">
+      <h4>Ready to power your renewable energy journey?</h4>
+      <p>Talk to our team about EV consulting, solar projects, BESS installations, or IRE 2026 stall bookings.</p>
     </div>
-    <a href="contact.html" class="btn-primary">Get In Touch →</a>
+    <a href="contact.html" class="btn-gold">Get In Touch →</a>
   </div>
 </section>
 
-<div id="footer-placeholder"></div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="name">Dhan Enterprise</div>
+      <div class="sub">Encompassing Energy Revolution</div>
+      <p>India's trusted renewable energy consultancy — EV, Solar, BESS, Wind, and co-organiser of IRE 2026, Hyderabad.</p>
+      <div style="font-size:12px;color:rgba(255,255,255,0.35);">WIN Dhan Enterprise · Est. 2014 · Hyderabad</div>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="trade.html">Global Network</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>IRE 2026</h5>
+      <ul>
+        <li><a href="ire.html">About the Expo</a></li>
+        <li><a href="stalls-booking/index.html">Book a Stall</a></li>
+        <li><a href="ire.html#sponsors">Sponsorship</a></li>
+        <li><a href="ire.html#floor-plan">Floor Plan</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+917981869954">+91 79818 69954</a></li>
+        <li><a href="mailto:ireexpo2026@gmail.com">ireexpo2026@gmail.com</a></li>
+        <li><a href="https://www.win-dhan.com">www.win-dhan.com</a></li>
+        <li style="color:rgba(255,255,255,0.3);font-size:12px;margin-top:6px;">HMDA Grounds, Necklace Road,<br>Hyderabad, Telangana</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 WIN Dhan Enterprise. All rights reserved.</span>
+    <span>Co-organised with <a href="https://www.suprabha-trust.in" target="_blank">Suprabha Trust</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy</a></span>
+  </div>
+</footer>
+
+<!-- ══════════ SCRIPTS ══════════ -->
 <script src="js/script.js"></script>
-<script>startCountdown('countdown');</script>
+<script>
+/* Countdown */
+function startCountdown(containerId) {
+  var target = new Date('2026-07-03T09:00:00+05:30').getTime();
+  function tick() {
+    var now = Date.now();
+    var diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hrs').textContent = '0';
+      document.getElementById('cd-min').textContent = '0';
+      document.getElementById('cd-sec').textContent = '0';
+      return;
+    }
+    document.getElementById('cd-days').textContent = Math.floor(diff / 86400000);
+    document.getElementById('cd-hrs').textContent  = Math.floor((diff % 86400000) / 3600000);
+    document.getElementById('cd-min').textContent  = Math.floor((diff % 3600000)  / 60000);
+    document.getElementById('cd-sec').textContent  = Math.floor((diff % 60000)    / 1000);
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+startCountdown('countdown');
+
+/* Scroll reveal */
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el) { io.observe(el); });
+})();
+</script>
+
 </body>
 </html>
