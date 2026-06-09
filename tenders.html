@@ -8,20 +8,37 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body data-page="tenders">
-<div id="nav-placeholder"></div>
+
+<!-- TOP BAR + NAV -->
+<div class="top-bar">
+  <div class="top-bar-left"><div class="top-bar-marquee"><span>EV &amp; Hybrid Consulting</span><span>Solar PV Projects</span><span>BESS &amp; Energy Storage</span><span>Wind Energy Advisory</span><span>Green Hydrogen Systems</span><span>Import &amp; Export</span><span>Government Tenders</span><span>IRE 2026 — 3 &amp; 4 July, Hyderabad</span><span>EV &amp; Hybrid Consulting</span><span>Solar PV Projects</span><span>BESS &amp; Energy Storage</span><span>Wind Energy Advisory</span><span>Green Hydrogen Systems</span><span>Import &amp; Export</span><span>Government Tenders</span><span>IRE 2026 — 3 &amp; 4 July, Hyderabad</span></div></div>
+  <div class="top-bar-right"><a href="tel:9849446409">📞 9849446409</a><a href="mailto:hari@win-dhan.in">✉ hari@win-dhan.in</a></div>
+</div>
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><div class="logo-emblem"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#c8992a" stroke-width="1.6" fill="none"/><path d="M12 6l-5 3v6l5 3 5-3V9L12 6Z" fill="#1e7a3c"/><circle cx="12" cy="12" r="2.2" fill="#c8992a"/></svg></div><div class="logo-text"><div class="brand">Dhan Enterprise</div><div class="tagline">Encompassing Energy Revolution</div></div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-group"><span class="nav-drop-btn">About <span class="caret">▾</span></span><div class="nav-dropdown"><a href="about.html#story"><span class="ico">📖</span> Our Story</a><a href="about.html#rnd"><span class="ico">🔬</span> R&amp;D</a></div></div>
+      <a href="services.html">Services</a>
+      <div class="nav-group"><span class="nav-drop-btn">IRE 2026 <span class="caret">▾</span></span><div class="nav-dropdown"><a href="ire.html#expo"><span class="ico">🏛️</span> Expo Details</a><a href="ire.html#stalls"><span class="ico">🏪</span> Book a Stall</a></div></div>
+      <div class="nav-group"><span class="nav-drop-btn">Trade <span class="caret">▾</span></span><div class="nav-dropdown"><a href="trade.html#export-import"><span class="ico">🚢</span> Export &amp; Import</a><a href="trade.html#directory"><span class="ico">📂</span> Trade Directory</a></div></div>
+      <a href="tenders.html" class="active">Tenders</a>
+    </div>
+    <div class="nav-actions"><a href="ire.html" class="btn-nav-ghost btn">IRE 2026</a><a href="contact.html" class="btn-nav-cta btn">Contact Us</a></div>
+  </div>
+</nav>
 
 <!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=80');"></div>
-  <div class="page-hero-overlay"></div>
-  <div class="page-hero-content">
-    <div class="page-hero-eyebrow">Procurement &amp; Opportunities</div>
-    <h1>Government <span>Tenders</span></h1>
-    <p class="page-hero-desc">Curated renewable energy government tenders from central and state agencies — updated regularly. Solar, wind, EV charging, BESS, and smart grid opportunities across India.</p>
+  <div class="page-hero-inner">
+    <div class="eyebrow">Procurement &amp; Opportunities</div>
+    <h1>Government <mark>Tenders</mark></h1>
+    <p class="hero-sub">Curated renewable energy government tenders from central and state agencies — updated regularly. Solar, wind, EV charging, BESS, and smart grid opportunities across India.</p>
   </div>
 </div>
 
-<!-- STATS -->
+<!-- STATS + TENDER LIST -->
 <section class="section reveal">
   <div class="grid-4" style="margin-bottom:3rem;">
     <div class="stat-card"><div class="val">50+</div><div class="lbl">Active Tenders</div></div>
@@ -31,9 +48,9 @@
   </div>
 
   <!-- FILTER PILLS -->
-  <div class="section-tag">Live Tenders</div>
-  <h2 class="section-title">Active <span>Opportunities</span></h2>
-  <div class="divider"></div>
+  <div class="sec-tag">Live Tenders</div>
+  <h2 class="sec-title">Active <mark>Opportunities</mark></h2>
+  <div class="divider-line"></div>
   <div class="filter-pills">
     <button class="pill active" data-cat="all">All</button>
     <button class="pill" data-cat="solar">Solar</button>
@@ -44,11 +61,11 @@
   </div>
 
   <!-- TENDER ROWS -->
-  <div style="display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2.5rem;">
+  <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2.5rem;">
 
     <div class="tender-row" data-cat="solar">
-      <div class="tender-badge" style="background:rgba(46,139,87,0.12);border:1px solid rgba(46,139,87,0.35);">
-        <div class="tb-org" style="color:#2E8B57;">SECI</div>
+      <div class="tender-badge" style="background:rgba(30,122,60,0.1);border:1px solid rgba(30,122,60,0.3);">
+        <div class="tb-org" style="color:var(--accent);">SECI</div>
         <div class="tb-sub">Central</div>
       </div>
       <div>
@@ -59,8 +76,8 @@
     </div>
 
     <div class="tender-row" data-cat="ev">
-      <div class="tender-badge" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);">
-        <div class="tb-org" style="color:var(--gold);">TSREDCO</div>
+      <div class="tender-badge" style="background:rgba(200,153,42,0.1);border:1px solid rgba(200,153,42,0.3);">
+        <div class="tb-org" style="color:var(--highlight);">TSREDCO</div>
         <div class="tb-sub">Telangana</div>
       </div>
       <div>
@@ -71,8 +88,8 @@
     </div>
 
     <div class="tender-row" data-cat="bess">
-      <div class="tender-badge" style="background:rgba(46,139,87,0.12);border:1px solid rgba(46,139,87,0.35);">
-        <div class="tb-org" style="color:#2E8B57;">NTPC</div>
+      <div class="tender-badge" style="background:rgba(30,122,60,0.1);border:1px solid rgba(30,122,60,0.3);">
+        <div class="tb-org" style="color:var(--accent);">NTPC</div>
         <div class="tb-sub">Central</div>
       </div>
       <div>
@@ -83,8 +100,8 @@
     </div>
 
     <div class="tender-row" data-cat="solar">
-      <div class="tender-badge" style="background:rgba(184,115,51,0.12);border:1px solid rgba(184,115,51,0.35);">
-        <div class="tb-org" style="color:var(--copper);">MNRE</div>
+      <div class="tender-badge" style="background:var(--bg-soft);border:1px solid var(--border);">
+        <div class="tb-org" style="color:var(--primary);">MNRE</div>
         <div class="tb-sub">Central</div>
       </div>
       <div>
@@ -95,8 +112,8 @@
     </div>
 
     <div class="tender-row" data-cat="wind">
-      <div class="tender-badge" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);">
-        <div class="tb-org" style="color:var(--gold);">APSPDCL</div>
+      <div class="tender-badge" style="background:rgba(200,153,42,0.1);border:1px solid rgba(200,153,42,0.3);">
+        <div class="tb-org" style="color:var(--highlight);">APSPDCL</div>
         <div class="tb-sub">Andhra</div>
       </div>
       <div>
@@ -107,8 +124,8 @@
     </div>
 
     <div class="tender-row" data-cat="solar">
-      <div class="tender-badge" style="background:rgba(46,139,87,0.12);border:1px solid rgba(46,139,87,0.35);">
-        <div class="tb-org" style="color:#2E8B57;">IREDA</div>
+      <div class="tender-badge" style="background:rgba(30,122,60,0.1);border:1px solid rgba(30,122,60,0.3);">
+        <div class="tb-org" style="color:var(--accent);">IREDA</div>
         <div class="tb-sub">Central</div>
       </div>
       <div>
@@ -119,8 +136,8 @@
     </div>
 
     <div class="tender-row" data-cat="bess">
-      <div class="tender-badge" style="background:rgba(184,115,51,0.12);border:1px solid rgba(184,115,51,0.35);">
-        <div class="tb-org" style="color:var(--copper);">SECI</div>
+      <div class="tender-badge" style="background:rgba(30,122,60,0.1);border:1px solid rgba(30,122,60,0.3);">
+        <div class="tb-org" style="color:var(--accent);">SECI</div>
         <div class="tb-sub">Central</div>
       </div>
       <div>
@@ -131,8 +148,8 @@
     </div>
 
     <div class="tender-row" data-cat="ev">
-      <div class="tender-badge" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);">
-        <div class="tb-org" style="color:var(--gold);">TSREDCO</div>
+      <div class="tender-badge" style="background:rgba(200,153,42,0.1);border:1px solid rgba(200,153,42,0.3);">
+        <div class="tb-org" style="color:var(--highlight);">TSREDCO</div>
         <div class="tb-sub">Telangana</div>
       </div>
       <div>
@@ -143,8 +160,8 @@
     </div>
 
     <div class="tender-row" data-cat="hydrogen">
-      <div class="tender-badge" style="background:rgba(46,139,87,0.12);border:1px solid rgba(46,139,87,0.35);">
-        <div class="tb-org" style="color:#2E8B57;">NTPC</div>
+      <div class="tender-badge" style="background:rgba(30,122,60,0.1);border:1px solid rgba(30,122,60,0.3);">
+        <div class="tb-org" style="color:var(--accent);">NTPC</div>
         <div class="tb-sub">Central</div>
       </div>
       <div>
@@ -155,8 +172,8 @@
     </div>
 
     <div class="tender-row" data-cat="solar">
-      <div class="tender-badge" style="background:rgba(184,115,51,0.12);border:1px solid rgba(184,115,51,0.35);">
-        <div class="tb-org" style="color:var(--copper);">KREDL</div>
+      <div class="tender-badge" style="background:var(--bg-soft);border:1px solid var(--border);">
+        <div class="tb-org" style="color:var(--primary);">KREDL</div>
         <div class="tb-sub">Karnataka</div>
       </div>
       <div>
@@ -168,32 +185,43 @@
 
   </div>
 
-  <div class="cta-banner">
-    <div><h4>Get Tender Alerts</h4><p>Register to receive curated renewable energy tenders from SECI, NTPC, TSREDCO, IREDA, and state DISCOMs directly in your inbox.</p></div>
-    <a href="contact.html" class="btn-primary">Subscribe to Tenders →</a>
+  <!-- CTA STRIP -->
+  <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.8rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-top:1rem;">
+    <div><h4 style="font-family:var(--font-display);font-size:1.05rem;font-weight:800;color:var(--primary);margin-bottom:0.2rem;">Get Tender Alerts</h4><p style="font-size:0.87rem;color:var(--text-muted);">Register to receive curated renewable energy tenders directly in your inbox.</p></div>
+    <a href="contact.html" class="btn btn-green">Subscribe to Tenders →</a>
   </div>
 </section>
 
 <!-- AGENCIES LIST -->
-<div class="section-wide reveal">
+<section class="section-full section-soft reveal">
   <div class="section-inner">
-    <div class="section-tag">Procurement Agencies</div>
-    <h2 class="section-title">Key <span>Agencies</span></h2>
-    <div class="divider"></div>
+    <div class="sec-tag">Procurement Agencies</div>
+    <h2 class="sec-title">Key <mark>Agencies</mark></h2>
+    <div class="divider-line"></div>
     <div class="grid-4">
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">SECI</h4><p style="font-size:0.83rem;color:var(--text-dim);">Solar Energy Corporation of India — utility-scale solar and wind auctions</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">NTPC Green</h4><p style="font-size:0.83rem;color:var(--text-dim);">NTPC's renewable energy arm — solar, wind, BESS, and green hydrogen</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">IREDA</h4><p style="font-size:0.83rem;color:var(--text-dim);">Indian Renewable Energy Development Agency — financing and project tenders</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">TSREDCO</h4><p style="font-size:0.83rem;color:var(--text-dim);">Telangana State Renewable Energy Development Corporation</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">APSPDCL</h4><p style="font-size:0.83rem;color:var(--text-dim);">Andhra Pradesh Southern Power Distribution Company — solar and wind</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">KREDL</h4><p style="font-size:0.83rem;color:var(--text-dim);">Karnataka Renewable Energy Development Ltd — solar policy auctions</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">MNRE</h4><p style="font-size:0.83rem;color:var(--text-dim);">Ministry of New &amp; Renewable Energy — PM Surya Ghar and policy schemes</p></div>
-      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--copper);">BEE</h4><p style="font-size:0.83rem;color:var(--text-dim);">Bureau of Energy Efficiency — PAT scheme and ECBC compliance tenders</p></div>
+      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--accent);">SECI</h4><p style="font-size:0.83rem;color:var(--text-muted);">Solar Energy Corporation of India — utility-scale solar and wind auctions</p></div>
+      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--accent);">NTPC Green</h4><p style="font-size:0.83rem;color:var(--text-muted);">NTPC's renewable energy arm — solar, wind, BESS, and green hydrogen</p></div>
+      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--accent);">IREDA</h4><p style="font-size:0.83rem;color:var(--text-muted);">Indian Renewable Energy Development Agency — financing and project tenders</p></div>
+      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--highlight);">TSREDCO</h4><p style="font-size:0.83rem;color:var(--text-muted);">Telangana State Renewable Energy Development Corporation</p></div>
+      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--highlight);">APSPDCL</h4><p style="font-size:0.83rem;color:var(--text-muted);">Andhra Pradesh Southern Power Distribution Company — solar and wind</p></div>
+      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--primary);">KREDL</h4><p style="font-size:0.83rem;color:var(--text-muted);">Karnataka Renewable Energy Development Ltd — solar policy auctions</p></div>
+      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--primary);">MNRE</h4><p style="font-size:0.83rem;color:var(--text-muted);">Ministry of New &amp; Renewable Energy — PM Surya Ghar and policy schemes</p></div>
+      <div class="info-card"><h4 style="font-weight:700;margin-bottom:0.3rem;color:var(--primary);">BEE</h4><p style="font-size:0.83rem;color:var(--text-muted);">Bureau of Energy Efficiency — PAT scheme and ECBC compliance tenders</p></div>
     </div>
   </div>
-</div>
+</section>
 
-<div id="footer-placeholder"></div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="fb-logo"><div class="logo-emblem" style="width:36px;height:36px;border-radius:8px;"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 2L3 7v10l9 5 9-5V7L12 2Z" stroke="#c8992a" stroke-width="1.6" fill="none"/><path d="M12 6l-5 3v6l5 3 5-3V9L12 6Z" fill="#1e7a3c"/><circle cx="12" cy="12" r="2.2" fill="#c8992a"/></svg></div><div><div class="brand">Dhan Enterprise</div><div class="tagline">Encompassing Energy Revolution</div></div></div><p>10+ years of renewable energy expertise. Headquartered in Begumpet, Hyderabad.</p><div class="footer-contact-item"><span class="fci-label">Phone</span><a href="tel:9849446409">9849446409</a></div><div class="footer-contact-item"><span class="fci-label">Email</span><a href="mailto:hari@win-dhan.in">hari@win-dhan.in</a></div></div>
+      <div class="footer-col"><h5>Services</h5><a href="services.html#ev">EV Consulting</a><a href="services.html#solar">Solar PV</a><a href="services.html#bess">BESS</a><a href="trade.html">Import / Export</a></div>
+      <div class="footer-col"><h5>IRE 2026</h5><a href="ire.html">About IRE</a><a href="ire.html#stalls">Book a Stall</a><a href="ire.html#sponsors">Sponsorship</a><a href="contact.html">Register</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="about.html">About Us</a><a href="about.html#careers">Careers</a><a href="contact.html">Contact</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Dhan Enterprise. All rights reserved.</p><p class="ft-accent">Hyderabad · India · Est. 2014</p></div>
+  </div>
+</footer>
 <script src="js/script.js"></script>
 </body>
 </html>
