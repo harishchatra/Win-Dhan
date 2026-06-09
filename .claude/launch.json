@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Static Site (Claude Preview)",
+      "runtimeExecutable": "preview",
+      "runtimeArgs": ["C:\\DhanWin Website\\index.html"],
+      "port": 3000
+    }
+  ]
+}
