@@ -3,11 +3,7 @@
    (inline string, used by JS)
 ══════════════════════════ */
 
-/* ────────────────────────────────────
-   Navigation injection
-──────────────────────────────────── */
-(function () {
-  const NAV_HTML = `
+/* ────  const NAV_HTML = `
 <header id="mainNav">
   <div class="utility-bar">
     <div class="utility-container">
@@ -45,7 +41,15 @@
           <div class="tagline">Encompassing Energy Revolution</div>
         </div>
       </a>
-      <div class="nav-links">
+      
+      <!-- Hamburger Toggle Button -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <i class="ti ti-menu-2"></i>
+      </button>
+
+      <!-- Navigation links drawer -->
+      <nav class="nav-links" id="navLinks" role="dialog" aria-modal="true" aria-label="Navigation menu">
+        <button class="nav-close" id="navClose" aria-label="Close navigation menu"><i class="ti ti-x"></i></button>
         <a href="index.html" data-page="index">Home</a>
         <div class="nav-group">
           <span class="nav-btn" data-page="about">About ▾</span>
@@ -77,7 +81,7 @@
         <span class="nav-separator"></span>
         <a href="register.html" class="btn-register">Register</a>
         <a href="stalls-booking/index.html" class="btn-book-stall">Book a Stall →</a>
-      </div>
+      </nav>
     </div>
   </div>
 </header>`;
@@ -147,10 +151,96 @@
     if (el.dataset.page === page || (page === 'tenders' && el.dataset.page === 'trade')) el.classList.add('active');
   });
 
-  // Scroll shadow
+  // Hamburger menu toggle, focus trap, and close on ESC/backdrop
+  const navToggle = document.getElementById('navToggle');
+  const navClose = document.getElementById('navClose');
+  const navLinks = document.getElementById('navLinks');
+
+  if (navToggle && navLinks) {
+    const toggleMenu = (open) => {
+      const isOpening = (open !== undefined) ? open : !navLinks.classList.contains('open');
+      navLinks.classList.toggle('open', isOpening);
+      navToggle.setAttribute('aria-expanded', isOpening);
+      navToggle.classList.toggle('active', isOpening);
+      
+      if (isOpening) {
+        document.body.style.overflow = 'hidden';
+        if (navClose) navClose.focus();
+      } else {
+        document.body.style.overflow = '';
+        navToggle.focus();
+      }
+    };
+
+    navToggle.addEventListener('click', () => toggleMenu());
+    if (navClose) navClose.addEventListener('click', () => toggleMenu(false));
+
+    // Close on backdrop click (outside nav content)
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('open') && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+        toggleMenu(false);
+      }
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+        toggleMenu(false);
+      }
+    });
+
+    // Keyboard Focus Trap
+    navLinks.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        const focusables = navLinks.querySelectorAll('a, button, [tabindex="0"]');
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey) { // Shift + Tab
+          if (document.activeElement === first) {
+            last.focus();
+            e.preventDefault();
+          }
+        } else { // Tab
+          if (document.activeElement === last) {
+            first.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    });
+
+    // Close menu when links are clicked (useful for anchor links on same page)
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 1024) {
+          toggleMenu(false);
+        }
+      });
+    });
+  }
+
+  // Scroll Shadow and Scroll-driven Navbar hide/show
+  let lastScrollY = window.scrollY;
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('mainNav');
-    if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+    if (!nav) return;
+
+    const currentScrollY = window.scrollY;
+    
+    // Toggle scrolled state shadow
+    nav.classList.toggle('scrolled', currentScrollY > 40);
+
+    // Slide navbar out of view when scrolling down, slide back when scrolling up
+    if (navLinks && !navLinks.classList.contains('open')) {
+      if (currentScrollY > lastScrollY && currentScrollY > 120) {
+        nav.style.transform = 'translateY(-100%)';
+      } else {
+        nav.style.transform = 'translateY(0)';
+      }
+    }
+    lastScrollY = currentScrollY;
   });
 })();
 
