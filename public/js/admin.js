@@ -320,7 +320,7 @@ document.addEventListener('click', () => {
 // ── USER ROLE & PERMISSION SWITCHER ──
 async function initAdminUI() {
   try {
-    const res = await fetch('/api/auth/session');
+    const res = await fetch('/api/auth/session', { cache: 'no-store' });
     if (!res.ok) {
       window.location.href = '/login.html';
       return;

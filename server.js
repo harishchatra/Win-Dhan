@@ -114,6 +114,7 @@ app.post('/api/auth/logout', (req, res) => {
 });
 
 app.get('/api/auth/session', (req, res) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
   if (req.session.user) {
     res.json({ success: true, user: req.session.user });
   } else {

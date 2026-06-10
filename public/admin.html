@@ -9,7 +9,7 @@
     // Immediate auth check
     (function() {
       document.documentElement.style.visibility = 'hidden';
-      fetch('/api/auth/session')
+      fetch('/api/auth/session', { cache: 'no-store' })
         .then(res => {
           if (!res.ok) throw new Error('Unauthorized');
           return res.json();
