@@ -671,20 +671,36 @@
       btn.innerHTML = "⏳ Generating...";
       btn.disabled = true;
 
-      const opt = {
-        margin:       15,
-        filename:     `IRE_Expo_Pass_${passId}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 3, useCORS: true, letterRendering: true },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-
-      html2pdf().from(element).set(opt).save().then(() => {
+      html2canvas(element, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#FFFFFF'
+      }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        
+        // Load jsPDF dynamically from global scope (exposed by html2pdf bundle)
+        const { jsPDF } = window.jspdf || window;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        
+        // A4 page dimensions in mm
+        const pdfWidth = 210;
+        const pdfHeight = 297;
+        
+        // Center the ticket on A4 page (width set to 100mm on paper)
+        const ticketWidth = 100;
+        const ticketHeight = (canvas.height * ticketWidth) / canvas.width;
+        
+        const xOffset = (pdfWidth - ticketWidth) / 2;
+        const yOffset = (pdfHeight - ticketHeight) / 2;
+        
+        pdf.addImage(imgData, 'PNG', xOffset, yOffset, ticketWidth, ticketHeight);
+        pdf.save(`IRE_Expo_Pass_${passId}.pdf`);
+        
         btn.innerHTML = originalText;
         btn.disabled = false;
       }).catch(err => {
         console.error("PDF generation error:", err);
-        alert("Failed to save PDF. Please try printing the pass or saving as an image.");
+        alert("Failed to save PDF. Please try saving as an image instead.");
         btn.innerHTML = originalText;
         btn.disabled = false;
       });
