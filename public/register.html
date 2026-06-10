@@ -592,19 +592,22 @@
   <script>
     // Load saved API URL on startup and check registration limits
     document.addEventListener('DOMContentLoaded', () => {
+      const defaultUrl = 'https://script.google.com/macros/s/AKfycbyq7IMQ5LBIOw3fv8DI7gm-gWhcqWsB2zA0xKN8LZJfSHdvaVBjde-G9RxOBg4D1O_u/exec';
       const savedUrl = localStorage.getItem('google_sheet_api_url');
-      if (savedUrl) {
-        document.getElementById('sheet-api-url').value = savedUrl;
+      
+      const urlInput = document.getElementById('sheet-api-url');
+      if (urlInput) {
+        urlInput.value = savedUrl || defaultUrl;
       }
       
-      // Hide integration settings from public users if URL is already saved, unless accessed via ?admin=true
+      // Hide integration settings from public users, show only if accessed via ?admin=true
       const isAdmin = new URLSearchParams(window.location.search).get('admin') === 'true';
       const integrationGuide = document.querySelector('.integration-guide');
       if (integrationGuide) {
-        if (savedUrl && !isAdmin) {
-          integrationGuide.style.display = 'none';
-        } else {
+        if (isAdmin) {
           integrationGuide.style.display = 'block';
+        } else {
+          integrationGuide.style.display = 'none';
         }
       }
       
@@ -731,8 +734,12 @@
         // Show ticket pass with backend returned pass ID
         showPass(payload, data.passId);
 
-        // Send to Google Sheets if a URL is saved in localStorage
-        const googleSheetUrl = localStorage.getItem('google_sheet_api_url');
+        // Send to Google Sheets - use default URL if none is saved in localStorage
+        let googleSheetUrl = localStorage.getItem('google_sheet_api_url');
+        if (!googleSheetUrl || !googleSheetUrl.trim()) {
+          googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyq7IMQ5LBIOw3fv8DI7gm-gWhcqWsB2zA0xKN8LZJfSHdvaVBjde-G9RxOBg4D1O_u/exec';
+        }
+        
         if (googleSheetUrl && googleSheetUrl.trim()) {
           fetch(googleSheetUrl.trim(), {
             method: 'POST',
