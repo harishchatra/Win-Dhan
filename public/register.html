@@ -616,6 +616,17 @@
         // Show ticket pass with backend returned pass ID
         showPass(payload, data.passId);
 
+        // Send to Google Sheets if a URL is saved in localStorage
+        const googleSheetUrl = localStorage.getItem('google_sheet_api_url');
+        if (googleSheetUrl && googleSheetUrl.trim()) {
+          fetch(googleSheetUrl.trim(), {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          }).catch(err => console.error('Google Sheet logging failed:', err));
+        }
+
       } catch (err) {
         console.error('Registration API error:', err);
         alert('❌ Error: ' + err.message);
