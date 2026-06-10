@@ -610,7 +610,7 @@
         
         const data = await res.json();
         if (!res.ok || !data.success) {
-          throw new Error(data.error || 'Failed to complete registration on server.');
+          throw new Error(data.error || data.message || 'Failed to complete registration on server.');
         }
 
         // Show ticket pass with backend returned pass ID
