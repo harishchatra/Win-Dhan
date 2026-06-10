@@ -2093,6 +2093,208 @@
       border: 1px dashed var(--color-gold);
       border-radius: 6px;
     }
+
+    /* WhatsApp Modal Styling */
+    .wa-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 42, 24, 0.4);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      animation: waFadeIn 0.3s ease forwards;
+    }
+    @keyframes waFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .wa-modal-box {
+      width: 100%;
+      max-width: 380px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(17, 42, 24, 0.15);
+      border: 1px solid rgba(184, 115, 51, 0.25);
+      display: flex;
+      flex-direction: column;
+      margin: 1rem;
+      animation: waSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes waSlideUp {
+      from { transform: translateY(30px) scale(0.95); }
+      to { transform: translateY(0) scale(1); }
+    }
+    .wa-header {
+      background: #075E54;
+      padding: 1.25rem;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+    }
+    .wa-avatar {
+      width: 40px;
+      height: 40px;
+      background: #128C7E;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      position: relative;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+    }
+    .wa-status-dot {
+      width: 10px;
+      height: 10px;
+      background: #4CAF50;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      border: 1.5px solid #075E54;
+    }
+    .wa-header-info {
+      flex-grow: 1;
+    }
+    .wa-header-info h4 {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    .wa-header-info p {
+      margin: 2px 0 0 0;
+      font-size: 0.72rem;
+      color: #D4F2EE;
+      font-weight: 500;
+    }
+    .wa-close-btn {
+      background: transparent;
+      border: none;
+      color: #FFFFFF;
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .wa-close-btn:hover {
+      opacity: 1;
+    }
+    .wa-chat-body {
+      background: #ECE5DD;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 350px;
+      overflow-y: auto;
+      background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 0);
+      background-size: 12px 12px;
+    }
+    .wa-msg {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      line-height: 1.4;
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+    }
+    .wa-msg.incoming {
+      background: #FFFFFF;
+      color: #112A18;
+      align-self: flex-start;
+      border-top-left-radius: 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .wa-msg.outgoing {
+      background: #DCF8C6;
+      color: #112A18;
+      align-self: flex-end;
+      border-top-right-radius: 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .wa-options-container {
+      background: #FFFFFF;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .wa-option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      background: #FAFBFB;
+      border: 1px solid rgba(7, 94, 84, 0.15);
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #075E54;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .wa-option-btn:hover {
+      background: #F4F9F8;
+      border-color: #075E54;
+      transform: translateY(-1px);
+    }
+    .wa-form-container {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      animation: waFadeIn 0.3s ease;
+    }
+    .wa-input-field {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid rgba(7, 94, 84, 0.2);
+      border-radius: 8px;
+      outline: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      color: #112A18;
+      transition: border-color 0.2s;
+    }
+    .wa-input-field:focus {
+      border-color: #075E54;
+      box-shadow: 0 0 0 3px rgba(7, 94, 84, 0.1);
+    }
+    .wa-send-btn {
+      width: 100%;
+      background: #128C7E;
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(18, 140, 126, 0.2);
+      transition: all 0.2s;
+    }
+    .wa-send-btn:hover {
+      background: #075E54;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(18, 140, 126, 0.3);
+    }
   </style>
 </head>
 <body>
@@ -2318,7 +2520,7 @@
         
         <div class="sheet-handle" onclick="closeMobileSheet()"></div>
         
-        <div class="wizard-header">
+        <div class="wizard-header" style="display: none;">
           <div class="wizard-steps">
             <div class="step-indicator active" id="step-ind-1">1</div>
             <div class="step-indicator" id="step-ind-2">2</div>
@@ -2584,7 +2786,7 @@
             <span class="cta-total-label">Grand Total</span>
             <span class="cta-total-amt" id="cta-total-val">₹0</span>
           </div>
-          <button class="cta-btn cta-btn-primary" id="cta-next-btn" onclick="nextStep()" disabled>Proceed</button>
+          <button class="cta-btn cta-btn-primary" id="cta-next-btn" onclick="nextStep()" disabled>Book Your Stall</button>
         </div>
 
       </div> <!-- Close checkout-pane -->
@@ -2596,7 +2798,7 @@
 
   <!-- MOBILE FLOATING ACTION TRIGGER -->
   <button id="mobile-sheet-trigger" class="mobile-toggle-sheet-btn" onclick="toggleMobileSheet()">
-    <span>View Cart & Checkout</span>
+    <span>View Cart & Book Your Stall</span>
     <span class="fab-badge" id="mobile-badge-count">0</span>
   </button>
 
@@ -3239,7 +3441,7 @@
         if (nextBtn) {
           nextBtn.disabled = true;
           if (currentStep === 1) {
-            nextBtn.textContent = 'Proceed';
+            nextBtn.textContent = 'Book Your Stall';
           }
         }
         
@@ -3354,58 +3556,11 @@
 
     /* ── WIZARD STEP SYSTEM ── */
     function nextStep() {
-      if (currentStep === 1) {
-        currentStep = 2;
-        updateStepIndicator();
-        document.getElementById('wizard-step-1').classList.remove('active');
-        document.getElementById('wizard-step-2').classList.add('active');
-        
-        const prevBtn = document.getElementById('cta-prev-btn');
-        if (prevBtn) {
-          prevBtn.disabled = false;
-          prevBtn.style.display = 'block';
-        }
-        const nextBtn = document.getElementById('cta-next-btn');
-        if (nextBtn) {
-          nextBtn.textContent = 'Confirm & Pay';
-        }
-      } else if (currentStep === 2) {
-        // Validate form before proceeding
-        const form = document.getElementById('booking-details-form');
-        
-        const sectorInput = document.getElementById('energy-sector');
-        if (!sectorInput.value) {
-          sectorInput.setCustomValidity('Please select a clean energy sector.');
-        } else {
-          sectorInput.setCustomValidity('');
-        }
-
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-        
-        openRzpModal();
-      }
+      openStallWaModal();
     }
 
     function prevStep() {
-      if (currentStep === 2) {
-        currentStep = 1;
-        updateStepIndicator();
-        document.getElementById('wizard-step-2').classList.remove('active');
-        document.getElementById('wizard-step-1').classList.add('active');
-        
-        const prevBtn = document.getElementById('cta-prev-btn');
-        if (prevBtn) {
-          prevBtn.disabled = true;
-          prevBtn.style.display = 'none';
-        }
-        const nextBtn = document.getElementById('cta-next-btn');
-        if (nextBtn) {
-          nextBtn.textContent = 'Proceed';
-        }
-      }
+      // Decommissioned
     }
 
     function updateStepIndicator() {
@@ -4192,6 +4347,101 @@
       .catch(err => console.error(err));
     }
 
+    /* WhatsApp B2B Modal Controller */
+    const WA_ORGANIZER_NUMBER = '919849446409';
+
+    function openStallWaModal() {
+      if (selectedStalls.length === 0) {
+        showToast("⚠️ Please select at least one stall first.");
+        return;
+      }
+      
+      let totalArea = 0;
+      let selectedStallsDetails = [];
+      selectedStalls.forEach(stallId => {
+        const data = stallsData.find(s => s.id === stallId);
+        if (data) {
+          totalArea += data.sizeSft;
+          selectedStallsDetails.push(`${data.id} (${data.sizeSft} SFT)`);
+        }
+      });
+      
+      const summaryText = `Stall(s): ${selectedStalls.join(', ')} (Total Area: ${totalArea} SFT)`;
+      document.getElementById('wa-selected-stalls-summary').textContent = summaryText;
+      
+      document.getElementById('wa-inquiry-modal').style.display = 'flex';
+    }
+
+    function closeWaModal() {
+      document.getElementById('wa-inquiry-modal').style.display = 'none';
+    }
+
+    function handleWaOverlayClick(e) {
+      if (e.target.id === 'wa-inquiry-modal') {
+        closeWaModal();
+      }
+    }
+
+    function submitWaContact(e) {
+      e.preventDefault();
+      const name = document.getElementById('wa-user-name').value.trim();
+      const phone = document.getElementById('wa-user-phone').value.trim();
+      
+      let totalArea = 0;
+      selectedStalls.forEach(stallId => {
+        const data = stallsData.find(s => s.id === stallId);
+        if (data) {
+          totalArea += data.sizeSft;
+        }
+      });
+      
+      const text = `Hi! I am interested in booking Stall(s) ${selectedStalls.join(', ')} (Total Area: ${totalArea} SFT) at the IRE Expo 2026. My Name is ${name} and my Phone Number is ${phone}. Please contact me to finalize.`;
+      const url = `https://wa.me/${WA_ORGANIZER_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+      closeWaModal();
+    }
+
   </script>
+
+  <!-- WHATSAPP INQUIRY MODAL -->
+  <div class="wa-modal-overlay" id="wa-inquiry-modal" onclick="handleWaOverlayClick(event)">
+    <div class="wa-modal-box">
+      <div class="wa-header">
+        <div class="wa-avatar">
+          👤
+          <div class="wa-status-dot"></div>
+        </div>
+        <div class="wa-header-info">
+          <h4>IRE Expo Support</h4>
+          <p>Active Now · Response in mins</p>
+        </div>
+        <button class="wa-close-btn" onclick="closeWaModal()">&times;</button>
+      </div>
+
+      <div class="wa-chat-body">
+        <div class="wa-msg incoming">
+          Hi! 👋 You've selected the following stalls for booking:<br>
+          <strong id="wa-selected-stalls-summary">None</strong><br><br>
+          Please provide your name and phone number to send your inquiry to the organizer on WhatsApp.
+        </div>
+      </div>
+
+      <div class="wa-options-container">
+        <!-- Form for contact info -->
+        <form class="wa-form-container" id="wa-contact-form" onsubmit="submitWaContact(event)" style="display: flex;">
+          <div style="font-size: 0.72rem; color: #556B5C; font-weight: 600; margin-bottom: 2px;">Name *</div>
+          <input type="text" id="wa-user-name" class="wa-input-field" placeholder="e.g. Harish Kumar" required>
+          
+          <div style="font-size: 0.72rem; color: #556B5C; font-weight: 600; margin-bottom: 2px; margin-top: 4px;">Phone Number *</div>
+          <input type="tel" id="wa-user-phone" class="wa-input-field" placeholder="e.g. 98494 46409" required pattern="^[0-9\s\-+]{10,15}$">
+          
+          <div style="display: flex; gap: 8px; margin-top: 6px;">
+            <button type="button" class="wa-option-btn" style="flex: 1; justify-content: center; border-color: #ccc; color: #666;" onclick="closeWaModal()">Cancel</button>
+            <button type="submit" class="wa-send-btn" style="flex: 2;">⚡ Send to WhatsApp</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

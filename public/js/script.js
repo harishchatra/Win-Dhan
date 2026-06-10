@@ -69,7 +69,7 @@
             <a href="ire.html#exhibitors"><i class="ti ti-building-store"></i> Exhibitors</a>
             <a href="ire.html#venue"><i class="ti ti-map-pin"></i> Venue</a>
             <div class="nav-drop-divider"></div>
-            <a href="stalls-booking/index.html" style="color: #B87333; font-weight: 700;"><i class="ti ti-ticket"></i> Book a Stall →</a>
+            <a href="stalls-booking/index.html" style="color: #B87333; font-weight: 700;"><i class="ti ti-ticket"></i> Book Your Stall →</a>
           </div>
         </div>
         <div class="nav-group">
@@ -81,7 +81,7 @@
         </div>
         <span class="nav-separator"></span>
         <a href="register.html" class="btn-register">Register</a>
-        <a href="stalls-booking/index.html" class="btn-book-stall">Book a Stall →</a>
+        <a href="stalls-booking/index.html" class="btn-book-stall">Book Your Stall →</a>
       </nav>
     </div>
   </div>
@@ -118,7 +118,7 @@
     <div class="footer-col">
       <h5>IRE 2026</h5>
       <a href="ire.html">About IRE Expo</a>
-      <a href="stalls-booking/index.html">Book a Stall</a>
+      <a href="stalls-booking/index.html">Book Your Stall</a>
       <a href="register.html">Visitor Registration</a>
       <a href="admin.html">Admin Dashboard</a>
       <a href="ire.html#sponsors">Sponsors & Partners</a>

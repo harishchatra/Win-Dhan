@@ -1335,6 +1335,209 @@
     display: none !important;
   }
 }
+
+/* WhatsApp Inquiry Modal Styles */
+.wa-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 42, 24, 0.4);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: waFadeIn 0.3s ease forwards;
+}
+@keyframes waFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.wa-modal-box {
+  width: 100%;
+  max-width: 380px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(17, 42, 24, 0.15);
+  border: 1px solid rgba(184, 115, 51, 0.25);
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  animation: waSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes waSlideUp {
+  from { transform: translateY(30px) scale(0.95); }
+  to { transform: translateY(0) scale(1); }
+}
+.wa-header {
+  background: #075E54;
+  padding: 1.25rem;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+.wa-avatar {
+  width: 40px;
+  height: 40px;
+  background: #128C7E;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  position: relative;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+.wa-status-dot {
+  width: 10px;
+  height: 10px;
+  background: #4CAF50;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 1.5px solid #075E54;
+}
+.wa-header-info {
+  flex-grow: 1;
+}
+.wa-header-info h4 {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.wa-header-info p {
+  margin: 2px 0 0 0;
+  font-size: 0.72rem;
+  color: #D4F2EE;
+  font-weight: 500;
+}
+.wa-close-btn {
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.wa-close-btn:hover {
+  opacity: 1;
+}
+.wa-chat-body {
+  background: #ECE5DD;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 350px;
+  overflow-y: auto;
+  background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 0);
+  background-size: 12px 12px;
+}
+.wa-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.84rem;
+  line-height: 1.4;
+  position: relative;
+  font-family: 'Outfit', sans-serif;
+}
+.wa-msg.incoming {
+  background: #FFFFFF;
+  color: #112A18;
+  align-self: flex-start;
+  border-top-left-radius: 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.wa-msg.outgoing {
+  background: #DCF8C6;
+  color: #112A18;
+  align-self: flex-end;
+  border-top-right-radius: 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+.wa-options-container {
+  background: #FFFFFF;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+.wa-option-btn {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  background: #FAFBFB;
+  border: 1px solid rgba(7, 94, 84, 0.15);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #075E54;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wa-option-btn:hover {
+  background: #F4F9F8;
+  border-color: #075E54;
+  transform: translateY(-1px);
+}
+.wa-form-container {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  animation: waFadeIn 0.3s ease;
+}
+.wa-input-field {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid rgba(7, 94, 84, 0.2);
+  border-radius: 8px;
+  outline: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  color: #112A18;
+  transition: border-color 0.2s;
+}
+.wa-input-field:focus {
+  border-color: #075E54;
+  box-shadow: 0 0 0 3px rgba(7, 94, 84, 0.1);
+}
+.wa-send-btn {
+  width: 100%;
+  background: #128C7E;
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(18, 140, 126, 0.2);
+  transition: all 0.2s;
+}
+.wa-send-btn:hover {
+  background: #075E54;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(18, 140, 126, 0.3);
+}
+}
   </style>
 </head>
 <body data-page="ire">
@@ -1352,7 +1555,7 @@
     <a href="#sponsors">Sponsors</a>
     <a href="#venue">Venue</a>
     <a href="#register">Register</a>
-    <a href="stalls-booking/index.html" class="subnav-cta">Book Stall →</a>
+    <a href="javascript:void(0)" onclick="openWaModal()" class="subnav-cta">Book Your Stall →</a>
   </nav>
 
   <!-- SECTION 1: HERO -->
@@ -1374,7 +1577,7 @@
 
         <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem;">
           <a href="register.html" class="btn-primary" style="background: linear-gradient(135deg, var(--copper), var(--gold)); border: none;">👤 Visitor Register</a>
-          <a href="stalls-booking/index.html" class="btn-primary">🏪 Stall Booking</a>
+          <button onclick="openWaModal()" class="btn-primary" style="display: inline-flex; align-items: center; gap: 6px; border: none; cursor: pointer;">🏪 Book Your Stall</button>
           <button class="btn-outline" onclick="triggerBrochureDownload()" style="color: #fff; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.25);">📥 Download Brochure</button>
         </div>
 
@@ -1739,7 +1942,7 @@
       </div>
       <div style="margin-top: 1.5rem; text-align: center; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
         <button class="btn-primary" onclick="triggerBrochureDownload()">📥 Download Floor Plan (PDF)</button>
-        <a href="stalls-booking/index.html" class="btn-outline">🏪 Open Interactive Booking Portal →</a>
+        <a href="stalls-booking/index.html" class="btn-outline">🏪 Book Your Stall (Interactive Map) →</a>
       </div>
     </div>
 
@@ -1923,7 +2126,7 @@
         <div class="counter-slots">🛡️ 75 Available Slots for Custom Fabricated Booths</div>
         
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a href="stalls-booking/index.html" class="btn-primary" style="font-size: 14px; padding: 0.85rem 2.2rem;">🏪 Book Stall Now</a>
+          <button onclick="openWaModal()" class="btn-primary" style="font-size: 14px; padding: 0.85rem 2.2rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; cursor: pointer;">🏪 Book Your Stall Now</button>
           <a href="register.html" class="btn-outline" style="font-size: 14px; padding: 0.85rem 2.2rem;">📝 Register as Visitor</a>
           <a href="javascript:void(0)" onclick="openSponsorModal()" class="btn-outline" style="font-size: 14px; padding: 0.85rem 2.2rem;">⭐ Become a Sponsor</a>
         </div>
@@ -2597,6 +2800,114 @@
     }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
 
     sections.forEach(s => { if (s) observer.observe(s); });
+  </script>
+
+  <!-- WHATSAPP INQUIRY MODAL -->
+  <div class="wa-modal-overlay" id="wa-inquiry-modal" onclick="handleWaOverlayClick(event)">
+    <div class="wa-modal-box">
+      <div class="wa-header">
+        <div class="wa-avatar">
+          👤
+          <div class="wa-status-dot"></div>
+        </div>
+        <div class="wa-header-info">
+          <h4>IRE Expo Support</h4>
+          <p>Active Now · Response in mins</p>
+        </div>
+        <button class="wa-close-btn" onclick="closeWaModal()">&times;</button>
+      </div>
+
+      <div class="wa-chat-body">
+        <div class="wa-msg incoming">
+          Hi! 👋 Welcome to IRE Expo 2026. How can we assist you with stall bookings or general queries today?
+        </div>
+        <div class="wa-msg incoming" id="wa-dynamic-msg" style="display: none;">
+          <!-- Placeholder for dynamic responses -->
+        </div>
+      </div>
+
+      <div class="wa-options-container">
+        <!-- Main Options -->
+        <div id="wa-main-options" style="display: flex; flex-direction: column; gap: 8px;">
+          <button class="wa-option-btn" onclick="selectWaOption('stall')">🏪 Book Your Stall / Contact Organizer</button>
+          <button class="wa-option-btn" onclick="selectWaOption('pricing')">💰 Inquire about Stall Pricing & Sizes</button>
+          <button class="wa-option-btn" onclick="selectWaOption('brochure')">📁 Request Exhibition Floor Plan & Brochure</button>
+        </div>
+
+        <!-- Form for contact info (Option 1) -->
+        <form class="wa-form-container" id="wa-contact-form" onsubmit="submitWaContact(event)">
+          <div style="font-size: 0.72rem; color: #556B5C; font-weight: 600; margin-bottom: 2px;">Name *</div>
+          <input type="text" id="wa-user-name" class="wa-input-field" placeholder="e.g. Harish Kumar" required>
+          
+          <div style="font-size: 0.72rem; color: #556B5C; font-weight: 600; margin-bottom: 2px; margin-top: 4px;">Phone Number *</div>
+          <input type="tel" id="wa-user-phone" class="wa-input-field" placeholder="e.g. 98494 46409" required pattern="^[0-9\s\-+]{10,15}$">
+          
+          <div style="display: flex; gap: 8px; margin-top: 6px;">
+            <button type="button" class="wa-option-btn" style="flex: 1; justify-content: center; border-color: #ccc; color: #666;" onclick="backToWaMain()">← Back</button>
+            <button type="submit" class="wa-send-btn" style="flex: 2;">⚡ Open in WhatsApp</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WA_ORGANIZER_NUMBER = '919849446409';
+
+    function openWaModal() {
+      document.getElementById('wa-inquiry-modal').style.display = 'flex';
+      backToWaMain();
+    }
+
+    function closeWaModal() {
+      document.getElementById('wa-inquiry-modal').style.display = 'none';
+    }
+
+    function handleWaOverlayClick(e) {
+      if (e.target.id === 'wa-inquiry-modal') {
+        closeWaModal();
+      }
+    }
+
+    function backToWaMain() {
+      document.getElementById('wa-main-options').style.display = 'flex';
+      document.getElementById('wa-contact-form').style.display = 'none';
+      document.getElementById('wa-dynamic-msg').style.display = 'none';
+    }
+
+    function selectWaOption(option) {
+      const dynamicMsg = document.getElementById('wa-dynamic-msg');
+      if (option === 'stall') {
+        dynamicMsg.textContent = "Great! Please provide your name and phone number below so we can generate your callback request message.";
+        dynamicMsg.style.display = 'block';
+        document.getElementById('wa-main-options').style.display = 'none';
+        document.getElementById('wa-contact-form').style.display = 'flex';
+        // Scroll chat to bottom
+        const chatBody = document.querySelector('.wa-chat-body');
+        setTimeout(() => { chatBody.scrollTop = chatBody.scrollHeight; }, 50);
+      } else if (option === 'pricing') {
+        const text = "Hello! I am interested in booking a stall at the IRE Expo 2026. Please share the pricing tiers and stall sizes.";
+        const url = `https://wa.me/${WA_ORGANIZER_NUMBER}?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+        closeWaModal();
+      } else if (option === 'brochure') {
+        const text = "Hello! Please share the exhibition floor plan and brochure for the IRE Expo 2026.";
+        const url = `https://wa.me/${WA_ORGANIZER_NUMBER}?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+        closeWaModal();
+      }
+    }
+
+    function submitWaContact(e) {
+      e.preventDefault();
+      const name = document.getElementById('wa-user-name').value.trim();
+      const phone = document.getElementById('wa-user-phone').value.trim();
+      
+      const text = `Hi! I want to book a stall at the IRE Expo 2026. My Name is ${name} and my Phone Number is ${phone}. Please call me back when you are free.`;
+      const url = `https://wa.me/${WA_ORGANIZER_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+      closeWaModal();
+    }
   </script>
 </body>
 </html>
