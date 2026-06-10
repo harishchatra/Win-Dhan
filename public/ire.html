@@ -1325,6 +1325,16 @@
   white-space: nowrap;
 }
 #ire-subnav .subnav-cta:hover { opacity: 0.88; }
+
+@media (max-width: 768px) {
+  #ire-subnav a[href="#dignitaries"],
+  #ire-subnav a[href="#why-exhibit"],
+  #ire-subnav a[href="#categories"],
+  #ire-subnav a[href="#venue"],
+  #ire-subnav a[href="#register"] {
+    display: none !important;
+  }
+}
   </style>
 </head>
 <body data-page="ire">
@@ -1362,9 +1372,10 @@
           </div>
         </div>
 
-        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
-          <a href="stalls-booking/index.html" class="btn-primary">🏪 Book Stall</a>
-          <button class="btn-outline" onclick="triggerBrochureDownload()" style="color: #fff; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.25);">Download Brochure</button>
+        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem;">
+          <a href="register.html" class="btn-primary" style="background: linear-gradient(135deg, var(--copper), var(--gold)); border: none;">👤 Visitor Register</a>
+          <a href="stalls-booking/index.html" class="btn-primary">🏪 Stall Booking</a>
+          <button class="btn-outline" onclick="triggerBrochureDownload()" style="color: #fff; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.25);">📥 Download Brochure</button>
         </div>
 
         <!-- Hero Stats -->
@@ -2037,9 +2048,14 @@
       }
     }
 
-    // Mock PDF Brochure download
+    // Real PDF Brochure download
     function triggerBrochureDownload() {
-      alert("📥 Download Started: IRE_Expo_2026_Brochure_Floor_Plan.pdf (Brochure contains pricing tiers, B2B schedules, and custom shell schemes details).");
+      const link = document.createElement('a');
+      link.href = '/IRE_Expo_2026_Brochure.pdf';
+      link.download = 'IRE_Expo_2026_Brochure.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
 
     // Load and render editable timeline event agenda dynamically
