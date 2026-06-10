@@ -3,6 +3,6 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "https://win-dhan-production.up.railway.app/api/:splat"
+  to = "https://strong-acceptance-production-c69a.up.railway.app/api/:splat"
   status = 200
   force = true
