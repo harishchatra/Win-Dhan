@@ -311,13 +311,41 @@ db.serialize(() => {
     }
   });
 
-  // Seed default Agendas
-  db.get(`SELECT COUNT(*) as count FROM agenda`, (err, row) => {
-    if (row && row.count === 0) {
-      console.log('Seeding initial agendas sessions...');
-      db.run(`INSERT INTO agenda VALUES ('ses-1', 1, 'Inauguration & Ribbon Cutting', 'Opening ceremony address detailing state clean grid transition paths.', 'spk-1', 'Hall A Conference stage', '09:00 AM', '10:00 AM', 'Keynote', 1, 1)`);
-      db.run(`INSERT INTO agenda VALUES ('ses-2', 1, 'EV Fleet Electrification Policies', 'Panel debate on commercial fleet transitions, charger corridors, and grid loads.', 'spk-2', 'Hall A Conference stage', '10:30 AM', '12:30 PM', 'Panel Discussion', 1, 2)`);
-      db.run(`INSERT INTO agenda VALUES ('ses-3', 2, 'BESS Battery Storage Masterclass', 'Technical hands-on session on containerized commercial battery systems.', 'spk-3', 'Workshop room C', '09:30 AM', '11:30 AM', 'Workshop', 1, 1)`);
+  // Clear and seed real Agendas on boot
+  db.run(`DELETE FROM agenda`, (err) => {
+    if (err) {
+      console.error('Error clearing agenda table:', err);
+    } else {
+      console.log('Seeding official agenda sessions...');
+      const day1Desc = `
+        <p style="margin-bottom: 0.6rem; font-weight: 600; color: #112A18;">A full-day exhibition featuring the latest innovations and solutions in:</p>
+        <ul style="margin-left: 1.25rem; margin-bottom: 0.8rem; list-style-type: disc; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; font-size: 0.8rem;">
+          <li>Electric Vehicles (EV)</li>
+          <li>Battery Energy Storage (BESS)</li>
+          <li>Solar Energy</li>
+          <li>Wind Energy</li>
+          <li>Smart Energy Technologies</li>
+          <li>Sustainable Infrastructure</li>
+        </ul>
+        <p>Visitors can explore exhibitor stalls, live demonstrations, product launches, and networking opportunities with industry leaders.</p>
+      `;
+      const day2DebateDesc = `
+        <p style="margin-bottom: 0.6rem; font-weight: 600; color: #112A18;">Key discussions and expert debates on:</p>
+        <ul style="margin-left: 1.25rem; margin-bottom: 0.8rem; list-style-type: disc; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; font-size: 0.8rem;">
+          <li>Battery Energy Storage (BESS)</li>
+          <li>Electric Vehicles (EV)</li>
+          <li>Solar Energy</li>
+          <li>Wind Energy</li>
+          <li>Renewable Energy Policy</li>
+          <li>Future Energy Tech &amp; Sustainability</li>
+        </ul>
+        <p>Industry experts, government representatives, policymakers, and business leaders will share insights on the future of India's clean energy ecosystem.</p>
+      `;
+      
+      db.run(`INSERT INTO agenda VALUES ('ses-1', 1, 'Expo & Technology Showcase', ?, 'All Registered Visitors & Industry Leaders', 'HMDA Grounds, Hyderabad', '11:00 AM', '06:30 PM', 'Exhibition', 1, 1)`, [day1Desc]);
+      db.run(`INSERT INTO agenda VALUES ('ses-2', 2, 'Expo Gates Open', 'General exhibition gates are open from 11:00 AM to 6:30 PM for all registered attendees.', 'Visitors & Delegates', 'HMDA Grounds Entrance', '11:00 AM', '06:30 PM', 'Expo Timings', 1, 1)`);
+      db.run(`INSERT INTO agenda VALUES ('ses-3', 2, 'Industry Leadership Debate & Panel Discussion', ?, 'Industry Experts, Policy Makers & Government Representatives', 'Main Conference Hall', '11:30 AM', '02:00 PM', 'Featured Debate', 1, 2)`, [day2DebateDesc]);
+      db.run(`INSERT INTO agenda VALUES ('ses-4', 2, 'Expo & Networking Session', 'Continue exploring exhibitor showcases, technology demonstrations, business networking opportunities, and industry collaborations.', 'Delegates, Exhibitors & Visitors', 'Exhibition Floor', '02:00 PM', '06:30 PM', 'Networking', 1, 3)`);
     }
   });
 

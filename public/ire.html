@@ -2582,10 +2582,13 @@
             const speakerInfo = sp ? `, presenting with ${sp.name} (${sp.designation}, ${sp.org})` : '';
             return {
               time: `${s.start_time} - ${s.end_time}`,
-              title: `${s.title} (${s.type})`,
+              timeRange: `${s.start_time} – ${s.end_time}`,
+              title: s.title,
               speaker: sp ? `${sp.name} (${sp.designation}, ${sp.org})` : (s.speaker_id || 'TBC'),
               venue: s.venue,
-              type: s.type
+              type: s.type,
+              description: s.desc || '',
+              featured: s.type.toLowerCase().includes('featured') || (s.title && s.title.toLowerCase().includes('debate'))
             };
           };
 
