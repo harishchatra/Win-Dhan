@@ -1220,6 +1220,30 @@
       background: rgba(74, 158, 138, 0.1);
       color: #1F6B5A;
     }
+    
+    .time-chip {
+      background: #FAF3E8;
+      color: #8B5A1A;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid rgba(184, 115, 51, 0.15);
+    }
+    
+    .timeline-content.featured {
+      border: 1px solid rgba(184, 115, 51, 0.4) !important;
+      border-left: 4px solid var(--copper) !important;
+      background: #FDFBFA;
+      box-shadow: 0 4px 15px rgba(184, 115, 51, 0.06);
+    }
+    .timeline-content.featured:hover {
+      background: #FAF4EB !important;
+    }
 
     /* Horizontal scroll for mobile/tablet */
     @media (max-width: 768px) {
@@ -2280,20 +2304,67 @@
     // Load and render editable timeline event agenda dynamically
     const AGENDA_DATA = {
       day1: [
-        { time: "11:00 AM", title: "Expo Day 1 Gates Open & Registration", speaker: "All Registered Visitors", venue: "HMDA Grounds Entrance", type: "Opening" },
-        { time: "11:30 AM", title: "Technology Showcase & Expo Exhibition", speaker: "Exhibitors & Industry Delegates", venue: "Exhibition Hall (Showcasing EV, BESS, Solar, Wind, etc.)", type: "Exhibition" },
-        { time: "01:30 PM", title: "Networking Lunch Session", speaker: "All Attendees", venue: "Exhibition Food Court", type: "Networking" },
-        { time: "02:30 PM", title: "Live Product Demonstrations & B2B Meetings", speaker: "Tech Teams & Exhibitors", venue: "Exhibitor Stalls", type: "B2B Sessions" },
-        { time: "05:00 PM", title: "Networking & Business Connect Hour", speaker: "Delegates & Exhibitors", venue: "Exhibition Floor", type: "Networking" },
-        { time: "06:30 PM", title: "Day 1 Expo Gates Close", speaker: "Organizers", venue: "HMDA Grounds", type: "Closing" }
+        {
+          time: "11:00 AM",
+          timeRange: "11:00 AM – 06:30 PM",
+          title: "Expo & Technology Showcase",
+          speaker: "All Registered Visitors & Industry Leaders",
+          venue: "HMDA Grounds, Hyderabad",
+          type: "Exhibition",
+          description: `
+            <p style="margin-bottom: 0.6rem; font-weight: 600; color: #112A18;">A full-day exhibition featuring the latest innovations and solutions in:</p>
+            <ul style="margin-left: 1.25rem; margin-bottom: 0.8rem; list-style-type: disc; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; font-size: 0.8rem;">
+              <li>Electric Vehicles (EV)</li>
+              <li>Battery Energy Storage (BESS)</li>
+              <li>Solar Energy</li>
+              <li>Wind Energy</li>
+              <li>Smart Energy Technologies</li>
+              <li>Sustainable Infrastructure</li>
+            </ul>
+            <p>Visitors can explore exhibitor stalls, live demonstrations, product launches, and networking opportunities with industry leaders.</p>
+          `
+        }
       ],
       day2: [
-        { time: "11:00 AM", title: "Expo Day 2 Gates Open", speaker: "Visitors & Delegates", venue: "HMDA Grounds", type: "Opening" },
-        { time: "11:30 AM", title: "Grand Panel Debate: Future of BESS, EV, Wind, & Solar in India", speaker: "Industry Leaders & Technical Experts", venue: "Conference Hall Stage A", type: "Panel Discussion" },
-        { time: "02:00 PM", title: "Networking Lunch Session", speaker: "All Attendees", venue: "Exhibition Food Court", type: "Networking" },
-        { time: "03:00 PM", title: "B2B Meetings & Technology Interaction", speaker: "Exhibitors & Business Delegates", venue: "Exhibitor Stalls", type: "B2B Sessions" },
-        { time: "05:00 PM", title: "Closing Ceremony & Valedictory Addresses", speaker: "Dignitaries & Chief Guests", venue: "Main Stage", type: "Ceremony" },
-        { time: "06:30 PM", title: "Expo Close & Gate Exit", speaker: "Organizers", venue: "HMDA Grounds", type: "Closing" }
+        {
+          time: "11:00 AM",
+          timeRange: "11:00 AM – 06:30 PM",
+          title: "Expo Gates Open",
+          speaker: "Visitors & Delegates",
+          venue: "HMDA Grounds Entrance",
+          type: "Expo Timings",
+          description: "General exhibition gates are open from 11:00 AM to 6:30 PM for all registered attendees."
+        },
+        {
+          time: "11:30 AM",
+          timeRange: "11:30 AM – 02:00 PM",
+          title: "Industry Leadership Debate & Panel Discussion",
+          speaker: "Industry Experts, Policy Makers & Government Representatives",
+          venue: "Main Conference Hall",
+          type: "Featured Debate",
+          featured: true,
+          description: `
+            <p style="margin-bottom: 0.6rem; font-weight: 600; color: #112A18;">Key discussions and expert debates on:</p>
+            <ul style="margin-left: 1.25rem; margin-bottom: 0.8rem; list-style-type: disc; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; font-size: 0.8rem;">
+              <li>Battery Energy Storage (BESS)</li>
+              <li>Electric Vehicles (EV)</li>
+              <li>Solar Energy</li>
+              <li>Wind Energy</li>
+              <li>Renewable Energy Policy</li>
+              <li>Future Energy Tech &amp; Sustainability</li>
+            </ul>
+            <p>Industry experts, government representatives, policymakers, and business leaders will share insights on the future of India's clean energy ecosystem.</p>
+          `
+        },
+        {
+          time: "02:00 PM",
+          timeRange: "02:00 PM – 06:30 PM",
+          title: "Expo & Networking Session",
+          speaker: "Delegates, Exhibitors & Visitors",
+          venue: "Exhibition Floor",
+          type: "Networking",
+          description: "Continue exploring exhibitor showcases, technology demonstrations, business networking opportunities, and industry collaborations."
+        }
       ]
     };
 
@@ -2338,10 +2409,10 @@
           } else if (typeLower.includes('keynote')) {
             typeClass = 'type-keynote';
             dotClass = 'dot-copper';
-          } else if (typeLower.includes('panel')) {
+          } else if (typeLower.includes('panel') || typeLower.includes('debate')) {
             typeClass = 'type-panel';
             dotClass = 'dot-copper';
-          } else if (typeLower.includes('technical') || typeLower.includes('talk')) {
+          } else if (typeLower.includes('technical') || typeLower.includes('talk') || typeLower.includes('exhibition') || typeLower.includes('timings')) {
             typeClass = 'type-technical';
             dotClass = 'dot-copper';
           } else if (typeLower.includes('networking')) {
@@ -2354,24 +2425,35 @@
 
           const itemDiv = document.createElement('div');
           itemDiv.className = 'timeline-item';
+          
+          let featuredClass = item.featured ? 'featured' : '';
+          
           itemDiv.innerHTML = `
             <div class="timeline-time">
               <span class="time-hour">${hour}</span>
               <span class="time-ampm">${ampm}</span>
             </div>
             <div class="timeline-dot ${dotClass}"></div>
-            <div class="timeline-content ${typeClass}">
-              <div class="timeline-title">${item.title}</div>
-              <div class="timeline-speaker">
+            <div class="timeline-content ${typeClass} ${featuredClass}">
+              <div class="timeline-title" style="font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: #112A18; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                ${item.featured ? `<span style="font-size: 9px; font-weight: 800; background: var(--copper); color: #fff; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; display: inline-block; letter-spacing: 0.5px;">⭐ Featured Debate</span>` : ''}
+                <span>${item.title}</span>
+              </div>
+              <div class="timeline-speaker" style="margin-top: 6px; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; color: var(--text-dim);">
                 <i class="ti ti-user" style="font-size: 13px;"></i>
                 <span>${item.speaker}</span>
               </div>
-              <div class="timeline-chips">
+              ${item.description ? `<div class="timeline-desc" style="font-size: 0.82rem; color: #555; margin: 10px 0; line-height: 1.5; font-family: 'Outfit', sans-serif;">${item.description}</div>` : ''}
+              <div class="timeline-chips" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
                 <span class="venue-chip">
                   <i class="ti ti-map-pin" style="font-size: 11px;"></i>
                   ${item.venue}
                 </span>
                 <span class="session-chip ${typeClass}">${item.type}</span>
+                <span class="time-chip">
+                  <i class="ti ti-clock" style="font-size: 11px;"></i>
+                  ${item.timeRange || item.time}
+                </span>
               </div>
             </div>
           `;
