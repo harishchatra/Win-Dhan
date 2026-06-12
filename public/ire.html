@@ -1245,6 +1245,124 @@
       background: #FAF4EB !important;
     }
 
+    /* ── SPONSORS MARQUEE SLIDER ── */
+    .sponsors-marquee-section {
+      padding: 2rem 0;
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+    
+    .sponsors-track-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      position: relative;
+    }
+    
+    .marquee-wrapper {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      user-select: none;
+      position: relative;
+      /* Mask gradient for smooth fade at edges */
+      mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+    }
+    
+    .marquee-track {
+      display: flex;
+      gap: 1.5rem;
+      flex-shrink: 0;
+      min-width: 100%;
+      padding: 0.5rem 0;
+    }
+    
+    .marquee-track.scroll-left {
+      animation: marqueeScrollLeft 30s linear infinite;
+    }
+    
+    .marquee-track.scroll-right {
+      animation: marqueeScrollRight 30s linear infinite;
+    }
+    
+    /* Pause animation on hover */
+    .marquee-wrapper:hover .marquee-track {
+      animation-play-state: paused;
+    }
+    
+    @keyframes marqueeScrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    @keyframes marqueeScrollRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    
+    /* Sponsor Card Styling */
+    .sponsor-marquee-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(184, 115, 51, 0.15);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      min-width: 260px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 4px 12px rgba(17, 42, 24, 0.03);
+      transition: all 0.25s ease;
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+    
+    .sponsor-marquee-card:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: var(--copper);
+      box-shadow: 0 8px 20px rgba(184, 115, 51, 0.1);
+      background: #FDFAF6;
+    }
+    
+    .sponsor-logo-badge {
+      width: 44px;
+      height: 44px;
+      background: #EEF5F0;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      border: 1px solid rgba(45, 90, 45, 0.08);
+      flex-shrink: 0;
+    }
+    
+    .sponsor-card-details {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      text-align: left;
+    }
+    
+    .sponsor-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #112A18;
+      line-height: 1.2;
+    }
+    
+    .sponsor-role {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--copper);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
     /* Horizontal scroll for mobile/tablet */
     @media (max-width: 768px) {
       .dignitaries-grid {
@@ -2070,32 +2188,156 @@
       <h2 class="section-title">Sponsors &amp; <span>Co-organisers</span></h2>
       <div class="divider"></div>
       
-      <div style="margin-bottom: 2.5rem;">
-        <h4 style="font-size: 0.8rem; font-weight: 800; color: var(--copper); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">Nodal Agencies & Government Support</h4>
-        <div class="grid-3" style="align-items: center; justify-items: center; gap: 2rem;">
-          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">🏛️ Ministry of Power (MNRE)</div>
-          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">🏛️ TSREDCO (Nodal Agency)</div>
-          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">🏛️ IREDA (Green Finance)</div>
+      <div class="sponsors-marquee-section">
+        <div class="sponsors-track-container">
+          
+          <!-- Track 1: Nodal Agencies, Co-Organizers & Trust Partners (Moving Left) -->
+          <div class="marquee-wrapper">
+            <div class="marquee-track scroll-left">
+              <!-- Set 1 -->
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏛️</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Ministry of Power (MNRE)</div>
+                  <div class="sponsor-role">Govt. Support / Nodal</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏛️</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">TSREDCO (Nodal Agency)</div>
+                  <div class="sponsor-role">Nodal Partner</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏛️</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">IREDA (Green Finance)</div>
+                  <div class="sponsor-role">Green Finance</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">⚡</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Dhan Enterprise</div>
+                  <div class="sponsor-role">Co-organiser</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🤝</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Suprabha Trust</div>
+                  <div class="sponsor-role">Trust Partner</div>
+                </div>
+              </div>
+              
+              <!-- Duplicate Set 1 for Loop -->
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏛️</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Ministry of Power (MNRE)</div>
+                  <div class="sponsor-role">Govt. Support / Nodal</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏛️</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">TSREDCO (Nodal Agency)</div>
+                  <div class="sponsor-role">Nodal Partner</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏛️</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">IREDA (Green Finance)</div>
+                  <div class="sponsor-role">Green Finance</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">⚡</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Dhan Enterprise</div>
+                  <div class="sponsor-role">Co-organiser</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🤝</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Suprabha Trust</div>
+                  <div class="sponsor-role">Trust Partner</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Track 2: Key Sponsors (BESS & Solar PV Industry) (Moving Right) -->
+          <div class="marquee-wrapper">
+            <div class="marquee-track scroll-right">
+              <!-- Set 2 -->
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏆</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Tata Motors Green</div>
+                  <div class="sponsor-role">Key Sponsor (EV)</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏆</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Premier Solar Systems</div>
+                  <div class="sponsor-role">Key Sponsor (Solar)</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏆</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Waaree PV modules</div>
+                  <div class="sponsor-role">Key Sponsor (BESS)</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏆</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Goldi Solar PV</div>
+                  <div class="sponsor-role">Key Sponsor (Solar)</div>
+                </div>
+              </div>
+              
+              <!-- Duplicate Set 2 for Loop -->
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏆</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Tata Motors Green</div>
+                  <div class="sponsor-role">Key Sponsor (EV)</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏆</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Premier Solar Systems</div>
+                  <div class="sponsor-role">Key Sponsor (Solar)</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏆</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Waaree PV modules</div>
+                  <div class="sponsor-role">Key Sponsor (BESS)</div>
+                </div>
+              </div>
+              <div class="sponsor-marquee-card">
+                <div class="sponsor-logo-badge">🏆</div>
+                <div class="sponsor-card-details">
+                  <div class="sponsor-name">Goldi Solar PV</div>
+                  <div class="sponsor-role">Key Sponsor (Solar)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
-
-      <div style="margin-bottom: 2.5rem;">
-        <h4 style="font-size: 0.8rem; font-weight: 800; color: var(--copper); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">Co-organising & Trust Partners</h4>
-        <div class="grid-2" style="align-items: center; justify-items: center; gap: 2rem; max-width: 600px; margin: 0 auto;">
-          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">⚡ Dhan Enterprise</div>
-          <div style="background:#fff; border: 1px solid var(--border); padding: 1.2rem; border-radius: 8px; font-weight:700; font-size: 0.9rem; text-align:center; min-width: 200px;">🤝 Suprabha Trust</div>
-        </div>
-      </div>
-
-      <div>
-        <h4 style="font-size: 0.8rem; font-weight: 800; color: var(--copper); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1rem;">Key Sponsors (BESS & Solar PV Industry)</h4>
-        <div class="grid-4" style="align-items: center; justify-items: center; gap: 1.5rem;">
-          <div style="background:#fff; border: 1px solid var(--border); padding: 1rem; border-radius: 6px; font-weight:800; font-size: 0.82rem; text-align:center; color: var(--text-dim); min-width: 160px;">🏆 Tata Motors Green</div>
-          <div style="background:#fff; border: 1px solid var(--border); padding: 1rem; border-radius: 6px; font-weight:800; font-size: 0.82rem; text-align:center; color: var(--text-dim); min-width: 160px;">🏆 Premier Solar Systems</div>
-          <div style="background:#fff; border: 1px solid var(--border); padding: 1rem; border-radius: 6px; font-weight:800; font-size: 0.82rem; text-align:center; color: var(--text-dim); min-width: 160px;">🏆 Waaree PV modules</div>
-          <div style="background:#fff; border: 1px solid var(--border); padding: 1rem; border-radius: 6px; font-weight:800; font-size: 0.82rem; text-align:center; color: var(--text-dim); min-width: 160px;">🏆 Goldi Solar PV</div>
-        </div>
-      </div>
+      
     </div>
   </section>
 
