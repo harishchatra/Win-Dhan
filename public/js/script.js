@@ -254,7 +254,7 @@
    Countdown timer (shared)
 ──────────────────────────────────── */
 function startCountdown(containerId) {
-  const target = new Date('2026-07-03T09:00:00');
+  const target = new Date('2026-07-03T11:00:00');
   const ids = { days: 'cd-days', hrs: 'cd-hrs', min: 'cd-min', sec: 'cd-sec' };
 
   function tick() {
