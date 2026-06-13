@@ -2316,8 +2316,31 @@ function jumpToSearchResult(tabId, itemId) {
 let selectedAdminStallId = null;
 let activeExhibitorCompany = '';
 
+// ── Sidebar Toggle function for mobile drawer ──
+function toggleSidebar(isOpen) {
+  const sidebar = document.getElementById('app-sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  if (sidebar) {
+    if (isOpen) {
+      sidebar.classList.add('open');
+    } else {
+      sidebar.classList.remove('open');
+    }
+  }
+  if (overlay) {
+    if (isOpen) {
+      overlay.classList.add('active');
+    } else {
+      overlay.classList.remove('active');
+    }
+  }
+}
+
 // ── Tab Switcher view function ──
 async function switchView(viewId, element) {
+  // Automatically close sidebar drawer on navigation selection (mobile)
+  toggleSidebar(false);
+
   // Hide all view panes
   const panes = document.querySelectorAll('.view-pane');
   panes.forEach(p => p.classList.remove('active'));

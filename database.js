@@ -272,6 +272,27 @@ db.serialize(() => {
       db.run(`INSERT INTO users VALUES ('u2', 'Suprabha Manager', 'manager', ?, 'admin')`, [pass2]);
       db.run(`INSERT INTO users VALUES ('u3', 'Raju Kumar', 'raju', ?, 'sales_executive')`, [pass3]);
     }
+
+    // Ensure Mr. Harish Chatra's account is always seeded
+    db.get(`SELECT * FROM users WHERE username = '@harishchatra'`, (err2, uRow) => {
+      if (err2) {
+        console.error('Error checking Harish Chatra user:', err2.message);
+        return;
+      }
+      if (!uRow) {
+        console.log('Seeding Harish Chatra super_admin user...');
+        const salt = bcrypt.genSaltSync(10);
+        const passHash = bcrypt.hashSync('7981869954', salt);
+        db.run(
+          `INSERT INTO users (id, name, username, password_hash, role) VALUES ('u_harish', 'Harish Chatra', '@harishchatra', ?, 'super_admin')`,
+          [passHash],
+          (err3) => {
+            if (err3) console.error('Failed to seed Harish Chatra:', err3.message);
+            else console.log('Harish Chatra seeded successfully.');
+          }
+        );
+      }
+    });
   });
 
   // Seed Stalls (Seed all 85 stalls completely available!)

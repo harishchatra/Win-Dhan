@@ -887,6 +887,139 @@
         padding: 2cm;
       }
     }
+
+    /* ── RESPONSIVE DESIGN STYLES ── */
+    .hamburger-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0 10px;
+      margin-right: 10px;
+      line-height: 1;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+    .hamburger-menu-btn:hover {
+      color: var(--copper);
+    }
+    
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 56px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(14, 31, 18, 0.4);
+      backdrop-filter: blur(2px);
+      z-index: 199;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    @media screen and (max-width: 850px) {
+      .hamburger-menu-btn {
+        display: inline-flex;
+      }
+
+      /* Sidebar changes into a drawer sliding from the left */
+      .app-sidebar {
+        position: fixed;
+        top: 56px;
+        left: 0;
+        bottom: 0;
+        width: 240px;
+        height: calc(100vh - 56px);
+        background: #fffdf8;
+        border-right: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+        z-index: 200;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .app-sidebar.open {
+        transform: translateX(0);
+      }
+
+      /* Viewport padding adjust */
+      .app-viewport {
+        padding: 1rem;
+      }
+
+      /* Grids and stacking adjustments */
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .split-pane-layout, .map-split-container {
+        grid-template-columns: 1fr !important;
+      }
+
+      .chart-container-grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      
+      /* Make search bar compact */
+      .header-search-container {
+        width: 160px;
+      }
+      .header-search:focus {
+        width: 200px;
+      }
+      
+      /* Header elements spacing */
+      .role-dropdown-container span.role-dropdown-label {
+        display: none !important; /* Hide "Role:" text */
+      }
+    }
+
+    @media screen and (max-width: 550px) {
+      .kpi-grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .header-search-container {
+        display: none; /* Hide search bar on very small devices to avoid clutter */
+      }
+      
+      .modal-form-row {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .brand-title {
+        font-size: 0.9rem;
+      }
+      
+      .app-header {
+        padding: 0 0.8rem;
+      }
+      
+      .header-actions {
+        gap: 8px;
+      }
+      
+      .role-dropdown-container {
+        padding: 2px 6px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -897,6 +1030,7 @@
   <!-- APP HEADER -->
   <header class="app-header">
     <div class="brand-area">
+      <button class="hamburger-menu-btn" id="hamburger-menu-btn" onclick="toggleSidebar(true)">☰</button>
       <a href="ire.html">
         <svg class="brand-logo" viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg">
           <rect width="86" height="52" rx="11" fill="#1A3A1A"/>
@@ -954,9 +1088,10 @@
 
   <!-- WORKSPACE SPLIT LAYOUT -->
   <div class="app-workspace">
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar(false)"></div>
     
     <!-- SIDEBAR NAVIGATION -->
-    <aside class="app-sidebar">
+    <aside class="app-sidebar" id="app-sidebar">
       <div class="sidebar-menu">
         <button class="sidebar-menu-btn active" id="nav-btn-dashboard" onclick="switchView('dashboard', this)">
           <span class="ico">📊</span> Dashboard
