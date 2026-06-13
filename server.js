@@ -9,6 +9,7 @@ const db = require('./database');
 require('dotenv').config();
 
 const app = express();
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 3000;
 
 // Ensure uploads folder exists
@@ -106,7 +107,13 @@ app.post('/api/auth/login', (req, res) => {
       username: user.username,
       role: user.role
     };
-    res.json({ success: true, user: req.session.user });
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error:', err);
+        return res.status(500).json({ error: 'Session save failed.' });
+      }
+      res.json({ success: true, user: req.session.user });
+    });
   });
 });
 
