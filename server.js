@@ -86,7 +86,12 @@ app.post('/api/auth/login', (req, res) => {
     return res.status(400).json({ error: 'Username and password are required.' });
   }
 
-  db.get(`SELECT * FROM users WHERE username = ?`, [username.toLowerCase()], (err, user) => {
+  let searchUsername = username.toLowerCase();
+  if (searchUsername === 'harishchatra') {
+    searchUsername = '@harishchatra';
+  }
+
+  db.get(`SELECT * FROM users WHERE username = ?`, [searchUsername], (err, user) => {
     if (err) return res.status(500).json({ error: err.message });
     if (!user) return res.status(401).json({ error: 'Invalid username or password.' });
 
