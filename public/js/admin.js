@@ -319,6 +319,7 @@ document.addEventListener('click', () => {
 
 // ── USER ROLE & PERMISSION SWITCHER ──
 async function initAdminUI() {
+  let user = null;
   try {
     const res = await fetch('/api/auth/session', { cache: 'no-store' });
     if (!res.ok) {
@@ -330,9 +331,17 @@ async function initAdminUI() {
       window.location.href = '/login.html';
       return;
     }
+    user = data.user;
+  } catch (err) {
+    console.error('Session verification network error:', err);
+    window.location.href = '/login.html';
+    return;
+  }
 
-    activeRole = data.user.role;
-    const userName = data.user.name;
+  // Authentication succeeded, load and render UI elements
+  try {
+    activeRole = user.role;
+    const userName = user.name;
 
     // Update avatar badge
     const avatar = document.getElementById('user-profile-avatar');
@@ -376,8 +385,8 @@ async function initAdminUI() {
     populateRegSettingsForm();
     renderNotificationsTray();
   } catch (err) {
-    console.error('Session verification error:', err);
-    window.location.href = '/login.html';
+    console.error('UI Rendering Error (Authentication is valid):', err);
+    // DO NOT REDIRECT to login.html to prevent infinite loops and allow debugging!
   }
 }
 
