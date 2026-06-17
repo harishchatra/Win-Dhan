@@ -3570,13 +3570,13 @@ function printInvoice(payId) {
       <head>
         <title>GST Invoice - ${p.company}</title>
         <style>
-          body { font-family: 'Outfit', sans-serif; padding: 40px; color: #18542a; }
-          .header { display: flex; justify-content: space-between; border-bottom: 2px solid #f96015; padding-bottom: 20px; }
-          .logo { font-size: 24px; font-weight: 800; color: #f96015; }
+          body { font-family: 'Outfit', sans-serif; padding: 40px; color: #000000; }
+          .header { display: flex; justify-content: space-between; border-bottom: 2px solid #F24405; padding-bottom: 20px; }
+          .logo { font-size: 24px; font-weight: 800; color: #F24405; }
           .details { margin: 30px 0; display: flex; justify-content: space-between; line-height: 1.6; }
           table { width: 100%; border-collapse: collapse; margin-top: 30px; }
           th, td { border: 1px solid rgba(0,0,0,0.1); padding: 12px; text-align: left; }
-          th { background: #EEF5F0; }
+          th { background: #F2F0E4; }
           .totals { text-align: right; margin-top: 30px; font-size: 16px; line-height: 1.8; }
           .stamp { margin-top: 50px; text-align: right; font-style: italic; }
         </style>
@@ -3633,7 +3633,7 @@ function printInvoice(payId) {
         <div class="totals">
           <div>Subtotal: ₹${p.amount.toLocaleString('en-IN')}</div>
           <div>GST (18%): ₹${p.gst.toLocaleString('en-IN')}</div>
-          <div style="font-size: 20px; font-weight: 800; color: #f96015;">Total Amount Paid: ₹${p.paid.toLocaleString('en-IN')}</div>
+          <div style="font-size: 20px; font-weight: 800; color: #F24405;">Total Amount Paid: ₹${p.paid.toLocaleString('en-IN')}</div>
           <div style="font-size: 16px; font-weight: 700; color: #c62828;">Outstanding Balance: ₹${p.pending.toLocaleString('en-IN')}</div>
         </div>
         <div class="stamp">
@@ -4120,8 +4120,8 @@ function applyRolePermissions() {
 function printCertificateElement() {
   const printWindow = window.open('', '_blank');
   const style = `
-    body { font-family: Georgia, serif; text-align: center; padding: 50px; color: #18542a; border: 15px double #f96015; }
-    h1 { font-size: 32px; color: #f96015; letter-spacing: 2px; }
+    body { font-family: Georgia, serif; text-align: center; padding: 50px; color: #000000; border: 15px double #F24405; }
+    h1 { font-size: 32px; color: #F24405; letter-spacing: 2px; }
   `;
   printWindow.document.write(`
     <html>

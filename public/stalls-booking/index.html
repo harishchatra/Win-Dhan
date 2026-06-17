@@ -14,17 +14,17 @@
     /* ── DESIGN SYSTEM & VARIABLE TOKENS ── */
     :root {
       /* Dhan Win Branding Colors */
-      --bg-dark: #f3e8cc;          /* Light Cream Background */
+      --bg-dark: #F2F0E4;          /* Light Cream Background */
       --bg-card: #FFFFFF;          /* White Card */
       --bg-card-solid: #FFFFFF;    /* Solid White Card */
-      --border-color: rgba(24, 84, 42, 0.13);  /* Soft Green Border */
-      --border-hover: rgba(249, 96, 21, 0.4);  /* Copper Border Hover */
+      --border-color: rgba(0, 0, 0, 0.13);  /* Soft Border */
+      --border-hover: rgba(242, 68, 5, 0.4);  /* Copper Border Hover */
       
-      --color-gold: #f96015;       /* Dhan Win Copper */
-      --color-gold-glow: #ffc926;  /* Dhan Win Gold */
-      --color-navy-lt: #ebdcb4;    /* Light Mint Green Accent */
-      --color-text: #18542a;       /* Deep Forest Green Text */
-      --color-text-dim: #246835;   /* Medium Green Text */
+      --color-gold: #F24405;       /* Dhan Win Copper */
+      --color-gold-glow: #F28705;  /* Dhan Win Gold */
+      --color-navy-lt: #E5E3D7;    /* Light Mint Green Accent */
+      --color-text: #000000;       /* Deep Forest Green Text */
+      --color-text-dim: #000000;   /* Medium Green Text */
       
       /* Curated Block Palette (UX colors) */
       --color-block-a: #D4873A;    /* Warm Amber - Block A */
@@ -59,8 +59,8 @@
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(45, 90, 45, 0.02) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(184, 115, 51, 0.02) 0%, transparent 40%);
+        radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.02) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(242, 68, 5, 0.02) 0%, transparent 40%);
       background-attachment: fixed;
       color: var(--color-text);
       font-family: var(--font-family);
@@ -2313,16 +2313,16 @@
         <a href="../ire.html" class="header-logo">
           <!-- Slim logo SVG matching Dhan Win -->
           <svg class="slim-logo" viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg">
-            <rect width="86" height="52" rx="11" fill="#18542a"/>
-            <rect width="86" height="52" rx="11" fill="none" stroke="rgba(249,96,21,0.45)" stroke-width="1.2"/>
-            <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#ffc926">W</text>
-            <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#f96015">IN</text>
-            <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(255,201,38,0.65)" letter-spacing="1.5">DHAN</text>
-            <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(249,96,21,0.35)" stroke-width="1"/>
-            <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#f96015">D</text>
-            <circle cx="55" cy="24" r="4" fill="#ffc926"/>
-            <circle cx="55" cy="24" r="2.2" fill="#f96015"/>
-            <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#ffc926">E</text>
+            <rect width="86" height="52" rx="11" fill="#000000"/>
+            <rect width="86" height="52" rx="11" fill="none" stroke="rgba(242,68,5,0.45)" stroke-width="1.2"/>
+            <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#F28705">W</text>
+            <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#F24405">IN</text>
+            <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(242,135,5,0.65)" letter-spacing="1.5">DHAN</text>
+            <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(242,68,5,0.35)" stroke-width="1"/>
+            <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#F24405">D</text>
+            <circle cx="55" cy="24" r="4" fill="#F28705"/>
+            <circle cx="55" cy="24" r="2.2" fill="#F24405"/>
+            <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#F28705">E</text>
           </svg>
           <span class="logo-title-text">IRE Expo 2026</span>
         </a>
@@ -4254,7 +4254,7 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      const colors = ['#D4873A', '#4A9E8A', '#C47B6A', '#5B7FA6', '#7A9E5A', '#6255A4', '#f96015', '#ffc926', '#E05C2A'];
+      const colors = ['#D4873A', '#4A9E8A', '#C47B6A', '#5B7FA6', '#7A9E5A', '#6255A4', '#F24405', '#F28705', '#F25C05'];
       const particles = [];
       
       // Left side fountain

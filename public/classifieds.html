@@ -68,9 +68,9 @@
   }
 }
 .success-banner {
-  background: #eef5f0;
-  color: #2d5a2d;
-  border: 1px solid rgba(45,90,45,0.25);
+  background: var(--bg-section);
+  color: var(--text);
+  border: 1px solid var(--border);
   padding: 1.25rem;
   border-radius: var(--radius);
   margin-bottom: 1.5rem;
@@ -735,7 +735,7 @@ async function performFetchSubmission(payload, formId, alertContainer) {
 
     if (response.ok && result.success) {
       alertContainer.innerHTML = `
-        <div class="success-banner" style="background:#eef5f0; color:#2d5a2d; border-color:rgba(45,90,45,0.25);">
+        <div class="success-banner" style="background:var(--bg-section); color:var(--text); border-color:var(--border);">
           <span>🎉</span>
           <div>
             <strong>Submission Successful!</strong><br>

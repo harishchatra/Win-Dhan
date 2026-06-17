@@ -25,16 +25,16 @@
       <a class="nav-logo" href="index.html">
         <div class="logo-mark">
           <svg viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg">
-            <rect width="86" height="52" rx="11" fill="#18542a"/>
-            <rect width="86" height="52" rx="11" fill="none" stroke="rgba(249,96,21,0.45)" stroke-width="1.2"/>
-            <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#ffc926">W</text>
-            <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#f96015">IN</text>
-            <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(255,201,38,0.65)" letter-spacing="1.5">DHAN</text>
-            <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(249,96,21,0.35)" stroke-width="1"/>
-            <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#f96015">D</text>
-            <circle cx="55" cy="24" r="4" fill="#ffc926"/>
-            <circle cx="55" cy="24" r="2.2" fill="#f96015"/>
-            <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#ffc926">E</text>
+            <rect width="86" height="52" rx="11" fill="#000000"/>
+            <rect width="86" height="52" rx="11" fill="none" stroke="rgba(242,68,5,0.45)" stroke-width="1.2"/>
+            <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#F28705">W</text>
+            <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#F24405">IN</text>
+            <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(242,135,5,0.65)" letter-spacing="1.5">DHAN</text>
+            <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(242,68,5,0.35)" stroke-width="1"/>
+            <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#F24405">D</text>
+            <circle cx="55" cy="24" r="4" fill="#F28705"/>
+            <circle cx="55" cy="24" r="2.2" fill="#F24405"/>
+            <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#F28705">E</text>
           </svg>
         </div>
         <div class="logo-text">
@@ -95,16 +95,16 @@
     <div class="footer-brand">
       <div class="logo-mark" style="width:80px;height:48px;margin-bottom:0.9rem;">
         <svg viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg" width="80" height="48">
-          <rect width="86" height="52" rx="11" fill="#18542a"/>
-          <rect width="86" height="52" rx="11" fill="none" stroke="rgba(249,96,21,0.45)" stroke-width="1.2"/>
-          <text x="2" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#ffc926">W</text>
-          <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#f96015">IN</text>
-          <text x="3" y="41" font-family="Arial,sans-serif" font-size="6.5" fill="rgba(255,201,38,0.65)" letter-spacing="1.5">DHAN</text>
-          <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(249,96,21,0.35)" stroke-width="1"/>
-          <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#f96015">D</text>
-          <circle cx="55" cy="24" r="4" fill="#ffc926"/>
-          <circle cx="55" cy="24" r="2.2" fill="#f96015"/>
-          <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#ffc926">E</text>
+          <rect width="86" height="52" rx="11" fill="#000000"/>
+          <rect width="86" height="52" rx="11" fill="none" stroke="rgba(242,68,5,0.45)" stroke-width="1.2"/>
+          <text x="2" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#F28705">W</text>
+          <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#F24405">IN</text>
+          <text x="3" y="41" font-family="Arial,sans-serif" font-size="6.5" fill="rgba(242,135,5,0.65)" letter-spacing="1.5">DHAN</text>
+          <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(242,68,5,0.35)" stroke-width="1"/>
+          <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#F24405">D</text>
+          <circle cx="55" cy="24" r="4" fill="#F28705"/>
+          <circle cx="55" cy="24" r="2.2" fill="#F24405"/>
+          <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#F28705">E</text>
         </svg>
       </div>
       <p>Dhan Enterprise — Encompassing Energy Revolution.<br>10+ years of renewable energy expertise from Hyderabad, India.</p>

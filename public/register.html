@@ -134,12 +134,12 @@
       top: 0;
       right: 0;
       height: 6px;
-      background: linear-gradient(90deg, #f96015, #ffe075, #ffc926, #f96015);
+      background: linear-gradient(90deg, #F24405, #F25C05, #F28705, #F24405);
       z-index: 10;
     }
 
     .pass-top {
-      background: #18542a; /* Forest Green */
+      background: #000000; /* Black */
       padding: 1.5rem 1.5rem 1.2rem 1.5rem;
       color: #FFFFFF;
       display: flex;
@@ -151,10 +151,10 @@
     .lanyard-slot {
       width: 48px;
       height: 7px;
-      background: #0b1a0d;
+      background: #000000;
       border-radius: 10px;
       margin: 0 auto;
-      border: 1px solid rgba(249, 96, 21, 0.4);
+      border: 1px solid rgba(242, 68, 5, 0.4);
     }
 
     .pass-header-content {
@@ -191,11 +191,11 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 1px;
-      background: #ffe075; /* Sunshine light background */
-      color: #18542a; /* Forest Green text */
+      background: #F28705; /* Orange-1 background */
+      color: #000000; /* Black text */
       padding: 5px 12px;
       border-radius: 30px;
-      border: 1px solid #ffc926;
+      border: 1px solid #F28705;
       white-space: nowrap;
     }
 
@@ -213,8 +213,8 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background: #f3e8cc; /* Warm cream background */
-      border: 1.5px solid rgba(249, 96, 21, 0.25);
+      background: #F2F0E4; /* Cream background */
+      border: 1.5px solid rgba(242, 68, 5, 0.25);
       z-index: 5;
     }
     .pass-perf::before { left: -9px; }
@@ -250,7 +250,7 @@
 
     .pass-value {
       font-size: 0.85rem;
-      color: #18542a;
+      color: #000000;
       font-weight: 700;
     }
 
@@ -343,7 +343,7 @@
       }
       .visitor-pass {
         box-shadow: none !important;
-        border: 1.5px solid #18542a !important;
+        border: 1.5px solid #000000 !important;
         background: #FFFFFF !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
@@ -503,16 +503,16 @@
               <div class="pass-header-content">
                 <div class="pass-logo" style="width: 36px; height: 22px;">
                   <svg viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                    <rect width="86" height="52" rx="11" fill="#18542a"/>
-                    <rect width="86" height="52" rx="11" fill="none" stroke="rgba(249,96,21,0.45)" stroke-width="1.2"/>
-                    <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#ffc926">W</text>
-                    <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#f96015">IN</text>
-                    <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(255,201,38,0.65)" letter-spacing="1.5">DHAN</text>
-                    <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(249,96,21,0.35)" stroke-width="1"/>
-                    <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#f96015">D</text>
-                    <circle cx="55" cy="24" r="4" fill="#ffc926"/>
-                    <circle cx="55" cy="24" r="2.2" fill="#f96015"/>
-                    <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#ffc926">E</text>
+                    <rect width="86" height="52" rx="11" fill="#000000"/>
+                    <rect width="86" height="52" rx="11" fill="none" stroke="rgba(242,68,5,0.45)" stroke-width="1.2"/>
+                    <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#F28705">W</text>
+                    <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#F24405">IN</text>
+                    <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(242,135,5,0.65)" letter-spacing="1.5">DHAN</text>
+                    <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(242,68,5,0.35)" stroke-width="1"/>
+                    <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#F24405">D</text>
+                    <circle cx="55" cy="24" r="4" fill="#F28705"/>
+                    <circle cx="55" cy="24" r="2.2" fill="#F24405"/>
+                    <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#F28705">E</text>
                   </svg>
                 </div>
                 <div class="pass-event-details">
@@ -760,16 +760,16 @@
         // Premium color coding for type badge
         const typeLower = data.type.toLowerCase();
         if (typeLower.includes('delegate') || typeLower.includes('government')) {
-          badge.style.background = '#f96015'; // Crisp Carrot
+          badge.style.background = '#F24405'; // Orange-3
           badge.style.color = '#FFFFFF';
-          badge.style.borderColor = '#f96015';
+          badge.style.borderColor = '#F24405';
         } else if (data.type === 'VIP Delegate') {
-          badge.style.background = '#ffc926'; // Sunshine
-          badge.style.color = '#18542a';
-          badge.style.borderColor = '#ffc926';
+          badge.style.background = '#F28705'; // Orange-1
+          badge.style.color = '#000000';
+          badge.style.borderColor = '#F28705';
         } else {
           badge.style.background = '#A8A9AD'; // Silver
-          badge.style.color = '#18542a';
+          badge.style.color = '#000000';
           badge.style.borderColor = '#A8A9AD';
         }
       }
@@ -844,7 +844,7 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      const colors = ['#f96015', '#ffc926', '#A8A9AD', '#18542a', '#246835', '#fa8043'];
+      const colors = ['#F24405', '#F28705', '#A8A9AD', '#000000', '#000000', '#F25C05'];
       const particles = [];
       
       // Bottom left burst
