@@ -555,13 +555,13 @@
 
     .btn-register {
       border: 1.5px solid var(--bg);
-      background: transparent;
-      color: var(--bg) !important;
+      background: var(--bg);
+      color: var(--text) !important;
     }
     .btn-register:hover {
       border-color: var(--gold) !important;
-      color: var(--gold) !important;
-      background: transparent !important;
+      color: var(--text) !important;
+      background: var(--gold) !important;
     }
 
     .btn-book-stall {
