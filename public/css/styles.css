@@ -752,7 +752,7 @@
   .hero-stat {
     text-align: center; padding: 1rem 1.4rem;
     background: rgba(255,255,255,0.92);
-    border: 1px solid rgba(45,90,45,0.12);
+    border: 1px solid rgba(0,0,0,0.12);
     border-radius: var(--radius);
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow-md);
@@ -938,7 +938,7 @@
   .service-card .sc-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(10,28,15,0.92) 0%, rgba(10,28,15,0.45) 60%, rgba(10,28,15,0.05) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.05) 100%);
   }
   .service-card .sc-body {
     position: relative;
@@ -1017,7 +1017,7 @@
   .countdown-boxes { display: flex; gap: 0.7rem; justify-content: center; margin-top: 0.8rem; }
   .cbox {
     background: var(--bg);
-    border: 1px solid rgba(45,90,45,0.12);
+    border: 1px solid rgba(0,0,0,0.12);
     border-radius: 8px;
     padding: 0.65rem 1rem;
     min-width: 62px;
@@ -1076,7 +1076,7 @@
   }
   .form-group input:focus,
   .form-group select:focus,
-  .form-group textarea:focus { border-color: var(--copper); box-shadow: 0 0 0 3px rgba(184,115,51,0.1); }
+  .form-group textarea:focus { border-color: var(--copper); box-shadow: 0 0 0 3px rgba(242,68,5,0.1); }
   .form-group textarea { min-height: 120px; resize: vertical; }
 
   .contact-info { display: flex; flex-direction: column; gap: 1.3rem; }
@@ -1091,7 +1091,7 @@
     justify-content: center;
     font-size: 17px;
     flex-shrink: 0;
-    box-shadow: 0 4px 10px rgba(184,115,51,0.18);
+    box-shadow: 0 4px 10px rgba(242,68,5,0.18);
     color: #fff;
   }
   .contact-item h4 { font-size: 0.82rem; font-weight: 700; color: var(--copper); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
@@ -1099,7 +1099,7 @@
 
   /* ── BANNER (CTA strip) ── */
   .cta-banner {
-    background: linear-gradient(135deg, rgba(184,115,51,0.08), rgba(201,168,76,0.04));
+    background: linear-gradient(135deg, rgba(242,68,5,0.08), rgba(242,135,5,0.04));
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1.8rem var(--space-container-current);
@@ -1168,7 +1168,7 @@
     align-items: center;
     justify-content: center;
   }
-  .pill.active { background: rgba(184,115,51,0.12); border-color: var(--copper-lt); color: var(--copper); }
+  .pill.active { background: rgba(242,68,5,0.12); border-color: var(--copper-lt); color: var(--copper); }
   .pill:hover { border-color: var(--copper-lt); color: var(--copper); }
 
   /* Responsive Table Container Wrapper */
@@ -1277,7 +1277,7 @@
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(17, 42, 24, 0.45);
+    background: rgba(0,0,0, 0.45);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     z-index: 2000;

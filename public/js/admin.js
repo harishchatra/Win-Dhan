@@ -1106,7 +1106,7 @@ function renderSponsorsTable() {
     return `
       <tr>
         <td><strong>${s.company}</strong></td>
-        <td><span class="tag-pill" style="font-size:9.5px; font-weight:700; background:rgba(184,115,51,0.06); color:var(--copper);">${s.type}</span></td>
+        <td><span class="tag-pill" style="font-size:9.5px; font-weight:700; background:rgba(242,68,5,0.06); color:var(--copper);">${s.type}</span></td>
         <td>${s.contact_person}<br><span style="font-size:0.65rem; color:var(--text-muted);">${s.phone}</span></td>
         <td><a href="mailto:${s.email}" style="font-size:0.75rem;">${s.email}</a></td>
         <td><strong>₹${s.amount.toLocaleString('en-IN')}</strong></td>
@@ -1286,7 +1286,7 @@ function renderAgendaList() {
       <div class="agenda-session-card" draggable="true" ondragstart="handleDragStart(event, '${s.id}')" ondragover="handleDragOver(event)" ondrop="handleDrop(event, ${index})">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <div>
-            <span class="tag-pill" style="font-size:8px; font-weight:700; background:rgba(184,115,51,0.06); color:var(--copper);">${s.type}</span>
+            <span class="tag-pill" style="font-size:8px; font-weight:700; background:rgba(242,68,5,0.06); color:var(--copper);">${s.type}</span>
             <span style="font-size:0.65rem; color:var(--text-muted); font-weight:700; margin-left:8px;">🕒 ${s.start_time} - ${s.end_time} | Venue: ${s.venue}</span>
           </div>
           <div>
@@ -1873,7 +1873,7 @@ function renderMediaGalleryGrid() {
 
   container.innerHTML = filtered.map(g => `
     <div style="border: 1px solid var(--border); border-radius: 6px; padding: 8px; background:#fff; text-align:center; position:relative;">
-      <span class="tag-pill" style="position:absolute; top:12px; left:12px; font-size:7px; font-weight:700; background:rgba(184,115,51,0.95); color:#fff; z-index:2;">${g.category}</span>
+      <span class="tag-pill" style="position:absolute; top:12px; left:12px; font-size:7px; font-weight:700; background:rgba(242,68,5,0.95); color:#fff; z-index:2;">${g.category}</span>
       <img src="${g.src}" style="width:100%; height:110px; object-fit:cover; border-radius: 4px; margin-bottom:5px;" alt="gallery image">
       <div style="font-size:9px; font-weight:700; color:var(--text-dim); text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">${g.filename}</div>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
@@ -2271,7 +2271,7 @@ function handleGlobalSearch(val) {
           <span class="lbl">${e.company}</span>
           <div class="sub">Stall: ${e.assigned_stall}</div>
         </div>
-        <span class="tag" style="background:#e8f5e9; color:#2e7d32;">active</span>
+        <span class="tag" style="background:#e8f5e9; color:#111111;">active</span>
       </div>
     `).join('');
   }
@@ -2498,7 +2498,7 @@ function renderAdminMapSVG() {
   html += `
     <defs>
       <pattern id="adminGridPattern" width="30" height="30" patternUnits="userSpaceOnUse">
-        <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(45, 90, 45, 0.05)" stroke-width="0.5"/>
+        <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(0,0,0, 0.05)" stroke-width="0.5"/>
       </pattern>
     </defs>
     <rect width="900" height="800" fill="url(#adminGridPattern)"/>
@@ -2506,14 +2506,14 @@ function renderAdminMapSVG() {
     <rect x="9" y="9" width="882" height="782" fill="none" stroke="var(--border)" stroke-width="1" rx="8"/>
     
     <!-- Corridors -->
-    <rect x="90" y="380" width="720" height="40" fill="rgba(184, 115, 51, 0.04)"/>
+    <rect x="90" y="380" width="720" height="40" fill="rgba(242,68,5, 0.04)"/>
     <line x1="90" y1="400" x2="810" y2="400" stroke="var(--border)" stroke-dasharray="2 2"/>
     <text x="450" y="403" fill="var(--text-muted)" font-size="9px" font-weight="700" text-anchor="middle">4m Visitor Corridor</text>
 
-    <rect x="90" y="110" width="720" height="30" fill="rgba(184, 115, 51, 0.02)"/>
-    <rect x="90" y="670" width="720" height="30" fill="rgba(184, 115, 51, 0.02)"/>
-    <rect x="90" y="140" width="30" height="530" fill="rgba(184, 115, 51, 0.02)"/>
-    <rect x="780" y="140" width="30" height="530" fill="rgba(184, 115, 51, 0.02)"/>
+    <rect x="90" y="110" width="720" height="30" fill="rgba(242,68,5, 0.02)"/>
+    <rect x="90" y="670" width="720" height="30" fill="rgba(242,68,5, 0.02)"/>
+    <rect x="90" y="140" width="30" height="530" fill="rgba(242,68,5, 0.02)"/>
+    <rect x="780" y="140" width="30" height="530" fill="rgba(242,68,5, 0.02)"/>
     
     <!-- Main Stage -->
     <g transform="translate(370, 715)">
@@ -2524,7 +2524,7 @@ function renderAdminMapSVG() {
 
     <!-- Food Court -->
     <g transform="translate(20, 715)">
-      <rect x="0" y="0" width="150" height="50" fill="rgba(45, 90, 45, 0.03)" stroke="var(--border)" stroke-width="1" rx="6"/>
+      <rect x="0" y="0" width="150" height="50" fill="rgba(0,0,0, 0.03)" stroke="var(--border)" stroke-width="1" rx="6"/>
       <text x="75" y="24" fill="var(--text-dim)" font-size="10px" font-weight="700" text-anchor="middle">🍲 FOOD COURT</text>
       <text x="75" y="38" fill="var(--text-muted)" font-size="7.5px" text-anchor="middle">Visitor Amenities</text>
     </g>
@@ -2566,8 +2566,8 @@ function renderAdminMapSVG() {
   ];
   unitPositions.forEach((pos, idx) => {
     const unitNum = idx + 1;
-    html += `<rect x="${pos.x - 4}" y="${pos.y - 4}" width="${dWidth + 8}" height="${dHeight + 8}" fill="none" stroke="rgba(201, 168, 76, 0.15)" stroke-width="1" rx="4"/>`;
-    html += `<text x="${pos.x + dWidth/2}" y="${pos.y - 8}" fill="rgba(201, 168, 76, 0.6)" font-size="7.5px" font-weight="800" text-anchor="middle">CLUSTER D-${unitNum}</text>`;
+    html += `<rect x="${pos.x - 4}" y="${pos.y - 4}" width="${dWidth + 8}" height="${dHeight + 8}" fill="none" stroke="rgba(242,135,5, 0.15)" stroke-width="1" rx="4"/>`;
+    html += `<text x="${pos.x + dWidth/2}" y="${pos.y - 8}" fill="rgba(242,135,5, 0.6)" font-size="7.5px" font-weight="800" text-anchor="middle">CLUSTER D-${unitNum}</text>`;
     
     const subW = dWidth / 2;
     const subH = dHeight / 3;
