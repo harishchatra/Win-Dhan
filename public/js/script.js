@@ -77,6 +77,8 @@
           <div class="nav-dropdown">
             <a href="trade.html#directory"><i class="ti ti-folder"></i> Trade Directory</a>
             <a href="tenders.html"><i class="ti ti-file-text"></i> Tenders</a>
+            <a href="network.html"><i class="ti ti-users"></i> Partner Network</a>
+            <a href="classifieds.html"><i class="ti ti-news"></i> Classifieds</a>
           </div>
         </div>
         <span class="nav-separator"></span>
@@ -114,6 +116,8 @@
       <a href="services.html">BESS &amp; Storage</a>
       <a href="services.html">Wind Energy</a>
       <a href="trade.html">Import / Export</a>
+      <a href="network.html">Partner Network</a>
+      <a href="classifieds.html">Classifieds</a>
     </div>
     <div class="footer-col">
       <h5>IRE 2026</h5>
@@ -149,7 +153,7 @@
   // Mark active nav link
   const page = document.body.dataset.page || '';
   document.querySelectorAll('.nav-links a[data-page], .nav-btn[data-page]').forEach(el => {
-    if (el.dataset.page === page || (page === 'tenders' && el.dataset.page === 'trade')) el.classList.add('active');
+    if (el.dataset.page === page || ((page === 'tenders' || page === 'network' || page === 'classifieds') && el.dataset.page === 'trade')) el.classList.add('active');
   });
 
   // Hamburger menu toggle, focus trap, and close on ESC/backdrop

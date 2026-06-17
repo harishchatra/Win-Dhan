@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Classifieds | Dhan Enterprise</title>
+<meta name="description" content="Dhan Enterprise classifieds division — Advertise packages, open tenders listings, clean energy job board. Publish tenders or post job openings.">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+.classifieds-tabs {
+  position: sticky;
+  top: 60px;
+  background: var(--bg);
+  z-index: 90;
+  padding-block: 0.75rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.classifieds-tabs::-webkit-scrollbar {
+  display: none;
+}
+.tab-pane {
+  animation: fadeIn 0.2s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.empty-directory-state {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  background: var(--bg-card);
+  border: 2px dashed var(--border-cu);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2.5rem;
+}
+.empty-directory-state i {
+  font-size: 2.8rem;
+  color: var(--copper-lt);
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.empty-directory-state h4 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.empty-directory-state p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin: 0 auto;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.success-banner {
+  background: #eef5f0;
+  color: #2d5a2d;
+  border: 1px solid rgba(45,90,45,0.25);
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+</style>
+</head>
+<body data-page="classifieds">
+<div id="nav-placeholder"></div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80');"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Commerce &amp; Talent Hub</div>
+    <h1>Classifieds <span>Section</span></h1>
+    <p class="page-hero-desc">Explore advertising packages, list procurement tenders, apply for job openings, or post vacancies for clean energy specialists.</p>
+  </div>
+</div>
+
+<!-- MAIN TABS CONTAINER -->
+<section class="section reveal">
+  <div class="classifieds-tabs">
+    <button class="pill active" data-tab="advertise">📢 Advertise</button>
+    <button class="pill" data-tab="tenders">📄 Tenders</button>
+    <button class="pill" data-tab="jobs">💼 Jobs</button>
+  </div>
+
+  <!-- TAB 1: ADVERTISE -->
+  <div class="tab-pane" id="tab-advertise">
+    <div class="section-tag">Promote Your Business</div>
+    <h2 class="section-title">Directory <span>Ad Packages</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Choose from our advertising packages to highlight your equipment, services, and brand in front of 5000+ certified clean energy professionals.</p>
+
+    <!-- Packages Grid -->
+    <div class="grid-3" style="margin-bottom:3.5rem;">
+      
+      <!-- Basic Directory -->
+      <div class="sponsor-card">
+        <div class="sp-head" style="background:linear-gradient(135deg,var(--text-muted),var(--silver));">
+          <div class="sp-icon">📢</div>
+          <div class="sp-tier">Basic Listing</div>
+          <div class="sp-price">₹12,000<span>/yr</span></div>
+          <div class="sp-sub">Ideal for local equipment dealers</div>
+        </div>
+        <div class="sp-body">
+          <ul>
+            <li><span class="ck">✓</span> Verified directory listing</li>
+            <li><span class="ck">✓</span> 1 product catalog page</li>
+            <li><span class="ck">✓</span> Address &amp; contact details</li>
+            <li><span class="ck">✓</span> Email support</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Premium Showcase -->
+      <div class="sponsor-card" style="border-color:var(--copper);">
+        <div class="sp-head" style="background:linear-gradient(135deg,var(--copper-dk),var(--copper));">
+          <div class="sp-icon">⭐</div>
+          <div class="sp-tier" style="color:var(--copper-pale);">Premium Showcase</div>
+          <div class="sp-price">₹35,000<span>/yr</span></div>
+          <div class="sp-sub" style="color:rgba(255,255,255,0.85);">Standard for clean energy builders</div>
+        </div>
+        <div class="sp-body">
+          <ul>
+            <li><span class="ck">✓</span> Top search rank in category</li>
+            <li><span class="ck">✓</span> 5 product catalog pages</li>
+            <li><span class="ck">✓</span> "Direct Enquiry" button lead routing</li>
+            <li><span class="ck">✓</span> Monthly social media feature</li>
+            <li><span class="ck">✓</span> Priority phone support</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Elite Network -->
+      <div class="sponsor-card" style="border-color:var(--gold);">
+        <div class="sp-head" style="background:linear-gradient(135deg,var(--copper-dk),var(--gold));">
+          <div class="sp-icon">🏆</div>
+          <div class="sp-tier" style="color:var(--gold-lt);">Elite Network</div>
+          <div class="sp-price">₹75,000<span>/yr</span></div>
+          <div class="sp-sub" style="color:rgba(255,255,255,0.85);">Maximum brand visibility &amp; traffic</div>
+        </div>
+        <div class="sp-body">
+          <ul>
+            <li><span class="ck">✓</span> Sticky home banner promotion</li>
+            <li><span class="ck">✓</span> Unlimited product listings</li>
+            <li><span class="ck">✓</span> Direct API integration for leads</li>
+            <li><span class="ck">✓</span> 2 Monthly email newsletter ads</li>
+            <li><span class="ck">✓</span> 24/7 Account manager support</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Advertise Form -->
+    <div class="section-inner" style="max-width: var(--container-md); padding-inline: 0;">
+      <div class="section-tag">Enquiry</div>
+      <h3 class="section-title">Request Ad <span>Space</span></h3>
+      <div class="divider"></div>
+      <p class="section-sub">Select your advertising package or request custom banner layouts. Our sales desk will verify your business and setup your listing.</p>
+
+      <div id="advertiseAlertContainer"></div>
+
+      <form class="contact-form" id="advertiseForm" onsubmit="submitAdvertiseForm(event)">
+        <h3>Ad Package Enquiry</h3>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="adName">Contact Name *</label>
+            <input type="text" id="adName" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="adCompany">Company Name *</label>
+            <input type="text" id="adCompany" placeholder="Registered business">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="adEmail">Email Address *</label>
+            <input type="email" id="adEmail" placeholder="your@company.com">
+          </div>
+          <div class="form-group">
+            <label for="adPhone">Phone Number *</label>
+            <input type="tel" id="adPhone" placeholder="10-digit mobile">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="adPackage">Target Ad Package *</label>
+          <select id="adPackage">
+            <option value="">Select ad package</option>
+            <option value="Basic Listing">Basic Listing (₹12,000/yr)</option>
+            <option value="Premium Showcase">Premium Showcase (₹35,000/yr)</option>
+            <option value="Elite Network">Elite Network (₹75,000/yr)</option>
+            <option value="Custom Banner Request">Custom Banner Promotion</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="adMessage">Specific Requirements / Brand Objectives *</label>
+          <textarea id="adMessage" placeholder="Describe your product catalog, targeting requirements, or custom banner size requests..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:0.9rem;">
+          Send Enquiry →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TAB 2: TENDERS -->
+  <div class="tab-pane" id="tab-tenders" style="display:none;">
+    <div class="section-tag">Procurement classifieds</div>
+    <h2 class="section-title">Open User <span>Tenders</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Browse sub-contracting and private procurement tenders submitted by companies and project developers across India.</p>
+
+    <!-- Empty State Directory -->
+    <div class="empty-directory-state">
+      <i>📄</i>
+      <h4>No Active Classified Tenders</h4>
+      <p>There are no user-submitted tenders active at this moment. If you are seeking vendors or sub-contractors, use the form below to publish your tender opportunity.</p>
+    </div>
+
+    <!-- Publish Form -->
+    <div class="section-inner" style="max-width: var(--container-md); padding-inline: 0;">
+      <div class="section-tag">Publish Opportunity</div>
+      <h3 class="section-title">Publish A <span>Tender</span></h3>
+      <div class="divider"></div>
+      <p class="section-sub">Upload your request for proposal (RFP), bid deadlines, and project details to receive verified vendor proposals.</p>
+
+      <div id="tendersAlertContainer"></div>
+
+      <form class="contact-form" id="tenderForm" onsubmit="submitTenderForm(event)">
+        <h3>Tender Details Form</h3>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tenderContact">Contact Person *</label>
+            <input type="text" id="tenderContact" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="tenderCompany">Issuing Organization *</label>
+            <input type="text" id="tenderCompany" placeholder="Issuing company name">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tenderEmail">Email Address *</label>
+            <input type="email" id="tenderEmail" placeholder="procurement@company.com">
+          </div>
+          <div class="form-group">
+            <label for="tenderPhone">Phone Number *</label>
+            <input type="tel" id="tenderPhone" placeholder="10-digit mobile">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tenderTitle">Tender Opportunity Title *</label>
+          <input type="text" id="tenderTitle" placeholder="e.g. Sub-contracting 10MW Solar Module Mounting Structures, Kurnool">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tenderValue">Estimated Value (INR) *</label>
+            <input type="text" id="tenderValue" placeholder="e.g. ₹4.5 Crores">
+          </div>
+          <div class="form-group">
+            <label for="tenderCategory">Tender Category *</label>
+            <select id="tenderCategory">
+              <option value="">Select category</option>
+              <option value="Solar PV">Solar PV</option>
+              <option value="Wind Energy">Wind Energy</option>
+              <option value="EV Charging Systems">EV Charging Systems</option>
+              <option value="BESS & Storage">BESS &amp; Storage</option>
+              <option value="Hydrogen & Tech">Hydrogen &amp; Tech</option>
+              <option value="Other">Other Procurement</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tenderDate">Bid Closing Date *</label>
+          <input type="date" id="tenderDate">
+        </div>
+
+        <div class="form-group">
+          <label for="tenderDescription">Project Specifications &amp; Vendor Qualification Criteria *</label>
+          <textarea id="tenderDescription" placeholder="Detail the technical specifications, scope of work, bid bond (EMD) requirements, and how vendors should apply..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:0.9rem;">
+          Publish Tender Opportunity →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TAB 3: JOBS -->
+  <div class="tab-pane" id="tab-jobs" style="display:none;">
+    <div class="section-tag">Talent Directory</div>
+    <h2 class="section-title">Careers &amp; <span>Vacancies</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Connecting recruiters with clean energy engineers, project managers, and technicians.</p>
+
+    <!-- Empty State Directory -->
+    <div class="empty-directory-state">
+      <i>💼</i>
+      <h4>No Active Job Board Listings</h4>
+      <p>No clean energy job openings are listed right now. Recruiters can post vacancies below, and candidates can join our green talent pool immediately.</p>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="jobsAlertContainer" style="max-width: var(--container-xl); margin: 0 auto 1.5rem;"></div>
+
+    <!-- Candidate & Recruiter Forms -->
+    <div class="grid-2-1" style="gap:2.5rem;align-items:start;">
+      
+      <!-- Apply for jobs form -->
+      <form class="contact-form" id="jobApplyForm" onsubmit="submitJobApplyForm(event)">
+        <h3>Join Candidate Talent Pool</h3>
+        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">Submit your profile to be shared with our network of 120+ clean energy developers, manufacturers, and EPC managers.</p>
+        
+        <div class="form-group">
+          <label for="applyName">Full Name *</label>
+          <input type="text" id="applyName" placeholder="Your full name">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="applyEmail">Email Address *</label>
+            <input type="email" id="applyEmail" placeholder="name@email.com">
+          </div>
+          <div class="form-group">
+            <label for="applyPhone">Phone Number *</label>
+            <input type="tel" id="applyPhone" placeholder="10-digit mobile">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="applyRole">Target Job Area *</label>
+          <select id="applyRole">
+            <option value="">Select target role</option>
+            <option value="Solar Project Engineer">Solar Project Engineer</option>
+            <option value="EV Drivetrain Engineer">EV Drivetrain Engineer</option>
+            <option value="BESS Design Engineer">BESS Design/BMS Specialist</option>
+            <option value="Business Development Manager">Business Development Manager</option>
+            <option value="EHS Safety Officer">EHS Safety Officer</option>
+            <option value="Wind Turbine Specialist">Wind Turbine Specialist</option>
+            <option value="Other">Other Clean Energy Role</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="applyMessage">Resume Summary &amp; Core Competencies *</label>
+          <textarea id="applyMessage" placeholder="Summarize your years of experience, solar/EV projects executed, core software skills (PVsyst, AutoCAD), and certification credentials..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+          Submit Candidate Profile →
+        </button>
+      </form>
+
+      <!-- Post a Job form -->
+      <form class="contact-form" id="jobPostForm" onsubmit="submitJobPostForm(event)">
+        <h3>Post a Job Vacancy</h3>
+        <p style="font-size:0.83rem;color:var(--text-dim);margin-bottom:1rem;">Post your organization's clean energy opening to our network of certified engineers and project graduates.</p>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="postEmployer">Recruiter Name *</label>
+            <input type="text" id="postEmployer" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="postCompany">Employer Company *</label>
+            <input type="text" id="postCompany" placeholder="Hiring company name">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="postEmail">Email Address *</label>
+            <input type="email" id="postEmail" placeholder="recruiting@company.com">
+          </div>
+          <div class="form-group">
+            <label for="postPhone">Phone Number *</label>
+            <input type="tel" id="postPhone" placeholder="10-digit mobile">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="postTitle">Job Position Title *</label>
+          <input type="text" id="postTitle" placeholder="e.g. Senior Solar Design Engineer">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="postCategory">Job Category *</label>
+            <select id="postCategory">
+              <option value="">Select industry sector</option>
+              <option value="Solar PV">Solar PV</option>
+              <option value="Electric Mobility (EV)">Electric Mobility (EV)</option>
+              <option value="Energy Storage (BESS)">Energy Storage (BESS)</option>
+              <option value="Wind Energy">Wind Energy</option>
+              <option value="Green Hydrogen">Green Hydrogen</option>
+              <option value="Other">Other Cleantech Area</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="postLocation">Location *</label>
+            <input type="text" id="postLocation" placeholder="e.g. Hyderabad / Remote">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="postDescription">Detailed Requirements &amp; Application Guide *</label>
+          <textarea id="postDescription" placeholder="Detail the duties, minimum required experience, required certifications, and salary details if public..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+          Post Job Opening →
+        </button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/script.js"></script>
+<script>
+// Tab Swapping Logic
+const tabPills = document.querySelectorAll('.classifieds-tabs .pill');
+const tabPanes = document.querySelectorAll('.tab-pane');
+
+tabPills.forEach(pill => {
+  pill.addEventListener('click', () => {
+    // Remove active state
+    tabPills.forEach(p => p.classList.remove('active'));
+    tabPanes.forEach(pane => pane.style.display = 'none');
+
+    // Add active state to selected tab
+    pill.classList.add('active');
+    const tabName = pill.dataset.tab;
+    const activePane = document.getElementById('tab-' + tabName);
+    if (activePane) {
+      activePane.style.display = '';
+      activePane.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Generic Input Validation Error Generator
+function showError(el, msg) {
+  el.style.borderColor = '#c0392b';
+  el.style.boxShadow = '0 0 0 3px rgba(192,57,43,0.1)';
+  const errDiv = document.createElement('div');
+  errDiv.className = 'err';
+  errDiv.style.cssText = 'color:#c0392b;font-size:.75rem;font-weight:700;margin-top:.25rem;';
+  errDiv.textContent = msg;
+  el.parentNode.appendChild(errDiv);
+}
+
+function clearErrors(formId) {
+  const form = document.getElementById(formId);
+  form.querySelectorAll('.form-group .err').forEach(e => e.remove());
+  form.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(el => {
+    el.style.borderColor = '';
+    el.style.boxShadow = '';
+  });
+}
+
+// Regex validators
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegex = /^\+?(\d{2})?[-. ]?([6-9]\d{9})$/;
+
+// 1. Submit Advertise Package Form
+async function submitAdvertiseForm(event) {
+  event.preventDefault();
+  clearErrors('advertiseForm');
+
+  const nameInput = document.getElementById('adName');
+  const companyInput = document.getElementById('adCompany');
+  const emailInput = document.getElementById('adEmail');
+  const phoneInput = document.getElementById('adPhone');
+  const pkgSelect = document.getElementById('adPackage');
+  const msgText = document.getElementById('adMessage');
+  const alertContainer = document.getElementById('advertiseAlertContainer');
+  alertContainer.innerHTML = '';
+
+  let valid = true;
+
+  if (!nameInput.value.trim()) { showError(nameInput, 'Contact Name is required'); valid = false; }
+  if (!companyInput.value.trim()) { showError(companyInput, 'Company Name is required'); valid = false; }
+  
+  if (!emailInput.value.trim()) {
+    showError(emailInput, 'Email is required');
+    valid = false;
+  } else if (!emailRegex.test(emailInput.value.trim())) {
+    showError(emailInput, 'Enter a valid email address');
+    valid = false;
+  }
+
+  if (!phoneInput.value.trim()) {
+    showError(phoneInput, 'Phone number is required');
+    valid = false;
+  } else if (!phoneRegex.test(phoneInput.value.trim())) {
+    showError(phoneInput, 'Enter a valid 10-digit mobile number');
+    valid = false;
+  }
+
+  if (!pkgSelect.value) { showError(pkgSelect, 'Please select an advertising package'); valid = false; }
+  if (!msgText.value.trim()) { showError(msgText, 'Requirements details are required'); valid = false; }
+  else if (msgText.value.trim().length < 10) { showError(msgText, 'Requirements details must be at least 10 characters'); valid = false; }
+
+  if (!valid) return;
+
+  const combinedMsg = `Ad Package: ${pkgSelect.value}\nRequirements:\n${msgText.value.trim()}`;
+  const payload = {
+    name: nameInput.value.trim(),
+    company: companyInput.value.trim(),
+    email: emailInput.value.trim(),
+    phone: phoneInput.value.trim(),
+    type: 'classified_advertise',
+    message: combinedMsg
+  };
+
+  await performFetchSubmission(payload, 'advertiseForm', alertContainer);
+}
+
+// 2. Submit Publish Tender Form
+async function submitTenderForm(event) {
+  event.preventDefault();
+  clearErrors('tenderForm');
+
+  const contactInput = document.getElementById('tenderContact');
+  const companyInput = document.getElementById('tenderCompany');
+  const emailInput = document.getElementById('tenderEmail');
+  const phoneInput = document.getElementById('tenderPhone');
+  const titleInput = document.getElementById('tenderTitle');
+  const valueInput = document.getElementById('tenderValue');
+  const catSelect = document.getElementById('tenderCategory');
+  const dateInput = document.getElementById('tenderDate');
+  const descText = document.getElementById('tenderDescription');
+  const alertContainer = document.getElementById('tendersAlertContainer');
+  alertContainer.innerHTML = '';
+
+  let valid = true;
+
+  if (!contactInput.value.trim()) { showError(contactInput, 'Contact Person is required'); valid = false; }
+  if (!companyInput.value.trim()) { showError(companyInput, 'Issuing Organization is required'); valid = false; }
+  
+  if (!emailInput.value.trim()) {
+    showError(emailInput, 'Email is required');
+    valid = false;
+  } else if (!emailRegex.test(emailInput.value.trim())) {
+    showError(emailInput, 'Enter a valid email address');
+    valid = false;
+  }
+
+  if (!phoneInput.value.trim()) {
+    showError(phoneInput, 'Phone number is required');
+    valid = false;
+  } else if (!phoneRegex.test(phoneInput.value.trim())) {
+    showError(phoneInput, 'Enter a valid 10-digit mobile number');
+    valid = false;
+  }
+
+  if (!titleInput.value.trim()) { showError(titleInput, 'Tender Title is required'); valid = false; }
+  if (!valueInput.value.trim()) { showError(valueInput, 'Estimated Value is required'); valid = false; }
+  if (!catSelect.value) { showError(catSelect, 'Tender Category is required'); valid = false; }
+  if (!dateInput.value) { showError(dateInput, 'Bid Closing Date is required'); valid = false; }
+  if (!descText.value.trim()) { showError(descText, 'Specifications details are required'); valid = false; }
+  else if (descText.value.trim().length < 10) { showError(descText, 'Specifications must be at least 10 characters'); valid = false; }
+
+  if (!valid) return;
+
+  const combinedMsg = `Tender Title: ${titleInput.value.trim()}\nEst. Value: ${valueInput.value.trim()}\nCategory: ${catSelect.value}\nClosing Date: ${dateInput.value}\nProject Details:\n${descText.value.trim()}`;
+  const payload = {
+    name: contactInput.value.trim(),
+    company: companyInput.value.trim(),
+    email: emailInput.value.trim(),
+    phone: phoneInput.value.trim(),
+    type: 'classified_tender',
+    message: combinedMsg
+  };
+
+  await performFetchSubmission(payload, 'tenderForm', alertContainer);
+}
+
+// 3. Submit Candidate Application Form
+async function submitJobApplyForm(event) {
+  event.preventDefault();
+  clearErrors('jobApplyForm');
+
+  const nameInput = document.getElementById('applyName');
+  const emailInput = document.getElementById('applyEmail');
+  const phoneInput = document.getElementById('applyPhone');
+  const roleSelect = document.getElementById('applyRole');
+  const msgText = document.getElementById('applyMessage');
+  const alertContainer = document.getElementById('jobsAlertContainer');
+  alertContainer.innerHTML = '';
+
+  let valid = true;
+
+  if (!nameInput.value.trim()) { showError(nameInput, 'Full Name is required'); valid = false; }
+  
+  if (!emailInput.value.trim()) {
+    showError(emailInput, 'Email is required');
+    valid = false;
+  } else if (!emailRegex.test(emailInput.value.trim())) {
+    showError(emailInput, 'Enter a valid email address');
+    valid = false;
+  }
+
+  if (!phoneInput.value.trim()) {
+    showError(phoneInput, 'Phone number is required');
+    valid = false;
+  } else if (!phoneRegex.test(phoneInput.value.trim())) {
+    showError(phoneInput, 'Enter a valid 10-digit mobile number');
+    valid = false;
+  }
+
+  if (!roleSelect.value) { showError(roleSelect, 'Please select target job area'); valid = false; }
+  if (!msgText.value.trim()) { showError(msgText, 'Qualifications description is required'); valid = false; }
+  else if (msgText.value.trim().length < 10) { showError(msgText, 'Qualifications must be at least 10 characters'); valid = false; }
+
+  if (!valid) return;
+
+  const combinedMsg = `Target Role Area: ${roleSelect.value}\nQualifications & Experience:\n${msgText.value.trim()}`;
+  const payload = {
+    name: nameInput.value.trim(),
+    company: 'Candidate Talent Pool',
+    email: emailInput.value.trim(),
+    phone: phoneInput.value.trim(),
+    type: 'classified_job_apply',
+    message: combinedMsg
+  };
+
+  await performFetchSubmission(payload, 'jobApplyForm', alertContainer);
+}
+
+// 4. Submit Job Post Form
+async function submitJobPostForm(event) {
+  event.preventDefault();
+  clearErrors('jobPostForm');
+
+  const employerInput = document.getElementById('postEmployer');
+  const companyInput = document.getElementById('postCompany');
+  const emailInput = document.getElementById('postEmail');
+  const phoneInput = document.getElementById('postPhone');
+  const titleInput = document.getElementById('postTitle');
+  const catSelect = document.getElementById('postCategory');
+  const locInput = document.getElementById('postLocation');
+  const descText = document.getElementById('postDescription');
+  const alertContainer = document.getElementById('jobsAlertContainer');
+  alertContainer.innerHTML = '';
+
+  let valid = true;
+
+  if (!employerInput.value.trim()) { showError(employerInput, 'Recruiter Name is required'); valid = false; }
+  if (!companyInput.value.trim()) { showError(companyInput, 'Company Name is required'); valid = false; }
+  
+  if (!emailInput.value.trim()) {
+    showError(emailInput, 'Email is required');
+    valid = false;
+  } else if (!emailRegex.test(emailInput.value.trim())) {
+    showError(emailInput, 'Enter a valid email address');
+    valid = false;
+  }
+
+  if (!phoneInput.value.trim()) {
+    showError(phoneInput, 'Phone number is required');
+    valid = false;
+  } else if (!phoneRegex.test(phoneInput.value.trim())) {
+    showError(phoneInput, 'Enter a valid 10-digit mobile number');
+    valid = false;
+  }
+
+  if (!titleInput.value.trim()) { showError(titleInput, 'Job Title is required'); valid = false; }
+  if (!catSelect.value) { showError(catSelect, 'Job Category is required'); valid = false; }
+  if (!locInput.value.trim()) { showError(locInput, 'Job Location is required'); valid = false; }
+  if (!descText.value.trim()) { showError(descText, 'Requirements are required'); valid = false; }
+  else if (descText.value.trim().length < 10) { showError(descText, 'Job description must be at least 10 characters'); valid = false; }
+
+  if (!valid) return;
+
+  const combinedMsg = `Job Position: ${titleInput.value.trim()}\nCategory: ${catSelect.value}\nLocation: ${locInput.value.trim()}\nRecruiter Name: ${employerInput.value.trim()}\nJob Description:\n${descText.value.trim()}`;
+  const payload = {
+    name: employerInput.value.trim(),
+    company: companyInput.value.trim(),
+    email: emailInput.value.trim(),
+    phone: phoneInput.value.trim(),
+    type: 'classified_job_post',
+    message: combinedMsg
+  };
+
+  await performFetchSubmission(payload, 'jobPostForm', alertContainer);
+}
+
+// Fetch helper function to perform standard submission and show message
+async function performFetchSubmission(payload, formId, alertContainer) {
+  try {
+    const response = await fetch('/api/inquiries', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+      alertContainer.innerHTML = `
+        <div class="success-banner" style="background:#eef5f0; color:#2d5a2d; border-color:rgba(45,90,45,0.25);">
+          <span>🎉</span>
+          <div>
+            <strong>Submission Successful!</strong><br>
+            Thank you. Your classified enquiry (ID: ${result.inquiryId}) has been successfully submitted and stored.
+          </div>
+        </div>
+      `;
+      document.getElementById(formId).reset();
+      
+      // Scroll to alert
+      alertContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Auto-clear message after 8 seconds
+      setTimeout(() => {
+        alertContainer.innerHTML = '';
+      }, 8000);
+
+    } else {
+      alertContainer.innerHTML = `
+        <div class="success-banner" style="background:#fdf3f2; color:#c0392b; border-color:rgba(192,57,43,0.2);">
+          <span>⚠️</span>
+          <div>
+            <strong>Submission Failed</strong><br>
+            ${result.error || 'Server encountered an error. Please try again.'}
+          </div>
+        </div>
+      `;
+    }
+  } catch (error) {
+    console.error('Submission error:', error);
+    alertContainer.innerHTML = `
+      <div class="success-banner" style="background:#fdf3f2; color:#c0392b; border-color:rgba(192,57,43,0.2);">
+        <span>⚠️</span>
+        <div>
+          <strong>Network Error</strong><br>
+          Could not contact the server. Please check your connection and try again.
+        </div>
+      </div>
+    `;
+  }
+}
+</script>
+</body>
+</html>
