@@ -16,29 +16,30 @@
 @layer tokens {
   :root {
     /* Brand Colors */
-    --bg-dark:       #112A18;
-    --copper:        #B87333;
-    --copper-light:  #C9A84C;
-    --nav-hover-bg:  #EEF5F0;
-    --text-dim:      #2D4735;
-    --border:        rgba(45,90,45,0.13);
+    --bg-dark:       #18542a;
+    --copper:        #f96015;
+    --copper-light:  #fc9c6d;
+    --nav-hover-bg:  #ebdcb4;
+    --text-dim:      #246835;
+    --border:        rgba(24,84,42,0.13);
 
-    --copper-lt:     #D4956A;
-    --copper-pale:   #F0C99A;
-    --copper-dk:     #8B5E2A;
-    --gold:          #C9A84C;
-    --gold-lt:       #E8C97A;
+    --copper-lt:     #fa8043;
+    --copper-pale:   #fce5d8;
+    --copper-dk:     #c34509;
+    --gold:          #ffc926;
+    --gold-lt:       #ffe075;
     --silver:        #A8A9AD;
 
-    --bg:            #F5FAF6;
+    --bg:            #f3e8cc;
     --bg-card:       #FFFFFF;
-    --bg-section:    #EEF5F0;
+    --bg-section:    #ebdcb4;
 
-    --text:          #112A18;
-    --text-muted:    #556B5C;
+    --text:          #18542a;
+    --text-muted:    #5a8264;
 
-    --border-cu:     rgba(184,115,51,0.25);
+    --border-cu:     rgba(249,96,21,0.25);
     --color-focus:   var(--copper);
+    --kiwi:          #9abc05;
 
     --shadow-sm:     0 2px 8px rgba(14,31,18,0.04);
     --shadow-md:     0 8px 28px rgba(14,31,18,0.07);
@@ -552,7 +553,7 @@
     }
 
     .btn-register {
-      border: 1.5px solid #112A18;
+    border: 1.5px solid var(--text);
       background: transparent;
     }
 
@@ -590,8 +591,8 @@
   }
 
   .live-badge {
-    background: var(--copper);
-    color: #112A18;
+    background: var(--kiwi);
+    color: #ffffff;
     font-size: 9px;
     font-weight: 800;
     padding: 1.5px 5px;

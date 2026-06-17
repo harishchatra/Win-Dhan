@@ -134,12 +134,12 @@
       top: 0;
       right: 0;
       height: 6px;
-      background: linear-gradient(90deg, #B87333, #E8C97A, #C9A84C, #B87333);
+      background: linear-gradient(90deg, #f96015, #ffe075, #ffc926, #f96015);
       z-index: 10;
     }
 
     .pass-top {
-      background: #112A18; /* Solid deep forest green */
+      background: #18542a; /* Forest Green */
       padding: 1.5rem 1.5rem 1.2rem 1.5rem;
       color: #FFFFFF;
       display: flex;
@@ -151,10 +151,10 @@
     .lanyard-slot {
       width: 48px;
       height: 7px;
-      background: #0d1e11;
+      background: #0b1a0d;
       border-radius: 10px;
       margin: 0 auto;
-      border: 1px solid rgba(184, 115, 51, 0.4);
+      border: 1px solid rgba(249, 96, 21, 0.4);
     }
 
     .pass-header-content {
@@ -180,7 +180,7 @@
 
     .pass-top .sub {
       font-size: 0.62rem;
-      color: #E8C97A; /* Gold color for sub-header */
+      color: #ffe075; /* Sunshine light */
       font-weight: 700;
       letter-spacing: 0.6px;
       margin-top: 2px;
@@ -191,18 +191,18 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 1px;
-      background: #E8C97A; /* Gold background */
-      color: #112A18; /* Dark green text */
+      background: #ffe075; /* Sunshine light background */
+      color: #18542a; /* Forest Green text */
       padding: 5px 12px;
       border-radius: 30px;
-      border: 1px solid #C9A84C;
+      border: 1px solid #ffc926;
       white-space: nowrap;
     }
 
     .pass-perf {
       height: 16px;
       background: #FFFFFF;
-      border-top: 2.5px dashed rgba(184, 115, 51, 0.3);
+      border-top: 2.5px dashed rgba(249, 96, 21, 0.3);
       position: relative;
     }
 
@@ -213,52 +213,45 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background: #F5FAF6; /* Blends with body background */
-      border: 1.5px solid rgba(184, 115, 51, 0.25);
+      background: #f3e8cc; /* Warm cream background */
+      border: 1.5px solid rgba(249, 96, 21, 0.25);
       z-index: 5;
     }
     .pass-perf::before { left: -9px; }
     .pass-perf::after { right: -9px; }
 
     .pass-bottom {
-      padding: 1.2rem 1.5rem 1.5rem 1.5rem;
       background: #FFFFFF;
+      padding: 1.5rem;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
     }
 
-    .pass-grid {
+    .pass-details {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 8px;
-      width: 100%;
-    }
-
-    .pass-field {
-      display: flex;
-      flex-direction: column;
-      background: #FAF8F5; /* Subtle cream background for details */
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(184, 115, 51, 0.08);
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 1.5rem;
+      flex-grow: 1;
+      background: #f8f3e8;
+      padding: 1.25rem;
+      border-radius: var(--radius-sm);
     }
 
     .pass-label {
-      font-size: 0.58rem;
+      font-size: 0.65rem;
+      color: #5a8264;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: #7A8E7E;
       font-weight: 700;
-      margin-bottom: 3px;
+      letter-spacing: 0.6px;
+      margin-bottom: 2px;
     }
 
     .pass-value {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
+      color: #18542a;
       font-weight: 700;
-      color: #112A18;
-      word-break: break-word;
     }
 
     .pass-qr-wrapper {
@@ -266,11 +259,10 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      background: #FAF8F5;
-      border: 1px dashed rgba(184, 115, 51, 0.3);
-      padding: 12px;
-      border-radius: 12px;
-      width: 100%;
+      flex-shrink: 0;
+      background: #f8f3e8;
+      padding: 1rem 1.2rem;
+      border-radius: var(--radius-sm);
     }
 
     .pass-qr {
@@ -300,15 +292,14 @@
     }
 
     .pass-footer {
-      font-size: 0.55rem;
-      color: #7A8E7E;
+      grid-column: 1 / -1;
       text-align: center;
-      border-top: 1px solid rgba(45, 90, 45, 0.08);
-      padding-top: 8px;
-      width: 100%;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      line-height: 1.3;
+      font-size: 0.65rem;
+      color: #5a8264;
+      font-weight: 700;
+      border-top: 1px dashed rgba(24,84,42,0.15);
+      padding-top: 0.75rem;
+      margin-top: 0.5rem;
     }
 
     /* Print styling */
@@ -352,7 +343,7 @@
       }
       .visitor-pass {
         box-shadow: none !important;
-        border: 1.5px solid #112A18 !important;
+        border: 1.5px solid #18542a !important;
         background: #FFFFFF !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
@@ -512,16 +503,16 @@
               <div class="pass-header-content">
                 <div class="pass-logo" style="width: 36px; height: 22px;">
                   <svg viewBox="0 0 86 52" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                    <rect width="86" height="52" rx="11" fill="#1A3A1A"/>
-                    <rect width="86" height="52" rx="11" fill="none" stroke="rgba(184,115,51,0.45)" stroke-width="1.2"/>
-                    <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#C9A84C">W</text>
-                    <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#B87333">IN</text>
-                    <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(201,168,76,0.65)" letter-spacing="1.5">DHAN</text>
-                    <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(184,115,51,0.35)" stroke-width="1"/>
-                    <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#B87333">D</text>
-                    <circle cx="55" cy="24" r="4" fill="#C9A84C"/>
-                    <circle cx="55" cy="24" r="2.2" fill="#B87333"/>
-                    <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#C9A84C">E</text>
+                    <rect width="86" height="52" rx="11" fill="#18542a"/>
+                    <rect width="86" height="52" rx="11" fill="none" stroke="rgba(249,96,21,0.45)" stroke-width="1.2"/>
+                    <text x="2"  y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#ffc926">W</text>
+                    <text x="16" y="30" font-family="Georgia,serif" font-size="17" font-weight="800" fill="#f96015">IN</text>
+                    <text x="3"  y="41" font-family="Arial,sans-serif" font-size="6.5" font-weight="400" fill="rgba(255,201,38,0.65)" letter-spacing="1.5">DHAN</text>
+                    <line x1="34" y1="9" x2="34" y2="43" stroke="rgba(249,96,21,0.35)" stroke-width="1"/>
+                    <text x="36" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#f96015">D</text>
+                    <circle cx="55" cy="24" r="4" fill="#ffc926"/>
+                    <circle cx="55" cy="24" r="2.2" fill="#f96015"/>
+                    <text x="57" y="39" font-family="Georgia,serif" font-size="28" font-weight="800" fill="#ffc926">E</text>
                   </svg>
                 </div>
                 <div class="pass-event-details">
@@ -535,10 +526,10 @@
             <div class="pass-perf"></div>
             
             <div class="pass-bottom">
-              <div class="pass-grid">
-                <div class="pass-field" style="grid-column: span 2;">
+              <div class="pass-details">
+                <div class="pass-field">
                   <span class="pass-label">Visitor Name</span>
-                  <span class="pass-value" id="ticket-name" style="font-size: 1.05rem; color: #112A18;">-</span>
+                  <span class="pass-value" id="ticket-name">-</span>
                 </div>
                 <div class="pass-field">
                   <span class="pass-label">Company</span>
@@ -550,21 +541,21 @@
                 </div>
                 <div class="pass-field">
                   <span class="pass-label">Pass ID</span>
-                  <span class="pass-value" id="ticket-pass-id" style="font-family: monospace; color: #B87333; font-weight: 800;">-</span>
+                  <span class="pass-value" id="ticket-pass-id" style="font-family: monospace;">-</span>
                 </div>
-                <div class="pass-field">
+                <div class="pass-field" style="grid-column: span 2;">
                   <span class="pass-label">Sector Interest</span>
-                  <span class="pass-value" id="ticket-sector" style="font-size: 0.72rem;">-</span>
+                  <span class="pass-value" id="ticket-sector">-</span>
                 </div>
               </div>
               
               <div class="pass-qr-wrapper">
                 <div class="pass-qr" id="ticket-qr"></div>
-                <span class="pass-qr-text">Scan for Gate Entry Verification</span>
+                <span class="pass-qr-text">Scan Code</span>
               </div>
               
               <div class="pass-footer">
-                HMDA Grounds, Necklace Road · Gate Entry: 11:00 AM onwards
+                HMDA Grounds, Necklace Road · Gate Entry: 11:00 AM
               </div>
             </div>
           </div>
@@ -672,7 +663,7 @@
       const state = document.getElementById('reg-state');
 
       // Clear any past errors
-      document.querySelectorAll('.form-group .err').forEach(el => el.remove());
+      document.querySelectorAll('.err').forEach(el => el.remove());
       [name, company, email, phone, designation, type, sector, city, state].forEach(el => {
         el.style.borderColor = ''; el.style.boxShadow = '';
       });
@@ -680,11 +671,11 @@
       let valid = true;
       function showErr(el, msg) {
         valid = false;
-        el.style.borderColor = '#c0392b';
-        el.style.boxShadow = '0 0 0 3px rgba(192,57,43,0.1)';
+        el.style.borderColor = '#d52518';
+        el.style.boxShadow = '0 0 0 3px rgba(213,37,24,0.1)';
         const d = document.createElement('div');
         d.className = 'err';
-        d.style.cssText = 'color:#c0392b;font-size:.72rem;font-weight:700;margin-top:.25rem;';
+        d.style.cssText = 'color:#d52518;font-size:.72rem;font-weight:700;margin-top:.25rem;';
         d.textContent = msg;
         el.parentNode.appendChild(d);
       }
@@ -769,21 +760,17 @@
         // Premium color coding for type badge
         const typeLower = data.type.toLowerCase();
         if (typeLower.includes('delegate') || typeLower.includes('government')) {
-          badge.style.background = '#B87333'; // Copper
+          badge.style.background = '#f96015'; // Crisp Carrot
           badge.style.color = '#FFFFFF';
-          badge.style.borderColor = '#B87333';
-        } else if (typeLower.includes('exhibitor')) {
-          badge.style.background = '#C9A84C'; // Gold
-          badge.style.color = '#112A18';
-          badge.style.borderColor = '#C9A84C';
-        } else if (typeLower.includes('media')) {
-          badge.style.background = '#A8A9AD'; // Silver
-          badge.style.color = '#112A18';
-          badge.style.borderColor = '#A8A9AD';
+          badge.style.borderColor = '#f96015';
+        } else if (data.type === 'VIP Delegate') {
+          badge.style.background = '#ffc926'; // Sunshine
+          badge.style.color = '#18542a';
+          badge.style.borderColor = '#ffc926';
         } else {
-          badge.style.background = '#E8C97A'; // Light Gold (Visitor/Student)
-          badge.style.color = '#112A18';
-          badge.style.borderColor = '#C9A84C';
+          badge.style.background = '#A8A9AD'; // Silver
+          badge.style.color = '#18542a';
+          badge.style.borderColor = '#A8A9AD';
         }
       }
 
@@ -857,7 +844,7 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      const colors = ['#B87333', '#C9A84C', '#A8A9AD', '#112A18', '#2D4735', '#D4956A'];
+      const colors = ['#f96015', '#ffc926', '#A8A9AD', '#18542a', '#246835', '#fa8043'];
       const particles = [];
       
       // Bottom left burst
