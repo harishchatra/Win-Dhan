@@ -1487,3 +1487,89 @@
     }
   }
 }
+
+/* ═══════════════════════════════════════════════
+   NEW DESIGN FEATURES — Image Strips, Mosaics, Expo Stats
+   ═══════════════════════════════════════════════ */
+
+/* Subtle body texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(242,68,5,0.012) 2px, rgba(242,68,5,0.012) 4px),
+    repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,0,0.008) 2px, rgba(0,0,0,0.008) 4px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 4-col image strip */
+.img-strip-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; overflow: hidden; }
+.img-strip-4 .strip-item { position: relative; overflow: hidden; height: 185px; }
+.img-strip-4 .strip-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.72) saturate(1.1); transition: filter 0.35s, transform 0.35s; display: block; }
+.img-strip-4 .strip-item:hover img { filter: brightness(0.92) saturate(1.3); transform: scale(1.04); }
+.strip-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 14px; background: linear-gradient(to top, rgba(0,0,0,0.82), transparent); }
+.strip-label .strip-tag { font-size: 9.5px; color: var(--copper-lt); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px; }
+.strip-label .strip-name { font-size: 12px; font-weight: 600; color: #ffffff; }
+
+/* 3-col mini image strip */
+.img-strip-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; border-radius: var(--radius); overflow: hidden; height: 120px; }
+.img-strip-3 .strip-item { position: relative; overflow: hidden; }
+.img-strip-3 .strip-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.68) saturate(1.1); transition: filter 0.3s; display: block; }
+.img-strip-3 .strip-item:hover img { filter: brightness(0.85) saturate(1.25); }
+.strip-mini-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px; background: linear-gradient(transparent, rgba(0,0,0,0.78)); }
+.strip-mini-label span { font-size: 10px; color: #ffffff; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; }
+
+/* Expo stat boxes */
+.expo-stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 2rem; }
+.expo-stat-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem 1rem; box-shadow: var(--shadow-sm); }
+.expo-stat-box .esb-lbl { font-size: 9.5px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
+.expo-stat-box .esb-val { font-size: 13.5px; color: var(--text); font-weight: 600; }
+
+/* Event Programme Day Cards */
+.event-programme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
+.ep-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+.ep-card-header { padding: 1.2rem 1.4rem; }
+.ep-card-header.day1 { background: linear-gradient(135deg, var(--copper-dk), var(--copper)); }
+.ep-card-header.day2 { background: linear-gradient(135deg, #000000, #1a1a1a); }
+.ep-card-header .ep-day-label { font-size: 9.5px; color: rgba(255,255,255,0.7); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 3px; }
+.ep-card-header .ep-day-date { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; color: #ffffff; }
+.ep-card-header .ep-day-sub { font-size: 11.5px; color: rgba(255,255,255,0.8); margin-top: 2px; }
+.ep-card-body { padding: 1.2rem 1.4rem; }
+.ep-session-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+.ep-badge { background: var(--copper); color: #fff; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
+.ep-timeline { display: flex; flex-direction: column; gap: 10px; }
+.ep-timeline-row { display: flex; gap: 12px; align-items: flex-start; }
+.ep-time { min-width: 72px; font-size: 11px; color: var(--copper); font-weight: 700; padding-top: 1px; flex-shrink: 0; }
+.ep-event { font-size: 13px; color: var(--text-dim); line-height: 1.45; }
+.ep-session-block { background: var(--bg); border: 1px solid var(--border-cu); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 8px; }
+.ep-session-block .ep-sesh-tag { font-size: 9.5px; color: var(--copper); letter-spacing: 1px; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+.ep-session-block h4 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.ep-session-block p { font-size: 11.5px; color: var(--text-dim); }
+
+/* Photo Mosaic Gallery */
+.photo-mosaic { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 260px 260px; gap: 6px; margin-bottom: 2rem; }
+.pm-item { position: relative; overflow: hidden; border-radius: var(--radius-sm); cursor: pointer; }
+.pm-item.tall { grid-row: span 2; }
+.pm-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.72) saturate(1.1); transition: all 0.4s; display: block; }
+.pm-item:hover img { filter: brightness(0.88) saturate(1.25); transform: scale(1.04); }
+.pm-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,0.75)); display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+.pm-tag { font-size: 9.5px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 600; padding: 3px 9px; border-radius: 3px; background: rgba(242,68,5,0.75); color: #ffffff; width: fit-content; margin-bottom: 5px; }
+.pm-title { font-size: 13.5px; font-weight: 600; color: #ffffff; line-height: 1.35; opacity: 0; transform: translateY(8px); transition: all 0.3s; }
+.pm-item:hover .pm-title { opacity: 1; transform: translateY(0); }
+
+/* Expo photo strip */
+.expo-photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; border-radius: var(--radius); overflow: hidden; height: 190px; margin-top: 0.9rem; }
+.expo-photo-strip .strip-item { position: relative; overflow: hidden; }
+.expo-photo-strip .strip-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.62) saturate(1.05); display: block; }
+
+@media (max-width: 768px) {
+  .img-strip-4 { grid-template-columns: repeat(2, 1fr); }
+  .expo-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .event-programme-grid { grid-template-columns: 1fr; }
+  .photo-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .pm-item.tall { grid-row: span 1; }
+  .expo-photo-strip { grid-template-columns: repeat(2, 1fr); height: auto; }
+  .img-strip-3 { height: 90px; }
+}

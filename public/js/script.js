@@ -82,8 +82,11 @@
           </div>
         </div>
         <span class="nav-separator"></span>
+        <a href="gallery.html" data-page="gallery">Gallery</a>
+        <span class="nav-separator"></span>
         <a href="register.html" class="btn-register">Register</a>
         <a href="stalls-booking/index.html" class="btn-book-stall">Book Your Stall →</a>
+
       </nav>
     </div>
   </div>
