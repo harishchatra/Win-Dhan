@@ -6,6 +6,8 @@ const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const db = require('./database');
+const SQLiteStore = require('connect-sqlite3')(session);
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const app = express();
@@ -24,15 +26,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Sessions setup
+const sessionDbPath = process.env.DATABASE_PATH ? path.dirname(process.env.DATABASE_PATH) : __dirname;
+const sessionDbName = process.env.DATABASE_PATH ? path.basename(process.env.DATABASE_PATH).replace('.db', '_sessions.db') : 'ire_expo_sessions.db';
+
 app.use(session({
+  store: new SQLiteStore({
+    dir: sessionDbPath,
+    db: sessionDbName,
+    table: 'sessions'
+  }),
   secret: process.env.SESSION_SECRET || 'ire-expo-secret-key-2026',
   resave: false,
   saveUninitialized: false,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24, // 24 hours
-    secure: false // Set to true in HTTPS production
+    secure: process.env.NODE_ENV === 'production'
   }
 }));
+
+// Login Rate Limiter
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // Limit each IP to 10 login requests per `window`
+  message: { error: 'Too many login attempts from this IP, please try again after 15 minutes.' }
+});
 
 // Serve Admin Dashboard
 app.get('/admin', (req, res) => {
@@ -89,12 +106,12 @@ function checkAuth(roles = []) {
   };
 }
 
-// ──────────────── AUTHENTICATION ROUTING ────────────────
+// ──────────────── AUTH API ROUTING ────────────────
 
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', loginLimiter, (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    return res.status(400).json({ error: 'Username and password are required.' });
+    return res.status(400).json({ error: 'Username and password required.' });
   }
 
   let searchUsername = username.toLowerCase();
