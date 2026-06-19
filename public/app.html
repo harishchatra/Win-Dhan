@@ -290,6 +290,7 @@
     <div class="app-logo">IRE <span>2026</span></div>
     <button class="install-btn" id="installBtn">Install App</button>
   </div>
+  <div id="offline-banner" style="display:none; background:#ff5252; color:#fff; text-align:center; padding:8px; font-size:0.8rem; font-weight:bold;">Offline Mode - Changes will sync when connected</div>
 
   <div class="app-content">
 
@@ -586,6 +587,73 @@
     let currentDirSeg = 'team';
     let sharedStats = { visitors: 0, exhibitors: 0, stalls: 0 };
 
+    // ── Offline Networking Engine ──
+    let offlineQueue = JSON.parse(localStorage.getItem('ire_offline_queue')) || [];
+    
+    function updateOfflineBanner() {
+      document.getElementById('offline-banner').style.display = navigator.onLine ? 'none' : 'block';
+    }
+    window.addEventListener('online', () => { updateOfflineBanner(); syncOfflineQueue(); });
+    window.addEventListener('offline', updateOfflineBanner);
+    updateOfflineBanner();
+
+    async function offlineFetch(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Network err');
+        const data = await res.json();
+        localStorage.setItem('cache_' + url, JSON.stringify(data));
+        return data;
+      } catch (e) {
+        if (!navigator.onLine) {
+          const cached = localStorage.getItem('cache_' + url);
+          if (cached) return JSON.parse(cached);
+        }
+        return [];
+      }
+    }
+
+    async function offlineAction(url, options, actionDesc) {
+      try {
+        if (!navigator.onLine) throw new Error('Offline');
+        const res = await fetch(url, options);
+        if (!res.ok) throw new Error('Server err');
+        return await res.json();
+      } catch (e) {
+        if (!navigator.onLine) {
+          offlineQueue.push({ url, options, desc: actionDesc, time: Date.now() });
+          localStorage.setItem('ire_offline_queue', JSON.stringify(offlineQueue));
+          showToast(`Saved offline: ${actionDesc}. Will sync when connected.`);
+          return { success: true, offline: true };
+        }
+        throw e;
+      }
+    }
+
+    async function syncOfflineQueue() {
+      if (offlineQueue.length === 0 || !navigator.onLine) return;
+      showToast('Syncing offline changes...');
+      const queue = [...offlineQueue];
+      offlineQueue = [];
+      localStorage.setItem('ire_offline_queue', JSON.stringify(offlineQueue));
+      
+      let successCount = 0;
+      for (const item of queue) {
+        try {
+          await fetch(item.url, item.options);
+          successCount++;
+        } catch(e) {
+          offlineQueue.push(item);
+          localStorage.setItem('ire_offline_queue', JSON.stringify(offlineQueue));
+        }
+      }
+      if (successCount > 0) {
+        showToast(`Successfully synced ${successCount} changes!`);
+        refreshData();
+      }
+    }
+    setInterval(syncOfflineQueue, 30000);
+
     // ── Boot sequence ──
     async function checkSession() {
       try {
@@ -593,10 +661,20 @@
         const data = await res.json();
         if (data.success) {
           user = data.user;
+          localStorage.setItem('ire_session_user', JSON.stringify(user));
+          document.getElementById('login-cover').style.display = 'none';
+          initApp();
+        } else {
+          localStorage.removeItem('ire_session_user');
+        }
+      } catch(e) {
+        const cachedUser = localStorage.getItem('ire_session_user');
+        if (cachedUser) {
+          user = JSON.parse(cachedUser);
           document.getElementById('login-cover').style.display = 'none';
           initApp();
         }
-      } catch(e) {}
+      }
     }
     checkSession();
 
@@ -613,6 +691,7 @@
         const data = await res.json();
         if (data.success) {
           user = data.user;
+          localStorage.setItem('ire_session_user', JSON.stringify(user));
           document.getElementById('login-cover').style.display = 'none';
           initApp();
         } else {
@@ -622,7 +701,8 @@
     }
 
     async function doLogout() {
-      await fetch('/api/auth/logout', {method:'POST'});
+      localStorage.removeItem('ire_session_user');
+      try { await fetch('/api/auth/logout', {method:'POST'}); } catch(e){}
       window.location.reload();
     }
 
@@ -666,13 +746,12 @@
 
     async function refreshData() {
       // Fetch tasks
-      const resT = await fetch('/api/tasks');
-      allTasks = await resT.json();
+      allTasks = await offlineFetch('/api/tasks');
       
       // Filter for this user unless super_admin
       let myTasks = allTasks;
       if (user.role !== 'super_admin') {
-        myTasks = allTasks.filter(t => t.assigned_user.toLowerCase().includes(user.name.toLowerCase().split(' ')[0]));
+        myTasks = allTasks.filter(t => t.assigned_user && t.assigned_user.toLowerCase().includes(user.name.toLowerCase().split(' ')[0]));
       }
 
       // Update KPI
@@ -682,29 +761,26 @@
       renderTasks(myTasks);
 
       // Fetch Notifications for ALL users
-      const resN = await fetch('/api/admin_notifications');
-      if (resN.ok) {
-        allNotifs = await resN.json();
-        renderNotifs();
-        // Render 3 recent notifications to the Home Activity Feed
-        const feed = document.getElementById('home-activity-feed');
-        if (allNotifs.length > 0) {
-          feed.innerHTML = allNotifs.slice(0, 3).map(n => `
-            <div style="background:rgba(255,255,255,0.03); padding:12px; border-radius:12px; border:1px solid var(--card-border); font-size:0.8rem; line-height:1.4;">
-              <span style="color:var(--text-dim); font-size:0.7rem;">${new Date(n.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span><br>
-              ${n.message}
-            </div>
-          `).join('');
-        } else {
-          feed.innerHTML = '<p style="color:gray; font-size:0.8rem;">No recent activity.</p>';
-        }
+      allNotifs = await offlineFetch('/api/admin_notifications');
+      renderNotifs();
+      
+      const feed = document.getElementById('home-activity-feed');
+      if (allNotifs.length > 0) {
+        feed.innerHTML = allNotifs.slice(0, 3).map(n => `
+          <div style="background:rgba(255,255,255,0.03); padding:12px; border-radius:12px; border:1px solid var(--card-border); font-size:0.8rem; line-height:1.4;">
+            <span style="color:var(--text-dim); font-size:0.7rem;">${new Date(n.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span><br>
+            ${n.message}
+          </div>
+        `).join('');
+      } else {
+        feed.innerHTML = '<p style="color:gray; font-size:0.8rem;">No recent activity.</p>';
       }
 
       // Fetch Shared Live Stats (for ALL employees)
       Promise.all([
-        fetch('/api/stalls').then(r=>r.ok ? r.json() : []),
-        fetch('/api/exhibitors').then(r=>r.ok ? r.json() : []),
-        fetch('/api/visitors').then(r=>r.ok ? r.json() : [])
+        offlineFetch('/api/stalls'),
+        offlineFetch('/api/exhibitors'),
+        offlineFetch('/api/visitors')
       ]).then(([stallsData, exhibData, visData]) => {
         const soldStalls = stallsData.filter(d=>d.status==='sold').length;
         document.getElementById('stat-stalls').textContent = `${soldStalls} / 85`;
@@ -720,21 +796,21 @@
       });
 
       // Fetch Leads specifically for Admin Overview / KPI
-      fetch('/api/leads').then(r=>r.json()).then(data => {
+      offlineFetch('/api/leads').then(data => {
         const active = data.filter(d=>d.status !== 'confirmed' && d.status !== 'lost').length;
         if(document.getElementById('kpi-leads').style.display === 'block') document.getElementById('val-leads').textContent = active;
         if (user.role === 'super_admin') document.getElementById('admin-kpi-leads').textContent = data.length; // all leads
       });
 
       if(document.getElementById('kpi-stalls').style.display === 'block') {
-        fetch('/api/stalls').then(r=>r.json()).then(data => {
+        offlineFetch('/api/stalls').then(data => {
           const sold = data.filter(d=>d.status==='sold').length;
           document.getElementById('val-stalls').textContent = `${sold} / 85`;
           document.getElementById('sub-stalls').textContent = `${85-sold} Available`;
         });
       }
       if(document.getElementById('kpi-rev').style.display === 'block') {
-        fetch('/api/payments').then(r=>r.json()).then(data => {
+        offlineFetch('/api/payments').then(data => {
           let paid = 0; data.forEach(d=> paid += (d.paid||0));
           document.getElementById('val-rev').textContent = `₹${(paid/100000).toFixed(1)}L`;
         });
@@ -750,8 +826,8 @@
       }
 
       // Fetch Directory Data
-      fetch('/api/users').then(r=>r.json()).then(data => { dirTeam = data; renderDirectory(); });
-      fetch('/api/volunteers').then(r=>r.json()).then(data => { dirVols = data; renderDirectory(); });
+      offlineFetch('/api/users').then(data => { dirTeam = data; renderDirectory(); });
+      offlineFetch('/api/volunteers').then(data => { dirVols = data; renderDirectory(); });
     }
 
     // ── Rendering ──
@@ -878,10 +954,10 @@
       let c = dirVols.find(v => v.id === id);
       if(!c) return;
       c.status = newStatus;
-      await fetch(`/api/volunteers/${id}`, {
+      await offlineAction(`/api/volunteers/${id}`, {
         method:'PUT', headers:{'Content-Type':'application/json'},
         body: JSON.stringify(c)
-      });
+      }, 'Update Volunteer Status');
       openProfile(id); // refresh modal
       refreshData();
     }
@@ -905,12 +981,12 @@
         upi_id: document.getElementById('ep-upi').value.trim()
       };
       try {
-        const res = await fetch('/api/users/me', {
+        const res = await offlineAction('/api/users/me', {
           method: 'PUT',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(payload)
-        });
-        if (!res.ok) throw new Error('Update failed');
+        }, 'Update Profile');
+        if (!res.offline && !res.success) throw new Error('Update failed');
         document.getElementById('edit-profile-modal').style.display = 'none';
         showToast('Profile updated successfully!');
         refreshData();
@@ -944,11 +1020,11 @@
     }
 
     async function setStatus(id, status) {
-      await fetch(`/api/tasks/${id}/toggle`, {
+      await offlineAction(`/api/tasks/${id}/toggle`, {
         method:'PUT',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ status })
-      });
+      }, `Set Task ${status}`);
       refreshData();
     }
 
@@ -971,7 +1047,7 @@
     async function submitTask() {
       const title = document.getElementById('t-title').value;
       if(!title) return;
-      await fetch('/api/tasks', {
+      await offlineAction('/api/tasks', {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({
           title, priority: document.getElementById('t-prio').value,
@@ -979,7 +1055,7 @@
           assigned_user: document.getElementById('t-assign').value, 
           category: 'General'
         })
-      });
+      }, 'Add Task');
       document.getElementById('add-task-modal').style.display='none';
       document.getElementById('t-title').value = '';
       refreshData();
@@ -987,11 +1063,11 @@
     }
 
     async function markRead(id) {
-      await fetch(`/api/admin_notifications/${id}/read`, {method:'PATCH'});
+      await offlineAction(`/api/admin_notifications/${id}/read`, {method:'PATCH'}, 'Mark Notification Read');
       refreshData();
     }
     async function markAllRead() {
-      await fetch('/api/admin_notifications/read_all', {method:'PATCH'});
+      await offlineAction('/api/admin_notifications/read_all', {method:'PATCH'}, 'Mark All Notifications Read');
       refreshData();
     }
 
