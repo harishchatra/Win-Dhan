@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>IRE 2026 App</title>
+  
+  <!-- PWA Manifest & Icons -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" href="/icons/app-icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="IRE 2026">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0f1218;
+      --card-bg: #1a1e26;
+      --copper: #F28705;
+      --copper-dk: #d66b04;
+      --text: #ffffff;
+      --text-dim: #9aa4b5;
+      --border: #2a3140;
+      
+      --status-sold: #4caf50;
+      --status-pending: #ff9800;
+      --status-reserved: #2196f3;
+      --status-available: #e0e0e0;
+      
+      --nav-height: 70px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* Top App Bar */
+    .app-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+      padding-top: env(safe-area-inset-top); /* For iPhone notch */
+      height: calc(60px + env(safe-area-inset-top));
+    }
+    .app-logo { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; }
+    .app-logo span { color: var(--copper); }
+    
+    .install-btn {
+      background: rgba(242, 135, 5, 0.15);
+      color: var(--copper);
+      border: 1px solid var(--copper);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    /* Main Content Area */
+    .app-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: calc(80px + env(safe-area-inset-top)) 20px calc(var(--nav-height) + 40px + env(safe-area-inset-bottom)) 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .screen { display: none; animation: fadeIn 0.3s ease; }
+    .screen.active { display: flex; flex-direction: column; gap: 20px; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Bottom Nav Bar */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: calc(var(--nav-height) + env(safe-area-inset-bottom));
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-bottom: env(safe-area-inset-bottom);
+      z-index: 100;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-weight: 600;
+      width: 25%;
+      position: relative;
+    }
+    .nav-item.active { color: var(--copper); }
+    .nav-ico { font-size: 1.4rem; margin-bottom: 4px; }
+    
+    .nav-badge {
+      position: absolute;
+      top: -4px; right: 18px;
+      background: red;
+      color: white;
+      font-size: 9px;
+      font-weight: 800;
+      width: 16px; height: 16px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      border: 2px solid var(--card-bg);
+      display: none;
+    }
+
+    /* UI Components */
+    .card { background: var(--card-bg); border-radius: 16px; padding: 18px; border: 1px solid var(--border); }
+    .kpi-val { font-size: 2rem; font-weight: 800; line-height: 1.1; margin: 4px 0; }
+    .kpi-lbl { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; font-weight: 700;}
+    .kpi-sub { font-size: 0.75rem; color: var(--copper); margin-top: 4px; font-weight: 600; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* Task List */
+    .task-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .task-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .task-title { font-size: 1rem; font-weight: 600; line-height: 1.3; }
+    .task-badge { font-size: 0.65rem; padding: 3px 8px; border-radius: 50px; font-weight: 700; text-transform: uppercase; }
+    .badge-pending { background: rgba(255,152,0,0.15); color: var(--status-pending); }
+    .badge-prog { background: rgba(33,150,243,0.15); color: var(--status-reserved); }
+    .badge-done { background: rgba(76,175,80,0.15); color: var(--status-sold); }
+    
+    .task-meta { font-size: 0.75rem; color: var(--text-dim); display: flex; justify-content: space-between; }
+    .btn-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px;
+      border-radius: 8px;
+      width: 100%;
+      margin-top: 5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Floating Action Button (FAB) */
+    .fab {
+      position: fixed;
+      bottom: calc(var(--nav-height) + 20px + env(safe-area-inset-bottom));
+      right: 20px;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--copper);
+      color: #000;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 15px rgba(242,135,5,0.4);
+      z-index: 90;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.8);
+      z-index: 200;
+      display: none; align-items: flex-end;
+    }
+    .modal-sheet {
+      background: var(--card-bg);
+      width: 100%;
+      padding: 24px;
+      border-radius: 24px 24px 0 0;
+      border-top: 1px solid var(--border);
+      padding-bottom: calc(24px + env(safe-area-inset-bottom));
+    }
+    .input-grp { margin-bottom: 15px; }
+    .input-grp label { display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
+    .input-grp input, .input-grp select {
+      width: 100%; padding: 12px; background: var(--bg); border: 1px solid var(--border);
+      color: white; border-radius: 8px; font-size: 1rem;
+    }
+    .btn-primary {
+      width: 100%; padding: 14px; background: var(--copper); color: #000;
+      border: none; border-radius: 8px; font-weight: 700; font-size: 1rem; margin-top: 10px;
+    }
+
+    /* Notification Feed */
+    .notif-item {
+      padding: 12px; border-bottom: 1px solid var(--border);
+      font-size: 0.9rem; line-height: 1.4;
+    }
+    .notif-item.unread { border-left: 3px solid var(--copper); background: rgba(255,255,255,0.02); }
+    .notif-time { font-size: 0.7rem; color: var(--text-dim); margin-top: 4px; }
+
+    /* Login Screen Cover */
+    #login-cover {
+      position: fixed; top:0; left:0; right:0; bottom:0;
+      background: var(--bg); z-index: 500;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-cover">
+    <h1 class="app-logo" style="font-size:2.5rem; margin-bottom: 10px;">IRE <span>2026</span></h1>
+    <p style="color:var(--text-dim); margin-bottom:40px;">Team Dashboard</p>
+    
+    <div style="width:100%; max-width:320px;">
+      <div class="input-grp">
+        <label>Username</label>
+        <input type="text" id="login-user" placeholder="e.g. sadanand">
+      </div>
+      <div class="input-grp">
+        <label>Password</label>
+        <input type="password" id="login-pass" placeholder="••••••••">
+      </div>
+      <button class="btn-primary" onclick="doLogin()">Sign In</button>
+      <p id="login-err" style="color:#ff5252; font-size:0.8rem; text-align:center; margin-top:15px;"></p>
+    </div>
+  </div>
+
+  <!-- MAIN APP SHELL -->
+  <div class="app-header">
+    <div class="app-logo">IRE <span>2026</span></div>
+    <button class="install-btn" id="installBtn">Install App</button>
+  </div>
+
+  <div class="app-content">
+
+    <!-- HOME SCREEN -->
+    <div id="screen-home" class="screen active">
+      <div>
+        <h2 style="font-size: 1.5rem;" id="welcome-msg">Hi, Team</h2>
+        <p style="color:var(--text-dim); font-size:0.9rem;" id="role-msg">Role</p>
+      </div>
+
+      <div class="card" id="kpi-stalls" style="display:none;">
+        <div class="kpi-lbl">Stalls Booked</div>
+        <div class="kpi-val" id="val-stalls">0 / 85</div>
+        <div class="kpi-sub" id="sub-stalls">0 Available</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card" id="kpi-rev" style="display:none;">
+          <div class="kpi-lbl">Revenue</div>
+          <div class="kpi-val" id="val-rev" style="font-size:1.6rem;">₹0</div>
+          <div class="kpi-sub" id="sub-rev">Collected</div>
+        </div>
+        <div class="card" id="kpi-leads" style="display:none;">
+          <div class="kpi-lbl">Active Leads</div>
+          <div class="kpi-val" id="val-leads" style="font-size:1.6rem;">0</div>
+          <div class="kpi-sub" id="sub-leads">In Pipeline</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="kpi-lbl">My Tasks Due</div>
+        <div class="kpi-val" id="val-tasks-due" style="font-size:1.6rem;">0</div>
+        <button class="btn-toggle" style="margin-top:10px; background:var(--copper); color:#000; border:none;" onclick="switchTab('tasks')">View Tasks →</button>
+      </div>
+    </div>
+
+    <!-- TASKS SCREEN -->
+    <div id="screen-tasks" class="screen">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="font-size: 1.5rem;">Tasks</h2>
+        <span id="task-view-lbl" style="font-size:0.8rem; color:var(--text-dim);">My Tasks</span>
+      </div>
+      <div id="task-list">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- NOTIFS SCREEN -->
+    <div id="screen-notifs" class="screen">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="font-size: 1.5rem;">Alerts</h2>
+        <button onclick="markAllRead()" style="background:none;border:none;color:var(--copper);font-weight:600;display:none;" id="btn-mark-all">Mark Read</button>
+      </div>
+      <div class="card" style="padding:0; overflow:hidden;" id="notif-list">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- PROFILE SCREEN -->
+    <div id="screen-profile" class="screen">
+      <h2 style="font-size: 1.5rem; margin-bottom:20px;">Profile</h2>
+      <div class="card" style="text-align:center; padding:30px 20px;">
+        <div style="width:80px; height:80px; border-radius:50%; background:var(--copper); color:#000; font-size:2rem; font-weight:800; display:flex; align-items:center; justify-content:center; margin: 0 auto 15px auto;" id="prof-initials">H</div>
+        <h3 id="prof-name">Name</h3>
+        <p style="color:var(--text-dim); margin-bottom:20px;" id="prof-username">@username</p>
+        <button class="btn-toggle" style="color:#ff5252; border-color:#ff5252;" onclick="doLogout()">Sign Out</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAB Add Task -->
+  <button class="fab" onclick="openAddTask()">+</button>
+
+  <!-- Add Task Bottom Sheet -->
+  <div class="modal-overlay" id="add-task-modal">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;margin-bottom:20px;">
+        <h3>New Task</h3>
+        <span style="font-size:1.5rem;line-height:1;color:var(--text-dim);cursor:pointer;" onclick="document.getElementById('add-task-modal').style.display='none'">×</span>
+      </div>
+      <div class="input-grp">
+        <label>Task Title</label>
+        <input type="text" id="t-title" placeholder="What needs to be done?">
+      </div>
+      <div class="grid-2">
+        <div class="input-grp">
+          <label>Priority</label>
+          <select id="t-prio">
+            <option>High</option><option selected>Medium</option><option>Low</option>
+          </select>
+        </div>
+        <div class="input-grp">
+          <label>Deadline</label>
+          <input type="date" id="t-date">
+        </div>
+      </div>
+      <button class="btn-primary" onclick="submitTask()">Save Task</button>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="switchTab('home')" id="nav-home">
+      <div class="nav-ico">🏠</div><span>Home</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('tasks')" id="nav-tasks">
+      <div class="nav-ico">📋</div><span>Tasks</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('notifs')" id="nav-notifs">
+      <div class="nav-ico">🔔</div><span>Alerts</span>
+      <div class="nav-badge" id="app-notif-badge">0</div>
+    </div>
+    <div class="nav-item" onclick="switchTab('profile')" id="nav-profile">
+      <div class="nav-ico">👤</div><span>Profile</span>
+    </div>
+  </div>
+
+  <script>
+    // ── PWA Installation Logic ──
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') installBtn.style.display = 'none';
+        deferredPrompt = null;
+      }
+    });
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+
+    // ── App State ──
+    let user = null;
+    let allTasks = [];
+    let allNotifs = [];
+
+    // ── Boot sequence ──
+    async function checkSession() {
+      try {
+        const res = await fetch('/api/auth/session');
+        const data = await res.json();
+        if (data.success) {
+          user = data.user;
+          document.getElementById('login-cover').style.display = 'none';
+          initApp();
+        }
+      } catch(e) {}
+    }
+    checkSession();
+
+    async function doLogin() {
+      const u = document.getElementById('login-user').value;
+      const p = document.getElementById('login-pass').value;
+      const err = document.getElementById('login-err');
+      err.textContent = 'Authenticating...';
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST', headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({username: u, password: p})
+        });
+        const data = await res.json();
+        if (data.success) {
+          user = data.user;
+          document.getElementById('login-cover').style.display = 'none';
+          initApp();
+        } else {
+          err.textContent = data.error || 'Login failed';
+        }
+      } catch(e) { err.textContent = 'Network error'; }
+    }
+
+    async function doLogout() {
+      await fetch('/api/auth/logout', {method:'POST'});
+      window.location.reload();
+    }
+
+    // ── Core Data Fetching ──
+    async function initApp() {
+      // Set Profile
+      document.getElementById('welcome-msg').textContent = `Hi, ${user.name.split(' ')[0]}`;
+      document.getElementById('role-msg').textContent = user.role.replace('_', ' ').toUpperCase();
+      document.getElementById('prof-initials').textContent = user.name[0].toUpperCase();
+      document.getElementById('prof-name').textContent = user.name;
+      document.getElementById('prof-username').textContent = user.username;
+
+      // Layout adjustments based on role
+      if(user.role === 'super_admin' || user.role === 'finance_manager' || user.role === 'sales_manager') {
+        document.getElementById('kpi-stalls').style.display = 'block';
+        document.getElementById('kpi-rev').style.display = 'block';
+        document.getElementById('kpi-leads').style.display = 'block';
+      }
+      if(user.role === 'super_admin') {
+        document.getElementById('task-view-lbl').textContent = 'All Team Tasks';
+      }
+
+      refreshData();
+      setInterval(refreshData, 30000); // Background refresh every 30s
+    }
+
+    async function refreshData() {
+      // Fetch tasks
+      const resT = await fetch('/api/tasks');
+      allTasks = await resT.json();
+      
+      // Filter for this user unless super_admin
+      let myTasks = allTasks;
+      if (user.role !== 'super_admin') {
+        myTasks = allTasks.filter(t => t.assigned_user.toLowerCase().includes(user.name.toLowerCase().split(' ')[0]));
+      }
+
+      // Update KPI
+      const pendingCount = myTasks.filter(t => t.status !== 'Completed').length;
+      document.getElementById('val-tasks-due').textContent = pendingCount;
+      
+      renderTasks(myTasks);
+
+      // Fetch Notifications if Super Admin
+      if (user.role === 'super_admin') {
+        const resN = await fetch('/api/admin_notifications');
+        if (resN.ok) {
+          allNotifs = await resN.json();
+          renderNotifs();
+        }
+      } else {
+        document.getElementById('notif-list').innerHTML = `<div style="padding:20px;text-align:center;color:gray;font-size:0.8rem;">Local alerts feature coming soon.</div>`;
+      }
+
+      // Fetch Home KPIs
+      if(document.getElementById('kpi-stalls').style.display === 'block') {
+        fetch('/api/stalls').then(r=>r.json()).then(data => {
+          const sold = data.filter(d=>d.status==='sold').length;
+          document.getElementById('val-stalls').textContent = `${sold} / 85`;
+          document.getElementById('sub-stalls').textContent = `${85-sold} Available`;
+        });
+        fetch('/api/payments').then(r=>r.json()).then(data => {
+          let paid = 0; data.forEach(d=> paid += (d.paid||0));
+          document.getElementById('val-rev').textContent = `₹${(paid/100000).toFixed(1)}L`;
+        });
+        fetch('/api/leads').then(r=>r.json()).then(data => {
+          const active = data.filter(d=>d.status !== 'confirmed' && d.status !== 'lost').length;
+          document.getElementById('val-leads').textContent = active;
+        });
+      }
+    }
+
+    // ── Rendering ──
+    function renderTasks(list) {
+      const container = document.getElementById('task-list');
+      if(list.length===0) { container.innerHTML = '<p style="color:gray;text-align:center;margin-top:20px;">No tasks assigned.</p>'; return; }
+      
+      container.innerHTML = list.map(t => {
+        let bClass = t.status === 'Completed' ? 'badge-done' : t.status === 'In Progress' ? 'badge-prog' : 'badge-pending';
+        return `
+          <div class="task-item">
+            <div class="task-header">
+              <div class="task-title">${t.title}</div>
+              <div class="task-badge ${bClass}">${t.status}</div>
+            </div>
+            <div class="task-meta">
+              <span>📅 ${t.deadline}</span>
+              ${user.role === 'super_admin' ? `<span>👤 ${t.assigned_user}</span>` : ''}
+            </div>
+            <button class="btn-toggle" onclick="toggleTask('${t.id}')">Toggle Status 🔄</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderNotifs() {
+      const container = document.getElementById('notif-list');
+      const badge = document.getElementById('app-notif-badge');
+      const btnAll = document.getElementById('btn-mark-all');
+      
+      const unread = allNotifs.filter(n => !n.is_read).length;
+      badge.textContent = unread;
+      badge.style.display = unread > 0 ? 'flex' : 'none';
+      btnAll.style.display = unread > 0 ? 'block' : 'none';
+
+      if(allNotifs.length===0) { container.innerHTML = '<p style="padding:20px;text-align:center;color:gray;">No team alerts yet.</p>'; return; }
+
+      container.innerHTML = allNotifs.map(n => `
+        <div class="notif-item ${!n.is_read ? 'unread' : ''}" onclick="markRead('${n.id}')">
+          ${n.message}
+          <div class="notif-time">${new Date(n.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+        </div>
+      `).join('');
+    }
+
+    // ── Actions ──
+    async function toggleTask(id) {
+      await fetch(`/api/tasks/${id}/toggle`, {method:'PUT'});
+      refreshData();
+    }
+
+    function openAddTask() {
+      document.getElementById('add-task-modal').style.display='flex';
+      document.getElementById('t-date').valueAsDate = new Date();
+    }
+
+    async function submitTask() {
+      const title = document.getElementById('t-title').value;
+      if(!title) return;
+      await fetch('/api/tasks', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          title, priority: document.getElementById('t-prio').value,
+          deadline: document.getElementById('t-date').value,
+          assigned_user: user.name, category: 'General'
+        })
+      });
+      document.getElementById('add-task-modal').style.display='none';
+      document.getElementById('t-title').value = '';
+      refreshData();
+      switchTab('tasks');
+    }
+
+    async function markRead(id) {
+      await fetch(`/api/admin_notifications/${id}/read`, {method:'PATCH'});
+      refreshData();
+    }
+    async function markAllRead() {
+      await fetch('/api/admin_notifications/read_all', {method:'PATCH'});
+      refreshData();
+    }
+
+    // ── Navigation ──
+    function switchTab(tabId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById(`screen-${tabId}`).classList.add('active');
+      document.getElementById(`nav-${tabId}`).classList.add('active');
+      window.scrollTo(0,0);
+    }
+  </script>
+</body>
+</html>
