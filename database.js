@@ -257,43 +257,69 @@ db.serialize(() => {
     value TEXT
   )`);
 
-  // ──────────────── SEEDING INITIAL DATABASE DATA ────────────────
+  // ── Remove old test/dummy accounts on every boot ──
+  db.run(`DELETE FROM users WHERE username IN ('hari', 'manager', 'raju')`, (delErr) => {
+    if (delErr) console.error('Error removing old test accounts:', delErr.message);
+    else console.log('Old test accounts removed.');
+  });
 
-  // Seed Users
-  db.get(`SELECT COUNT(*) as count FROM users`, (err, row) => {
-    if (row && row.count === 0) {
-      console.log('Seeding default users...');
-      const salt = bcrypt.genSaltSync(10);
-      const pass1 = bcrypt.hashSync('hari123', salt);
-      const pass2 = bcrypt.hashSync('manager123', salt);
-      const pass3 = bcrypt.hashSync('raju123', salt);
-
-      db.run(`INSERT INTO users VALUES ('u1', 'Hari Prasad', 'hari', ?, 'super_admin')`, [pass1]);
-      db.run(`INSERT INTO users VALUES ('u2', 'Suprabha Manager', 'manager', ?, 'admin')`, [pass2]);
-      db.run(`INSERT INTO users VALUES ('u3', 'Raju Kumar', 'raju', ?, 'sales_executive')`, [pass3]);
+  // ── Seed real team accounts (only if they don't already exist) ──
+  const teamMembers = [
+    {
+      id: 'u_harish',
+      name: 'Harish Chatra',
+      username: '@harishchatra',
+      password: '7981869954',
+      role: 'super_admin'
+    },
+    {
+      id: 'u_sadanand',
+      name: 'Sadanand',
+      username: 'sadanand',
+      password: 'Sadanand@IRE26',
+      role: 'sales_manager'       // Leads, Exhibitors, Reports (for invoices/billing)
+    },
+    {
+      id: 'u_renu',
+      name: 'Renu',
+      username: 'renu',
+      password: 'Renu@IRE26',
+      role: 'finance_manager'     // Stalls, Payments, Reports
+    },
+    {
+      id: 'u_sandeep',
+      name: 'Sandeep',
+      username: 'sandeep',
+      password: 'Sandeep@IRE26',
+      role: 'sponsor_manager'     // Tasks, Media, limited dashboard access
+    },
+    {
+      id: 'u_chanti',
+      name: 'Chanti',
+      username: 'chanti',
+      password: 'Chanti@IRE26',
+      role: 'sales_manager'       // Marketing campaigns, Leads (colleges/influencers)
     }
+  ];
 
-    // Ensure Mr. Harish Chatra's account is always seeded
-    db.get(`SELECT * FROM users WHERE username = '@harishchatra'`, (err2, uRow) => {
-      if (err2) {
-        console.error('Error checking Harish Chatra user:', err2.message);
-        return;
-      }
-      if (!uRow) {
-        console.log('Seeding Harish Chatra super_admin user...');
+  teamMembers.forEach(member => {
+    db.get(`SELECT * FROM users WHERE username = ?`, [member.username], (err, existing) => {
+      if (err) { console.error(`Error checking user ${member.username}:`, err.message); return; }
+      if (!existing) {
         const salt = bcrypt.genSaltSync(10);
-        const passHash = bcrypt.hashSync('7981869954', salt);
+        const hash = bcrypt.hashSync(member.password, salt);
         db.run(
-          `INSERT INTO users (id, name, username, password_hash, role) VALUES ('u_harish', 'Harish Chatra', '@harishchatra', ?, 'super_admin')`,
-          [passHash],
-          (err3) => {
-            if (err3) console.error('Failed to seed Harish Chatra:', err3.message);
-            else console.log('Harish Chatra seeded successfully.');
+          `INSERT INTO users (id, name, username, password_hash, role) VALUES (?, ?, ?, ?, ?)`,
+          [member.id, member.name, member.username, hash, member.role],
+          (insErr) => {
+            if (insErr) console.error(`Failed to seed ${member.name}:`, insErr.message);
+            else console.log(`✅ Team member seeded: ${member.name} (${member.role})`);
           }
         );
       }
     });
   });
+
 
   // Seed Stalls (Seed all 85 stalls completely available!)
   db.get(`SELECT COUNT(*) as count FROM stalls`, (err, row) => {
