@@ -1065,8 +1065,8 @@
         📷 Share App QR
       </button>
 
-      <!-- PWA Install Button (Hidden by default, shown if installable) -->
-      <button id="adminInstallBtn" class="btn-action-primary" style="display:none; padding:4px 10px; font-size:0.7rem; border-radius:50px; border:1px solid var(--copper);">
+      <!-- PWA Install Button -->
+      <button id="adminInstallBtn" class="btn-action-primary" style="padding:4px 10px; font-size:0.7rem; border-radius:50px; border:1px solid var(--copper);">
         📱 Install App
       </button>
 
@@ -3219,13 +3219,12 @@
 
   <script>
     // ── PWA Installation Logic for Admin ──
-    let deferredPromptAdmin;
+    let deferredPromptAdmin = null;
     const adminInstallBtn = document.getElementById('adminInstallBtn');
     
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPromptAdmin = e;
-      if (adminInstallBtn) adminInstallBtn.style.display = 'inline-flex';
     });
 
     if (adminInstallBtn) {
@@ -3235,6 +3234,14 @@
           const { outcome } = await deferredPromptAdmin.userChoice;
           if (outcome === 'accepted') adminInstallBtn.style.display = 'none';
           deferredPromptAdmin = null;
+        } else {
+          // If browser doesn't support automatic prompt (like Safari/iPhone) or already installed
+          alert(
+            "Automatic installation isn't available right now.\n\n" +
+            "How to install manually:\n" +
+            "• On iPhone/iPad: Tap the 'Share' icon at the bottom of Safari, then tap 'Add to Home Screen'.\n" +
+            "• On Desktop (Chrome/Edge): Click the Install icon (looks like a screen with a down arrow) on the far right side of your URL address bar."
+          );
         }
       });
     }

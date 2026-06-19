@@ -72,7 +72,7 @@
       border-radius: 50px;
       font-size: 0.8rem;
       font-weight: 600;
-      display: none;
+      display: block;
     }
 
     /* Main Content Area */
@@ -376,13 +376,12 @@
 
   <script>
     // ── PWA Installation Logic ──
-    let deferredPrompt;
+    let deferredPrompt = null;
     const installBtn = document.getElementById('installBtn');
     
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      installBtn.style.display = 'block';
     });
 
     installBtn.addEventListener('click', async () => {
@@ -391,6 +390,13 @@
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') installBtn.style.display = 'none';
         deferredPrompt = null;
+      } else {
+        alert(
+          "Automatic installation isn't available right now.\n\n" +
+          "How to install manually:\n" +
+          "• On iPhone/iPad: Tap the 'Share' icon at the bottom of Safari, then tap 'Add to Home Screen'.\n" +
+          "• On Android: Tap the 3 dots menu at the top right, then select 'Add to Home screen' or 'Install app'."
+        );
       }
     });
 
