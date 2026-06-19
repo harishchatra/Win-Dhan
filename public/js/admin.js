@@ -4099,19 +4099,19 @@ function downloadExhibitorCert() {
 // Override applyRolePermissions for Phase 3 Granular gate rules
 function applyRolePermissions() {
   const allNavs = [
-    { id: 'nav-btn-dashboard',      roles: ['super_admin', 'event_director', 'finance_manager', 'sales_manager', 'sales_executive', 'sponsor_manager'] },
+    { id: 'nav-btn-dashboard',      roles: ['super_admin', 'event_director', 'finance_manager', 'sales_manager', 'sales_executive', 'developer'] },
     { id: 'nav-btn-stalls',         roles: ['super_admin', 'event_director', 'sales_manager', 'sales_executive', 'finance_manager'] },
     { id: 'nav-btn-map',            roles: ['super_admin', 'event_director', 'sales_manager', 'sales_executive', 'finance_manager'] },
     { id: 'nav-btn-leads',          roles: ['super_admin', 'event_director', 'sales_manager', 'sales_executive'] },
     { id: 'nav-btn-exhibitors',     roles: ['super_admin', 'event_director', 'sales_manager', 'sales_executive'] },
     { id: 'nav-btn-payments',       roles: ['super_admin', 'event_director', 'finance_manager'] },
     { id: 'nav-btn-visitors',       roles: ['super_admin', 'event_director', 'sales_manager', 'sales_executive'] },
-    { id: 'nav-btn-sponsors',       roles: ['super_admin', 'event_director', 'sponsor_manager'] },
-    { id: 'nav-btn-sponsor-apps',   roles: ['super_admin', 'event_director', 'sponsor_manager'] },
+    { id: 'nav-btn-sponsors',       roles: ['super_admin', 'event_director', 'developer'] },
+    { id: 'nav-btn-sponsor-apps',   roles: ['super_admin', 'event_director', 'developer'] },
     { id: 'nav-btn-program',        roles: ['super_admin', 'event_director'] },
     { id: 'nav-btn-marketing',      roles: ['super_admin', 'event_director', 'sales_manager'] },
-    { id: 'nav-btn-media',          roles: ['super_admin', 'event_director', 'sponsor_manager'] },
-    { id: 'nav-btn-tasks',          roles: ['super_admin', 'event_director', 'sales_manager', 'sales_executive', 'sponsor_manager', 'finance_manager'] },
+    { id: 'nav-btn-media',          roles: ['super_admin', 'event_director', 'developer'] },
+    { id: 'nav-btn-tasks',          roles: ['super_admin', 'event_director', 'sales_manager', 'sales_executive', 'developer', 'finance_manager'] },
     { id: 'nav-btn-reports',        roles: ['super_admin', 'event_director', 'finance_manager', 'sales_manager'] },
     { id: 'nav-btn-settings',       roles: ['super_admin'] },
     { id: 'nav-btn-exhibitor-portal', roles: ['exhibitor'] }

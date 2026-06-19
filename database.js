@@ -303,7 +303,7 @@ db.serialize(() => {
       name: 'Sandeep',
       username: 'sandeep',
       password: 'Sandeep@IRE26',
-      role: 'sponsor_manager'     // Tasks, Media, limited dashboard access
+      role: 'developer'     // Tasks, Media, limited dashboard access
     },
     {
       id: 'u_chanti',

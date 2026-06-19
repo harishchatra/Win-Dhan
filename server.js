@@ -524,28 +524,28 @@ app.delete('/api/tasks/:id', checkAuth(), (req, res) => {
 
 // ──────────────── ADMIN NOTIFICATIONS API (Super Admin task alerts) ────────────────
 
-app.get('/api/admin_notifications', checkAuth(['super_admin']), (req, res) => {
+app.get('/api/admin_notifications', checkAuth(), (req, res) => {
   db.all(`SELECT * FROM admin_notifications ORDER BY timestamp DESC LIMIT 50`, (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(rows);
   });
 });
 
-app.get('/api/admin_notifications/unread_count', checkAuth(['super_admin']), (req, res) => {
+app.get('/api/admin_notifications/unread_count', checkAuth(), (req, res) => {
   db.get(`SELECT COUNT(*) as count FROM admin_notifications WHERE is_read = 0`, (err, row) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ count: row ? row.count : 0 });
   });
 });
 
-app.patch('/api/admin_notifications/:id/read', checkAuth(['super_admin']), (req, res) => {
+app.patch('/api/admin_notifications/:id/read', checkAuth(), (req, res) => {
   db.run(`UPDATE admin_notifications SET is_read = 1 WHERE id = ?`, [req.params.id], function(err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ success: true });
   });
 });
 
-app.patch('/api/admin_notifications/read_all', checkAuth(['super_admin']), (req, res) => {
+app.patch('/api/admin_notifications/read_all', checkAuth(), (req, res) => {
   db.run(`UPDATE admin_notifications SET is_read = 1`, function(err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ success: true });
@@ -796,7 +796,7 @@ app.get('/api/sponsors', (req, res) => {
   });
 });
 
-app.post('/api/sponsors', checkAuth(['super_admin', 'admin', 'sponsor_manager']), (req, res) => {
+app.post('/api/sponsors', checkAuth(['super_admin', 'admin', 'developer']), (req, res) => {
   const { company, type, contact_person, phone, email, amount, benefits, agreement, status } = req.body;
   const id = 'sp-' + Date.now();
   db.run(
@@ -809,7 +809,7 @@ app.post('/api/sponsors', checkAuth(['super_admin', 'admin', 'sponsor_manager'])
   );
 });
 
-app.put('/api/sponsors/:id', checkAuth(['super_admin', 'admin', 'sponsor_manager']), (req, res) => {
+app.put('/api/sponsors/:id', checkAuth(['super_admin', 'admin', 'developer']), (req, res) => {
   const { company, type, contact_person, phone, email, amount, benefits, agreement, status } = req.body;
   db.run(
     `UPDATE sponsors SET company = ?, type = ?, contact_person = ?, phone = ?, email = ?, amount = ?, benefits = ?, agreement = ?, status = ? WHERE id = ?`,
@@ -851,7 +851,7 @@ app.post('/api/sponsor_applications', (req, res) => {
   );
 });
 
-app.put('/api/sponsor_applications/:id', checkAuth(['super_admin', 'admin', 'sponsor_manager']), (req, res) => {
+app.put('/api/sponsor_applications/:id', checkAuth(['super_admin', 'admin', 'developer']), (req, res) => {
   const { status } = req.body;
   const id = req.params.id;
 

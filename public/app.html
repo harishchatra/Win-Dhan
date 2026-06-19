@@ -319,10 +319,32 @@
         </div>
       </div>
 
+      <!-- Developer Specific KPIs -->
+      <div class="grid-2" id="kpi-dev-group" style="display:none;">
+        <div class="card">
+          <div class="kpi-lbl">Delegated Tasks</div>
+          <div class="kpi-val" id="val-dev-tasks" style="font-size:1.6rem;">0</div>
+          <div class="kpi-sub">Across Team</div>
+        </div>
+        <div class="card">
+          <div class="kpi-lbl">Pending Assets</div>
+          <div class="kpi-val" id="val-dev-assets" style="font-size:1.6rem;">0</div>
+          <div class="kpi-sub">Design/Media</div>
+        </div>
+      </div>
+
       <div class="card">
         <div class="kpi-lbl">My Tasks Due</div>
         <div class="kpi-val" id="val-tasks-due" style="font-size:1.6rem;">0</div>
         <button class="btn-toggle" style="margin-top:10px; background:var(--copper); color:#000; border:none;" onclick="switchTab('tasks')">View Tasks →</button>
+      </div>
+
+      <!-- Activity Feed (Fixes empty state) -->
+      <div style="margin-top: 10px;">
+        <h3 style="font-size:1rem; margin-bottom:12px; color:var(--text-dim);">Recent Activity</h3>
+        <div id="home-activity-feed" style="display:flex; flex-direction:column; gap:10px;">
+          <p style="color:gray; font-size:0.8rem;">Loading activity...</p>
+        </div>
       </div>
     </div>
 
@@ -354,7 +376,9 @@
       <div class="card" style="text-align:center; padding:30px 20px;">
         <div style="width:80px; height:80px; border-radius:50%; background:var(--copper); color:#000; font-size:2rem; font-weight:800; display:flex; align-items:center; justify-content:center; margin: 0 auto 15px auto;" id="prof-initials">H</div>
         <h3 id="prof-name">Name</h3>
-        <p style="color:var(--text-dim); margin-bottom:20px;" id="prof-username">@username</p>
+        <p style="color:var(--text-dim); font-size:0.85rem; margin-top:2px;" id="prof-username">@username</p>
+        <div style="display:inline-block; margin-top:10px; padding:4px 12px; background:rgba(255,255,255,0.05); border:1px solid var(--card-border); border-radius:50px; font-size:0.7rem; font-weight:700; color:var(--copper);" id="prof-role-badge">ROLE</div>
+        <p style="color:var(--text-dim); font-size:0.8rem; margin:15px 0 25px 0;" id="prof-email">user@ire2026.com</p>
         <button class="btn-toggle" style="color:#ff5252; border-color:#ff5252;" onclick="doLogout()">Sign Out</button>
       </div>
     </div>
@@ -490,16 +514,30 @@
       document.getElementById('role-msg').textContent = user.role.replace('_', ' ').toUpperCase();
       document.getElementById('prof-initials').textContent = user.name[0].toUpperCase();
       document.getElementById('prof-name').textContent = user.name;
-      document.getElementById('prof-username').textContent = user.username;
+      // Force username strictly to lowercase and prepend @ if missing
+      const uname = user.username.startsWith('@') ? user.username.toLowerCase() : '@' + user.username.toLowerCase();
+      document.getElementById('prof-username').textContent = uname;
+      document.getElementById('prof-role-badge').textContent = user.role.replace('_', ' ').toUpperCase();
+      document.getElementById('prof-email').textContent = `${user.username.replace('@','')}@ire2026.com`;
 
       // Layout adjustments based on role
-      if(user.role === 'super_admin' || user.role === 'finance_manager' || user.role === 'sales_manager') {
+      document.getElementById('kpi-stalls').style.display = 'none';
+      document.getElementById('kpi-rev').style.display = 'none';
+      document.getElementById('kpi-leads').style.display = 'none';
+      document.getElementById('kpi-dev-group').style.display = 'none';
+
+      if(user.role === 'super_admin') {
         document.getElementById('kpi-stalls').style.display = 'block';
         document.getElementById('kpi-rev').style.display = 'block';
         document.getElementById('kpi-leads').style.display = 'block';
-      }
-      if(user.role === 'super_admin') {
         document.getElementById('task-view-lbl').textContent = 'All Team Tasks';
+      } else if (user.role === 'sales_manager') {
+        document.getElementById('kpi-leads').style.display = 'block';
+      } else if (user.role === 'finance_manager') {
+        document.getElementById('kpi-stalls').style.display = 'block';
+        document.getElementById('kpi-rev').style.display = 'block';
+      } else if (user.role === 'developer') {
+        document.getElementById('kpi-dev-group').style.display = 'grid';
       }
 
       refreshData();
@@ -523,32 +561,55 @@
       
       renderTasks(myTasks);
 
-      // Fetch Notifications if Super Admin
-      if (user.role === 'super_admin') {
-        const resN = await fetch('/api/admin_notifications');
-        if (resN.ok) {
-          allNotifs = await resN.json();
-          renderNotifs();
+      // Fetch Notifications for ALL users
+      const resN = await fetch('/api/admin_notifications');
+      if (resN.ok) {
+        allNotifs = await resN.json();
+        renderNotifs();
+        // Render 3 recent notifications to the Home Activity Feed
+        const feed = document.getElementById('home-activity-feed');
+        if (allNotifs.length > 0) {
+          feed.innerHTML = allNotifs.slice(0, 3).map(n => `
+            <div style="background:rgba(255,255,255,0.03); padding:12px; border-radius:12px; border:1px solid var(--card-border); font-size:0.8rem; line-height:1.4;">
+              <span style="color:var(--text-dim); font-size:0.7rem;">${new Date(n.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span><br>
+              ${n.message}
+            </div>
+          `).join('');
+        } else {
+          feed.innerHTML = '<p style="color:gray; font-size:0.8rem;">No recent activity.</p>';
         }
-      } else {
-        document.getElementById('notif-list').innerHTML = `<div style="padding:20px;text-align:center;color:gray;font-size:0.8rem;">Local alerts feature coming soon.</div>`;
       }
 
       // Fetch Home KPIs
-      if(document.getElementById('kpi-stalls').style.display === 'block') {
-        fetch('/api/stalls').then(r=>r.json()).then(data => {
-          const sold = data.filter(d=>d.status==='sold').length;
-          document.getElementById('val-stalls').textContent = `${sold} / 85`;
-          document.getElementById('sub-stalls').textContent = `${85-sold} Available`;
-        });
-        fetch('/api/payments').then(r=>r.json()).then(data => {
-          let paid = 0; data.forEach(d=> paid += (d.paid||0));
-          document.getElementById('val-rev').textContent = `₹${(paid/100000).toFixed(1)}L`;
-        });
-        fetch('/api/leads').then(r=>r.json()).then(data => {
-          const active = data.filter(d=>d.status !== 'confirmed' && d.status !== 'lost').length;
-          document.getElementById('val-leads').textContent = active;
-        });
+      if(user.role === 'super_admin' || user.role === 'finance_manager' || user.role === 'sales_manager') {
+        if(document.getElementById('kpi-stalls').style.display === 'block') {
+          fetch('/api/stalls').then(r=>r.json()).then(data => {
+            const sold = data.filter(d=>d.status==='sold').length;
+            document.getElementById('val-stalls').textContent = `${sold} / 85`;
+            document.getElementById('sub-stalls').textContent = `${85-sold} Available`;
+          });
+        }
+        if(document.getElementById('kpi-rev').style.display === 'block') {
+          fetch('/api/payments').then(r=>r.json()).then(data => {
+            let paid = 0; data.forEach(d=> paid += (d.paid||0));
+            document.getElementById('val-rev').textContent = `₹${(paid/100000).toFixed(1)}L`;
+          });
+        }
+        if(document.getElementById('kpi-leads').style.display === 'block') {
+          fetch('/api/leads').then(r=>r.json()).then(data => {
+            const active = data.filter(d=>d.status !== 'confirmed' && d.status !== 'lost').length;
+            document.getElementById('val-leads').textContent = active;
+          });
+        }
+      }
+      
+      // Fetch Developer KPIs
+      if(user.role === 'developer' || user.role === 'super_admin') {
+        const delegated = allTasks.filter(t => t.assigned_user && t.assigned_user !== 'Sandeep' && t.status !== 'Completed').length;
+        const mediaTasks = allTasks.filter(t => (t.category === 'Media' || t.category === 'Design' || t.title.toLowerCase().includes('design') || t.title.toLowerCase().includes('website')) && t.status !== 'Completed').length;
+        
+        if(document.getElementById('val-dev-tasks')) document.getElementById('val-dev-tasks').textContent = delegated;
+        if(document.getElementById('val-dev-assets')) document.getElementById('val-dev-assets').textContent = mediaTasks;
       }
     }
 
