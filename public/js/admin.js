@@ -3764,48 +3764,53 @@ async function changeSponsorStatus(sId, newStatus) {
 }
 
 // ── Organiser Task Manager ──
-function renderTasksTable() {
+async function renderTasksTable() {
   const statusF = document.getElementById('task-filter-status') ? document.getElementById('task-filter-status').value : '';
   const catF = document.getElementById('task-filter-category') ? document.getElementById('task-filter-category').value : '';
-
-  let tasks = JSON.parse(localStorage.getItem('ire_db_tasks')) || [];
-
-  let filtered = tasks.filter(t => {
-    if (statusF && t.status !== statusF) return false;
-    if (catF && t.category !== catF) return false;
-    return true;
-  });
 
   const tbody = document.getElementById('tasks-table-body');
   if (!tbody) return;
 
-  if (filtered.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--text-muted);">No tasks found matching criteria.</td></tr>`;
-    return;
+  try {
+    const res = await fetch('/api/tasks');
+    let tasks = await res.json();
+
+    let filtered = tasks.filter(t => {
+      if (statusF && t.status !== statusF) return false;
+      if (catF && t.category !== catF) return false;
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--text-muted);">No tasks found matching criteria.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(t => {
+      let actionsHtml = `
+        <div style="display:flex; gap:4px; justify-content:center;">
+          <button class="btn-action-outline" style="font-size:10px; padding:2px 6px;" onclick="toggleTaskStatus('${t.id}')">🔄 Toggle Status</button>
+          <button class="btn-action-outline" style="font-size:10px; padding:2px 6px; color:var(--status-sold);" onclick="deleteTask('${t.id}')">🗑️ Delete</button>
+        </div>
+      `;
+
+      let statusClass = t.status === 'Completed' ? 'available' : (t.status === 'Working' || t.status === 'In Progress') ? 'pending' : 'reserved';
+
+      return `
+        <tr>
+          <td><strong>${t.title}</strong></td>
+          <td><span class="status-badge ${t.priority === 'High' ? 'sold' : t.priority === 'Medium' ? 'pending' : 'available'}">${t.priority}</span></td>
+          <td>📅 ${t.deadline}</td>
+          <td>👤 ${t.assigned_user}</td>
+          <td><span class="category-badge">${t.category}</span></td>
+          <td><span class="status-badge ${statusClass}">${t.status}</span></td>
+          <td>${actionsHtml}</td>
+        </tr>
+      `;
+    }).join('');
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:2rem; color:red;">Failed to load tasks.</td></tr>`;
   }
-
-  tbody.innerHTML = filtered.map(t => {
-    let actionsHtml = `
-      <div style="display:flex; gap:4px; justify-content:center;">
-        <button class="btn-action-outline" style="font-size:10px; padding:2px 6px;" onclick="toggleTaskStatus('${t.id}')">🔄 Toggle Status</button>
-        <button class="btn-action-outline" style="font-size:10px; padding:2px 6px; color:var(--status-sold);" onclick="deleteTask('${t.id}')">🗑️ Delete</button>
-      </div>
-    `;
-
-    let statusClass = t.status === 'Completed' ? 'available' : t.status === 'In Progress' ? 'pending' : 'reserved';
-
-    return `
-      <tr>
-        <td><strong>${t.title}</strong></td>
-        <td><span class="status-badge ${t.priority === 'High' ? 'sold' : t.priority === 'Medium' ? 'pending' : 'available'}">${t.priority}</span></td>
-        <td>📅 ${t.deadline}</td>
-        <td>👤 ${t.assigned_user}</td>
-        <td><span class="category-badge">${t.category}</span></td>
-        <td><span class="status-badge ${statusClass}">${t.status}</span></td>
-        <td>${actionsHtml}</td>
-      </tr>
-    `;
-  }).join('');
 }
 
 function openAddTaskModal() {
@@ -3814,7 +3819,7 @@ function openAddTaskModal() {
   openModal('modal-task');
 }
 
-function submitTaskForm(e) {
+async function submitTaskForm(e) {
   e.preventDefault();
   const title = document.getElementById('task-title-input').value.trim();
   const priority = document.getElementById('task-priority-input').value;
@@ -3827,78 +3832,58 @@ function submitTaskForm(e) {
     return;
   }
 
-  let tasks = JSON.parse(localStorage.getItem('ire_db_tasks')) || [];
-  tasks.push({
-    id: 'task-' + Date.now(),
-    title: title,
-    priority: priority,
-    deadline: deadline,
-    assigned_user: assigned,
-    category: category,
-    status: 'Pending'
-  });
-  localStorage.setItem('ire_db_tasks', JSON.stringify(tasks));
+  try {
+    const res = await fetch('/api/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, priority, deadline, assigned_user: assigned, category })
+    });
+    
+    if (!res.ok) throw new Error('Failed to create task');
 
-  logActivity(`New task created: "${title}" assigned to ${assigned}.`);
-  closeModal('modal-task');
-  renderTasksTable();
-  showToast('🛠️ Task created successfully.');
+    logActivity(`New task created: "${title}" assigned to ${assigned}.`);
+    closeModal('modal-task');
+    renderTasksTable();
+    showToast('🛠️ Task created successfully.');
+  } catch(err) {
+    console.error(err);
+    alert('Error creating task.');
+  }
 }
 
 async function toggleTaskStatus(taskId) {
-  // Find task details for UI feedback
-  let tasks = JSON.parse(localStorage.getItem('ire_db_tasks')) || [];
-  const localTask = tasks.find(t => t.id === taskId);
-
   try {
     const res = await fetch(`/api/tasks/${taskId}/toggle`, { method: 'PUT' });
     if (!res.ok) throw new Error('Server toggle failed');
     const data = await res.json();
     const newStatus = data.status;
 
-    // Update local cache for instant UI
-    const idx = tasks.findIndex(t => t.id === taskId);
-    if (idx !== -1) {
-      const oldStatus = tasks[idx].status;
-      tasks[idx].status = newStatus;
-      logActivity(`Task "${tasks[idx].title}" status changed from ${oldStatus} → ${newStatus}.`);
-      localStorage.setItem('ire_db_tasks', JSON.stringify(tasks));
-    }
+    logActivity(`Task status updated to ${newStatus}.`);
 
     renderTasksTable();
     showToast(`Task status updated to ${newStatus}.`);
 
-    // If super_admin — refresh notification bell immediately after a Completed toggle
     if (newStatus === 'Completed' && activeRole === 'super_admin') {
       setTimeout(() => fetchAdminNotifications(), 800);
     }
   } catch (err) {
     console.error('toggleTaskStatus error:', err);
-    // Fallback: local-only toggle
-    const idx = tasks.findIndex(t => t.id === taskId);
-    if (idx !== -1) {
-      const oldStatus = tasks[idx].status;
-      if (oldStatus === 'Pending') tasks[idx].status = 'In Progress';
-      else if (oldStatus === 'In Progress') tasks[idx].status = 'Completed';
-      else tasks[idx].status = 'Pending';
-      logActivity(`Task "${tasks[idx].title}" status toggled (offline).`);
-      localStorage.setItem('ire_db_tasks', JSON.stringify(tasks));
-      renderTasksTable();
-      showToast(`Task status updated to ${tasks[idx].status}.`);
-    }
+    showToast('⚠️ Failed to toggle task.');
   }
 }
 
-function deleteTask(taskId) {
+async function deleteTask(taskId) {
   if (confirm('Are you sure you want to delete this task?')) {
-    let tasks = JSON.parse(localStorage.getItem('ire_db_tasks')) || [];
-    const idx = tasks.findIndex(t => t.id === taskId);
-    if (idx !== -1) {
-      logActivity(`Deleted task "${tasks[idx].title}".`);
-      tasks.splice(idx, 1);
-      localStorage.setItem('ire_db_tasks', JSON.stringify(tasks));
+    try {
+      const res = await fetch(`/api/tasks/${taskId}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to delete');
+      
+      logActivity(`Deleted task.`);
       renderTasksTable();
       showToast('🗑️ Task deleted.');
+    } catch(err) {
+      console.error(err);
+      showToast('⚠️ Failed to delete task.');
     }
   }
 }
