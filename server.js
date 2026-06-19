@@ -490,8 +490,12 @@ app.put('/api/tasks/:id/toggle', checkAuth(), (req, res) => {
     if (err || !row) return res.status(500).json({ error: 'Task not found.' });
 
     let newStatus = 'Pending';
-    if (row.status === 'Pending') newStatus = 'In Progress';
-    else if (row.status === 'In Progress') newStatus = 'Completed';
+    if (req.body && req.body.status) {
+      newStatus = req.body.status;
+    } else {
+      if (row.status === 'Pending') newStatus = 'Working';
+      else if (row.status === 'Working' || row.status === 'In Progress') newStatus = 'Completed';
+    }
 
     db.run(`UPDATE tasks SET status = ? WHERE id = ?`, [newStatus, req.params.id], function(err1) {
       if (err1) return res.status(500).json({ error: err1.message });

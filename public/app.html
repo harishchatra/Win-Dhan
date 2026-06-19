@@ -446,6 +446,10 @@
         <label>Task Title</label>
         <input type="text" id="t-title" placeholder="What needs to be done?">
       </div>
+      <div class="input-grp" id="t-assign-group" style="display:none; margin-bottom:10px;">
+        <label>Assign To</label>
+        <select id="t-assign"></select>
+      </div>
       <div class="grid-2">
         <div class="input-grp">
           <label>Priority</label>
@@ -724,7 +728,7 @@
       if(list.length===0) { container.innerHTML = '<p style="color:gray;text-align:center;margin-top:20px;">No tasks assigned.</p>'; return; }
       
       container.innerHTML = list.map(t => {
-        let bClass = t.status === 'Completed' ? 'badge-done' : t.status === 'In Progress' ? 'badge-prog' : 'badge-pending';
+        let bClass = t.status === 'Completed' ? 'badge-done' : (t.status === 'Working' || t.status === 'In Progress') ? 'badge-prog' : 'badge-pending';
         return `
           <div class="task-item">
             <div class="task-header">
@@ -735,7 +739,10 @@
               <span>📅 ${t.deadline}</span>
               ${user.role === 'super_admin' ? `<span>👤 ${t.assigned_user}</span>` : ''}
             </div>
-            <button class="btn-toggle" onclick="toggleTask('${t.id}')">Toggle Status 🔄</button>
+            <div style="display:flex; gap:8px; margin-top:10px;">
+              <button class="btn-toggle" style="flex:1; background:${t.status==='Working' ? 'rgba(255,165,0,0.2)' : 'transparent'}; border-color:${t.status==='Working' ? 'orange' : 'var(--card-border)'};" onclick="setStatus('${t.id}', 'Working')">Working</button>
+              <button class="btn-toggle" style="flex:1; background:${t.status==='Completed' ? 'rgba(0,255,0,0.2)' : 'transparent'}; border-color:${t.status==='Completed' ? 'green' : 'var(--card-border)'};" onclick="setStatus('${t.id}', 'Completed')">Completed</button>
+            </div>
           </div>
         `;
       }).join('');
@@ -871,15 +878,29 @@
       });
     }
 
-    // ── Actions ──
-    async function toggleTask(id) {
-      await fetch(`/api/tasks/${id}/toggle`, {method:'PUT'});
+    async function setStatus(id, status) {
+      await fetch(`/api/tasks/${id}/toggle`, {
+        method:'PUT',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ status })
+      });
       refreshData();
     }
 
     function openAddTask() {
       document.getElementById('add-task-modal').style.display='flex';
       document.getElementById('t-date').valueAsDate = new Date();
+      
+      const assignGroup = document.getElementById('t-assign-group');
+      const assignSelect = document.getElementById('t-assign');
+      if (user.role === 'super_admin') {
+        assignGroup.style.display = 'block';
+        assignSelect.innerHTML = dirTeam.map(u => `<option value="${u.name}">${u.name} (${u.role.replace('_',' ')})</option>`).join('');
+        assignSelect.value = user.name;
+      } else {
+        assignGroup.style.display = 'none';
+        assignSelect.innerHTML = `<option value="${user.name}">${user.name}</option>`;
+      }
     }
 
     async function submitTask() {
@@ -890,7 +911,8 @@
         body: JSON.stringify({
           title, priority: document.getElementById('t-prio').value,
           deadline: document.getElementById('t-date').value,
-          assigned_user: user.name, category: 'General'
+          assigned_user: document.getElementById('t-assign').value, 
+          category: 'General'
         })
       });
       document.getElementById('add-task-modal').style.display='none';
