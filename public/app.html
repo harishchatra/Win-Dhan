@@ -426,7 +426,10 @@
         <p style="color:var(--text-dim); font-size:0.85rem; margin-top:2px;" id="prof-username">@username</p>
         <div style="display:inline-block; margin-top:10px; padding:4px 12px; background:rgba(255,255,255,0.05); border:1px solid var(--card-border); border-radius:50px; font-size:0.7rem; font-weight:700; color:var(--copper);" id="prof-role-badge">ROLE</div>
         <p style="color:var(--text-dim); font-size:0.8rem; margin:15px 0 25px 0;" id="prof-email">user@ire2026.com</p>
-        <button class="btn-toggle" style="color:#ff5252; border-color:#ff5252;" onclick="doLogout()">Sign Out</button>
+        <div style="display:flex; justify-content:center; gap:10px; margin-bottom:20px;">
+          <button class="btn-primary" style="flex:1;" onclick="openEditProfile()">Edit Profile</button>
+          <button class="btn-toggle" style="flex:1; color:#ff5252; border-color:#ff5252;" onclick="doLogout()">Sign Out</button>
+        </div>
       </div>
     </div>
 
@@ -491,6 +494,35 @@
       </div>
     </div>
   </div>
+
+  <!-- Edit Profile Bottom Sheet -->
+  <div class="modal-overlay" id="edit-profile-modal">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;margin-bottom:20px;">
+        <h3>Edit Profile</h3>
+        <span style="font-size:1.5rem;line-height:1;color:var(--text-dim);cursor:pointer;" onclick="document.getElementById('edit-profile-modal').style.display='none'">×</span>
+      </div>
+      <div class="input-grp">
+        <label>Phone Number</label>
+        <input type="text" id="ep-phone" placeholder="e.g. 9876543210">
+      </div>
+      <div class="input-grp">
+        <label>WhatsApp Number</label>
+        <input type="text" id="ep-wa" placeholder="e.g. 9876543210">
+      </div>
+      <div class="input-grp">
+        <label>Email Address</label>
+        <input type="email" id="ep-email" placeholder="user@ire2026.com">
+      </div>
+      <div class="input-grp">
+        <label>UPI ID (For expenses / protected)</label>
+        <input type="text" id="ep-upi" placeholder="name@bank">
+      </div>
+      <button class="btn-primary" onclick="submitEditProfile()">Save Profile</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Message</div>
 
   <!-- BOTTOM NAV -->
   <div class="bottom-nav">
@@ -852,6 +884,39 @@
       });
       openProfile(id); // refresh modal
       refreshData();
+    }
+    
+    // ── Edit Profile Actions ──
+    function openEditProfile() {
+      // Find current user's profile in the directory to prepopulate
+      let c = dirTeam.find(u => u.username === user.username);
+      document.getElementById('ep-phone').value = c ? (c.phone || '') : '';
+      document.getElementById('ep-wa').value = c ? (c.whatsapp || '') : '';
+      document.getElementById('ep-email').value = c ? (c.email || '') : '';
+      document.getElementById('ep-upi').value = c ? (c.upi_id || '') : '';
+      document.getElementById('edit-profile-modal').style.display = 'flex';
+    }
+
+    async function submitEditProfile() {
+      const payload = {
+        phone: document.getElementById('ep-phone').value.trim(),
+        whatsapp: document.getElementById('ep-wa').value.trim(),
+        email: document.getElementById('ep-email').value.trim(),
+        upi_id: document.getElementById('ep-upi').value.trim()
+      };
+      try {
+        const res = await fetch('/api/users/me', {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error('Update failed');
+        document.getElementById('edit-profile-modal').style.display = 'none';
+        showToast('Profile updated successfully!');
+        refreshData();
+      } catch (err) {
+        showToast('Error updating profile');
+      }
     }
     
     // ── Admin Overview Actions ──

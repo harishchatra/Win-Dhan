@@ -319,6 +319,27 @@ app.post('/api/exhibitors/upload', checkAuth(['super_admin', 'admin', 'sales_exe
 
 // ──────────────── PAYMENTS API ROUTING ────────────────
 
+app.get('/api/users', checkAuth(), (req, res) => {
+  db.all(`SELECT id, name, username, role, phone, whatsapp, email, upi_id FROM users`, (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    // Privacy guard: Only allow super_admin and finance_manager to see UPI IDs
+    if (req.session.user && req.session.user.role !== 'super_admin' && req.session.user.role !== 'finance_manager') {
+      rows.forEach(r => { if(r.upi_id) r.upi_id = null; });
+    }
+    res.json(rows);
+  });
+});
+
+app.put('/api/users/me', checkAuth(), (req, res) => {
+  const { phone, whatsapp, email, upi_id } = req.body;
+  const username = req.session.user.username;
+  db.run(`UPDATE users SET phone=?, whatsapp=?, email=?, upi_id=? WHERE username=?`, 
+    [phone || '', whatsapp || '', email || '', upi_id || '', username], function(err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ success: true });
+  });
+});
+
 app.get('/api/payments', checkAuth(), (req, res) => {
   db.all(`SELECT * FROM payments`, (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
