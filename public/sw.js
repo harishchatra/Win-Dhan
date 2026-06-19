@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ire-app-cache-v1';
+const CACHE_NAME = 'ire-app-cache-v2';
 const urlsToCache = [
   '/app',
   '/manifest.json',
@@ -8,13 +8,10 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', event => {
+  self.skipWaiting(); // Force the waiting service worker to become the active service worker.
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
@@ -23,41 +20,36 @@ self.addEventListener('activate', event => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
+            return caches.delete(cacheName); // Clear old caches
           }
         })
       );
-    })
+    }).then(() => self.clients.claim()) // Take control of all open pages immediately
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
-  // We only cache the core shell. API calls go to network always.
-  if (event.request.url.includes('/api/')) {
-    event.respondWith(fetch(event.request));
+  // Always go to network first for HTML and API requests to ensure real-time updates
+  if (event.request.mode === 'navigate' || event.request.url.includes('/api/') || event.request.url.includes('/app')) {
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match(event.request))
+    );
     return;
   }
   
+  // Stale-while-revalidate for assets (icons, fonts, etc.)
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
+    caches.match(event.request).then(cachedResponse => {
+      const fetchPromise = fetch(event.request).then(networkResponse => {
+        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, networkResponse.clone());
+          });
         }
-        return fetch(event.request).then(
-          response => {
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            let responseToCache = response.clone();
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-            return response;
-          }
-        );
-      })
+        return networkResponse;
+      }).catch(() => {});
+      
+      return cachedResponse || fetchPromise;
+    })
   );
 });
