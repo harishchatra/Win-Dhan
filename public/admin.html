@@ -1140,6 +1140,9 @@
         <button class="sidebar-menu-btn" id="nav-btn-tasks" onclick="switchView('tasks', this)">
           <span class="ico">🛠️</span> Task Manager
         </button>
+        <button class="sidebar-menu-btn" id="nav-btn-volunteers" onclick="switchView('volunteers', this)">
+          <span class="ico">🤝</span> Volunteers
+        </button>
         <button class="sidebar-menu-btn" id="nav-btn-reports" onclick="switchView('reports', this)">
           <span class="ico">🖨️</span> Analytics Reports
         </button>
@@ -2146,6 +2149,22 @@
               <!-- Dynamically populated rows -->
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- MODULE: VOLUNTEERS -->
+      <div class="view-pane" id="view-volunteers" style="display:none;">
+        <div class="view-header-bar">
+          <div class="view-title-area">
+            <h2>Volunteers Directory</h2>
+            <p>Manage volunteer registrations, roles, and check-in status.</p>
+          </div>
+          <div class="view-actions-area">
+            <button class="btn-action-primary" onclick="openVolModal()">➕ Add Volunteer</button>
+          </div>
+        </div>
+        <div class="table-container" id="volunteers-table-container">
+          <!-- Populated by admin.js renderVolunteers() -->
         </div>
       </div>
 

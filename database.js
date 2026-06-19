@@ -19,8 +19,17 @@ db.serialize(() => {
     name TEXT NOT NULL,
     username TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
-    role TEXT NOT NULL
+    role TEXT NOT NULL,
+    phone TEXT,
+    whatsapp TEXT,
+    email TEXT,
+    upi_id TEXT
   )`);
+  // Ensure columns exist if table was created previously
+  db.run(`ALTER TABLE users ADD COLUMN phone TEXT`, (err)=>{});
+  db.run(`ALTER TABLE users ADD COLUMN whatsapp TEXT`, (err)=>{});
+  db.run(`ALTER TABLE users ADD COLUMN email TEXT`, (err)=>{});
+  db.run(`ALTER TABLE users ADD COLUMN upi_id TEXT`, (err)=>{});
 
   // 2. Stalls Table
   db.run(`CREATE TABLE IF NOT EXISTS stalls (
@@ -145,6 +154,19 @@ db.serialize(() => {
     assigned_user TEXT,
     category TEXT,
     status TEXT DEFAULT 'Pending'
+  )`);
+
+  // 10. Volunteers Table
+  db.run(`CREATE TABLE IF NOT EXISTS volunteers (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    whatsapp TEXT,
+    email TEXT,
+    upi_id TEXT,
+    role_assigned TEXT,
+    availability TEXT,
+    status TEXT DEFAULT 'Registered'
   )`);
 
   // 9b. Admin Notifications Table (for Super Admin task completion alerts)
@@ -282,35 +304,40 @@ db.serialize(() => {
       name: 'Harish Chatra',
       username: '@harishchatra',
       password: '7981869954',
-      role: 'super_admin'
+      role: 'super_admin',
+      phone: '7981869954', whatsapp: '7981869954', email: 'harish@ire2026.com', upi_id: 'harish@ybl'
     },
     {
       id: 'u_sadanand',
       name: 'Sadanand',
       username: 'sadanand',
       password: 'Sadanand@IRE26',
-      role: 'sales_manager'       // Leads, Exhibitors, Reports (for invoices/billing)
+      role: 'sales_manager',
+      phone: '9876543210', whatsapp: '9876543210', email: 'sadanand@ire2026.com', upi_id: 'sadanand@ybl'
     },
     {
       id: 'u_renu',
       name: 'Renu',
       username: 'renu',
       password: 'Renu@IRE26',
-      role: 'finance_manager'     // Stalls, Payments, Reports
+      role: 'finance_manager',
+      phone: '8765432109', whatsapp: '8765432109', email: 'renu@ire2026.com', upi_id: 'renu@ybl'
     },
     {
       id: 'u_sandeep',
       name: 'Sandeep',
       username: 'sandeep',
       password: 'Sandeep@IRE26',
-      role: 'developer'     // Tasks, Media, limited dashboard access
+      role: 'developer',
+      phone: '7654321098', whatsapp: '7654321098', email: 'sandeep@ire2026.com', upi_id: 'sandeep@ybl'
     },
     {
       id: 'u_chanti',
       name: 'Chanti',
       username: 'chanti',
       password: 'Chanti@IRE26',
-      role: 'sales_manager'       // Marketing campaigns, Leads (colleges/influencers)
+      role: 'sales_manager',
+      phone: '6543210987', whatsapp: '6543210987', email: 'chanti@ire2026.com', upi_id: 'chanti@ybl'
     }
   ];
 
@@ -318,16 +345,14 @@ db.serialize(() => {
     db.get(`SELECT * FROM users WHERE username = ?`, [member.username], (err, existing) => {
       if (err) { console.error(`Error checking user ${member.username}:`, err.message); return; }
       if (!existing) {
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(member.password, salt);
-        db.run(
-          `INSERT INTO users (id, name, username, password_hash, role) VALUES (?, ?, ?, ?, ?)`,
-          [member.id, member.name, member.username, hash, member.role],
-          (insErr) => {
-            if (insErr) console.error(`Failed to seed ${member.name}:`, insErr.message);
-            else console.log(`✅ Team member seeded: ${member.name} (${member.role})`);
-          }
-        );
+        bcrypt.hash(member.password, 10, (err, hash) => {
+          db.run(`INSERT INTO users (id, name, username, password_hash, role, phone, whatsapp, email, upi_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
+            [member.id, member.name, member.username, hash, member.role, member.phone, member.whatsapp, member.email, member.upi_id]
+          );
+        });
+      } else {
+        db.run(`UPDATE users SET phone=?, whatsapp=?, email=?, upi_id=? WHERE username=?`, 
+          [member.phone, member.whatsapp, member.email, member.upi_id, member.username]);
       }
     });
   });

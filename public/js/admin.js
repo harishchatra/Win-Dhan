@@ -4112,6 +4112,7 @@ function applyRolePermissions() {
     { id: 'nav-btn-marketing',      roles: ['super_admin', 'event_director', 'sales_manager'] },
     { id: 'nav-btn-media',          roles: ['super_admin', 'event_director', 'developer'] },
     { id: 'nav-btn-tasks',          roles: ['super_admin', 'event_director', 'sales_manager', 'sales_executive', 'developer', 'finance_manager'] },
+    { id: 'nav-btn-volunteers',     roles: ['super_admin', 'event_director', 'developer', 'sales_manager', 'finance_manager'] },
     { id: 'nav-btn-reports',        roles: ['super_admin', 'event_director', 'finance_manager', 'sales_manager'] },
     { id: 'nav-btn-settings',       roles: ['super_admin'] },
     { id: 'nav-btn-exhibitor-portal', roles: ['exhibitor'] }
@@ -4145,7 +4146,105 @@ function applyRolePermissions() {
   if (currentActiveView === 'payments') renderPaymentsTable();
   if (currentActiveView === 'sponsor-apps') renderSponsorAppsTable();
   if (currentActiveView === 'tasks') renderTasksTable();
+  if (currentActiveView === 'volunteers') renderVolunteers();
   if (currentActiveView === 'exhibitor-portal') renderExhibitorPortal();
+}
+
+// ── Volunteers Module ──
+async function renderVolunteers() {
+  const container = document.getElementById('volunteers-table-container');
+  if (!container) return;
+  container.innerHTML = `<div style="padding:2rem;text-align:center;">Loading volunteers...</div>`;
+  try {
+    const res = await fetch('/api/volunteers');
+    const vols = await res.json();
+    
+    let html = `
+      <table class="datatable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role / Area</th>
+            <th>Contact</th>
+            <th>Availability</th>
+            <th>Status</th>
+            <th>UPI ID</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+    vols.forEach(v => {
+      html += `
+        <tr>
+          <td><strong>${v.name}</strong></td>
+          <td><span class="category-badge">${v.role_assigned || '-'}</span></td>
+          <td><span style="font-size:10px;">📞 ${v.phone}<br>✉️ ${v.email || '-'}</span></td>
+          <td>${v.availability || '-'}</td>
+          <td><span class="status-badge ${v.status === 'Checked In' ? 'available' : 'pending'}">${v.status || 'Registered'}</span></td>
+          <td>${v.upi_id ? '<span style="color:var(--status-sold); font-weight:700;">'+v.upi_id+'</span>' : '<span style="color:var(--text-muted);font-size:10px;">Protected</span>'}</td>
+        </tr>
+      `;
+    });
+    if(vols.length===0) html += `<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">No volunteers registered.</td></tr>`;
+    html += `</tbody></table>`;
+    
+    // Add simple add modal directly to DOM if not exists
+    if(!document.getElementById('vol-add-modal')) {
+      document.body.insertAdjacentHTML('beforeend', `
+        <div id="vol-add-modal" class="modal-overlay">
+          <div class="modal-card" style="max-width:500px;">
+            <div class="modal-header">
+              <h3>Register Volunteer</h3>
+              <button class="modal-close" onclick="document.getElementById('vol-add-modal').style.display='none'">×</button>
+            </div>
+            <div class="modal-body">
+              <form id="vol-form" onsubmit="submitVolForm(event)">
+                <div class="modal-form-group"><label>Full Name</label><input type="text" id="v-name" required></div>
+                <div class="modal-form-group"><label>Phone</label><input type="text" id="v-phone" required></div>
+                <div class="modal-form-group"><label>WhatsApp</label><input type="text" id="v-wa"></div>
+                <div class="modal-form-group"><label>Email</label><input type="email" id="v-email"></div>
+                <div class="modal-form-group"><label>UPI ID (Optional)</label><input type="text" id="v-upi"></div>
+                <div class="modal-form-group"><label>Assigned Role</label><input type="text" id="v-role"></div>
+                <div class="modal-form-group"><label>Availability</label><input type="text" id="v-avail" placeholder="e.g. Day 1, Both"></div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" form="vol-form" class="btn-action-primary">Save Volunteer</button>
+            </div>
+          </div>
+        </div>
+      `);
+    }
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = `<div style="padding:2rem;text-align:center;color:red;">Error loading volunteers</div>`;
+  }
+}
+
+window.openVolModal = function() {
+  document.getElementById('vol-form').reset();
+  document.getElementById('vol-add-modal').style.display = 'flex';
+}
+
+window.submitVolForm = async function(e) {
+  e.preventDefault();
+  const payload = {
+    name: document.getElementById('v-name').value,
+    phone: document.getElementById('v-phone').value,
+    whatsapp: document.getElementById('v-wa').value,
+    email: document.getElementById('v-email').value,
+    upi_id: document.getElementById('v-upi').value,
+    role_assigned: document.getElementById('v-role').value,
+    availability: document.getElementById('v-avail').value
+  };
+  await fetch('/api/volunteers', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  document.getElementById('vol-add-modal').style.display = 'none';
+  showToast('Volunteer registered successfully');
+  renderVolunteers();
 }
 
 function printCertificateElement() {

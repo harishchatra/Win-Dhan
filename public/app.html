@@ -117,7 +117,7 @@
       color: var(--text-dim);
       font-size: 0.7rem;
       font-weight: 600;
-      width: 25%;
+      width: 20%;
       position: relative;
       transition: color 0.3s;
     }
@@ -300,6 +300,15 @@
         <p style="color:var(--text-dim); font-size:0.9rem;" id="role-msg">Role</p>
       </div>
 
+      <!-- Shared Live Stats Strip -->
+      <div style="background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.5)); border:1px solid var(--card-border); border-radius:14px; padding:12px; display:flex; justify-content:space-between; text-align:center;">
+        <div><div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Visitors</div><div id="stat-visitors" style="font-weight:800; color:#fff; font-size:1.2rem;">--</div></div>
+        <div style="width:1px; background:var(--card-border);"></div>
+        <div><div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Exhibitors</div><div id="stat-exhib" style="font-weight:800; color:#fff; font-size:1.2rem;">--</div></div>
+        <div style="width:1px; background:var(--card-border);"></div>
+        <div><div style="font-size:0.65rem; color:var(--text-dim); text-transform:uppercase; font-weight:700;">Stalls</div><div id="stat-stalls" style="font-weight:800; color:var(--copper); font-size:1.2rem;">--</div></div>
+      </div>
+
       <div class="card" id="kpi-stalls" style="display:none;">
         <div class="kpi-lbl">Stalls Booked</div>
         <div class="kpi-val" id="val-stalls">0 / 85</div>
@@ -359,6 +368,44 @@
       </div>
     </div>
 
+    <!-- ADMIN OVERVIEW SCREEN -->
+    <div id="screen-admin" class="screen">
+      <h2 style="font-size: 1.5rem; margin-bottom:10px;">Admin Overview</h2>
+      <div class="grid-2" style="margin-bottom:15px;">
+        <div class="card" style="padding:15px;" onclick="viewAdminModule('leads')">
+          <div class="kpi-lbl">Total Leads</div>
+          <div class="kpi-val" id="admin-kpi-leads" style="font-size:1.5rem;">0</div>
+        </div>
+        <div class="card" style="padding:15px;" onclick="viewAdminModule('exhibitors')">
+          <div class="kpi-lbl">Exhibitors</div>
+          <div class="kpi-val" id="admin-kpi-exhibitors" style="font-size:1.5rem;">0</div>
+        </div>
+        <div class="card" style="padding:15px;" onclick="viewAdminModule('stalls')">
+          <div class="kpi-lbl">Stalls Booked</div>
+          <div class="kpi-val" id="admin-kpi-stalls" style="font-size:1.5rem;">0</div>
+        </div>
+        <div class="card" style="padding:15px;" onclick="viewAdminModule('tasks')">
+          <div class="kpi-lbl">All Tasks</div>
+          <div class="kpi-val" id="admin-kpi-tasks" style="font-size:1.5rem;">0</div>
+        </div>
+      </div>
+      <div class="card" id="admin-module-list" style="padding:0; overflow:hidden; display:none;"></div>
+    </div>
+
+    <!-- DIRECTORY SCREEN -->
+    <div id="screen-directory" class="screen">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="font-size: 1.5rem;">Directory</h2>
+        <div style="display:flex; background:rgba(255,255,255,0.1); border-radius:50px; padding:2px;">
+          <button id="dir-seg-team" onclick="setDirSeg('team')" style="background:var(--copper); border:none; padding:6px 14px; border-radius:50px; color:#000; font-size:0.75rem; font-weight:800; cursor:pointer;">Team</button>
+          <button id="dir-seg-vol" onclick="setDirSeg('vol')" style="background:transparent; border:none; padding:6px 14px; border-radius:50px; color:var(--text-dim); font-size:0.75rem; font-weight:800; cursor:pointer;">Volunteers</button>
+        </div>
+      </div>
+      <input type="text" id="dir-search" placeholder="Search name or role..." style="width:100%; padding:14px; border-radius:12px; border:1px solid var(--card-border); background:var(--card-bg); color:#fff; font-size:0.95rem; margin-top:10px; margin-bottom:15px;" oninput="renderDirectory()">
+      
+      <div id="dir-list" style="display:flex; flex-direction:column; gap:12px;"></div>
+    </div>
+
     <!-- NOTIFS SCREEN -->
     <div id="screen-notifs" class="screen">
       <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -415,6 +462,32 @@
     </div>
   </div>
 
+  <!-- Directory Profile Modal -->
+  <div class="modal-overlay" id="dir-profile-modal">
+    <div class="modal-sheet">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
+        <div style="display:flex; gap:15px; align-items:center;">
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--copper); color:#000; font-size:1.5rem; font-weight:800; display:flex; align-items:center; justify-content:center;" id="dir-p-initial">X</div>
+          <div>
+            <h3 id="dir-p-name" style="margin-bottom:2px;">Name</h3>
+            <span id="dir-p-role" style="font-size:0.75rem; padding:2px 8px; background:rgba(255,255,255,0.1); border-radius:50px; color:var(--text-dim);">Role</span>
+          </div>
+        </div>
+        <span style="font-size:1.5rem;line-height:1;color:var(--text-dim);cursor:pointer;" onclick="document.getElementById('dir-profile-modal').style.display='none'">×</span>
+      </div>
+      
+      <div class="grid-2" style="margin-bottom:15px;">
+        <a id="dir-btn-call" href="#" style="text-decoration:none; background:rgba(34,197,94,0.15); color:var(--status-sold); border:1px solid rgba(34,197,94,0.3); padding:12px; border-radius:12px; text-align:center; font-weight:700; display:flex; align-items:center; justify-content:center; gap:6px;">📞 Call</a>
+        <a id="dir-btn-wa" href="#" target="_blank" style="text-decoration:none; background:rgba(34,197,94,0.15); color:var(--status-sold); border:1px solid rgba(34,197,94,0.3); padding:12px; border-radius:12px; text-align:center; font-weight:700; display:flex; align-items:center; justify-content:center; gap:6px;">💬 WhatsApp</a>
+      </div>
+      <a id="dir-btn-mail" href="#" style="display:flex; text-decoration:none; background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--card-border); padding:12px; border-radius:12px; text-align:center; font-weight:700; margin-bottom:20px; align-items:center; justify-content:center; gap:6px;">✉️ Email</a>
+
+      <div style="font-size:0.85rem; color:var(--text-dim); border-top:1px solid var(--card-border); padding-top:15px;" id="dir-p-extra">
+        <!-- UPI and Status injected here -->
+      </div>
+    </div>
+  </div>
+
   <!-- BOTTOM NAV -->
   <div class="bottom-nav">
     <div class="nav-item active" onclick="switchTab('home')" id="nav-home">
@@ -423,9 +496,15 @@
     <div class="nav-item" onclick="switchTab('tasks')" id="nav-tasks">
       <div class="nav-ico">📋</div><span>Tasks</span>
     </div>
+    <div class="nav-item" onclick="switchTab('directory')" id="nav-directory">
+      <div class="nav-ico">📞</div><span>Directory</span>
+    </div>
     <div class="nav-item" onclick="switchTab('notifs')" id="nav-notifs">
       <div class="nav-ico">🔔</div><span>Alerts</span>
       <div class="nav-badge" id="app-notif-badge">0</div>
+    </div>
+    <div class="nav-item" onclick="switchTab('admin')" id="nav-admin" style="display:none;">
+      <div class="nav-ico">⚙️</div><span>Admin</span>
     </div>
     <div class="nav-item" onclick="switchTab('profile')" id="nav-profile">
       <div class="nav-ico">👤</div><span>Profile</span>
@@ -466,6 +545,10 @@
     let user = null;
     let allTasks = [];
     let allNotifs = [];
+    let dirTeam = [];
+    let dirVols = [];
+    let currentDirSeg = 'team';
+    let sharedStats = { visitors: 0, exhibitors: 0, stalls: 0 };
 
     // ── Boot sequence ──
     async function checkSession() {
@@ -531,6 +614,7 @@
         document.getElementById('kpi-rev').style.display = 'block';
         document.getElementById('kpi-leads').style.display = 'block';
         document.getElementById('task-view-lbl').textContent = 'All Team Tasks';
+        document.getElementById('nav-admin').style.display = 'flex'; // Enable Admin Mobile CRM tab
       } else if (user.role === 'sales_manager') {
         document.getElementById('kpi-leads').style.display = 'block';
       } else if (user.role === 'finance_manager') {
@@ -580,27 +664,44 @@
         }
       }
 
-      // Fetch Home KPIs
-      if(user.role === 'super_admin' || user.role === 'finance_manager' || user.role === 'sales_manager') {
-        if(document.getElementById('kpi-stalls').style.display === 'block') {
-          fetch('/api/stalls').then(r=>r.json()).then(data => {
-            const sold = data.filter(d=>d.status==='sold').length;
-            document.getElementById('val-stalls').textContent = `${sold} / 85`;
-            document.getElementById('sub-stalls').textContent = `${85-sold} Available`;
-          });
+      // Fetch Shared Live Stats (for ALL employees)
+      Promise.all([
+        fetch('/api/stalls').then(r=>r.ok ? r.json() : []),
+        fetch('/api/exhibitors').then(r=>r.ok ? r.json() : []),
+        fetch('/api/visitors').then(r=>r.ok ? r.json() : [])
+      ]).then(([stallsData, exhibData, visData]) => {
+        const soldStalls = stallsData.filter(d=>d.status==='sold').length;
+        document.getElementById('stat-stalls').textContent = `${soldStalls} / 85`;
+        document.getElementById('stat-exhib').textContent = exhibData.length || 0;
+        document.getElementById('stat-visitors').textContent = visData.length || 0;
+        
+        // Update Admin Overview if Super Admin
+        if (user.role === 'super_admin') {
+          document.getElementById('admin-kpi-stalls').textContent = soldStalls;
+          document.getElementById('admin-kpi-exhibitors').textContent = exhibData.length;
+          document.getElementById('admin-kpi-tasks').textContent = allTasks.length;
         }
-        if(document.getElementById('kpi-rev').style.display === 'block') {
-          fetch('/api/payments').then(r=>r.json()).then(data => {
-            let paid = 0; data.forEach(d=> paid += (d.paid||0));
-            document.getElementById('val-rev').textContent = `₹${(paid/100000).toFixed(1)}L`;
-          });
-        }
-        if(document.getElementById('kpi-leads').style.display === 'block') {
-          fetch('/api/leads').then(r=>r.json()).then(data => {
-            const active = data.filter(d=>d.status !== 'confirmed' && d.status !== 'lost').length;
-            document.getElementById('val-leads').textContent = active;
-          });
-        }
+      });
+
+      // Fetch Leads specifically for Admin Overview / KPI
+      fetch('/api/leads').then(r=>r.json()).then(data => {
+        const active = data.filter(d=>d.status !== 'confirmed' && d.status !== 'lost').length;
+        if(document.getElementById('kpi-leads').style.display === 'block') document.getElementById('val-leads').textContent = active;
+        if (user.role === 'super_admin') document.getElementById('admin-kpi-leads').textContent = data.length; // all leads
+      });
+
+      if(document.getElementById('kpi-stalls').style.display === 'block') {
+        fetch('/api/stalls').then(r=>r.json()).then(data => {
+          const sold = data.filter(d=>d.status==='sold').length;
+          document.getElementById('val-stalls').textContent = `${sold} / 85`;
+          document.getElementById('sub-stalls').textContent = `${85-sold} Available`;
+        });
+      }
+      if(document.getElementById('kpi-rev').style.display === 'block') {
+        fetch('/api/payments').then(r=>r.json()).then(data => {
+          let paid = 0; data.forEach(d=> paid += (d.paid||0));
+          document.getElementById('val-rev').textContent = `₹${(paid/100000).toFixed(1)}L`;
+        });
       }
       
       // Fetch Developer KPIs
@@ -611,6 +712,10 @@
         if(document.getElementById('val-dev-tasks')) document.getElementById('val-dev-tasks').textContent = delegated;
         if(document.getElementById('val-dev-assets')) document.getElementById('val-dev-assets').textContent = mediaTasks;
       }
+
+      // Fetch Directory Data
+      fetch('/api/users').then(r=>r.json()).then(data => { dirTeam = data; renderDirectory(); });
+      fetch('/api/volunteers').then(r=>r.json()).then(data => { dirVols = data; renderDirectory(); });
     }
 
     // ── Rendering ──
@@ -654,6 +759,116 @@
           <div class="notif-time">${new Date(n.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
         </div>
       `).join('');
+    }
+
+    // ── Directory Rendering ──
+    function setDirSeg(seg) {
+      currentDirSeg = seg;
+      document.getElementById('dir-seg-team').style.background = seg === 'team' ? 'var(--copper)' : 'transparent';
+      document.getElementById('dir-seg-team').style.color = seg === 'team' ? '#000' : 'var(--text-dim)';
+      document.getElementById('dir-seg-vol').style.background = seg === 'vol' ? 'var(--copper)' : 'transparent';
+      document.getElementById('dir-seg-vol').style.color = seg === 'vol' ? '#000' : 'var(--text-dim)';
+      renderDirectory();
+    }
+
+    function renderDirectory() {
+      const q = document.getElementById('dir-search').value.toLowerCase();
+      let list = currentDirSeg === 'team' ? dirTeam : dirVols;
+      
+      if(q) {
+        list = list.filter(i => i.name.toLowerCase().includes(q) || (i.role||i.role_assigned||'').toLowerCase().includes(q));
+      }
+
+      const container = document.getElementById('dir-list');
+      if(list.length===0) { container.innerHTML = '<p style="text-align:center;color:gray;">No contacts found.</p>'; return; }
+
+      container.innerHTML = list.map(c => {
+        const roleStr = c.role ? c.role.replace('_',' ').toUpperCase() : (c.role_assigned||'Volunteer').toUpperCase();
+        return `
+          <div class="task-item" style="flex-direction:row; align-items:center; cursor:pointer;" onclick="openProfile('${c.id}')">
+            <div style="width:40px; height:40px; border-radius:50%; background:rgba(242,135,5,0.1); border:1px solid rgba(242,135,5,0.3); color:var(--copper); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+              ${c.name[0].toUpperCase()}
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:1.05rem; font-weight:700; color:#fff;">${c.name}</div>
+              <div style="font-size:0.75rem; color:var(--text-dim);">${roleStr}</div>
+            </div>
+            <a href="tel:${c.phone}" style="text-decoration:none; font-size:1.4rem; padding:8px; display:inline-block;" onclick="event.stopPropagation()">📞</a>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openProfile(id) {
+      let c = dirTeam.find(u => u.id === id) || dirVols.find(v => v.id === id);
+      if(!c) return;
+
+      document.getElementById('dir-p-initial').textContent = c.name[0].toUpperCase();
+      document.getElementById('dir-p-name').textContent = c.name;
+      document.getElementById('dir-p-role').textContent = c.role ? c.role.replace('_',' ').toUpperCase() : (c.role_assigned||'Volunteer').toUpperCase();
+      
+      const btnCall = document.getElementById('dir-btn-call');
+      if(c.phone) { btnCall.href = `tel:${c.phone}`; btnCall.style.opacity=1; btnCall.style.pointerEvents='auto'; } else { btnCall.href = '#'; btnCall.style.opacity=0.3; btnCall.style.pointerEvents='none'; }
+      
+      const btnWa = document.getElementById('dir-btn-wa');
+      if(c.whatsapp || c.phone) { btnWa.href = `https://wa.me/91${c.whatsapp || c.phone}`; btnWa.style.opacity=1; btnWa.style.pointerEvents='auto'; } else { btnWa.href = '#'; btnWa.style.opacity=0.3; btnWa.style.pointerEvents='none'; }
+      
+      const btnMail = document.getElementById('dir-btn-mail');
+      if(c.email) { btnMail.href = `mailto:${c.email}`; btnMail.style.opacity=1; btnMail.style.pointerEvents='auto'; } else { btnMail.href = '#'; btnMail.style.opacity=0.3; btnMail.style.pointerEvents='none'; }
+
+      let extraHtml = '';
+      if(c.upi_id) extraHtml += `<div style="margin-bottom:10px;"><strong style="color:#fff;">UPI ID:</strong> ${c.upi_id}</div>`;
+      
+      if(currentDirSeg === 'vol') {
+        const toggleBg = c.status === 'Checked In' ? '#22c55e' : 'var(--card-border)';
+        extraHtml += `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span><strong>Status:</strong> ${c.status || 'Registered'}</span>
+            <button onclick="toggleVolStatus('${c.id}', '${c.status === 'Checked In' ? 'Registered' : 'Checked In'}')" style="background:${toggleBg}; border:none; padding:6px 12px; border-radius:50px; color:#fff; font-weight:700;">
+              ${c.status === 'Checked In' ? 'Check Out' : 'Check In'}
+            </button>
+          </div>
+        `;
+      }
+      document.getElementById('dir-p-extra').innerHTML = extraHtml;
+      
+      document.getElementById('dir-profile-modal').style.display = 'flex';
+    }
+
+    async function toggleVolStatus(id, newStatus) {
+      let c = dirVols.find(v => v.id === id);
+      if(!c) return;
+      c.status = newStatus;
+      await fetch(`/api/volunteers/${id}`, {
+        method:'PUT', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(c)
+      });
+      openProfile(id); // refresh modal
+      refreshData();
+    }
+    
+    // ── Admin Overview Actions ──
+    function viewAdminModule(type) {
+      const list = document.getElementById('admin-module-list');
+      list.style.display = 'block';
+      list.innerHTML = `<div style="padding:20px; text-align:center;">Loading ${type}...</div>`;
+      
+      // We leverage the fact that PWA is for quick overview
+      fetch(`/api/${type}`).then(r=>r.json()).then(data => {
+        list.innerHTML = `<div style="padding:15px; border-bottom:1px solid var(--card-border); font-weight:800; text-transform:uppercase; color:var(--copper);">${type} List</div>`;
+        if(data.length===0) { list.innerHTML += '<div style="padding:15px;">No records.</div>'; return; }
+        
+        data.slice(0, 50).forEach(item => {
+          const title = item.company || item.title || item.block || 'Record';
+          const sub = item.status || item.assigned_user || '';
+          list.innerHTML += `
+            <div style="padding:15px; border-bottom:1px solid var(--card-border);">
+              <div style="font-weight:700; color:#fff;">${title}</div>
+              <div style="font-size:0.75rem; color:var(--text-dim); margin-top:4px;">Status: ${sub}</div>
+            </div>
+          `;
+        });
+      });
     }
 
     // ── Actions ──
