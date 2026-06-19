@@ -8,6 +8,8 @@ const bcrypt = require('bcryptjs');
 const db = require('./database');
 const SQLiteStore = require('connect-sqlite3')(session);
 const rateLimit = require('express-rate-limit');
+const https = require('https');
+const csv = require('csv-parser');
 require('dotenv').config();
 
 const app = express();
@@ -428,6 +430,65 @@ app.get('/api/visitors/count', (req, res) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ count: row ? row.count : 0 });
   });
+});
+
+// ──────────────── GOOGLE SHEETS SYNC ────────────────
+const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/12nydiUAhS387MKfO_WT7TbpqYu2gW6NmFR1wqikDAPc/export?format=csv';
+
+function syncVisitors() {
+  console.log('[Sync] Starting Google Sheets Visitor Sync...');
+  https.get(GOOGLE_SHEET_CSV_URL, (res) => {
+    if (res.statusCode !== 200) {
+      console.error('[Sync] Failed to fetch Google Sheet. Status:', res.statusCode);
+      return;
+    }
+    
+    res.pipe(csv())
+      .on('data', (row) => {
+        if (!row.Phone && !row.Email) return;
+        
+        db.get(`SELECT id FROM visitors WHERE phone = ? OR email = ?`, [row.Phone, row.Email], (err, existing) => {
+          if (err || existing) return;
+          
+          const passId = `IRE-V-${Math.floor(1000 + Math.random() * 9000)}`;
+          let regDate = new Date().toISOString().split('T')[0];
+          if (row.Timestamp) {
+            try { regDate = new Date(row.Timestamp).toISOString().split('T')[0]; } catch(e){}
+          }
+          
+          db.run(
+            `INSERT INTO visitors (id, name, phone, email, company, designation, city, state, type, status, reg_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'registered', ?)`,
+            [
+              passId,
+              row.Name || 'Unknown',
+              row.Phone || '',
+              row.Email || '',
+              row.Company || 'N/A',
+              row.Designation || 'Visitor',
+              '',
+              '',
+              row.Category || row.Sector || 'General',
+              regDate
+            ]
+          );
+        });
+      })
+      .on('end', () => {
+        console.log('[Sync] Google Sheets Visitor Sync Completed.');
+      });
+  }).on('error', (err) => {
+    console.error('[Sync] Error syncing from Google Sheets:', err.message);
+  });
+}
+
+// Initial Sync on server start
+setTimeout(syncVisitors, 5000);
+// Recurring Sync every 5 minutes (300,000 ms)
+setInterval(syncVisitors, 300000);
+
+app.post('/api/admin/sync_visitors', checkAuth(['super_admin', 'sales_manager']), (req, res) => {
+  syncVisitors();
+  res.json({ success: true, message: 'Visitor sync triggered in the background.' });
 });
 
 app.post('/api/visitors/register', (req, res) => {
