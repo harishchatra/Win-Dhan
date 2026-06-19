@@ -1060,6 +1060,11 @@
 
     <!-- Actions, Alerts Tray & Profile Switcher -->
     <div class="header-actions">
+      <!-- Share PWA QR Code (For team members) -->
+      <button class="btn-action-outline" style="padding:4px 10px; font-size:0.7rem; border-radius:50px;" onclick="document.getElementById('modal-app-qr').classList.add('active')">
+        📷 Share App QR
+      </button>
+
       <!-- PWA Install Button (Hidden by default, shown if installable) -->
       <button id="adminInstallBtn" class="btn-action-primary" style="display:none; padding:4px 10px; font-size:0.7rem; border-radius:50px; border:1px solid var(--copper);">
         📱 Install App
@@ -3183,6 +3188,28 @@
       </div>
       <div class="modal-footer" style="border-top:none;">
         <button type="button" class="btn-action-primary" onclick="printCertificateElement()">🖨️ Print / Save PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL Q: APP QR CODE -->
+  <div class="modal-overlay" id="modal-app-qr">
+    <div class="modal-box" style="max-width:350px; text-align:center;">
+      <div class="modal-header">
+        <h3>Install Team App</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('modal-app-qr').classList.remove('active')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.85rem; color:var(--text-dim); margin-bottom:20px;">
+          Ask your team to scan this QR code with their phone camera to install the IRE 2026 App.
+        </p>
+        <div style="background:#fff; padding:15px; display:inline-block; border-radius:10px; border:1px solid var(--border); box-shadow:var(--shadow-sm);">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://strong-acceptance-production-c69a.up.railway.app/app" alt="App QR" style="display:block;">
+        </div>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:20px;">
+          They can also visit:<br>
+          <strong style="color:var(--copper); word-break:break-all;">strong-acceptance-production-c69a.up.railway.app/app</strong>
+        </p>
       </div>
     </div>
   </div>
