@@ -476,7 +476,7 @@ app.post('/api/tasks', checkAuth(), (req, res) => {
 });
 
 app.put('/api/tasks/:id/toggle', checkAuth(), (req, res) => {
-  db.get(`SELECT status FROM tasks WHERE id = ?`, [req.params.id], (err, row) => {
+  db.get(`SELECT * FROM tasks WHERE id = ?`, [req.params.id], (err, row) => {
     if (err || !row) return res.status(500).json({ error: 'Task not found.' });
 
     let newStatus = 'Pending';
@@ -485,6 +485,20 @@ app.put('/api/tasks/:id/toggle', checkAuth(), (req, res) => {
 
     db.run(`UPDATE tasks SET status = ? WHERE id = ?`, [newStatus, req.params.id], function(err1) {
       if (err1) return res.status(500).json({ error: err1.message });
+
+      // ── Fire super_admin notification when a task is marked Completed ──
+      if (newStatus === 'Completed') {
+        const completedBy = req.session.user ? req.session.user.name : 'A team member';
+        const notifId = 'anotif-' + Date.now();
+        const msg = `✅ <strong>${completedBy}</strong> completed task: "${row.title}"`;
+        db.run(
+          `INSERT INTO admin_notifications (id, message, type, completed_by, task_title, task_id, timestamp, is_read)
+           VALUES (?, ?, 'task', ?, ?, ?, ?, 0)`,
+          [notifId, msg, completedBy, row.title, row.id, new Date().toISOString()],
+          (nErr) => { if (nErr) console.error('Notification write error:', nErr.message); }
+        );
+      }
+
       res.json({ success: true, status: newStatus });
     });
   });
@@ -492,6 +506,37 @@ app.put('/api/tasks/:id/toggle', checkAuth(), (req, res) => {
 
 app.delete('/api/tasks/:id', checkAuth(), (req, res) => {
   db.run(`DELETE FROM tasks WHERE id = ?`, [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true });
+  });
+});
+
+
+// ──────────────── ADMIN NOTIFICATIONS API (Super Admin task alerts) ────────────────
+
+app.get('/api/admin_notifications', checkAuth(['super_admin']), (req, res) => {
+  db.all(`SELECT * FROM admin_notifications ORDER BY timestamp DESC LIMIT 50`, (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
+  });
+});
+
+app.get('/api/admin_notifications/unread_count', checkAuth(['super_admin']), (req, res) => {
+  db.get(`SELECT COUNT(*) as count FROM admin_notifications WHERE is_read = 0`, (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ count: row ? row.count : 0 });
+  });
+});
+
+app.patch('/api/admin_notifications/:id/read', checkAuth(['super_admin']), (req, res) => {
+  db.run(`UPDATE admin_notifications SET is_read = 1 WHERE id = ?`, [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true });
+  });
+});
+
+app.patch('/api/admin_notifications/read_all', checkAuth(['super_admin']), (req, res) => {
+  db.run(`UPDATE admin_notifications SET is_read = 1`, function(err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ success: true });
   });

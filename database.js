@@ -147,6 +147,18 @@ db.serialize(() => {
     status TEXT DEFAULT 'Pending'
   )`);
 
+  // 9b. Admin Notifications Table (for Super Admin task completion alerts)
+  db.run(`CREATE TABLE IF NOT EXISTS admin_notifications (
+    id TEXT PRIMARY KEY,
+    message TEXT NOT NULL,
+    type TEXT DEFAULT 'task',
+    completed_by TEXT,
+    task_title TEXT,
+    task_id TEXT,
+    timestamp TEXT NOT NULL,
+    is_read INTEGER DEFAULT 0
+  )`);
+
   // 10. CRM Timeline Table
   db.run(`CREATE TABLE IF NOT EXISTS crm_timeline (
     id TEXT PRIMARY KEY,

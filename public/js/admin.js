@@ -384,6 +384,9 @@ async function initAdminUI() {
     populateContentEditorForm();
     populateRegSettingsForm();
     renderNotificationsTray();
+
+    // Start server-side task completion notification polling (super_admin only)
+    startAdminNotifPolling();
   } catch (err) {
     console.error('UI Rendering Error (Authentication is valid):', err);
     // DO NOT REDIRECT to login.html to prevent infinite loops and allow debugging!
@@ -3842,19 +3845,47 @@ function submitTaskForm(e) {
   showToast('🛠️ Task created successfully.');
 }
 
-function toggleTaskStatus(taskId) {
+async function toggleTaskStatus(taskId) {
+  // Find task details for UI feedback
   let tasks = JSON.parse(localStorage.getItem('ire_db_tasks')) || [];
-  const idx = tasks.findIndex(t => t.id === taskId);
-  if (idx !== -1) {
-    const oldStatus = tasks[idx].status;
-    if (oldStatus === 'Pending') tasks[idx].status = 'In Progress';
-    else if (oldStatus === 'In Progress') tasks[idx].status = 'Completed';
-    else tasks[idx].status = 'Pending';
+  const localTask = tasks.find(t => t.id === taskId);
 
-    logActivity(tasks[idx].title ? `Task "${tasks[idx].title}" status toggled from ${oldStatus} to ${tasks[idx].status}.` : '');
-    localStorage.setItem('ire_db_tasks', JSON.stringify(tasks));
+  try {
+    const res = await fetch(`/api/tasks/${taskId}/toggle`, { method: 'PUT' });
+    if (!res.ok) throw new Error('Server toggle failed');
+    const data = await res.json();
+    const newStatus = data.status;
+
+    // Update local cache for instant UI
+    const idx = tasks.findIndex(t => t.id === taskId);
+    if (idx !== -1) {
+      const oldStatus = tasks[idx].status;
+      tasks[idx].status = newStatus;
+      logActivity(`Task "${tasks[idx].title}" status changed from ${oldStatus} → ${newStatus}.`);
+      localStorage.setItem('ire_db_tasks', JSON.stringify(tasks));
+    }
+
     renderTasksTable();
-    showToast(`Task status updated to ${tasks[idx].status}.`);
+    showToast(`Task status updated to ${newStatus}.`);
+
+    // If super_admin — refresh notification bell immediately after a Completed toggle
+    if (newStatus === 'Completed' && activeRole === 'super_admin') {
+      setTimeout(() => fetchAdminNotifications(), 800);
+    }
+  } catch (err) {
+    console.error('toggleTaskStatus error:', err);
+    // Fallback: local-only toggle
+    const idx = tasks.findIndex(t => t.id === taskId);
+    if (idx !== -1) {
+      const oldStatus = tasks[idx].status;
+      if (oldStatus === 'Pending') tasks[idx].status = 'In Progress';
+      else if (oldStatus === 'In Progress') tasks[idx].status = 'Completed';
+      else tasks[idx].status = 'Pending';
+      logActivity(`Task "${tasks[idx].title}" status toggled (offline).`);
+      localStorage.setItem('ire_db_tasks', JSON.stringify(tasks));
+      renderTasksTable();
+      showToast(`Task status updated to ${tasks[idx].status}.`);
+    }
   }
 }
 
@@ -4138,3 +4169,105 @@ function printCertificateElement() {
   printWindow.document.close();
 }
 
+
+// ══════════════════════════════════════════════════════════════
+//  SUPER ADMIN — SERVER-SIDE TASK COMPLETION NOTIFICATION SYSTEM
+//  Polls /api/admin_notifications every 30s when role = super_admin
+// ══════════════════════════════════════════════════════════════
+
+let _adminNotifPollInterval = null;
+
+async function fetchAdminNotifications() {
+  if (activeRole !== 'super_admin') return;
+
+  try {
+    const res = await fetch('/api/admin_notifications', { cache: 'no-store' });
+    if (!res.ok) return; // Not super_admin or server error — silent fail
+    const notifs = await res.json();
+
+    renderAdminNotificationBell(notifs);
+  } catch (err) {
+    // Silent fail — don't disrupt the UI
+  }
+}
+
+function renderAdminNotificationBell(notifs) {
+  const tray = document.getElementById('notif-tray-list');
+  const badge = document.getElementById('notif-bell-badge');
+  if (!tray || !badge) return;
+
+  const unread = notifs.filter(n => !n.is_read);
+  badge.textContent = unread.length;
+  badge.style.display = unread.length > 0 ? 'inline-block' : 'none';
+
+  if (notifs.length === 0) {
+    tray.innerHTML = `<div style="padding:18px 15px; font-size:0.75rem; color:var(--text-muted); text-align:center;">
+      🎉 No task notifications yet.<br><span style="font-size:0.68rem; opacity:0.6;">Team completions will appear here.</span>
+    </div>`;
+    return;
+  }
+
+  tray.innerHTML = notifs.slice(0, 15).map(n => {
+    const timeAgo = formatTimeAgo(n.timestamp);
+    const isUnread = !n.is_read;
+    return `
+      <div class="notif-tray-item ${isUnread ? '' : 'read'}"
+           style="border-left: 3px solid ${isUnread ? 'var(--copper)' : 'var(--border)'}; padding: 10px 12px; cursor:pointer;"
+           onclick="markAdminNotifRead('${n.id}', this)">
+        <span class="ico" style="font-size:1.1rem;">✅</span>
+        <div style="flex:1; min-width:0;">
+          <div class="msg" style="font-size:12px; line-height:1.45;">${n.message}</div>
+          <div class="time" style="font-size:10px; color:var(--text-muted); margin-top:3px;">🕐 ${timeAgo}</div>
+        </div>
+        ${isUnread ? '<div style="width:7px;height:7px;border-radius:50%;background:var(--copper);flex-shrink:0;margin-top:4px;"></div>' : ''}
+      </div>`;
+  }).join('');
+
+  // Add "Mark All Read" button if there are unread ones
+  if (unread.length > 0) {
+    tray.innerHTML += `
+      <div style="padding: 8px 12px; border-top: 1px solid var(--border); text-align:center;">
+        <button onclick="markAllAdminNotifsRead()" style="
+          font-size:11px; color:var(--copper); background:none; border:none; cursor:pointer; font-weight:600; padding:4px 8px;
+        ">✔ Mark All as Read</button>
+      </div>`;
+  }
+}
+
+async function markAdminNotifRead(notifId, el) {
+  try {
+    await fetch(`/api/admin_notifications/${notifId}/read`, { method: 'PATCH' });
+    if (el) {
+      el.classList.add('read');
+      el.style.borderLeftColor = 'var(--border)';
+      const dot = el.querySelector('div[style*="border-radius:50%"]');
+      if (dot) dot.remove();
+    }
+    await fetchAdminNotifications();
+  } catch(e) {}
+}
+
+async function markAllAdminNotifsRead() {
+  try {
+    await fetch('/api/admin_notifications/read_all', { method: 'PATCH' });
+    await fetchAdminNotifications();
+    showToast('✅ All notifications marked as read.');
+  } catch(e) {}
+}
+
+function formatTimeAgo(isoTimestamp) {
+  const diff = Math.floor((Date.now() - new Date(isoTimestamp).getTime()) / 1000);
+  if (diff < 60) return 'Just now';
+  if (diff < 3600) return `${Math.floor(diff/60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff/3600)}h ago`;
+  return `${Math.floor(diff/86400)}d ago`;
+}
+
+// Start polling when page loads (only for super_admin)
+// Triggered from initAdminUI after role is confirmed
+function startAdminNotifPolling() {
+  if (activeRole !== 'super_admin') return;
+  fetchAdminNotifications(); // Immediate first fetch
+  if (_adminNotifPollInterval) clearInterval(_adminNotifPollInterval);
+  _adminNotifPollInterval = setInterval(fetchAdminNotifications, 30000); // Every 30 seconds
+}
