@@ -5,17 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>IRE Expo 2026 | Admin Portal</title>
   
+  <!-- PWA Manifest & Icons (Allows Admin to install the app) -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" href="/icons/app-icon-192.png">
+  
   <script>
     // Immediate auth check
     (function() {
       document.documentElement.style.visibility = 'hidden';
-      fetch('/api/auth/session', { cache: 'no-store' })
-        .then(res => {
-          if (!res.ok) throw new Error('Unauthorized');
-          return res.json();
-        })
-        .then(data => {
-          if (data.success) {
             document.documentElement.style.visibility = 'visible';
           } else {
             window.location.href = '/login.html';
@@ -1062,6 +1060,11 @@
 
     <!-- Actions, Alerts Tray & Profile Switcher -->
     <div class="header-actions">
+      <!-- PWA Install Button (Hidden by default, shown if installable) -->
+      <button id="adminInstallBtn" class="btn-action-primary" style="display:none; padding:4px 10px; font-size:0.7rem; border-radius:50px; border:1px solid var(--copper);">
+        📱 Install App
+      </button>
+
       <!-- Notification tray bell (Module 9) -->
       <button class="notif-bell-btn" onclick="toggleNotifTray(event)" title="Notifications Center">
         🔔
@@ -3186,5 +3189,32 @@
 
   <!-- LOAD JS SCRIPTS -->
   <script src="js/admin.js"></script>
+
+  <script>
+    // ── PWA Installation Logic for Admin ──
+    let deferredPromptAdmin;
+    const adminInstallBtn = document.getElementById('adminInstallBtn');
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPromptAdmin = e;
+      if (adminInstallBtn) adminInstallBtn.style.display = 'inline-flex';
+    });
+
+    if (adminInstallBtn) {
+      adminInstallBtn.addEventListener('click', async () => {
+        if (deferredPromptAdmin) {
+          deferredPromptAdmin.prompt();
+          const { outcome } = await deferredPromptAdmin.userChoice;
+          if (outcome === 'accepted') adminInstallBtn.style.display = 'none';
+          deferredPromptAdmin = null;
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
 </body>
 </html>
