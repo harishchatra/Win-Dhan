@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -46,7 +46,7 @@
         <p style="font-family:'Inter',sans-serif;font-size:15px;color:var(--gray-60);line-height:1.8;margin-bottom:1.5rem;">Co-organised by Dhan Enterprise and Suprabha Trust, IRE 2026 creates an unparalleled platform for B2B networking, live product demonstrations, policy discussions, and deal-making in India's booming clean energy sector.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <a href="stalls-booking/index.html" class="btn-primary">Book a Stall →</a>
-          <a href="#sponsorship" class="btn-outline">View Sponsorship</a>
+          <button onclick="openSponsorModal()" class="btn-outline">Sponsor Now</button>
         </div>
       </div>
       <div class="ire-image-stack">
@@ -247,11 +247,205 @@
       <h4>Be part of IRE 2026 — 3–4 July, Hyderabad</h4>
       <p>Book your stall or sponsorship slot today. Contact ireexpo2026@gmail.com · +91 79818 69954</p>
     </div>
-    <a href="stalls-booking/index.html" class="btn-gold">Book a Stall →</a>
+    <div style="display:flex; gap:12px;">
+      <button onclick="openSponsorModal()" class="btn-outline" style="border-color:var(--white); color:var(--white);">Sponsor Now →</button>
+      <a href="stalls-booking/index.html" class="btn-gold">Book a Stall →</a>
+    </div>
+  </div>
+</div>
+
+<!-- SPONSORSHIP MODAL -->
+<div class="modal-overlay" id="modal-sponsor" onclick="if(event.target===this) closeSponsorModal()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Submit Sponsorship Request</h3>
+      <button class="modal-close-btn" onclick="closeSponsorModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="sponsorshipForm" onsubmit="submitSponsorship(event)" novalidate>
+        <div class="modal-form-row">
+          <div class="modal-form-group">
+            <label>Company Name *</label>
+            <input type="text" id="sponsor-company" required placeholder="e.g. Reliance Solars">
+          </div>
+          <div class="modal-form-group">
+            <label>Contact Person *</label>
+            <input type="text" id="sponsor-contact" required placeholder="e.g. Rajesh Kumar">
+          </div>
+        </div>
+        <div class="modal-form-row">
+          <div class="modal-form-group">
+            <label>Phone Number *</label>
+            <input type="text" id="sponsor-phone" required placeholder="10-digit mobile">
+          </div>
+          <div class="modal-form-group">
+            <label>Email Address *</label>
+            <input type="email" id="sponsor-email" required placeholder="e.g. contact@company.com">
+          </div>
+        </div>
+        <div class="modal-form-row">
+          <div class="modal-form-group">
+            <label>Industry Class *</label>
+            <input type="text" id="sponsor-industry" required placeholder="e.g. Solar EPC">
+          </div>
+          <div class="modal-form-group">
+            <label>Preferred Package *</label>
+            <select id="sponsor-package" required>
+              <option value="Associate Org|3500000">Associate Org (₹35.0L)</option>
+              <option value="Gold Prime|2500000">Gold Prime (₹25.0L)</option>
+              <option value="Title Sponsor|1500000">Title Sponsor (₹15.0L)</option>
+              <option value="Silver|1000000">Silver (₹10.0L)</option>
+              <option value="Bronze|500000">Bronze (₹5.0L)</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-form-group">
+          <label>Upload Company Profile (Optional)</label>
+          <input type="file" id="sponsor-profile" accept=".pdf,.doc,.docx">
+        </div>
+        <div class="modal-footer" style="padding: 1rem 0 0 0; background: transparent; border: none;">
+          <button type="button" class="btn-ghost" onclick="closeSponsorModal()" style="padding: 10px 20px;">Cancel</button>
+          <button type="submit" class="btn-primary" style="padding: 10px 24px; border: none; cursor: pointer;">Submit Request</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
 <div id="footer-placeholder"></div>
 <script src="js/script.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  function openSponsorModal() {
+    document.getElementById('modal-sponsor').classList.add('active');
+  }
+  function closeSponsorModal() {
+    document.getElementById('modal-sponsor').classList.remove('active');
+  }
+
+  async function submitSponsorship(e) {
+    e.preventDefault();
+    const form = e.target;
+    
+    // Basic validation
+    let valid = true;
+    form.querySelectorAll('.err').forEach(el => el.remove());
+    form.querySelectorAll('[required]').forEach(el => {
+      el.style.borderColor = 'var(--border)';
+      if (!el.value.trim()) {
+        valid = false;
+        el.style.borderColor = '#c0392b';
+        const d = document.createElement('div');
+        d.className = 'err';
+        d.style.cssText = 'color:#c0392b;font-size:11.5px;font-weight:600;margin-top:4px;';
+        d.textContent = 'This field is required';
+        el.parentNode.appendChild(d);
+      }
+    });
+    if (!valid) return;
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalBtnText = btn.innerHTML;
+    btn.innerHTML = 'Processing...';
+    btn.disabled = true;
+
+    try {
+      // Calculate amounts
+      const packageVal = document.getElementById('sponsor-package').value;
+      const amountBase = parseInt(packageVal.split('|')[1], 10);
+      const totalAmount = amountBase * 1.18; // Add 18% GST
+
+      const formData = {
+        company: document.getElementById('sponsor-company').value,
+        contact: document.getElementById('sponsor-contact').value,
+        phone: document.getElementById('sponsor-phone').value,
+        email: document.getElementById('sponsor-email').value,
+        industry: document.getElementById('sponsor-industry').value,
+        package: packageVal.split('|')[0]
+      };
+
+      // Fetch Razorpay Config
+      const configRes = await fetch('/api/config/razorpay');
+      if (!configRes.ok) throw new Error('Failed to fetch Razorpay config');
+      const { key_id } = await configRes.json();
+
+      // Create Order
+      const orderRes = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: Math.round(totalAmount * 100), // amount in paise
+          currency: 'INR',
+          receipt: 'sponsor_' + Date.now()
+        })
+      });
+      
+      if (!orderRes.ok) {
+        const errData = await orderRes.json();
+        throw new Error(errData.error || 'Failed to create order');
+      }
+      const orderData = await orderRes.json();
+
+      const options = {
+        "key": key_id,
+        "amount": orderData.amount,
+        "currency": orderData.currency,
+        "name": "Dhan Enterprise",
+        "description": "IRE 2026 Sponsorship (" + formData.package + ")",
+        "image": "favicon.ico",
+        "order_id": orderData.order_id,
+        "handler": async function (response) {
+            try {
+              const verifyRes = await fetch('/api/verify-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_signature: response.razorpay_signature,
+                  bookingData: formData
+                })
+              });
+              const verifyData = await verifyRes.json();
+              
+              if (verifyRes.ok && verifyData.success) {
+                form.innerHTML = '<div style="background:#d4edda;color:#155724;border:1px solid #c3e6cb;padding:1.5rem;border-radius:8px;text-align:center;">' +
+                  '<h3 style="margin-bottom:0.5rem;font-family:var(--font-display);">✓ Sponsorship Confirmed!</h3>' +
+                  '<p style="font-size:14px;margin-bottom:0.5rem;">Payment ID: ' + response.razorpay_payment_id + '</p>' +
+                  '<p style="font-size:13px;font-weight:400;">Thank you for partnering with IRE 2026. Our team will contact you shortly.</p>' +
+                  '</div>';
+              } else {
+                alert("Payment verification failed: " + (verifyData.error || "Unknown error"));
+              }
+            } catch (e) {
+              alert("Payment verification request failed.");
+              console.error(e);
+            }
+        },
+        "prefill": {
+            "name": formData.contact,
+            "email": formData.email,
+            "contact": formData.phone
+        },
+        "theme": {
+            "color": "#1A4731"
+        }
+      };
+
+      const rzp1 = new Razorpay(options);
+      rzp1.on('payment.failed', function (response){
+          alert("Payment Failed: " + response.error.description);
+      });
+      rzp1.open();
+
+    } catch (err) {
+      console.error(err);
+      alert(err.message || 'An error occurred while initializing payment. Please try again.');
+    } finally {
+      btn.innerHTML = originalBtnText;
+      btn.disabled = false;
+    }
+  }
+</script>
 </body>
 </html>
