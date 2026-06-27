@@ -2,708 +2,289 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | Dhan Enterprise</title>
-<meta name="description" content="Learn about Dhan Enterprise — 10+ years of renewable energy expertise, our R&D initiatives, academic collaborations, and career opportunities in Hyderabad.">
+<meta name="description" content="About Dhan Enterprise — founded 2014, Hyderabad. 10+ years renewable energy consultancy in EV, Solar, BESS, Wind.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
-<style>
-/* Corporate Light Design System - Scoped to about.html */
-:root {
-  --green: #1A4731;
-  --green-dk: #0F2E1F;
-  --green-lt: #2C6248;
-  --green-pale: #EAF3EE;
-  --gold: #C9943A;
-  --gold-lt: #E8B55A;
-  --gold-pale: #FDF5E8;
-  --black: #111111;
-  --gray-60: #555555;
-  --gray-40: #888888;
-  --gray-20: #CCCCCC;
-  --gray-10: #EEEEEE;
-  --gray-05: #F7F7F7;
-  --white: #FFFFFF;
-  --border: #E2E2E2;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  color: var(--gray-60);
-  background-color: var(--white);
-  line-height: 1.6;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
-  color: var(--black);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* SECTION PATTERN */
-.section {
-  padding: 5rem 2rem;
-  background-color: var(--white);
-}
-.section.bg-gray {
-  background-color: var(--gray-05);
-}
-
-.section-eyebrow {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 10.5px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-}
-.section-eyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 20px;
-  height: 1.5px;
-  background-color: var(--gold);
-}
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  color: var(--black);
-  margin-bottom: 1rem;
-  line-height: 1.2;
-}
-.section-title span {
-  color: var(--green);
-}
-
-.section-rule {
-  width: 48px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--green), var(--gold));
-  margin-bottom: 1.2rem;
-}
-
-.section-subtitle {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-  color: var(--gray-60);
-  max-width: 700px;
-  margin-bottom: 3rem;
-}
-
-/* Page hero: dark green (#0F2E1F) with white text, gold eyebrow, no image overlay */
-.page-hero {
-  background-color: var(--green-dk);
-  color: var(--white);
-  padding: 8rem 2rem 5rem 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.page-hero .section-eyebrow {
-  color: var(--gold);
-  justify-content: center;
-}
-.page-hero .section-eyebrow::before {
-  background-color: var(--gold);
-}
-.page-hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  color: var(--white);
-  margin-bottom: 1rem;
-}
-.page-hero h1 span {
-  color: var(--white);
-}
-.page-hero p {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  max-width: 600px;
-  color: var(--white);
-  opacity: 0.9;
-  margin: 0 auto;
-}
-
-/* Buttons */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.5rem;
-  background-color: var(--green);
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  border: 1px solid var(--green);
-}
-.btn-primary:hover {
-  background-color: var(--green-lt);
-  border-color: var(--green-lt);
-}
-
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.5rem;
-  background-color: transparent;
-  color: var(--green);
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.3s;
-  border: 1px solid var(--green);
-}
-.btn-outline:hover {
-  background-color: var(--green-pale);
-}
-
-.btn-outline-white {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.5rem;
-  background-color: transparent;
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.3s;
-  border: 1px solid var(--white);
-}
-.btn-outline-white:hover {
-  background-color: var(--white);
-  color: var(--green-dk);
-}
-
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.5rem;
-  background-color: transparent;
-  color: var(--green);
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-.btn-ghost:hover {
-  color: var(--green-lt);
-  background-color: var(--gray-05);
-  border-radius: 4px;
-}
-
-.btn-gold {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.5rem;
-  background-color: var(--gold);
-  color: var(--white);
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  border: 1px solid var(--gold);
-}
-.btn-gold:hover {
-  background-color: var(--gold-lt);
-  border-color: var(--gold-lt);
-}
-
-/* Grids */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-.grid-10 { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; }
-
-@media (max-width: 900px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-}
-
-/* Card Pattern */
-.card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  padding: 2rem;
-  border-radius: 4px;
-  transition: all 0.3s;
-}
-.card:hover {
-  border-color: var(--gold);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-
-/* Team Card Specifics */
-.team-card {
-  text-align: center;
-  padding: 2.5rem 1.5rem;
-}
-.team-avatar {
-  width: 80px;
-  height: 80px;
-  background-color: var(--green);
-  color: var(--white);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 900;
-  margin: 0 auto 1.5rem auto;
-}
-.team-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: var(--black);
-  margin-bottom: 0.3rem;
-}
-.team-role {
-  font-size: 0.85rem;
-  color: var(--gray-60);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-}
-
-/* Timeline/Story */
-.story-image {
-  border-radius: 4px;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border: 1px solid var(--border);
-}
-
-.tl-item { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
-.tl-dot {
-  width: 48px; height: 48px;
-  background: var(--green-pale);
-  color: var(--green);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-family: 'Playfair Display', serif; font-size: 1.1rem;
-  flex-shrink: 0;
-  border: 1px solid var(--green-lt);
-}
-.tl-body h4 { margin-bottom: 0.5rem; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--black); }
-.tl-body p { margin: 0; color: var(--gray-60); font-size: 0.95rem; }
-
-/* Stat Card */
-.stat-card {
-  text-align: center;
-}
-.stat-card .val {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--green);
-  margin-bottom: 0.5rem;
-}
-.stat-card .lbl {
-  font-size: 0.9rem;
-  color: var(--gray-60);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-}
-
-/* R&D Card */
-.rnd-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-  transition: all 0.3s;
-}
-.rnd-card:hover {
-  border-color: var(--gold);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-.rnd-img { height: 200px; width: 100%; }
-.rnd-img img { width: 100%; height: 100%; object-fit: cover; }
-.rnd-body { padding: 1.5rem; }
-.rnd-body .tag { color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 0.5rem; display: block; }
-.rnd-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.8rem; color: var(--black); }
-.rnd-body p { font-size: 0.9rem; color: var(--gray-60); }
-
-/* Global Network */
-.network-item {
-  border: 1px solid var(--border);
-  padding: 1rem;
-  text-align: center;
-  border-radius: 4px;
-  background: var(--white);
-  font-weight: 600;
-  color: var(--black);
-  font-size: 0.9rem;
-}
-
-/* Countdown */
-.countdown {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-.countdown-box {
-  background: var(--green-pale);
-  border: 1px solid var(--green-lt);
-  padding: 1.5rem;
-  border-radius: 4px;
-  text-align: center;
-  min-width: 100px;
-}
-.countdown-box .val {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--green);
-  display: block;
-}
-.countdown-box .lbl {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: var(--gray-60);
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-/* Academics & Careers specific */
-.info-card {
-  text-align: center;
-}
-.info-card .icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-.info-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-}
-.career-card .dept {
-  color: var(--gold);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-.career-card .role {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-  color: var(--black);
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: revealAnim 0.8s forwards;
-}
-@keyframes revealAnim {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.cta-banner {
-  background: var(--green-dk);
-  padding: 3rem;
-  border-radius: 4px;
-  color: var(--white);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 3rem;
-}
-.cta-banner h4 { color: var(--white); font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif; }
-.cta-banner p { color: var(--green-pale); margin: 0; }
-@media(max-width:768px) { .cta-banner { flex-direction: column; text-align: center; gap: 1.5rem; } }
-
-</style>
 </head>
 <body data-page="about">
 <div id="nav-placeholder"></div>
 
 <!-- PAGE HERO -->
-<div class="page-hero">
+<section class="page-hero">
   <div class="container">
-    <div class="section-eyebrow">Est. 2014 · Hyderabad, India</div>
-    <h1>About <span>Dhan Enterprise</span></h1>
-    <p>A decade of renewable energy innovation — consulting, R&D, trade and education, all from the heart of Hyderabad.</p>
+    <div class="eyebrow eyebrow-dark">Our Story</div>
+    <h1 class="section-title section-title-light" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">About <span>Dhan Enterprise</span></h1>
+    <p class="section-sub section-sub-light">A decade of renewable energy expertise — bridging innovation and implementation across India and beyond.</p>
   </div>
-</div>
+</section>
 
-<!-- OUR STORY -->
-<section class="section reveal bg-gray" id="story">
+<!-- STORY -->
+<section id="story" class="section-white reveal">
   <div class="container">
-    <div class="grid-2" style="align-items: center;">
+    <div class="about-section">
       <div>
-        <div class="section-eyebrow">Our Story</div>
-        <h2 class="section-title">A Decade of <span>Clean Energy</span></h2>
+        <div class="eyebrow">Who We Are</div>
+        <h2 class="section-title">Powering India's<br><span>Clean Energy Future</span></h2>
         <div class="section-rule"></div>
-        <p class="section-subtitle">Founded in 2014, Dhan Enterprise has grown from a boutique EV consulting practice into one of South India's most connected renewable energy firms.</p>
-        <p style="margin-bottom:2rem;">We operate across EV systems, Solar PV, Battery Energy Storage, Wind, Green Hydrogen, and international trade — serving private companies, government bodies, and startups. Our headquarters in Begumpet, Hyderabad serves as the nerve centre for a 22-state network of 120+ partner organisations.</p>
-        
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot">14</div>
-            <div class="tl-body"><h4>Founded 2014</h4><p>Started as EV consulting practice in Hyderabad.</p></div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot">18</div>
-            <div class="tl-body"><h4>Solar Expansion 2018</h4><p>Extended into Solar PV and BESS advisory services.</p></div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot">22</div>
-            <div class="tl-body"><h4>22 States 2022</h4><p>Built a 120+ partner network across India.</p></div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot">26</div>
-            <div class="tl-body">
-              <h4>IRE 2026</h4>
-              <p>Co-organising India's premier clean energy expo — 3 &amp; 4 July 2026, Hyderabad.</p>
-              
-              <!-- Countdown Component -->
-              <div class="countdown">
-                <div class="countdown-box"><span class="val">388</span><span class="lbl">Days</span></div>
-                <div class="countdown-box"><span class="val">14</span><span class="lbl">Hours</span></div>
-                <div class="countdown-box"><span class="val">45</span><span class="lbl">Mins</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="height: 100%;">
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80" alt="Dhan Enterprise office Hyderabad" class="story-image">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- KEY NUMBERS -->
-<section class="section reveal">
-  <div class="container">
-    <div class="section-eyebrow">By The Numbers</div>
-    <h2 class="section-title">Our <span>Impact</span></h2>
-    <div class="section-rule"></div>
-    <div class="grid-4" style="margin-top: 3rem;">
-      <div class="stat-card card"><div class="val">10+</div><div class="lbl">Years of Expertise</div></div>
-      <div class="stat-card card"><div class="val">120+</div><div class="lbl">Partner Organisations</div></div>
-      <div class="stat-card card"><div class="val">22</div><div class="lbl">States Covered</div></div>
-      <div class="stat-card card"><div class="val">500+</div><div class="lbl">IRE 2026 Delegates</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- R&D -->
-<section class="section reveal bg-gray" id="rnd">
-  <div class="container">
-    <div class="section-eyebrow">Innovation &amp; Technology</div>
-    <h2 class="section-title">Research &amp; <span>Development</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">Driving next-generation clean energy solutions through applied research, technology partnerships, and indigenous innovation — from laboratory to deployment.</p>
-    
-    <div class="grid-2" style="margin-bottom:4rem; align-items:center;">
-      <div style="position:relative; border-radius:4px; overflow:hidden; height:360px; border:1px solid var(--border);">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="R&D Lab" style="width:100%;height:100%;object-fit:cover;opacity:0.9;">
-        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,46,31,0.9) 0%,rgba(15,46,31,0.1) 100%);"></div>
-        <div style="position:absolute;bottom:2rem;left:2rem;">
-          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:700;">Our Focus</div>
-          <div style="font-family:'Playfair Display', serif;font-size:1.8rem;color:var(--white);font-weight:900;line-height:1.2;">Pioneering Clean<br>Energy Technologies</div>
-        </div>
+        <p style="font-family:'Inter',sans-serif;font-size:15px;color:var(--gray-60);line-height:1.8;margin-bottom:1rem;">Dhan Enterprise is a Hyderabad-based renewable energy consultancy founded in 2014 by Harish Manjunath. With over a decade of deep industry expertise at the intersection of automotive technology and sustainable energy, we bridge the gap between innovation and scalable implementation.</p>
+        <p style="font-family:'Inter',sans-serif;font-size:15px;color:var(--gray-60);line-height:1.8;margin-bottom:1rem;">We work with OEMs, project developers, EPCs, government bodies, and international partners — providing end-to-end advisory across the entire renewable energy value chain.</p>
+        <p style="font-family:'Inter',sans-serif;font-size:15px;color:var(--gray-60);line-height:1.8;">We co-organise the Indian Renewable Energy Expo (IRE 2026) with Suprabha Trust — Telangana's premier platform connecting innovators, policymakers, investors, and energy leaders across India.</p>
       </div>
       <div>
-        <p style="margin-bottom:2rem;">At Dhan Enterprise, R&D is the cornerstone of our long-term vision. We collaborate with national laboratories, IITs, MNRE-funded institutions, and global technology partners to develop, test, and commercialise cutting-edge renewable energy solutions suited to Indian conditions.</p>
-        <div class="grid-2" style="gap:1.5rem;">
-          <div class="stat-card card" style="padding:1.5rem;"><div class="val" style="font-size:2rem;">12+</div><div class="lbl">Active Projects</div></div>
-          <div class="stat-card card" style="padding:1.5rem;"><div class="val" style="font-size:2rem;">8</div><div class="lbl">Tech Partners</div></div>
-          <div class="stat-card card" style="padding:1.5rem;"><div class="val" style="font-size:2rem;">3</div><div class="lbl">Patents</div></div>
-          <div class="stat-card card" style="padding:1.5rem;"><div class="val" style="font-size:2rem;">IIT</div><div class="lbl">Collaborations</div></div>
+        <div class="fact-list">
+          <div class="fact-item"><span class="fact-label">Founded</span><span class="fact-value">2014 · Hyderabad, Telangana</span></div>
+          <div class="fact-item"><span class="fact-label">Founder</span><span class="fact-value">Harish Manjunath</span></div>
+          <div class="fact-item"><span class="fact-label">Tagline</span><span class="fact-value">Encompassing Energy Revolution</span></div>
+          <div class="fact-item"><span class="fact-label">Network</span><span class="fact-value">120+ Partners · 22 States · 10 Countries</span></div>
+          <div class="fact-item"><span class="fact-label">Sectors</span><span class="fact-value">EV · Solar · BESS · Wind · Green Hydrogen</span></div>
+          <div class="fact-item"><span class="fact-label">Flagship Event</span><span class="fact-value">IRE 2026 · 3–4 July · HMDA Grounds, Hyderabad</span></div>
+          <div class="fact-item"><span class="fact-label">Website</span><span class="fact-value">www.win-dhan.com</span></div>
         </div>
       </div>
-    </div>
-    
-    <div class="grid-3">
-      <div class="rnd-card">
-        <div class="rnd-img"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80" alt="Next-gen solar"></div>
-        <div class="rnd-body"><span class="tag">Solar Technology</span><h3>Next-Gen Photovoltaics</h3><p>Perovskite solar cells, bifacial modules, and high-efficiency thin-film technologies — targeting 30%+ module efficiency.</p></div>
-      </div>
-      <div class="rnd-card">
-        <div class="rnd-img"><img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&q=80" alt="Battery R&D"></div>
-        <div class="rnd-body"><span class="tag">Energy Storage</span><h3>Advanced Battery Chemistry</h3><p>Solid-state battery research, sodium-ion cells, and indigenous BMS optimised for tropical temperatures.</p></div>
-      </div>
-      <div class="rnd-card">
-        <div class="rnd-img"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80" alt="AI Energy"></div>
-        <div class="rnd-body"><span class="tag">Digital Intelligence</span><h3>AI-Powered Energy Management</h3><p>Machine learning for solar yield forecasting, real-time grid load balancing, and autonomous BESS dispatch.</p></div>
-      </div>
-      <div class="rnd-card">
-        <div class="rnd-img"><img src="https://images.unsplash.com/photo-1548337138-e87d889cc369?w=600&q=80" alt="Wind R&D"></div>
-        <div class="rnd-body"><span class="tag">Wind Technology</span><h3>Low-Wind Turbine Design</h3><p>Compact, low-cut-in-speed turbines for Deccan Plateau and coastal Andhra conditions.</p></div>
-      </div>
-      <div class="rnd-card">
-        <div class="rnd-img"><img src="https://images.unsplash.com/photo-1568952433726-3896e3881c65?w=600&q=80" alt="Green Hydrogen"></div>
-        <div class="rnd-body"><span class="tag">Green Hydrogen</span><h3>Electrolyser Innovation</h3><p>PEM and alkaline electrolyser R&D for cost-competitive green hydrogen — targeting below ₹150/kg by 2030.</p></div>
-      </div>
-      <div class="rnd-card">
-        <div class="rnd-img"><img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&q=80" alt="Microgrid"></div>
-        <div class="rnd-body"><span class="tag">Smart Systems</span><h3>Hybrid Microgrid Systems</h3><p>Self-sufficient solar-wind-BESS microgrids for rural electrification — plug-and-play with remote monitoring.</p></div>
-      </div>
-    </div>
-    
-    <div class="cta-banner">
-      <div><h4>Collaborate on R&D with Dhan Enterprise</h4><p>We welcome partnerships with research institutions, startups, and corporates working on clean energy innovation.</p></div>
-      <a href="contact.html" class="btn-gold">Partner With Us</a>
     </div>
   </div>
 </section>
 
-<!-- TEAM GRID -->
-<section class="section reveal" id="team">
+<!-- STATS -->
+<section class="section-gray reveal">
+  <div class="section-inner">
+    <div class="joined-grid">
+      <div class="joined-grid-inner cols-4">
+        <div class="stat-card"><div class="stat-val">10<sup style="font-size:1rem;color:var(--gold);">+</sup></div><div class="stat-lbl">Years of Expertise</div></div>
+        <div class="stat-card"><div class="stat-val">22</div><div class="stat-lbl">States Covered</div></div>
+        <div class="stat-card"><div class="stat-val">120<sup style="font-size:1rem;color:var(--gold);">+</sup></div><div class="stat-lbl">Network Partners</div></div>
+        <div class="stat-card"><div class="stat-val">10</div><div class="stat-lbl">Countries</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="section-white reveal">
   <div class="container">
-    <div class="section-eyebrow">Our People</div>
-    <h2 class="section-title">Leadership <span>Team</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">Meet the experts driving Dhan Enterprise's mission to transform India's renewable energy landscape through innovation and collaboration.</p>
-    
-    <div class="grid-4">
-      <div class="card team-card">
-        <div class="team-avatar">VR</div>
-        <div class="team-name">Vikram Reddy</div>
-        <div class="team-role">Founder & CEO</div>
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="eyebrow" style="justify-content:center;">The People</div>
+      <h2 class="section-title">Our <span>Team</span></h2>
+      <div class="section-rule" style="margin:0 auto;"></div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-initials">HM</div>
+        <div class="team-name">Harish Manjunath</div>
+        <div class="team-role">Founder &amp; Managing Director</div>
       </div>
-      <div class="card team-card">
-        <div class="team-avatar">AS</div>
-        <div class="team-name">Ananya Sharma</div>
-        <div class="team-role">Head of R&D</div>
+      <div class="team-card">
+        <div class="team-initials">EV</div>
+        <div class="team-name">EV Consulting Team</div>
+        <div class="team-role">Electric Vehicle &amp; Hybrid OEM Advisory</div>
       </div>
-      <div class="card team-card">
-        <div class="team-avatar">MD</div>
-        <div class="team-name">Mohan Das</div>
-        <div class="team-role">VP, Operations</div>
-      </div>
-      <div class="card team-card">
-        <div class="team-avatar">KR</div>
-        <div class="team-name">Kavita Rao</div>
-        <div class="team-role">Director of Strategy</div>
+      <div class="team-card">
+        <div class="team-initials">RE</div>
+        <div class="team-name">Renewables Division</div>
+        <div class="team-role">Solar, BESS, Wind &amp; Green Hydrogen</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- GLOBAL NETWORK -->
-<section class="section reveal bg-gray" id="global-network">
-  <div class="container">
-    <div class="section-eyebrow">Reach</div>
-    <h2 class="section-title">Global <span>Network</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">While rooted in Hyderabad, our trade operations and technology partnerships span across 10 key international markets.</p>
-    
-    <div class="grid-10">
-      <div class="network-item">India</div>
-      <div class="network-item">Singapore</div>
-      <div class="network-item">UAE</div>
-      <div class="network-item">Germany</div>
-      <div class="network-item">Australia</div>
-      <div class="network-item">UK</div>
-      <div class="network-item">USA</div>
-      <div class="network-item">Japan</div>
-      <div class="network-item">South Korea</div>
-      <div class="network-item">France</div>
+<section id="network" class="section-gray reveal">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="eyebrow" style="justify-content:center;">International Presence</div>
+      <h2 class="section-title">Global <span>Network</span></h2>
+      <div class="section-rule" style="margin:0 auto;"></div>
+      <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Active partnerships across 10 countries — facilitating trade, technology transfer, and joint ventures in renewable energy.</p>
+    </div>
+    <div class="network-grid">
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">India</div><div class="ctype">HQ · 22 States</div></div>
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">UAE</div><div class="ctype">Trade &amp; Exports</div></div>
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">Saudi Arabia</div><div class="ctype">Project Dev.</div></div>
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">Germany</div><div class="ctype">Technology Import</div></div>
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">Denmark</div><div class="ctype">Wind Technology</div></div>
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">China</div><div class="ctype">Solar &amp; BESS</div></div>
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">Japan</div><div class="ctype">EV &amp; Smart Grid</div></div>
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">Singapore</div><div class="ctype">SE Asia Hub</div></div>
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">Kenya</div><div class="ctype">Africa Exports</div></div>
+      <div class="country-pill"><span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span><div class="cname">Brazil</div><div class="ctype">Americas</div></div>
     </div>
   </div>
 </section>
 
-<!-- ACADEMICS -->
-<section class="section reveal" id="academics">
-  <div class="container">
-    <div class="section-eyebrow">Knowledge &amp; Learning</div>
-    <h2 class="section-title">Academic <span>Programmes</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">Bridging industry and academia — training programmes, internships, and knowledge partnerships for the next generation of renewable energy professionals.</p>
-    
-    <div class="grid-3">
-      <div class="card info-card">
-        <div class="icon">🎓</div>
-        <h3>Industry Training</h3>
-        <p>Short-term industry certification programmes in EV technology, solar installation, BESS commissioning, and energy auditing — in collaboration with IITs and NITs.</p>
-      </div>
-      <div class="card info-card">
-        <div class="icon">🔬</div>
-        <h3>Research Internships</h3>
-        <p>Semester-long internships for engineering and MBA students in renewable energy project management, R&D labs, and trade operations.</p>
-      </div>
-      <div class="card info-card">
-        <div class="icon">🏫</div>
-        <h3>University Partnerships</h3>
-        <p>MoUs with Osmania University, JNTU Hyderabad, and two IITs for joint curriculum development in clean energy engineering.</p>
-      </div>
+<!-- CTA -->
+<div class="cta-banner reveal">
+  <div class="cta-banner-inner">
+    <div>
+      <h4>Partner with Dhan Enterprise</h4>
+      <p>Join our network of 120+ partners across 22 states and 10 countries. Let's build India's renewable energy future together.</p>
     </div>
+    <a href="contact.html" class="btn-gold">Get In Touch →</a>
   </div>
-</section>
-
-<!-- CAREERS -->
-<section class="section reveal bg-gray" id="careers">
-  <div class="container">
-    <div class="section-eyebrow">Join Our Team</div>
-    <h2 class="section-title">Current <span>Openings</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">We're growing our team of clean energy professionals across consulting, R&D, trade, and events. Build your career at the forefront of India's energy revolution.</p>
-    
-    <div class="grid-3">
-      <div class="card career-card">
-        <div class="dept">EV Consulting</div>
-        <div class="role">EV Systems Engineer</div>
-        <p style="margin-bottom: 1.5rem;">Lead technical consulting for EV drivetrain projects, BMS integration, and charging infrastructure planning across South India.</p>
-        <a href="contact.html" class="btn-primary">Apply Now</a>
-      </div>
-      <div class="card career-card">
-        <div class="dept">Solar &amp; BESS</div>
-        <div class="role">Solar Project Manager</div>
-        <p style="margin-bottom: 1.5rem;">Oversee rooftop and ground-mount solar projects from feasibility through commissioning, managing EPC contractors and clients.</p>
-        <a href="contact.html" class="btn-primary">Apply Now</a>
-      </div>
-      <div class="card career-card">
-        <div class="dept">Trade &amp; Operations</div>
-        <div class="role">Trade Operations Executive</div>
-        <p style="margin-bottom: 1.5rem;">Handle import-export documentation, supplier relations, and logistics coordination for renewable energy equipment across 40+ countries.</p>
-        <a href="contact.html" class="btn-primary">Apply Now</a>
-      </div>
-    </div>
-    
-    <div class="cta-banner">
-      <div><h4>Don't see a suitable role?</h4><p>Send us your CV — we're always looking for talented people passionate about clean energy.</p></div>
-      <a href="contact.html" class="btn-outline-white">Send Your CV</a>
-    </div>
-  </div>
-</section>
+</div>
 
 <div id="footer-placeholder"></div>
 <script src="js/script.js"></script>

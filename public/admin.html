@@ -919,7 +919,23 @@
 
     <!-- Universal Search (Module 9) -->
     <div class="header-search-container">
-      <span class="header-search-icon">🔍</span>
+      <span class="header-search-icon"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg>
+</span>
       <input type="text" class="header-search" id="global-search-input" placeholder="Global Search everywhere..." oninput="handleGlobalSearch(this.value)">
       <div class="search-results-dropdown" id="global-search-dropdown">
         <!-- Results injected dynamically -->
@@ -930,12 +946,44 @@
     <div class="header-actions">
       <!-- Notification tray bell (Module 9) -->
       <button class="notif-bell-btn" onclick="toggleNotifTray(event)" title="Notifications Center">
-        🔔
+        <!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-bell"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+  <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+</svg>
+
         <span class="notif-bell-badge" id="notif-bell-badge">0</span>
       </button>
       <div class="notif-center-dropdown" id="notif-center-dropdown">
         <div class="notif-tray-header">
-          <span>🔔 Events Notifications</span>
+          <span><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-bell"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+  <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+</svg>
+ Events Notifications</span>
           <button class="btn-action-outline" style="font-size:8px; padding:2px 5px;" onclick="clearAllNotifications()">Clear All</button>
         </div>
         <div id="notif-tray-list">
@@ -959,54 +1007,327 @@
     <aside class="app-sidebar">
       <div class="sidebar-menu">
         <button class="sidebar-menu-btn active" id="nav-btn-dashboard" onclick="switchView('dashboard', this)">
-          <span class="ico">📊</span> Dashboard
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-bar-chart"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 21v-6" />
+  <path d="M12 21V9" />
+  <path d="M19 21V3" />
+</svg>
+</span> Dashboard
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-stalls" onclick="switchView('stalls', this)">
-          <span class="ico">🏪</span> Stall Inventory
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-store"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+  <path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" />
+  <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" />
+</svg>
+</span> Stall Inventory
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-map" onclick="switchView('map', this)">
-          <span class="ico">🗺️</span> Interactive Map
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" />
+  <path d="M15 5.764v15" />
+  <path d="M9 3.236v15" />
+</svg>
+</span> Interactive Map
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-leads" onclick="switchView('leads', this)">
-          <span class="ico">👤</span> Lead CRM
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-user"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" />
+</svg>
+</span> Lead CRM
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-exhibitors" onclick="switchView('exhibitors', this)">
-          <span class="ico">🤝</span> Exhibitors
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-handshake"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m11 17 2 2a1 1 0 1 0 3-3" />
+  <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+  <path d="m21 3 1 11h-2" />
+  <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+  <path d="M3 4h8" />
+</svg>
+</span> Exhibitors
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-payments" onclick="switchView('payments', this)">
-          <span class="ico">💳</span> Payments Ledger
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-credit-card"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="20" height="14" x="2" y="5" rx="2" />
+  <line x1="2" x2="22" y1="10" y2="10" />
+</svg>
+</span> Payments Ledger
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-visitors" onclick="switchView('visitors', this)">
-          <span class="ico">👥</span> Visitor CRM &amp; QR
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-users"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" />
+</svg>
+</span> Visitor CRM &amp; QR
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-sponsors" onclick="switchView('sponsors', this)">
-          <span class="ico">🏆</span> Sponsors Package
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-trophy"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978" />
+  <path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978" />
+  <path d="M18 9h1.5a1 1 0 0 0 0-5H18" />
+  <path d="M4 22h16" />
+  <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+  <path d="M6 9H4.5a1 1 0 0 1 0-5H6" />
+</svg>
+</span> Sponsors Package
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-sponsor-apps" onclick="switchView('sponsor-apps', this)">
-          <span class="ico">📋</span> Sponsor Apps
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-clipboard"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+</span> Sponsor Apps
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-program" onclick="switchView('program', this)">
-          <span class="ico">📅</span> Summit Program
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-calendar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+</svg>
+</span> Summit Program
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-marketing" onclick="switchView('marketing', this)">
-          <span class="ico">📢</span> Marketing &amp; Inqs
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-megaphone"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+  <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+  <path d="M8 6v8" />
+</svg>
+</span> Marketing &amp; Inqs
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-media" onclick="switchView('media', this)">
-          <span class="ico">📂</span> Central Gallery
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-folder"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+</svg>
+</span> Central Gallery
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-tasks" onclick="switchView('tasks', this)">
-          <span class="ico">🛠️</span> Task Manager
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-wrench"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" />
+</svg>
+</span> Task Manager
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-reports" onclick="switchView('reports', this)">
-          <span class="ico">🖨️</span> Analytics Reports
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-printer"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+  <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" />
+  <rect x="6" y="14" width="12" height="8" rx="1" />
+</svg>
+</span> Analytics Reports
         </button>
         <button class="sidebar-menu-btn" id="nav-btn-settings" onclick="switchView('settings', this)">
-          <span class="ico">⚙️</span> Site &amp; Public Regs
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-settings"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+</span> Site &amp; Public Regs
         </button>
         
         <!-- Exhibitor Only Portal Nav -->
         <button class="sidebar-menu-btn" id="nav-btn-exhibitor-portal" style="display:none;" onclick="switchView('exhibitor-portal', this)">
-          <span class="ico">🚪</span> Exhibitor Portal
+          <span class="ico"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-door-open"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 20H2" />
+  <path d="M11 4.562v16.157a1 1 0 0 0 1.242.97L19 20V5.562a2 2 0 0 0-1.515-1.94l-4-1A2 2 0 0 0 11 4.561z" />
+  <path d="M11 4H8a2 2 0 0 0-2 2v14" />
+  <path d="M14 12h.01" />
+  <path d="M22 20h-3" />
+</svg>
+</span> Exhibitor Portal
         </button>
       </div>
 
@@ -1030,7 +1351,24 @@
             <p>IRE 2026 real-time metrics, occupancy tracking, and activity audits.</p>
           </div>
           <div class="view-actions-area">
-            <button class="btn-action-outline" onclick="exportModuleData('payments')">📊 Export Revenue Report</button>
+            <button class="btn-action-outline" onclick="exportModuleData('payments')"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-bar-chart"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 21v-6" />
+  <path d="M12 21V9" />
+  <path d="M19 21V3" />
+</svg>
+ Export Revenue Report</button>
           </div>
         </div>
 
@@ -1148,7 +1486,23 @@
             <p>Add, edit, reserve, sell, and delete exhibition stall grid configurations.</p>
           </div>
           <div class="view-actions-area">
-            <button class="btn-action-primary" id="btn-create-stall-trigger" onclick="openStallModal(null)">➕ Create Stall</button>
+            <button class="btn-action-primary" id="btn-create-stall-trigger" onclick="openStallModal(null)"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+ Create Stall</button>
           </div>
         </div>
 
@@ -1222,9 +1576,56 @@
             <div class="map-canvas-header">
               <span style="font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Hall Blueprint Occupancy Grid</span>
               <div style="display:flex; gap: 4px;">
-                <button class="btn-action-outline" style="padding: 2px 6px;" onclick="zoomAdminMap(1.25)">➕</button>
-                <button class="btn-action-outline" style="padding: 2px 6px;" onclick="zoomAdminMap(0.8)">➖</button>
-                <button class="btn-action-outline" style="padding: 2px 6px;" onclick="resetAdminMapZoom()">⟲</button>
+                <button class="btn-action-outline" style="padding: 2px 6px;" onclick="zoomAdminMap(1.25)"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+</button>
+                <button class="btn-action-outline" style="padding: 2px 6px;" onclick="zoomAdminMap(0.8)"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-minus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+</svg>
+</button>
+                <button class="btn-action-outline" style="padding: 2px 6px;" onclick="resetAdminMapZoom()"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-rotate-ccw"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+  <path d="M3 3v5h5" />
+</svg>
+</button>
               </div>
             </div>
             
@@ -1319,7 +1720,23 @@
             <p>Track business leads, add communication notes, and convert leads into active exhibitors.</p>
           </div>
           <div class="view-actions-area">
-            <button class="btn-action-primary" onclick="openLeadModal(null)">➕ Add New Lead</button>
+            <button class="btn-action-primary" onclick="openLeadModal(null)"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+ Add New Lead</button>
             <button class="btn-action-outline" onclick="exportModuleData('leads')">📥 Export Leads CSV</button>
           </div>
         </div>
@@ -1392,7 +1809,23 @@
             <p>Manage confirmed exhibitor details, assign booths, and record certification documents.</p>
           </div>
           <div class="view-actions-area">
-            <button class="btn-action-primary" onclick="openExhibitorModal(null)">➕ Add Exhibitor Profile</button>
+            <button class="btn-action-primary" onclick="openExhibitorModal(null)"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+ Add Exhibitor Profile</button>
             <button class="btn-action-outline" onclick="exportModuleData('exhibitors')">📥 Export Exhibitors CSV</button>
           </div>
         </div>
@@ -1511,7 +1944,23 @@
           </div>
           <div class="view-actions-area">
             <button class="btn-action-primary" onclick="openCheckInScanner()">📷 Check-In Scanner Simulator</button>
-            <button class="btn-action-primary" onclick="openVisitorModal(null)">➕ Register Visitor</button>
+            <button class="btn-action-primary" onclick="openVisitorModal(null)"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+ Register Visitor</button>
             <button class="btn-action-outline" onclick="exportModuleData('visitors')">📥 Export Visitors CSV</button>
           </div>
         </div>
@@ -1598,7 +2047,23 @@
             <p>Track branding packages invoices, benefit logs, and agreement certificates.</p>
           </div>
           <div class="view-actions-area">
-            <button class="btn-action-primary" id="btn-add-sponsor-trigger" onclick="openSponsorModal(null)">➕ Add Sponsor Profile</button>
+            <button class="btn-action-primary" id="btn-add-sponsor-trigger" onclick="openSponsorModal(null)"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+ Add Sponsor Profile</button>
             <button class="btn-action-outline" onclick="exportModuleData('sponsors')">📥 Export Sponsors CSV</button>
           </div>
         </div>
@@ -1641,8 +2106,40 @@
             <p>Build Day 1 &amp; Day 2 timeline schedules, drag to reorder sessions, and manage speaker listings.</p>
           </div>
           <div class="view-actions-area">
-            <button class="btn-action-primary" id="btn-create-session-trigger" onclick="openSessionModal(null)">➕ Add Session</button>
-            <button class="btn-action-primary" id="btn-add-speaker-trigger" onclick="openSpeakerModal(null)">➕ Add Speaker</button>
+            <button class="btn-action-primary" id="btn-create-session-trigger" onclick="openSessionModal(null)"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+ Add Session</button>
+            <button class="btn-action-primary" id="btn-add-speaker-trigger" onclick="openSpeakerModal(null)"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+ Add Speaker</button>
           </div>
         </div>
 
@@ -1682,7 +2179,23 @@
             <p>Track WhatsApp/Email funnel conversions and process B2B inquiries submitted from public forms.</p>
           </div>
           <div class="view-actions-area">
-            <button class="btn-action-primary" onclick="openCampaignModal()">➕ Create Campaign Blast</button>
+            <button class="btn-action-primary" onclick="openCampaignModal()"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+ Create Campaign Blast</button>
           </div>
         </div>
 
@@ -1803,7 +2316,24 @@
             <p>Inspect visitor registrations trend line, sponsors funding metrics, and export auditing sheets.</p>
           </div>
           <div class="view-actions-area">
-            <button class="btn-action-primary" onclick="triggerReportPrint()">🖨️ Print Active Report</button>
+            <button class="btn-action-primary" onclick="triggerReportPrint()"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-printer"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+  <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" />
+  <rect x="6" y="14" width="12" height="8" rx="1" />
+</svg>
+ Print Active Report</button>
             <button class="btn-action-outline" onclick="triggerReportExportCSV()">📥 Export CSV Sheets</button>
           </div>
         </div>
@@ -1813,9 +2343,66 @@
           <div class="card-panel" style="height:fit-content;">
             <div class="panel-title">Audit Reports list</div>
             <div style="display:flex; flex-direction:column; gap:6px;">
-              <button class="sidebar-menu-btn report-type-btn active" id="report-btn-visitor" onclick="switchReportTab('visitor')">👥 Visitor Attendance Report</button>
-              <button class="sidebar-menu-btn report-type-btn" id="report-btn-sponsor" onclick="switchReportTab('sponsor')">🏆 Sponsors Funding Report</button>
-              <button class="sidebar-menu-btn report-type-btn" id="report-btn-exhibitor" onclick="switchReportTab('exhibitor')">🤝 Exhibitor Allocation Audit</button>
+              <button class="sidebar-menu-btn report-type-btn active" id="report-btn-visitor" onclick="switchReportTab('visitor')"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-users"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" />
+</svg>
+ Visitor Attendance Report</button>
+              <button class="sidebar-menu-btn report-type-btn" id="report-btn-sponsor" onclick="switchReportTab('sponsor')"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-trophy"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978" />
+  <path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978" />
+  <path d="M18 9h1.5a1 1 0 0 0 0-5H18" />
+  <path d="M4 22h16" />
+  <path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z" />
+  <path d="M6 9H4.5a1 1 0 0 1 0-5H6" />
+</svg>
+ Sponsors Funding Report</button>
+              <button class="sidebar-menu-btn report-type-btn" id="report-btn-exhibitor" onclick="switchReportTab('exhibitor')"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-handshake"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m11 17 2 2a1 1 0 1 0 3-3" />
+  <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+  <path d="m21 3 1 11h-2" />
+  <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+  <path d="M3 4h8" />
+</svg>
+ Exhibitor Allocation Audit</button>
               <button class="sidebar-menu-btn report-type-btn" id="report-btn-revenue" onclick="switchReportTab('revenue')">💰 Cash Revenue Ledger</button>
               <button class="sidebar-menu-btn report-type-btn" id="report-btn-leads" onclick="switchReportTab('leads')">📈 CRM Leads Funnel progress</button>
             </div>
@@ -1883,7 +2470,22 @@
                 <textarea id="site-edit-about-text" required style="min-height:120px;" placeholder="Type main about overview..."></textarea>
               </div>
 
-              <button type="submit" class="btn-action-primary">⚡ Update Website content</button>
+              <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Update Website content</button>
             </form>
           </div>
 
@@ -1918,7 +2520,22 @@
                 </div>
               </div>
 
-              <button type="submit" class="btn-action-primary">⚡ Save Settings parameters</button>
+              <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Save Settings parameters</button>
             </form>
           </div>
         </div>
@@ -1963,7 +2580,23 @@
             <p>Create, edit, assign, and track operational tasks for expo staff teams.</p>
           </div>
           <div class="view-actions-area">
-            <button class="btn-action-primary" onclick="openAddTaskModal()">➕ Add Task</button>
+            <button class="btn-action-primary" onclick="openAddTaskModal()"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg>
+ Add Task</button>
           </div>
         </div>
         
@@ -2035,7 +2668,22 @@
                 <label>Upload Corporate Brochure (PDF)</label>
                 <input type="file" id="ex-portal-brochure-file" required style="font-size:0.75rem; width:100%; border:1px dashed var(--border-cu); padding:8px; border-radius:4px; margin-bottom:10px;">
               </div>
-              <button type="submit" class="btn-action-primary">⚡ Upload Brochure</button>
+              <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Upload Brochure</button>
             </form>
 
             <div style="margin-top:1.5rem;">
@@ -2055,8 +2703,42 @@
                 <p><strong>Total Due:</strong> <span id="ex-portal-payment-due">₹0</span></p>
               </div>
               <div style="display:flex; gap:8px;">
-                <button class="btn-action-outline" onclick="downloadExhibitorInvoice()">🖨️ Download GST Invoice</button>
-                <button class="btn-action-outline" id="ex-portal-cert-btn" disabled onclick="downloadExhibitorCert()">🎓 Print Participation Certificate</button>
+                <button class="btn-action-outline" onclick="downloadExhibitorInvoice()"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-printer"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+  <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" />
+  <rect x="6" y="14" width="12" height="8" rx="1" />
+</svg>
+ Download GST Invoice</button>
+                <button class="btn-action-outline" id="ex-portal-cert-btn" disabled onclick="downloadExhibitorCert()"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-graduation-cap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+  <path d="M22 10v6" />
+  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+</svg>
+ Print Participation Certificate</button>
               </div>
             </div>
 
@@ -2156,7 +2838,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-stall')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Save Stall Configuration</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Save Stall Configuration</button>
         </div>
       </form>
     </div>
@@ -2258,7 +2955,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-lead')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Save Lead Profile</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Save Lead Profile</button>
         </div>
       </form>
     </div>
@@ -2403,7 +3115,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-exhibitor')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Save Exhibitor</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Save Exhibitor</button>
         </div>
       </form>
     </div>
@@ -2481,7 +3208,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-payment')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Commit Transaction</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Commit Transaction</button>
         </div>
       </form>
     </div>
@@ -2561,7 +3303,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-visitor')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Save Visitor</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Save Visitor</button>
         </div>
       </form>
     </div>
@@ -2572,7 +3329,22 @@
     <div class="visitor-pass-modal-box">
       <div class="visitor-pass-top">
         <button class="modal-close-btn" style="position:absolute; top:10px; right:12px; color:#fff;" onclick="closeModal('modal-qr-pass')">&times;</button>
-        <div style="font-size:1.15rem; width:28px; height:28px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold-lt); margin: 0 auto 5px;">⚡</div>
+        <div style="font-size:1.15rem; width:28px; height:28px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold-lt); margin: 0 auto 5px;"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+</div>
         <h4 style="font-family:var(--font-display); font-size:0.85rem; font-weight:800;">IRE EXPO HYDERABAD 2026</h4>
         <span style="font-size:8px; color:var(--gold-lt); font-weight:800; text-transform:uppercase; letter-spacing:1px;">Visitor Entry Pass</span>
       </div>
@@ -2621,7 +3393,24 @@
           </tr>
         </table>
         
-        <button class="btn-action-primary" style="width:100%; justify-content:center; font-size:11px;" onclick="window.print()">🖨️ Download Pass PDF</button>
+        <button class="btn-action-primary" style="width:100%; justify-content:center; font-size:11px;" onclick="window.print()"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-printer"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+  <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" />
+  <rect x="6" y="14" width="12" height="8" rx="1" />
+</svg>
+ Download Pass PDF</button>
       </div>
     </div>
   </div>
@@ -2661,7 +3450,22 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn-action-outline" onclick="closeModal('modal-scanner')">Cancel</button>
-        <button class="btn-action-primary" onclick="submitScannerCheckIn()">⚡ Confirm Gate Check-In</button>
+        <button class="btn-action-primary" onclick="submitScannerCheckIn()"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Confirm Gate Check-In</button>
       </div>
     </div>
   </div>
@@ -2741,7 +3545,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-sponsor')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Save Sponsor</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Save Sponsor</button>
         </div>
       </form>
     </div>
@@ -2822,7 +3641,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-session')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Save Session</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Save Session</button>
         </div>
       </form>
     </div>
@@ -2867,7 +3701,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-speaker')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Save Speaker</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Save Speaker</button>
         </div>
       </form>
     </div>
@@ -2911,7 +3760,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-campaign')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Deploy Campaign</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Deploy Campaign</button>
         </div>
       </form>
     </div>
@@ -2952,7 +3816,23 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-inq-reply')">Cancel</button>
-          <button type="submit" class="btn-action-primary">✉️ Dispatch Email Reply</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-mail"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+</svg>
+ Dispatch Email Reply</button>
         </div>
       </form>
     </div>
@@ -3028,7 +3908,22 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn-action-outline" onclick="closeModal('modal-task')">Cancel</button>
-          <button type="submit" class="btn-action-primary">⚡ Save Task</button>
+          <button type="submit" class="btn-action-primary"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ Save Task</button>
         </div>
       </form>
     </div>
@@ -3044,7 +3939,24 @@
         <!-- generated certificate content -->
       </div>
       <div class="modal-footer" style="border-top:none;">
-        <button type="button" class="btn-action-primary" onclick="printCertificateElement()">🖨️ Print / Save PDF</button>
+        <button type="button" class="btn-action-primary" onclick="printCertificateElement()"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-printer"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+  <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" />
+  <rect x="6" y="14" width="12" height="8" rx="1" />
+</svg>
+ Print / Save PDF</button>
       </div>
     </div>
   </div>

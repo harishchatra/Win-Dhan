@@ -1,728 +1,291 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dhan Enterprise | Encompassing Energy Revolution</title>
-<meta name="description" content="Dhan Enterprise — India's premier renewable energy consultancy specialising in EV, Solar, BESS, Wind, and co-organiser of IRE 2026, Hyderabad.">
+<meta name="description" content="Dhan Enterprise — India's premier renewable energy consultancy. EV, Solar, BESS, Wind consulting. Co-organiser of IRE 2026, Hyderabad.">
 <meta name="keywords" content="Renewable Energy Consultancy, EV Consulting, Solar Energy India, BESS, Battery Storage, Wind Energy, IRE 2026, Hyderabad">
 <meta property="og:title" content="Dhan Enterprise | Encompassing Energy Revolution">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.win-dhan.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
-<style>
-/* ── CORPORATE LIGHT DESIGN SYSTEM ── */
-:root {
-  --green:       #1A4731;
-  --green-dk:    #0F2E1F;
-  --green-lt:    #2C6248;
-  --green-pale:  #EAF3EE;
-  --gold:        #C9943A;
-  --gold-lt:     #E8B55A;
-  --gold-pale:   #FDF5E8;
-  --black:       #111111;
-  --gray-60:     #555555;
-  --gray-40:     #888888;
-  --gray-20:     #CCCCCC;
-  --gray-10:     #EEEEEE;
-  --gray-05:     #F7F7F7;
-  --white:       #FFFFFF;
-  --border:      #E2E2E2;
-
-  --font-display: 'Playfair Display', serif;
-  --font-ui: 'Inter', sans-serif;
-}
-
-body {
-  font-family: var(--font-ui);
-  color: var(--gray-60);
-  background: var(--white);
-  margin: 0;
-  padding: 0;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  color: var(--black);
-  margin: 0;
-}
-
-/* Animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s forwards;
-}
-@keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* SECTION PATTERN */
-.section {
-  padding: 6rem 2rem;
-  background: var(--white);
-}
-.section-gray {
-  background: var(--gray-05);
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Eyebrow */
-.section-eyebrow {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: 10.5px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-}
-.section-eyebrow::before {
-  content: '';
-  width: 20px;
-  height: 1.5px;
-  background: var(--gold);
-}
-
-/* Section Title */
-.section-title {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  color: var(--black);
-  margin-bottom: 1.2rem;
-}
-.section-title span {
-  color: var(--green);
-}
-
-/* Section Rule */
-.section-rule {
-  width: 48px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--green), var(--gold));
-  margin-bottom: 1.2rem;
-}
-
-/* Section Subtitle */
-.section-sub {
-  font-family: var(--font-ui);
-  font-weight: 400;
-  font-size: 15px;
-  color: var(--gray-60);
-  max-width: 600px;
-  line-height: 1.6;
-}
-
-/* BUTTONS */
-.btn-primary, .btn-outline, .btn-ghost, .btn-gold {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.6rem;
-  font-family: var(--font-ui);
-  font-weight: 600;
-  font-size: 14px;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-.btn-primary { background: var(--green); color: var(--white); }
-.btn-primary:hover { background: var(--green-lt); }
-.btn-outline { background: transparent; border-color: var(--green); color: var(--green); }
-.btn-outline:hover { background: var(--green-pale); }
-.btn-ghost { background: transparent; color: var(--green); }
-.btn-ghost:hover { background: var(--gray-05); }
-.btn-gold { background: var(--gold); color: var(--white); }
-.btn-gold:hover { background: var(--gold-lt); }
-
-/* CARD PATTERN */
-.card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.3s;
-}
-.card:hover {
-  border-color: var(--green);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  transform: translateY(-4px);
-}
-.card-img {
-  height: 220px;
-  overflow: hidden;
-  position: relative;
-}
-.card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-.card:hover .card-img img {
-  transform: scale(1.05);
-}
-.card-body {
-  padding: 1.8rem;
-  border-top: 1px solid var(--gray-10);
-}
-.card-tag {
-  font-family: var(--font-ui);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 0.6rem;
-  letter-spacing: 1px;
-}
-.card-title {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.8rem;
-  color: var(--black);
-}
-.card-desc {
-  font-family: var(--font-ui);
-  font-size: 14px;
-  color: var(--gray-60);
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* HERO SECTION */
-.hero {
-  padding: 8rem 2rem;
-  background: var(--gray-05);
-  position: relative;
-  overflow: hidden;
-}
-.hero-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  align-items: center;
-}
-.hero-left {
-  position: relative;
-  z-index: 2;
-}
-.hero-left h1 {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(2.8rem, 4vw, 4rem);
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: var(--black);
-}
-.hero-left h1 span {
-  color: var(--green);
-}
-.hero-desc {
-  font-family: var(--font-ui);
-  font-size: 1.1rem;
-  color: var(--gray-60);
-  margin-bottom: 2.5rem;
-  line-height: 1.6;
-  max-width: 500px;
-}
-.hero-btns {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 3rem;
-}
-.trust-marks {
-  /* Container for trust marks row */
-}
-.hero-right {
-  position: relative;
-  z-index: 2;
-}
-.hero-stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-.stat-card-hero {
-  background: var(--white);
-  border: 1px solid var(--border);
-  padding: 2rem 1.5rem;
-  border-radius: 8px;
-  text-align: center;
-  transition: transform 0.3s;
-}
-.stat-card-hero:hover {
-  transform: translateY(-5px);
-  border-color: var(--gold);
-}
-.stat-card-hero .num {
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  font-weight: 900;
-  color: var(--green);
-  margin-bottom: 0.5rem;
-}
-.stat-card-hero .lbl {
-  font-family: var(--font-ui);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--gray-40);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* LAYOUT GRIDS */
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 3rem;
-}
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-
-/* IRE PREVIEW SECTION */
-.ire-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-.ire-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin: 2rem 0;
-}
-.ire-stat-item {
-  background: var(--gray-05);
-  border: 1px solid var(--gray-10);
-  padding: 1.5rem 1rem;
-  border-radius: 6px;
-  text-align: center;
-}
-.ire-stat-item .val {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--green);
-}
-.ire-stat-item .lbl {
-  font-size: 11px;
-  color: var(--gray-60);
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-top: 4px;
-}
-.ire-images {
-  position: relative;
-  height: 500px;
-}
-.ire-img-1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 80%;
-  height: 75%;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
-.ire-img-2 {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 60%;
-  height: 55%;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 4px solid var(--white);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* COUNTDOWN PATTERN */
-.countdown-panel {
-  margin-top: 1.5rem;
-  background: var(--gold-pale);
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid rgba(201, 148, 58, 0.2);
-}
-.countdown-label {
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-.countdown-boxes {
-  display: flex;
-  gap: 1rem;
-}
-.cbox {
-  background: var(--white);
-  padding: 1rem;
-  border-radius: 6px;
-  min-width: 70px;
-  text-align: center;
-  border: 1px solid var(--border);
-}
-.cbox .num {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-weight: 900;
-  color: var(--green);
-}
-.cbox .unit {
-  font-family: var(--font-ui);
-  font-size: 10px;
-  text-transform: uppercase;
-  color: var(--gray-40);
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-/* CTA BANNER */
-.cta-banner {
-  background: var(--green-dk);
-  border-radius: 8px;
-  padding: 3rem 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-  position: relative;
-  overflow: hidden;
-}
-.cta-banner::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  background: linear-gradient(45deg, rgba(201, 148, 58, 0.1), transparent);
-  pointer-events: none;
-}
-.cta-text h4 {
-  color: var(--white);
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  position: relative;
-  z-index: 2;
-}
-.cta-text p {
-  color: var(--green-pale);
-  font-family: var(--font-ui);
-  font-size: 1rem;
-  margin: 0;
-  position: relative;
-  z-index: 2;
-}
-.cta-banner .btn-gold {
-  position: relative;
-  z-index: 2;
-  white-space: nowrap;
-}
-
-@media (max-width: 900px) {
-  .hero-container, .ire-grid { grid-template-columns: 1fr; }
-  .grid-3 { grid-template-columns: 1fr 1fr; }
-  .grid-4 { grid-template-columns: 1fr 1fr; }
-  .ire-stats { grid-template-columns: 1fr 1fr; }
-  .cta-banner { flex-direction: column; text-align: center; padding: 2.5rem 1.5rem; }
-}
-
-@media (max-width: 600px) {
-  .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .hero-stats-grid { grid-template-columns: 1fr; }
-  .countdown-boxes { flex-wrap: wrap; }
-}
-</style>
 </head>
+<body data-page="index">
+
+<div id="nav-placeholder"></div>
 
 <!-- HERO -->
-<section class="hero reveal">
-  <div class="hero-container">
-    <div class="hero-left">
-      <div class="section-eyebrow">Est. 2014 · Hyderabad, India</div>
-      <h1>Encompassing<br><span>Energy Revolution</span></h1>
-      <p class="hero-desc">10+ years of renewable energy expertise — EV, Solar, BESS, Wind, and Green Hydrogen. Now co-organising IRE 2026, India's premier clean energy expo.</p>
-      <div class="hero-btns">
-        <a href="services.html" class="btn-primary">Our Services →</a>
-        <a href="ire.html" class="btn-outline">IRE 2026 Expo</a>
-      </div>
-      <div class="trust-marks"></div>
+<section class="home-hero">
+  <!-- LEFT -->
+  <div class="hero-left reveal">
+    <div class="eyebrow">Est. 2014 · Hyderabad, India</div>
+    <h1>Encompassing<br><em>Energy Revolution</em></h1>
+    <p class="hero-desc">12+ years of renewable energy expertise — EV, Solar, BESS, Wind, and Green Hydrogen. Now co-organising IRE 2026, India's premier clean energy expo.</p>
+    <div class="hero-btns">
+      <a href="services.html" class="btn-primary">Our Services →</a>
+      <a href="ire.html" class="btn-outline">IRE 2026 Expo</a>
     </div>
-    <div class="hero-right">
-      <div class="hero-stats-grid">
-        <div class="stat-card-hero">
-          <div class="num">10+</div>
-          <div class="lbl">Years Active</div>
-        </div>
-        <div class="stat-card-hero">
-          <div class="num">22</div>
-          <div class="lbl">States</div>
-        </div>
-        <div class="stat-card-hero">
-          <div class="num">120+</div>
-          <div class="lbl">Partners</div>
-        </div>
-        <div class="stat-card-hero">
-          <div class="num">500+</div>
-          <div class="lbl">IRE Delegates</div>
-        </div>
+    <div class="trust-marks">
+      <div class="trust-item"><div class="trust-check">✓</div> 22 States served</div>
+      <div class="trust-item"><div class="trust-check">✓</div> Govt. empanelled</div>
+      <div class="trust-item"><div class="trust-check">✓</div> 10 countries</div>
+    </div>
+  </div>
+  <!-- RIGHT -->
+  <div class="hero-right reveal">
+    <div class="hero-stat-grid" style="width:100%;max-width:480px;">
+      <div class="hero-stat-cell">
+        <div class="hs-num">10<sup>+</sup></div>
+        <div class="hs-lbl">Years Active</div>
+        <div class="hs-desc">Since 2014, Hyderabad</div>
+      </div>
+      <div class="hero-stat-cell">
+        <div class="hs-num">22</div>
+        <div class="hs-lbl">States</div>
+        <div class="hs-desc">Pan-India partner network</div>
+      </div>
+      <div class="hero-stat-cell">
+        <div class="hs-num">120<sup>+</sup></div>
+        <div class="hs-lbl">Partners</div>
+        <div class="hs-desc">Industry collaborations</div>
+      </div>
+      <div class="hero-stat-cell">
+        <div class="hs-num">500<sup>+</sup></div>
+        <div class="hs-lbl">IRE Delegates</div>
+        <div class="hs-desc">Expected July 2026</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES PREVIEW -->
-<section class="section reveal">
-  <div class="container">
-    <div class="section-eyebrow">What We Do</div>
-    <h2 class="section-title">Renewable Energy <span>Services</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-sub">From EV consultancy to grid-scale solar, BESS, and wind — we provide end-to-end expertise for India's clean energy transition.</p>
-    
-    <div class="grid-3">
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80" alt="Electric Vehicle Systems">
-        </div>
-        <div class="card-body">
-          <div class="card-tag">EV &amp; Hybrid</div>
-          <h3 class="card-title">Electric Vehicle Systems</h3>
-          <p class="card-desc">Comprehensive EV consulting — drivetrains, BMS, charging infrastructure, and fleet electrification.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80" alt="Solar & Energy Storage">
-        </div>
-        <div class="card-body">
-          <div class="card-tag">Solar &amp; BESS</div>
-          <h3 class="card-title">Solar &amp; Energy Storage</h3>
-          <p class="card-desc">Rooftop, ground-mount, floating solar and battery storage systems — from kW to MW scale.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&q=80" alt="Wind Energy">
-        </div>
-        <div class="card-body">
-          <div class="card-tag">Wind &amp; Hybrid</div>
-          <h3 class="card-title">Wind Energy</h3>
-          <p class="card-desc">Wind resource assessment, turbine selection, hybrid microgrid design, and O&amp;M consulting.</p>
-        </div>
-      </div>
-    </div>
-    
-    <div style="margin-top: 3rem; text-align: center;">
-      <a href="services.html" class="btn-outline">View All Services →</a>
-    </div>
-  </div>
-</section>
-
-<!-- IRE 2026 PREVIEW -->
-<section class="section section-gray reveal">
-  <div class="container">
-    <div class="ire-grid">
+<!-- SERVICES -->
+<section class="section-gray reveal">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:4rem;align-items:start;">
       <div>
-        <div class="section-eyebrow">3 &amp; 4 July 2026 · Hyderabad</div>
-        <h2 class="section-title">Indian Renewable<br>Energy <span>Expo 2026</span></h2>
+        <div class="eyebrow">What We Do</div>
+        <h2 class="section-title">Our Core <span>Services</span></h2>
         <div class="section-rule"></div>
-        <p class="section-sub">India's premier clean energy expo — 500+ delegates, 75+ stalls, government bodies, and global technology showcases. Co-organised by Dhan Enterprise &amp; Suprabha Trust.</p>
-        
-        <div class="ire-stats">
-          <div class="ire-stat-item"><div class="val">500+</div><div class="lbl">Delegates</div></div>
-          <div class="ire-stat-item"><div class="val">75+</div><div class="lbl">Stalls</div></div>
-          <div class="ire-stat-item"><div class="val">4</div><div class="lbl">Sponsor Tiers</div></div>
-          <div class="ire-stat-item"><div class="val">2</div><div class="lbl">Days</div></div>
-        </div>
-        
-        <div class="countdown-panel">
-          <div class="countdown-label">Countdown to IRE 2026</div>
-          <div class="countdown-boxes" id="countdown">
-            <div class="cbox"><div class="num" id="cd-days">--</div><div class="unit">Days</div></div>
-            <div class="cbox"><div class="num" id="cd-hrs">--</div><div class="unit">Hrs</div></div>
-            <div class="cbox"><div class="num" id="cd-min">--</div><div class="unit">Min</div></div>
-            <div class="cbox"><div class="num" id="cd-sec">--</div><div class="unit">Sec</div></div>
+        <p class="section-sub">Comprehensive renewable energy consultancy across India and 10 countries — from EV ecosystem development to solar, BESS, and wind.</p>
+        <a href="services.html" class="btn-outline" style="margin-top:1.8rem;display:inline-block;">View All Services →</a>
+      </div>
+      <div class="joined-grid">
+        <div class="joined-grid-inner cols-3">
+          <div class="service-card">
+            <div class="tag-pill">EV &amp; Hybrid</div>
+            <div class="card-icon"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+</div>
+            <h3>Electric Vehicle Systems</h3>
+            <p>OEM strategy, dealer network development, fleet electrification, and EV ecosystem advisory for automotive brands across India.</p>
+            <div class="card-arrow">→</div>
+          </div>
+          <div class="service-card">
+            <div class="tag-pill">Solar &amp; BESS</div>
+            <div class="card-icon"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+</div>
+            <h3>Solar &amp; Energy Storage</h3>
+            <p>Rooftop, ground-mount, and agri-solar development — from feasibility studies to EPC and battery energy storage integration.</p>
+            <div class="card-arrow">→</div>
+          </div>
+          <div class="service-card">
+            <div class="tag-pill">Wind &amp; Hybrid</div>
+            <div class="card-icon">🌬</div>
+            <h3>Wind Energy</h3>
+            <p>Wind resource assessment, turbine selection, project development, and hybrid wind-solar-storage integration for maximum yield.</p>
+            <div class="card-arrow">→</div>
           </div>
         </div>
-        
-        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="ire.html" class="btn-primary">Explore IRE 2026 →</a>
-          <a href="stalls-booking/index.html" class="btn-outline">Book a Stall</a>
-        </div>
-      </div>
-      
-      <div class="ire-images">
-        <img class="ire-img-1" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Renewable energy expo hall">
-        <img class="ire-img-2" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80" alt="Expo stalls">
       </div>
     </div>
   </div>
 </section>
 
-<!-- SECTORS GRID -->
-<section class="section reveal">
+<!-- IRE 2026 -->
+<section class="section-white reveal">
   <div class="container">
-    <div class="section-eyebrow">Sectors We Serve</div>
-    <h2 class="section-title">Clean Energy <span>Sectors</span></h2>
-    <div class="section-rule"></div>
-    
-    <div class="grid-4">
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&q=80" alt="Electric Vehicles">
+    <div class="ire-two-col">
+      <!-- LEFT -->
+      <div>
+        <div class="eyebrow">Flagship Event</div>
+        <h2 class="section-title">Indian Renewable<br><span>Energy Expo 2026</span></h2>
+        <div class="section-rule"></div>
+        <p class="section-sub" style="margin-bottom:1.5rem;">IRE 2026 is Telangana's premier renewable energy and EV exposition — connecting manufacturers, distributors, government, investors, and innovators for two transformative days.</p>
+        <p style="font-family:'Inter',sans-serif;font-size:13.5px;color:var(--gray-60);margin-bottom:1.8rem;">
+          <!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-calendar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+</svg>
+ <strong style="color:var(--black);">3–4 July 2026</strong> &nbsp;·&nbsp;
+          <!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+ <strong style="color:var(--black);">HMDA Grounds, Necklace Road, Hyderabad</strong>
+        </p>
+        <!-- 2×2 stat grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1.8rem;">
+          <div class="stat-card"><div class="stat-val">85</div><div class="stat-lbl">Exhibitor Stalls</div></div>
+          <div class="stat-card"><div class="stat-val">5</div><div class="stat-lbl">Exhibition Blocks</div></div>
+          <div class="stat-card"><div class="stat-val">500<sup style="font-size:1rem;color:var(--gold);">+</sup></div><div class="stat-lbl">Expected Delegates</div></div>
+          <div class="stat-card"><div class="stat-val">4</div><div class="stat-lbl">Sponsor Tiers</div></div>
         </div>
-        <div class="card-body">
-          <h4 class="card-title">Electric Vehicles</h4>
-          <p class="card-desc">Two-wheelers, three-wheelers, buses, commercial fleets — full EV ecosystem.</p>
+        <!-- Countdown -->
+        <div class="countdown-wrap" style="margin-bottom:1.8rem;">
+          <div class="countdown-label">Event Countdown</div>
+          <div class="countdown-boxes">
+            <div class="cbox"><span class="cnum" id="cd-days">--</span><span class="cunit">Days</span></div>
+            <div class="cbox"><span class="cnum" id="cd-hrs">--</span><span class="cunit">Hours</span></div>
+            <div class="cbox"><span class="cnum" id="cd-min">--</span><span class="cunit">Mins</span></div>
+            <div class="cbox"><span class="cnum" id="cd-sec">--</span><span class="cunit">Secs</span></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="stalls-booking/index.html" class="btn-primary">Book a Stall →</a>
+          <a href="ire.html#sponsorship" class="btn-outline">Sponsorship Tiers</a>
         </div>
       </div>
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80" alt="Solar Energy">
-        </div>
-        <div class="card-body">
-          <h4 class="card-title">Solar Energy</h4>
-          <p class="card-desc">Rooftop, utility-scale, floating, and agri-solar across India.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&q=80" alt="BESS & Storage">
-        </div>
-        <div class="card-body">
-          <h4 class="card-title">BESS &amp; Storage</h4>
-          <p class="card-desc">Lithium-ion, flow battery, and containerised energy storage solutions.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1548337138-e87d889cc369?w=600&q=80" alt="Wind Energy">
-        </div>
-        <div class="card-body">
-          <h4 class="card-title">Wind Energy</h4>
-          <p class="card-desc">Onshore wind, low-wind turbines, and hybrid wind-solar microgrids.</p>
+      <!-- RIGHT image stack -->
+      <div class="ire-image-stack">
+        <img loading="lazy" decoding="async" class="ire-img-1" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80" alt="IRE 2026 expo hall">
+        <img loading="lazy" decoding="async" class="ire-img-2" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80" alt="Solar energy display">
+        <div class="ire-badge-circle">
+          <div class="ib-num">IRE</div>
+          <div class="ib-lbl">2026</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA STRIP -->
-<section class="section reveal">
-  <div class="container">
-    <div class="cta-banner">
-      <div class="cta-text">
-        <h4>Ready to power your renewable energy journey?</h4>
-        <p>Talk to our team about EV consulting, solar projects, BESS, or IRE 2026 stall bookings.</p>
+<!-- SECTORS -->
+<section class="section-gray reveal">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="eyebrow" style="justify-content:center;">Energy Domains</div>
+      <h2 class="section-title">Sectors We <span>Serve</span></h2>
+      <div class="section-rule" style="margin:0 auto 0;"></div>
+    </div>
+    <div class="joined-grid">
+      <div class="joined-grid-inner cols-4">
+        <div class="sector-card">
+          <div class="sector-img">
+            <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="Electric Vehicles">
+          </div>
+          <div class="sector-body">
+            <h4>Electric Vehicles</h4>
+            <p>Two-wheelers, three-wheelers, cars, buses — complete EV ecosystem advisory.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-img">
+            <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&q=80" alt="Solar Energy">
+          </div>
+          <div class="sector-body">
+            <h4>Solar PV &amp; Thermal</h4>
+            <p>Rooftop, ground-mount, floating solar and agri-PV projects across all segments.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-img">
+            <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=500&q=80" alt="BESS">
+          </div>
+          <div class="sector-body">
+            <h4>BESS &amp; Storage</h4>
+            <p>Lithium-ion and flow battery systems for commercial and utility-scale energy management.</p>
+          </div>
+        </div>
+        <div class="sector-card">
+          <div class="sector-img">
+            <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=500&q=80" alt="Wind Energy">
+          </div>
+          <div class="sector-body">
+            <h4>Wind Energy</h4>
+            <p>Onshore wind development, turbine sourcing, and hybrid wind-solar solutions.</p>
+          </div>
+        </div>
       </div>
-      <a href="contact.html" class="btn-gold">Get In Touch →</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="name">Dhan Enterprise</div>
-      <div class="sub">Encompassing Energy Revolution</div>
-      <p>India's trusted renewable energy consultancy — EV, Solar, BESS, Wind, and co-organiser of IRE 2026, Hyderabad.</p>
-      <div style="font-size:12px;color:rgba(255,255,255,0.35);">WIN Dhan Enterprise · Est. 2014 · Hyderabad</div>
+<!-- CTA BANNER -->
+<div class="cta-banner reveal">
+  <div class="cta-banner-inner">
+    <div>
+      <h4>Ready to power your renewable energy journey?</h4>
+      <p>Partner with Dhan Enterprise — 10+ years of expertise connecting India's clean energy ecosystem across 22 states and 10 countries.</p>
     </div>
-    <div class="footer-col">
-      <h5>Company</h5>
-      <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="trade.html">Global Network</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>IRE 2026</h5>
-      <ul>
-        <li><a href="ire.html">About the Expo</a></li>
-        <li><a href="stalls-booking/index.html">Book a Stall</a></li>
-        <li><a href="ire.html#sponsors">Sponsorship</a></li>
-        <li><a href="ire.html#floor-plan">Floor Plan</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Contact</h5>
-      <ul>
-        <li><a href="tel:+917981869954">+91 79818 69954</a></li>
-        <li><a href="mailto:ireexpo2026@gmail.com">ireexpo2026@gmail.com</a></li>
-        <li><a href="https://www.win-dhan.com">www.win-dhan.com</a></li>
-        <li style="color:rgba(255,255,255,0.3);font-size:12px;margin-top:6px;">HMDA Grounds, Necklace Road,<br>Hyderabad, Telangana</li>
-      </ul>
-    </div>
+    <a href="contact.html" class="btn-gold">Get In Touch →</a>
   </div>
-  <div class="footer-bottom">
-    <span>© 2026 WIN Dhan Enterprise. All rights reserved.</span>
-    <span>Co-organised with <a href="https://www.suprabha-trust.in" target="_blank">Suprabha Trust</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy</a></span>
-  </div>
-</footer>
+</div>
 
-<!-- ══════════ SCRIPTS ══════════ -->
+<div id="footer-placeholder"></div>
 <script src="js/script.js"></script>
-<script>
-/* Countdown */
-function startCountdown(containerId) {
-  var target = new Date('2026-07-03T09:00:00+05:30').getTime();
-  function tick() {
-    var now = Date.now();
-    var diff = target - now;
-    if (diff <= 0) {
-      document.getElementById('cd-days').textContent = '0';
-      document.getElementById('cd-hrs').textContent = '0';
-      document.getElementById('cd-min').textContent = '0';
-      document.getElementById('cd-sec').textContent = '0';
-      return;
-    }
-    document.getElementById('cd-days').textContent = Math.floor(diff / 86400000);
-    document.getElementById('cd-hrs').textContent  = Math.floor((diff % 86400000) / 3600000);
-    document.getElementById('cd-min').textContent  = Math.floor((diff % 3600000)  / 60000);
-    document.getElementById('cd-sec').textContent  = Math.floor((diff % 60000)    / 1000);
-  }
-  tick();
-  setInterval(tick, 1000);
-}
-startCountdown('countdown');
-
-/* Scroll reveal */
-(function() {
-  var els = document.querySelectorAll('.reveal');
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  els.forEach(function(el) { io.observe(el); });
-})();
-</script>
-
 </body>
 </html>

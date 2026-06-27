@@ -4,8 +4,10 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const db = require('./database');
+const Razorpay = require('razorpay');
 require('dotenv').config();
 
 const app = express();
@@ -988,6 +990,64 @@ app.use((err, req, res, next) => {
 
 // ──────────────── START THE SERVER ────────────────
 
+// ──────────────── RAZORPAY INTEGRATION ────────────────
+
+const razorpayInstance = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
+app.get('/api/config/razorpay', (req, res) => {
+  res.json({ key_id: process.env.RAZORPAY_KEY_ID });
+});
+
+app.post('/api/create-order', async (req, res) => {
+  try {
+    const { amount, currency = 'INR', receipt } = req.body;
+    if (!amount || amount < 100) {
+      return res.status(400).json({ error: 'Amount must be at least 100 paise.' });
+    }
+    const options = {
+      amount: parseInt(amount, 10),
+      currency,
+      receipt
+    };
+    const order = await razorpayInstance.orders.create(options);
+    res.json({
+      order_id: order.id,
+      amount: order.amount,
+      currency: order.currency
+    });
+  } catch (error) {
+    console.error('Razorpay Error:', error);
+    if (error.statusCode === 401) return res.status(401).json({ error: 'Authentication failed with Razorpay.' });
+    res.status(500).json({ error: 'Failed to create order.' });
+  }
+});
+
+app.post('/api/verify-payment', (req, res) => {
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature, bookingData } = req.body;
+  if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+    return res.status(400).json({ error: 'Missing required Razorpay fields.' });
+  }
+  
+  const body = razorpay_order_id + '|' + razorpay_payment_id;
+  const expectedSignature = crypto
+    .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+    .update(body.toString())
+    .digest('hex');
+
+  if (expectedSignature === razorpay_signature) {
+    // Payment verified successfully.
+    // Insert/update in database as needed:
+    // db.run(`INSERT INTO payments (order_id, payment_id, status) VALUES (?, ?, ?)`, [razorpay_order_id, razorpay_payment_id, 'PAID']);
+    res.json({ success: true, message: 'Payment verified successfully.' });
+  } else {
+    res.status(400).json({ error: 'Signature mismatch. Payment verification failed.' });
+  }
+});
+
+// START SERVER
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

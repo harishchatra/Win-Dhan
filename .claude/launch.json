@@ -2,9 +2,15 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "Static Site (Claude Preview)",
-      "runtimeExecutable": "preview",
-      "runtimeArgs": ["C:\\DhanWin Website\\index.html"],
+      "name": "IRE Expo Platform (production)",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js"],
+      "port": 3000
+    },
+    {
+      "name": "IRE Expo Platform (dev / nodemon)",
+      "runtimeExecutable": "nodemon",
+      "runtimeArgs": ["server.js"],
       "port": 3000
     }
   ]

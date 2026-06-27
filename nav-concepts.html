@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhan Enterprise — Navbar Concepts v2 (All Links Visible)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1A4731; --green-dk:#0F2E1F; --green-lt:#2C6248; --green-pale:#EAF3EE;
+  --gold:#C9943A; --gold-lt:#E8B55A; --gold-pale:#FDF5E8;
+  --black:#111; --gray-60:#555; --gray-40:#888; --gray-20:#CCC; --gray-10:#EEE; --gray-05:#F7F7F7;
+  --white:#fff; --border:#E2E2E2;
+  --r-sm:4px; --r:8px; --r-lg:12px;
+  --sh-sm:0 1px 4px rgba(0,0,0,.06); --sh-md:0 4px 16px rgba(0,0,0,.10); --sh-lg:0 12px 40px rgba(0,0,0,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;color:var(--black);background:#eceff0;line-height:1.6}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.page-head{padding:48px 0 8px;text-align:center}
+.page-head .kick{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.page-head h1{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;letter-spacing:-.02em}
+.page-head p{max-width:640px;margin:12px auto 0;color:var(--gray-60);font-size:15px}
+.note{display:inline-block;margin-top:14px;background:var(--gold-pale);color:#7a5a1e;border:1px solid #ecd7a8;border-radius:20px;padding:6px 16px;font-size:12px;font-weight:600}
+
+.concept{margin:52px 0}
+.concept-head{display:flex;align-items:baseline;gap:14px;margin:0 0 16px;flex-wrap:wrap}
+.concept-head .num{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--gold)}
+.concept-head h2{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.concept-head .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);background:var(--green-pale);padding:3px 10px;border-radius:20px}
+.concept-head .desc{flex:1 1 100%;color:var(--gray-60);font-size:13.5px;margin-top:2px}
+.stage{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-md);overflow:hidden}
+.canvas{height:150px;background:radial-gradient(700px 200px at 75% -60%, var(--green-pale), transparent),var(--gray-05);display:flex;align-items:center;justify-content:center;color:var(--gray-40);font-size:12.5px}
+
+/* shared bits */
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-mark{width:38px;height:38px;background:var(--green);border-radius:var(--r-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;flex-shrink:0}
+.logo-mark .lm-win{color:var(--gold);font-weight:800;font-size:8px;letter-spacing:1.4px}
+.logo-mark .lm-de{color:#fff;font-weight:800;font-size:11.5px}
+.logo-name{font-size:14px;font-weight:700;line-height:1.2}
+.logo-tag{font-size:8.5px;font-weight:600;color:var(--gray-40);letter-spacing:.07em;text-transform:uppercase}
+.live{background:#dc2626;color:#fff;font-size:8px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:20px;padding:2px 6px;display:inline-flex;align-items:center;gap:4px;vertical-align:middle}
+.live::before{content:'';width:4px;height:4px;background:#fff;border-radius:50%;animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.btn-primary{background:var(--green);color:#fff;padding:8px 16px;font-size:12.5px;font-weight:600;border-radius:var(--r-sm);white-space:nowrap;transition:.18s}
+.btn-primary:hover{background:var(--green-lt)}
+.btn-ghost{color:var(--green);padding:7px 13px;font-size:12.5px;font-weight:600;border-radius:var(--r-sm);border:1.5px solid var(--green);white-space:nowrap}
+.btn-ghost:hover{background:var(--green-pale)}
+
+/* ════ A · TWO-ROW FLAT ════ */
+.a-row1{display:flex;align-items:center;gap:18px;padding:0 24px;height:62px}
+.a-main{display:flex;align-items:center;gap:2px;margin-left:6px}
+.a-main a{font-size:13.5px;font-weight:500;color:var(--gray-60);padding:8px 13px;border-radius:var(--r-sm);position:relative}
+.a-main a:hover{color:var(--green);background:var(--green-pale)}
+.a-main a.on{color:var(--green);font-weight:600}
+.a-main a.on::after{content:'';position:absolute;left:13px;right:13px;bottom:-1px;height:2px;background:var(--green);border-radius:2px}
+.a-spacer{flex:1}
+.a-ctas{display:flex;align-items:center;gap:9px}
+.a-row2{display:flex;align-items:center;gap:6px;padding:9px 24px;background:var(--gray-05);border-top:1px solid var(--border);font-size:12px}
+.a-row2 .lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray-40);margin-right:6px}
+.a-row2 a{color:var(--gray-60);padding:3px 9px;border-radius:20px}
+.a-row2 a:hover{background:var(--green-pale);color:var(--green)}
+.a-row2 .sep{width:1px;height:13px;background:var(--gray-20);margin:0 4px}
+
+/* ════ B · ONE-ROW GROUPED ════ */
+.b-bar{display:flex;align-items:center;gap:14px;padding:0 22px;height:64px}
+.b-nav{display:flex;align-items:center;gap:0;margin-left:6px;flex-wrap:wrap}
+.b-grp{display:flex;align-items:center}
+.b-nav a{font-size:12.5px;font-weight:500;color:var(--gray-60);padding:6px 10px;border-radius:var(--r-sm)}
+.b-nav a:hover{color:var(--green);background:var(--green-pale)}
+.b-nav a.lead{font-weight:700;color:var(--black)}
+.b-nav a.on{color:var(--green);font-weight:700}
+.b-div{width:1px;height:22px;background:var(--border);margin:0 10px}
+.b-spacer{flex:1}
+
+/* ════ C · PILL BAR ════ */
+.c-bar{display:flex;align-items:center;gap:14px;padding:14px 22px;flex-wrap:wrap}
+.c-pills{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-left:6px}
+.c-pills a{font-size:12.5px;font-weight:500;color:var(--gray-60);padding:7px 14px;border-radius:50px;border:1px solid var(--border);background:#fff;transition:.15s;display:inline-flex;align-items:center;gap:5px}
+.c-pills a:hover{border-color:var(--green);color:var(--green);background:var(--green-pale)}
+.c-pills a.on{background:var(--green);border-color:var(--green);color:#fff}
+.c-pills a.gold{border-color:var(--gold);color:#8a6a25;background:var(--gold-pale)}
+.c-spacer{flex:1}
+
+/* ════ D · CENTERED STACK ════ */
+.d-top{display:flex;flex-direction:column;align-items:center;padding:18px 22px 14px;gap:12px}
+.d-brand{display:flex;flex-direction:column;align-items:center;gap:6px}
+.d-brand .logo-mark{width:42px;height:42px}
+.d-brand .nm{font-family:'Playfair Display',serif;font-size:18px;font-weight:900}
+.d-brand .tg{font-size:8.5px;font-weight:600;color:var(--gray-40);letter-spacing:.12em;text-transform:uppercase}
+.d-links{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap}
+.d-links a{font-size:13px;font-weight:500;color:var(--gray-60);padding:7px 14px;border-radius:var(--r-sm)}
+.d-links a:hover{color:var(--green);background:var(--green-pale)}
+.d-links a.on{color:var(--green);font-weight:600}
+.d-links .dot{width:3px;height:3px;border-radius:50%;background:var(--gray-20)}
+.d-cta{display:flex;justify-content:center;gap:9px;padding:0 22px 16px}
+
+.cmp{margin:58px 0 30px;background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.cmp table{width:100%;border-collapse:collapse;font-size:13px}
+.cmp th,.cmp td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--gray-10)}
+.cmp th{background:var(--green-dk);color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.cmp tr:last-child td{border-bottom:none}
+.cmp td:first-child{font-weight:700;color:var(--green)}
+.foot{text-align:center;color:var(--gray-40);font-size:12px;padding:28px 0 50px}
+@media(max-width:820px){.a-main,.b-nav{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="page-head">
+    <div class="kick">Dhan Enterprise · Navigation Studies v2</div>
+    <h1>All Links Visible — Clean Layouts</h1>
+    <p>Every link sir wants is shown directly on the bar — <b>no dropdowns hiding anything</b>. Each concept keeps it tidy a different way: a second row, quiet separators, soft pills, or a centred stack.</p>
+    <div class="note">⚠️ Preview only — not wired into the live website.</div>
+  </div>
+
+  <!-- A -->
+  <section class="concept">
+    <div class="concept-head"><span class="num">A</span><h2>Two-Row Flat</h2><span class="tag">Cleanest for many links</span>
+      <p class="desc">Main sections on the top row; all the deeper links sit on a quiet second strip. Nothing hidden, nothing cramped — the calmest way to show everything.</p></div>
+    <div class="stage">
+      <div class="a-row1">
+        <a class="logo" href="#"><div class="logo-mark"><span class="lm-win">WIN</span><span class="lm-de">DE</span></div><div><div class="logo-name">Dhan Enterprise</div><div class="logo-tag">Encompassing Energy Revolution</div></div></a>
+        <nav class="a-main">
+          <a class="on" href="#">Home</a><a href="#">About</a><a href="#">Services</a>
+          <a href="#"><span class="live">LIVE</span>&nbsp;IRE 2026</a><a href="#">Trade</a><a href="#">Contact</a>
+        </nav>
+        <div class="a-spacer"></div>
+        <div class="a-ctas"><a class="btn-ghost" href="#">Register</a><a class="btn-primary" href="#">Book a Stall →</a></div>
+      </div>
+      <div class="a-row2">
+        <span class="lbl">More</span>
+        <a href="#">Our Team</a><a href="#">Global Network</a><span class="sep"></span>
+        <a href="#">Book a Stall</a><a href="#">Sponsorship</a><a href="#">Floor Plan</a><span class="sep"></span>
+        <a href="#">Brand Data Bank</a><a href="#">Partner Network</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- B -->
+  <section class="concept">
+    <div class="concept-head"><span class="num">B</span><h2>One-Row Grouped</h2><span class="tag">Compact, all in a line</span>
+      <p class="desc">Absolutely everything on a single row, organised into clusters with thin separators. Densest option — fits all links without a second row, still readable.</p></div>
+    <div class="stage">
+      <div class="b-bar">
+        <a class="logo" href="#"><div class="logo-mark"><span class="lm-win">WIN</span><span class="lm-de">DE</span></div></a>
+        <nav class="b-nav">
+          <a class="lead on" href="#">Home</a>
+          <span class="b-div"></span>
+          <a class="lead" href="#">About</a><a href="#">Team</a><a href="#">Network</a>
+          <span class="b-div"></span>
+          <a class="lead" href="#">Services</a>
+          <span class="b-div"></span>
+          <a class="lead" href="#"><span class="live">LIVE</span>&nbsp;IRE</a><a href="#">Stall</a><a href="#">Sponsor</a><a href="#">Floor Plan</a>
+          <span class="b-div"></span>
+          <a class="lead" href="#">Trade</a><a href="#">Brand Bank</a><a href="#">Partners</a>
+          <span class="b-div"></span>
+          <a class="lead" href="#">Contact</a>
+        </nav>
+        <div class="b-spacer"></div>
+        <a class="btn-primary" href="#">Book a Stall →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- C -->
+  <section class="concept">
+    <div class="concept-head"><span class="num">C</span><h2>Soft Pill Bar</h2><span class="tag">Friendly & modern</span>
+      <p class="desc">Each link is a soft pill. They wrap neatly on smaller screens, so adding more links never breaks the layout. Active page filled green; the expo CTA tinted gold.</p></div>
+    <div class="stage">
+      <div class="c-bar">
+        <a class="logo" href="#"><div class="logo-mark"><span class="lm-win">WIN</span><span class="lm-de">DE</span></div><div><div class="logo-name">Dhan Enterprise</div><div class="logo-tag">Energy Revolution</div></div></a>
+        <nav class="c-pills">
+          <a class="on" href="#">Home</a><a href="#">About</a><a href="#">Our Team</a><a href="#">Global Network</a>
+          <a href="#">Services</a><a class="gold" href="#"><span class="live">LIVE</span>&nbsp;IRE 2026</a><a href="#">Sponsorship</a>
+          <a href="#">Floor Plan</a><a href="#">Trade</a><a href="#">Partner Network</a><a href="#">Contact</a>
+        </nav>
+        <div class="c-spacer"></div>
+        <a class="btn-primary" href="#">Book a Stall →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- D -->
+  <section class="concept">
+    <div class="concept-head"><span class="num">D</span><h2>Centred Stack</h2><span class="tag">Balanced & premium</span>
+      <p class="desc">Brand on top, all links centred in one clean line below, CTAs beneath. Symmetrical and airy — feels upscale while still showing every link openly.</p></div>
+    <div class="stage">
+      <div class="d-top">
+        <a class="d-brand" href="#"><div class="logo-mark"><span class="lm-win">WIN</span><span class="lm-de">DE</span></div><div class="nm">Dhan Enterprise</div><div class="tg">Encompassing Energy Revolution</div></a>
+        <nav class="d-links">
+          <a class="on" href="#">Home</a><span class="dot"></span><a href="#">About</a><a href="#">Our Team</a><a href="#">Global Network</a>
+          <span class="dot"></span><a href="#">Services</a><span class="dot"></span>
+          <a href="#"><span class="live">LIVE</span>&nbsp;IRE 2026</a><a href="#">Sponsorship</a><a href="#">Floor Plan</a>
+          <span class="dot"></span><a href="#">Trade</a><a href="#">Partner Network</a><span class="dot"></span><a href="#">Contact</a>
+        </nav>
+      </div>
+      <div class="d-cta"><a class="btn-ghost" href="#">Register</a><a class="btn-primary" href="#">Book a Stall →</a></div>
+    </div>
+  </section>
+
+  <div class="cmp">
+    <table>
+      <tr><th>Concept</th><th>How it stays clean</th><th>Feel</th><th>Room to add more links</th></tr>
+      <tr><td>A · Two-Row Flat</td><td>Deep links drop to a quiet 2nd strip</td><td>Calm, organised</td><td>★★★★★</td></tr>
+      <tr><td>B · One-Row Grouped</td><td>Clusters + thin separators</td><td>Compact, businesslike</td><td>★★★</td></tr>
+      <tr><td>C · Soft Pill Bar</td><td>Pills wrap to next line</td><td>Friendly, modern</td><td>★★★★★</td></tr>
+      <tr><td>D · Centred Stack</td><td>Brand & links on separate lines</td><td>Premium, airy</td><td>★★★★</td></tr>
+    </table>
+  </div>
+  <p class="foot">Preview file · not linked to the live site · safe to delete · Dhan Enterprise brand colours & fonts</p>
+</div>
+</body>
+</html>

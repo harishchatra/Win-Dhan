@@ -229,7 +229,23 @@ function renderAuditLogs() {
   
   container.innerHTML = logs.map(log => `
     <div class="activity-item">
-      <div class="activity-icon">⚙️</div>
+      <div class="activity-icon"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-settings"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+</div>
       <div class="activity-details">
         <div class="activity-msg">${log.message}</div>
         <div class="activity-time">${log.time}</div>
@@ -1618,9 +1634,42 @@ function renderCampaignsList() {
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
           <div>
             <h5 style="font-weight:800; font-size:0.84rem; color:var(--text);">${c.name}</h5>
-            <span style="font-size:0.62rem; color:var(--text-muted); font-weight:700;">📅 Launch: ${c.launch_date} | Channel: <strong>${c.type}</strong></span>
+            <span style="font-size:0.62rem; color:var(--text-muted); font-weight:700;"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-calendar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+</svg>
+ Launch: ${c.launch_date} | Channel: <strong>${c.type}</strong></span>
           </div>
-          <span class="tag-pill" style="font-size:8px; font-weight:700; background:rgba(46,125,50,0.08); color:var(--status-available);">⚡ ${c.leads_generated} Leads</span>
+          <span class="tag-pill" style="font-size:8px; font-weight:700; background:rgba(46,125,50,0.08); color:var(--status-available);"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ ${c.leads_generated} Leads</span>
         </div>
         
         <p style="font-size:0.7rem; color:var(--text-dim); margin-bottom:10px;">Target: ${c.audience}</p>
@@ -1706,7 +1755,23 @@ function renderInquiriesTable() {
     const renderActions = activeRole === 'sales_executive' ? `
       <span style="font-size:0.65rem; color:var(--text-muted); font-style:italic;">Read-only</span>
     ` : `
-      <button class="btn-table-icon" style="color:var(--copper);" onclick="openInquiryReplyModal('${inq.id}')" title="Reply Email / Assign User">✉️ Reply</button>
+      <button class="btn-table-icon" style="color:var(--copper);" onclick="openInquiryReplyModal('${inq.id}')" title="Reply Email / Assign User"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-mail"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+</svg>
+ Reply</button>
       <button class="btn-table-icon danger" onclick="archiveInquiryRecord('${inq.id}')" title="Archive / Delete">🗑️ Archive</button>
     `;
 
@@ -1760,7 +1825,23 @@ function submitInquiryReply(e) {
     logActivity(`Inquiry reply drafted to <strong>${db.inquiries[idx].company}</strong>. Assigned owner: <strong>${inOwner}</strong>.`);
     closeModal('modal-inq-reply');
     renderInquiriesTable();
-    showToast('✉️ Reply dispatched & Status Resolved.');
+    showToast('<!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-mail"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+</svg>
+ Reply dispatched & Status Resolved.');
   }
 }
 
@@ -2154,7 +2235,23 @@ async function savePublicRegSettings(e) {
     });
     if (res.ok) {
       logActivity(`Public registration settings modified.`);
-      showToast('⚙️ Public settings saved.');
+      showToast('<!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-settings"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+ Public settings saved.');
       await syncRamData();
     } else {
       showToast('❌ Failed to save settings');
@@ -2420,7 +2517,23 @@ function renderStallsTable() {
     let statusClass = s.status;
     let actionsHtml = `
       <div style="display:flex; gap:4px; justify-content:center;">
-        <button class="btn-action-outline" style="font-size:10px; padding:2px 6px;" onclick="inspectStall('${s.id}')">🔍 Inspect</button>
+        <button class="btn-action-outline" style="font-size:10px; padding:2px 6px;" onclick="inspectStall('${s.id}')"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg>
+ Inspect</button>
     `;
     if (activeRole === 'super_admin' || activeRole === 'admin' || activeRole === 'finance_manager') {
       if (s.status === 'under_review' || s.status === 'submitted' || s.status === 'payment_pending') {
@@ -2652,7 +2765,26 @@ function inspectStallDetails(sId) {
       if (s.status === 'available') {
         actionsHtml += `
           <button class="btn-action-primary" style="font-size:11px; padding:6px 12px;" onclick="changeStallStatus('${s.id}', 'reserved')">🔒 Reserve Stall</button>
-          <button class="btn-action-outline" style="font-size:11px; padding:6px 12px;" onclick="openAssignCompanyModal('${s.id}')">🤝 Sell / Assign</button>
+          <button class="btn-action-outline" style="font-size:11px; padding:6px 12px;" onclick="openAssignCompanyModal('${s.id}')"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-handshake"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m11 17 2 2a1 1 0 1 0 3-3" />
+  <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+  <path d="m21 3 1 11h-2" />
+  <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+  <path d="M3 4h8" />
+</svg>
+ Sell / Assign</button>
         `;
       } else if (s.status === 'reserved') {
         actionsHtml += `
@@ -2817,14 +2949,68 @@ function renderLeadsTable() {
     if (!l.lead_score) {
       l.lead_score = calculateLeadScore(l);
     }
-    let scoreEmoji = l.lead_score === 'Hot' ? '🔥' : l.lead_score === 'Warm' ? '☀️' : '❄️';
+    let scoreEmoji = l.lead_score === 'Hot' ? '🔥' : l.lead_score === 'Warm' ? '<!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+' : '❄️';
 
     return `
       <tr>
         <td><strong>${l.company}</strong> <span style="font-size:11px;" title="${l.lead_score} Lead">${scoreEmoji}</span></td>
         <td><span class="category-badge">${l.segment}</span></td>
         <td>${l.contact_person}</td>
-        <td><span style="font-size:10px;">📞 ${l.phone}<br>✉️ ${l.email}</span></td>
+        <td><span style="font-size:10px;"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-phone"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+</svg>
+ ${l.phone}<br><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-mail"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+</svg>
+ ${l.email}</span></td>
         <td>${l.city}, ${l.state}</td>
         <td>${l.assigned_to}</td>
         <td>${l.source}</td>
@@ -3134,8 +3320,88 @@ function renderExhibitorsTable() {
       <tr>
         <td><strong>${e.company}</strong></td>
         <td><span style="font-family:monospace; font-size:10px;">${e.gstin}</span></td>
-        <td><span style="font-size:10px;">👤 ${e.contact_person}<br>📞 ${e.phone}<br>✉️ ${e.email}</span></td>
-        <td><span style="font-size:10px;">📍 ${e.address}<br>🌐 <a href="${e.website}" target="_blank" style="color:var(--copper);">${e.website}</a></span></td>
+        <td><span style="font-size:10px;"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-user"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" />
+</svg>
+ ${e.contact_person}<br><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-phone"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+</svg>
+ ${e.phone}<br><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-mail"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+</svg>
+ ${e.email}</span></td>
+        <td><span style="font-size:10px;"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+ ${e.address}<br><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-globe"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+  <path d="M2 12h20" />
+</svg>
+ <a href="${e.website}" target="_blank" style="color:var(--copper);">${e.website}</a></span></td>
         <td><span class="category-badge">${e.category}</span></td>
         <td><span style="color:var(--copper); font-weight:700;">Stall ${e.assigned_stall}</span></td>
         <td>${docsText}</td>
@@ -3431,9 +3697,42 @@ function renderPaymentsTable() {
       <div style="display:flex; gap:4px; justify-content:center;">
     `;
     if (p.pending > 0 && (activeRole === 'super_admin' || activeRole === 'admin' || activeRole === 'finance_manager')) {
-      actionsHtml += `<button class="btn-action-primary" style="font-size:10px; padding:2px 6px;" onclick="openPaymentModal('${p.id}')">💳 Record Pay</button>`;
+      actionsHtml += `<button class="btn-action-primary" style="font-size:10px; padding:2px 6px;" onclick="openPaymentModal('${p.id}')"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-credit-card"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="20" height="14" x="2" y="5" rx="2" />
+  <line x1="2" x2="22" y1="10" y2="10" />
+</svg>
+ Record Pay</button>`;
     }
-    actionsHtml += `<button class="btn-action-outline" style="font-size:10px; padding:2px 6px;" onclick="printInvoice('${p.id}')">🖨️ Invoice</button>`;
+    actionsHtml += `<button class="btn-action-outline" style="font-size:10px; padding:2px 6px;" onclick="printInvoice('${p.id}')"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-printer"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+  <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" />
+  <rect x="6" y="14" width="12" height="8" rx="1" />
+</svg>
+ Invoice</button>`;
     actionsHtml += `</div>`;
 
     return `
@@ -3524,7 +3823,23 @@ function submitPaymentTransaction(e) {
     commitLocalDatabase(DB_PAYMENTS, db.payments);
     closeModal('modal-payment');
     renderPaymentsTable();
-    showToast('💳 Payment registered successfully.');
+    showToast('<!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-credit-card"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="20" height="14" x="2" y="5" rx="2" />
+  <line x1="2" x2="22" y1="10" y2="10" />
+</svg>
+ Payment registered successfully.');
   }
 }
 
@@ -3552,7 +3867,22 @@ function printInvoice(payId) {
       <body>
         <div class="header">
           <div>
-            <div class="logo">⚡ DHAN ENTERPRISE</div>
+            <div class="logo"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+ DHAN ENTERPRISE</div>
             <div>Encompassing Energy Revolution</div>
             <div>Peoples Plaza, NTR Marg, Hyderabad</div>
           </div>
@@ -3644,11 +3974,76 @@ function viewCrmTimeline(companyName) {
     
     listEl.innerHTML = companyLogs.map(log => {
       let icon = '💬';
-      if (log.type === 'call') icon = '📞';
-      else if (log.type === 'email') icon = '✉️';
+      if (log.type === 'call') icon = '<!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-phone"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+</svg>
+';
+      else if (log.type === 'email') icon = '<!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-mail"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+</svg>
+';
       else if (log.type === 'whatsapp') icon = '🟢';
-      else if (log.type === 'meeting') icon = '📅';
-      else if (log.type === 'payment') icon = '💳';
+      else if (log.type === 'meeting') icon = '<!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-calendar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+</svg>
+';
+      else if (log.type === 'payment') icon = '<!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-credit-card"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="20" height="14" x="2" y="5" rx="2" />
+  <line x1="2" x2="22" y1="10" y2="10" />
+</svg>
+';
 
       const dateStr = new Date(log.timestamp).toLocaleString();
       return `
@@ -3694,8 +4089,55 @@ function renderSponsorAppsTable() {
     return `
       <tr>
         <td><strong>${s.company}</strong></td>
-        <td>👤 ${s.contact_person || '—'}</td>
-        <td><span style="font-size:10px;">📞 ${s.phone || '—'}<br>✉️ ${s.email || '—'}</span></td>
+        <td><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-user"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" />
+</svg>
+ ${s.contact_person || '—'}</td>
+        <td><span style="font-size:10px;"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-phone"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
+</svg>
+ ${s.phone || '—'}<br><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-mail"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+  <rect x="2" y="4" width="20" height="16" rx="2" />
+</svg>
+ ${s.email || '—'}</span></td>
         <td>${s.industry || 'Renewable Energy'}</td>
         <td><span class="category-badge" style="background:#fff3e0; color:#f57c00;">${s.package || s.type}</span></td>
         <td><span style="font-size:10px;">₹${(s.amount || (s.package === 'Title' ? 1500000 : s.package === 'Platinum' ? 800000 : s.package === 'Gold' ? 500000 : s.package === 'Silver' ? 300000 : 200000)).toLocaleString()}</span></td>
@@ -3763,8 +4205,42 @@ function renderTasksTable() {
       <tr>
         <td><strong>${t.title}</strong></td>
         <td><span class="status-badge ${t.priority === 'High' ? 'sold' : t.priority === 'Medium' ? 'pending' : 'available'}">${t.priority}</span></td>
-        <td>📅 ${t.deadline}</td>
-        <td>👤 ${t.assigned_user}</td>
+        <td><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-calendar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+</svg>
+ ${t.deadline}</td>
+        <td><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-user"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" />
+</svg>
+ ${t.assigned_user}</td>
         <td><span class="category-badge">${t.category}</span></td>
         <td><span class="status-badge ${statusClass}">${t.status}</span></td>
         <td>${actionsHtml}</td>
@@ -3807,7 +4283,22 @@ function submitTaskForm(e) {
   logActivity(`New task created: "${title}" assigned to ${assigned}.`);
   closeModal('modal-task');
   renderTasksTable();
-  showToast('🛠️ Task created successfully.');
+  showToast('<!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-wrench"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" />
+</svg>
+ Task created successfully.');
 }
 
 function toggleTaskStatus(taskId) {
@@ -3940,7 +4431,25 @@ function renderExhibitorPortal() {
         return `
           <tr>
             <td><strong>${m.visitor_name}</strong><br><span style="font-size:9px; color:var(--text-muted);">${m.visitor_email}</span></td>
-            <td>📅 ${m.date}<br>🕒 ${m.time}</td>
+            <td><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-calendar"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+</svg>
+ ${m.date}<br>🕒 ${m.time}</td>
             <td><span style="font-size:10px;">${m.notes || '—'}</span></td>
             <td><span class="status-badge ${m.status}">${m.status}</span></td>
             <td>${actionBtn}</td>

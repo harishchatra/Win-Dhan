@@ -2,391 +2,421 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Trade | Dhan Enterprise</title>
-<meta name="description" content="Dhan Enterprise trade division — Export &amp; Import of renewable energy equipment, Trade Directory, Indian Companies Association, International Companies Association.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trade & Export | Dhan Enterprise</title>
+<meta name="description" content="Dhan Enterprise trade and export services — Brand Data Bank, global network across 10 countries, and HR requirements for renewable energy professionals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
-<style>
-  :root {
-    --green: #1A4731;
-    --green-dk: #0F2E1F;
-    --green-lt: #2C6248;
-    --green-pale: #EAF3EE;
-    --gold: #C9943A;
-    --gold-lt: #E8B55A;
-    --gold-pale: #FDF5E8;
-    --black: #111111;
-    --gray-60: #555555;
-    --gray-40: #888888;
-    --gray-20: #CCCCCC;
-    --gray-10: #EEEEEE;
-    --gray-05: #F7F7F7;
-    --white: #FFFFFF;
-    --border: #E2E2E2;
-  }
-
-  body {
-    background-color: var(--white);
-    color: var(--gray-60);
-    font-family: 'Inter', sans-serif;
-  }
-
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-  .section { padding: 5rem 0; }
-  .section-bg-gray { background-color: var(--gray-05); }
-
-  .section-eyebrow {
-    display: flex; align-items: center; gap: 8px;
-    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 10.5px;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
-  }
-  .section-eyebrow::before {
-    content: ""; display: block; width: 20px; height: 1.5px; background: var(--gold);
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif; font-weight: 900;
-    font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--black); margin-bottom: 0.8rem; line-height: 1.2;
-  }
-  .section-title span { color: var(--green); }
-  .section-rule {
-    width: 48px; height: 3px; background: linear-gradient(90deg, var(--green), var(--gold)); margin-bottom: 1.2rem;
-  }
-  .section-subtitle {
-    font-family: 'Inter', sans-serif; font-weight: 400; font-size: 15px;
-    color: var(--gray-60); max-width: 800px; line-height: 1.6; margin-bottom: 3rem;
-  }
-
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.1rem; }
-
-  @media (max-width: 1024px) {
-    .grid-5 { grid-template-columns: repeat(3, 1fr); }
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 768px) {
-    .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
-  }
-
-  .card {
-    background: var(--white); border: 1px solid var(--border); border-radius: 8px;
-    overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); border-color: var(--gold); }
-  .card-padded { padding: 2rem; }
-  .card-center { text-align: center; }
-  .card-icon { font-size: 2.5rem; margin-bottom: 1.2rem; }
-  .card-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--black); margin-bottom: 0.8rem; }
-  .card-body { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--gray-60); line-height: 1.6; }
-
-  .btn-primary {
-    display: inline-flex; align-items: center; justify-content: center;
-    background: var(--green); color: var(--white); padding: 0.8rem 1.5rem; border-radius: 4px;
-    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; text-decoration: none; transition: all 0.2s; border: 1px solid var(--green);
-  }
-  .btn-primary:hover { background: var(--green-lt); border-color: var(--green-lt); color: var(--white); }
-  .btn-outline {
-    display: inline-flex; align-items: center; justify-content: center;
-    background: transparent; color: var(--green); padding: 0.8rem 1.5rem; border-radius: 4px;
-    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; text-decoration: none; transition: all 0.2s; border: 1px solid var(--green);
-  }
-  .btn-outline:hover { background: var(--green-pale); }
-
-  .cta-banner {
-    background: var(--green-pale); border-radius: 8px; padding: 2.5rem;
-    display: flex; align-items: center; justify-content: space-between; margin-top: 3rem; border: 1px solid var(--border);
-  }
-  .cta-banner h4 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--black); margin-bottom: 0.5rem; font-weight: 800; }
-  .cta-banner p { font-family: 'Inter', sans-serif; font-size: 15px; color: var(--gray-60); }
-  @media(max-width: 768px) { .cta-banner { flex-direction: column; text-align: center; gap: 1.5rem; } }
-
-  .product-row {
-    display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem; background: var(--white);
-    border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--green);
-  }
-  .product-row.import { border-left-color: var(--gold); }
-  .product-row .pr-ico { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
-  .product-row .pr-name { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 0.3rem; }
-  .product-row .pr-desc { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--gray-60); }
-
-  .country-tag {
-    display: inline-block; background: var(--gray-05); border: 1px solid var(--border); border-radius: 4px;
-    padding: 0.4rem 0.8rem; font-family: 'Inter', sans-serif; font-size: 13px; color: var(--gray-60); font-weight: 500; margin: 0.4rem 0.4rem 0 0;
-  }
-
-  .trade-stat-bar { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-bottom: 3.5rem; }
-  .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 2rem 1.5rem; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-  .stat-card .val { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--green); margin-bottom: 0.5rem; }
-  .stat-card .lbl { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: var(--gray-60); text-transform: uppercase; letter-spacing: 1px; }
-  @media(max-width: 900px) { .trade-stat-bar { grid-template-columns: repeat(2,1fr); } }
-  @media(max-width: 600px) { .trade-stat-bar { grid-template-columns: 1fr; } }
-
-  .region-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 2rem 1.5rem; text-align: center; transition: border-color 0.25s; }
-  .region-card:hover { border-color: var(--gold); }
-  .region-card .r-flag { font-size: 2.5rem; margin-bottom: 1rem; }
-  .region-card h4 { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 0.5rem; }
-  .region-card p { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--gray-60); line-height: 1.5; }
-
-  .govt-item { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.2rem; }
-  .govt-item.state { border-left-color: var(--gold); }
-  .govt-item .gi-name { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 0.4rem; }
-  .govt-item .gi-desc { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--gray-60); line-height: 1.6; }
-
-  .page-hero { position: relative; padding: 10rem 1rem 6rem; background: var(--green-dk); color: var(--white); text-align: center; overflow: hidden; }
-  .page-hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-size: cover; background-position: center; opacity: 0.2; }
-  .page-hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-  .page-hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; letter-spacing: 1px; }
-  .page-hero-eyebrow::before, .page-hero-eyebrow::after { content: ""; display: block; width: 30px; height: 1px; background: var(--gold); }
-  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 900; margin-bottom: 1.5rem; line-height: 1.1; }
-  .page-hero h1 span { color: var(--gold); }
-  .page-hero-desc { font-family: 'Inter', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.85); line-height: 1.6; max-width: 700px; margin: 0 auto; }
-
-  .trade-card-head { padding: 2rem; background: var(--green-dk); color: var(--white); text-align: center; }
-  .trade-card-head.import { background: var(--black); }
-  .trade-card-head h3 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--gold); }
-  .trade-card-head p { font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(255,255,255,0.8); }
-  .trade-card-body { padding: 2rem; }
-
-  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-  .reveal.active { opacity: 1; transform: translateY(0); }
-</style>
 </head>
 <body data-page="trade">
 <div id="nav-placeholder"></div>
 
 <!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1800&q=80');"></div>
-  <div class="page-hero-content">
-    <div class="page-hero-eyebrow">Global Trade · 40+ Countries</div>
-    <h1>Trade &amp; <span>Commerce</span></h1>
-    <p class="page-hero-desc">Export-import facilitation, trade directory, and business associations connecting Indian and international renewable energy companies.</p>
+<section class="page-hero">
+  <div class="container">
+    <div class="eyebrow eyebrow-dark">Global Trade &amp; Talent</div>
+    <h1 class="section-title section-title-light" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">Trade, Export &amp; <span>Network</span></h1>
+    <p class="section-sub section-sub-light">Connecting Indian renewable energy brands to international markets, and sourcing world-class professionals for the clean energy sector.</p>
+  </div>
+</section>
+
+<!-- BRAND DATA BANK -->
+<section id="brands" class="section-white reveal">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:4rem;align-items:start;">
+      <div>
+        <div class="eyebrow">Indian Brands</div>
+        <h2 class="section-title">Brand <span>Data Bank</span></h2>
+        <div class="section-rule"></div>
+        <p class="section-sub">A curated ecosystem of Indian renewable energy manufacturers, innovators, and technology providers seeking international distribution and partnership opportunities.</p>
+        <a href="contact.html" class="btn-outline" style="margin-top:1.5rem;display:inline-block;">Register Your Brand →</a>
+      </div>
+      <div>
+        <div class="brand-grid">
+          <div class="trade-card">
+            <div class="trade-card-icon"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-zap"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
+</svg>
+</div>
+            <h4>EV Manufacturers</h4>
+            <p>Two-wheeler, three-wheeler, and four-wheeler EV OEMs — complete product portfolio and export documentation support.</p>
+          </div>
+          <div class="trade-card">
+            <div class="trade-card-icon"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+</div>
+            <h4>Solar Equipment</h4>
+            <p>Tier-1 Indian solar module, inverter, and BOS manufacturers targeting the Middle East, Africa, and Southeast Asia.</p>
+          </div>
+          <div class="trade-card">
+            <div class="trade-card-icon"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-battery"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M 22 14 L 22 10" />
+  <rect x="2" y="6" width="16" height="12" rx="2" />
+</svg>
+</div>
+            <h4>Battery &amp; BESS</h4>
+            <p>LFP cell manufacturers, BMS developers, and battery pack assemblers seeking global distribution partners.</p>
+          </div>
+          <div class="trade-card">
+            <div class="trade-card-icon">🌬</div>
+            <h4>Wind Components</h4>
+            <p>Blade manufacturers, tower fabricators, and nacelle sub-component suppliers — ready for international export.</p>
+          </div>
+          <div class="trade-card">
+            <div class="trade-card-icon">⚗️</div>
+            <h4>Green Hydrogen</h4>
+            <p>Electrolyser manufacturers, hydrogen storage system providers, and fuel cell technology companies from India.</p>
+          </div>
+          <div class="trade-card">
+            <div class="trade-card-icon">🏗</div>
+            <h4>EPC &amp; Infra</h4>
+            <p>Indian EPC contractors and infrastructure providers with capacity and certifications for international projects.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL NETWORK -->
+<section id="network" class="section-gray reveal">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="eyebrow" style="justify-content:center;">International Reach</div>
+      <h2 class="section-title">Global <span>Trade Network</span></h2>
+      <div class="section-rule" style="margin:0 auto;"></div>
+      <p class="section-sub" style="margin:1rem auto 0;text-align:center;">Active trade corridors across 10 countries — facilitating exports, imports, joint ventures, and technology licensing in renewable energy.</p>
+    </div>
+
+    <!-- MENA + Europe -->
+    <div style="margin-bottom:3rem;">
+      <div class="region-heading">Middle East &amp; Europe</div>
+      <div class="network-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+        <div class="country-pill">
+          <span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span>
+          <div class="cname">UAE</div>
+          <div class="ctype">Solar &amp; EV exports</div>
+        </div>
+        <div class="country-pill">
+          <span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span>
+          <div class="cname">Saudi Arabia</div>
+          <div class="ctype">Project development</div>
+        </div>
+        <div class="country-pill">
+          <span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span>
+          <div class="cname">Germany</div>
+          <div class="ctype">Technology import &amp; JV</div>
+        </div>
+        <div class="country-pill">
+          <span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span>
+          <div class="cname">Denmark</div>
+          <div class="ctype">Wind technology</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Asia -->
+    <div style="margin-bottom:3rem;">
+      <div class="region-heading">Asia Pacific</div>
+      <div class="network-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+        <div class="country-pill">
+          <span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span>
+          <div class="cname">China</div>
+          <div class="ctype">Solar &amp; BESS sourcing</div>
+        </div>
+        <div class="country-pill">
+          <span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span>
+          <div class="cname">Japan</div>
+          <div class="ctype">EV &amp; smart grid</div>
+        </div>
+        <div class="country-pill">
+          <span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span>
+          <div class="cname">Singapore</div>
+          <div class="ctype">SE Asia hub &amp; finance</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Africa + Americas -->
+    <div>
+      <div class="region-heading">Africa &amp; Americas</div>
+      <div class="network-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+        <div class="country-pill">
+          <span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span>
+          <div class="cname">Kenya</div>
+          <div class="ctype">Africa exports hub</div>
+        </div>
+        <div class="country-pill">
+          <span class="flag"><!-- @license lucide-static v1.21.0 - ISC -->
+<svg class="lucide-icon" style="width:1.2em; height:1.2em; vertical-align:-0.15em; margin-right:4px;"
+  class="lucide lucide-map-pin"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</svg>
+</span>
+          <div class="cname">Brazil</div>
+          <div class="ctype">Americas &amp; Wind</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HR REQUIREMENTS -->
+<section id="hr" class="section-white reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="eyebrow" style="justify-content:center;">Talent &amp; Careers</div>
+      <h2 class="section-title">HR <span>Requirements</span></h2>
+      <div class="section-rule" style="margin:0 auto;"></div>
+      <p class="section-sub" style="margin:1rem auto 0;text-align:center;">We connect renewable energy professionals with the companies that need them — across India and internationally.</p>
+    </div>
+    <div class="hr-role-grid">
+      <div class="hr-role-card">
+        <div class="hr-role-dept">Engineering</div>
+        <h4 class="hr-role-title">Solar PV Project Engineer</h4>
+        <div class="hr-role-meta">Hyderabad · Full-time</div>
+        <p class="hr-role-desc">Design, site assessment, and EPC coordination for rooftop and ground-mount solar projects up to 10 MWp.</p>
+        <a href="contact.html" class="btn-ghost" style="font-size:12px;padding:7px 14px;">Enquire →</a>
+      </div>
+      <div class="hr-role-card">
+        <div class="hr-role-dept">EV Advisory</div>
+        <h4 class="hr-role-title">EV Business Development Manager</h4>
+        <div class="hr-role-meta">Pan-India · Full-time</div>
+        <p class="hr-role-desc">OEM partnerships, dealer network expansion, and fleet electrification sales across Tier 1 and Tier 2 cities.</p>
+        <a href="contact.html" class="btn-ghost" style="font-size:12px;padding:7px 14px;">Enquire →</a>
+      </div>
+      <div class="hr-role-card">
+        <div class="hr-role-dept">Storage &amp; BESS</div>
+        <h4 class="hr-role-title">BESS Integration Specialist</h4>
+        <div class="hr-role-meta">Hyderabad / Remote · Full-time</div>
+        <p class="hr-role-desc">Battery system design, BMS selection, grid integration studies, and O&amp;M management for commercial projects.</p>
+        <a href="contact.html" class="btn-ghost" style="font-size:12px;padding:7px 14px;">Enquire →</a>
+      </div>
+      <div class="hr-role-card">
+        <div class="hr-role-dept">Trade &amp; Export</div>
+        <h4 class="hr-role-title">International Trade Executive</h4>
+        <div class="hr-role-meta">Hyderabad · Full-time</div>
+        <p class="hr-role-desc">Manage export documentation, international partner relationships, and trade compliance for renewable energy products.</p>
+        <a href="contact.html" class="btn-ghost" style="font-size:12px;padding:7px 14px;">Enquire →</a>
+      </div>
+      <div class="hr-role-card">
+        <div class="hr-role-dept">Events</div>
+        <h4 class="hr-role-title">IRE 2026 Event Coordinator</h4>
+        <div class="hr-role-meta">Hyderabad · Contract · July 2026</div>
+        <p class="hr-role-desc">Stall coordination, delegate management, and logistics support for the Indian Renewable Energy Expo 2026.</p>
+        <a href="contact.html" class="btn-ghost" style="font-size:12px;padding:7px 14px;">Enquire →</a>
+      </div>
+      <div class="hr-role-card">
+        <div class="hr-role-dept">Policy</div>
+        <h4 class="hr-role-title">Government Affairs Specialist</h4>
+        <div class="hr-role-meta">Delhi / Hyderabad · Full-time</div>
+        <p class="hr-role-desc">MNRE liaison, state nodal agency coordination, and regulatory advisory for renewable energy project approvals.</p>
+        <a href="contact.html" class="btn-ghost" style="font-size:12px;padding:7px 14px;">Enquire →</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <p style="font-family:'Inter',sans-serif;font-size:14px;color:var(--gray-60);margin-bottom:1rem;">Don't see a matching role? Send your profile — we're always looking for clean energy talent.</p>
+      <a href="contact.html" class="btn-primary">Send Your Profile →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner reveal">
+  <div class="cta-banner-inner">
+    <div>
+      <h4>Ready to trade, export, or partner with Dhan Enterprise?</h4>
+      <p>Contact us at ireexpo2026@gmail.com · +91 79818 69954 — we connect Indian energy brands to the world.</p>
+    </div>
+    <a href="contact.html" class="btn-gold">Contact Us →</a>
   </div>
 </div>
-
-<!-- EXPORT & IMPORT -->
-<section class="section reveal" id="export-import">
-  <div class="container">
-    <div class="section-eyebrow">Global Trade</div>
-    <h2 class="section-title">Export &amp; <span>Import</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">Dhan Enterprise facilitates cross-border trade of renewable energy equipment — connecting Indian manufacturers with global buyers and bringing world-class technology to India.</p>
-
-    <div class="trade-stat-bar">
-      <div class="stat-card"><div class="val">5</div><div class="lbl">Global Regions</div></div>
-      <div class="stat-card"><div class="val">40+</div><div class="lbl">Countries Reached</div></div>
-      <div class="stat-card"><div class="val">₹500Cr+</div><div class="lbl">Trade Facilitated</div></div>
-      <div class="stat-card"><div class="val">10+</div><div class="lbl">Trade Partners</div></div>
-    </div>
-
-    <div class="grid-2">
-      <!-- EXPORT -->
-      <div class="card">
-        <div class="trade-card-head">
-          <div style="font-size:3rem;margin-bottom:1rem;">🚢</div>
-          <h3>Export</h3>
-          <p>Made-in-India renewable energy products to global markets</p>
-        </div>
-        <div class="trade-card-body">
-          <div style="font-size:14px;font-weight:700;color:var(--black);letter-spacing:1px;text-transform:uppercase;margin-bottom:1.5rem;">Products We Export</div>
-          <div class="product-row"><div class="pr-ico">☀️</div><div><div class="pr-name">Solar Panels &amp; Modules</div><div class="pr-desc">Mono PERC, Bifacial, Thin Film — all wattages</div></div></div>
-          <div class="product-row"><div class="pr-ico">🔋</div><div><div class="pr-name">Battery &amp; BESS Systems</div><div class="pr-desc">Lithium-ion packs, BMS, energy storage solutions</div></div></div>
-          <div class="product-row"><div class="pr-ico">⚡</div><div><div class="pr-name">EV Charging Equipment</div><div class="pr-desc">AC/DC chargers, wallboxes, smart charge controllers</div></div></div>
-          <div class="product-row"><div class="pr-ico">🔌</div><div><div class="pr-name">Inverters &amp; Power Electronics</div><div class="pr-desc">String, central, micro-inverters, hybrid systems</div></div></div>
-          <div class="product-row"><div class="pr-ico">💨</div><div><div class="pr-name">Wind Components</div><div class="pr-desc">Blades, towers, nacelles, control systems</div></div></div>
-          <div style="margin-top:2rem;">
-            <div style="font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem;color:var(--black);">Export Destinations</div>
-            <span class="country-tag">🇦🇪 UAE</span><span class="country-tag">🇸🇦 Saudi Arabia</span><span class="country-tag">🇿🇦 South Africa</span><span class="country-tag">🇰🇪 Kenya</span><span class="country-tag">🇸🇬 Singapore</span><span class="country-tag">🇻🇳 Vietnam</span><span class="country-tag">🇩🇪 Germany</span><span class="country-tag">🇧🇷 Brazil</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- IMPORT -->
-      <div class="card">
-        <div class="trade-card-head import">
-          <div style="font-size:3rem;margin-bottom:1rem;">✈️</div>
-          <h3>Import</h3>
-          <p>Global technology brought to India's renewable energy sector</p>
-        </div>
-        <div class="trade-card-body">
-          <div style="font-size:14px;font-weight:700;color:var(--black);letter-spacing:1px;text-transform:uppercase;margin-bottom:1.5rem;">Technology We Import</div>
-          <div class="product-row import"><div class="pr-ico">🔬</div><div><div class="pr-name">High-Efficiency Solar Cells</div><div class="pr-desc">Perovskite, TOPCon, HJT cells from Europe &amp; Asia</div></div></div>
-          <div class="product-row import"><div class="pr-ico">🌊</div><div><div class="pr-name">Offshore Wind Technology</div><div class="pr-desc">Turbines, foundations, subsea cables from Denmark &amp; Germany</div></div></div>
-          <div class="product-row import"><div class="pr-ico">⚗️</div><div><div class="pr-name">Electrolyser Systems</div><div class="pr-desc">PEM &amp; alkaline electrolysers for green hydrogen</div></div></div>
-          <div class="product-row import"><div class="pr-ico">🤖</div><div><div class="pr-name">AI Energy Management</div><div class="pr-desc">Smart SCADA, EMS, grid automation from USA &amp; Japan</div></div></div>
-          <div class="product-row import"><div class="pr-ico">🚗</div><div><div class="pr-name">EV Drivetrains &amp; Motors</div><div class="pr-desc">High-performance motors, controllers, power modules</div></div></div>
-          <div style="margin-top:2rem;">
-            <div style="font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem;color:var(--black);">Import Origins</div>
-            <span class="country-tag">🇩🇪 Germany</span><span class="country-tag">🇨🇳 China</span><span class="country-tag">🇺🇸 USA</span><span class="country-tag">🇯🇵 Japan</span><span class="country-tag">🇩🇰 Denmark</span><span class="country-tag">🇰🇷 South Korea</span><span class="country-tag">🇸🇪 Sweden</span><span class="country-tag">🇮🇱 Israel</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="cta-banner">
-      <div>
-        <h4>Start a Trade Enquiry</h4>
-        <p>Looking to export Indian renewable products or import global technology? Connect with our trade desk today.</p>
-      </div>
-      <a href="contact.html" class="btn-primary">Trade Enquiry &rarr;</a>
-    </div>
-  </div>
-</section>
-
-<!-- TRADE DIRECTORY -->
-<section class="section section-bg-gray reveal" id="directory">
-  <div class="container">
-    <div class="section-eyebrow">Business &amp; Commerce</div>
-    <h2 class="section-title">Trade <span>Directory</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">Connecting buyers, sellers, distributors, and agents across the renewable energy supply chain — solar, EV, BESS, wind, and green hydrogen.</p>
-    
-    <div class="grid-4" style="margin-bottom:3rem;">
-      <div class="card card-padded card-center">
-        <div class="card-icon">🔆</div>
-        <h4 class="card-title">Solar Equipment</h4>
-        <p class="card-body">Panels, inverters, mounting structures, cables, monitoring systems</p>
-      </div>
-      <div class="card card-padded card-center">
-        <div class="card-icon">⚡</div>
-        <h4 class="card-title">EV Components</h4>
-        <p class="card-body">Motors, BMS, chargers, battery packs, drivetrains, controllers</p>
-      </div>
-      <div class="card card-padded card-center">
-        <div class="card-icon">🔋</div>
-        <h4 class="card-title">BESS &amp; Storage</h4>
-        <p class="card-body">Lithium cells, flow batteries, containerised BESS, UPS systems</p>
-      </div>
-      <div class="card card-padded card-center">
-        <div class="card-icon">💨</div>
-        <h4 class="card-title">Wind &amp; Hydro</h4>
-        <p class="card-body">Turbines, blades, nacelles, small hydro turbines, micro-wind</p>
-      </div>
-    </div>
-    
-    <div class="cta-banner" style="background:var(--white);">
-      <div>
-        <h4>List Your Products in the Trade Directory</h4>
-        <p>Reach 120+ partners, 22 states, and 500+ IRE 2026 delegates with your product listing.</p>
-      </div>
-      <a href="contact.html" class="btn-primary">List Now &rarr;</a>
-    </div>
-  </div>
-</section>
-
-<!-- INDIAN COMPANIES ASSOCIATION -->
-<section class="section reveal" id="indian">
-  <div class="container">
-    <div class="section-eyebrow">Industry Connect</div>
-    <h2 class="section-title">Indian Companies <span>Association</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">A dedicated platform connecting Indian renewable energy manufacturers, EPC contractors, distributors, and service providers — fostering collaboration, co-investment, and market access.</p>
-    
-    <div class="grid-4" style="margin-bottom:3rem;">
-      <div class="card card-padded card-center">
-        <div class="card-icon">🏭</div>
-        <h4 class="card-title">Manufacturers</h4>
-        <p class="card-body">Solar modules, wind turbines, EV components, inverters, BMS, and storage systems made in India.</p>
-      </div>
-      <div class="card card-padded card-center">
-        <div class="card-icon">🔧</div>
-        <h4 class="card-title">EPC Contractors</h4>
-        <p class="card-body">Engineering, procurement and construction firms specialising in solar, wind, and hybrid energy projects.</p>
-      </div>
-      <div class="card card-padded card-center">
-        <div class="card-icon">🤝</div>
-        <h4 class="card-title">Distributors &amp; Dealers</h4>
-        <p class="card-body">Pan-India distribution networks for renewable energy equipment, EV charging, and power electronics.</p>
-      </div>
-      <div class="card card-padded card-center">
-        <div class="card-icon">💡</div>
-        <h4 class="card-title">Startups &amp; Innovators</h4>
-        <p class="card-body">Deep-tech and cleantech startups developing next-generation renewable energy products and solutions.</p>
-      </div>
-    </div>
-    
-    <div class="cta-banner">
-      <div>
-        <h4>Register Your Indian Company</h4>
-        <p>Join our national network of 120+ renewable energy companies. Gain access to tenders, partnerships, and expo stalls.</p>
-      </div>
-      <a href="contact.html" class="btn-primary">Register Now &rarr;</a>
-    </div>
-  </div>
-</section>
-
-<!-- INTERNATIONAL COMPANIES -->
-<section class="section section-bg-gray reveal" id="international">
-  <div class="container">
-    <div class="section-eyebrow">Global Connect</div>
-    <h2 class="section-title">International Companies <span>Association</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">Bridging global renewable energy leaders with India's booming clean energy market — facilitating joint ventures, technology transfer, and export-import partnerships across five regions.</p>
-    
-    <div class="grid-5" style="margin-bottom:3rem;">
-      <div class="region-card"><div class="r-flag">🌏</div><h4>Middle East</h4><p>UAE, Saudi Arabia, Qatar, Kuwait, Oman</p></div>
-      <div class="region-card"><div class="r-flag">🌍</div><h4>Europe</h4><p>Germany, Netherlands, Denmark, Spain, Italy</p></div>
-      <div class="region-card"><div class="r-flag">🌏</div><h4>South-East Asia</h4><p>Singapore, Vietnam, Thailand, Malaysia</p></div>
-      <div class="region-card"><div class="r-flag">🌍</div><h4>Africa</h4><p>South Africa, Kenya, Nigeria, Ethiopia</p></div>
-      <div class="region-card"><div class="r-flag">🌎</div><h4>Americas</h4><p>USA, Canada, Brazil, Mexico</p></div>
-    </div>
-    
-    <div class="grid-3" style="margin-bottom:3rem;">
-      <div class="card card-padded">
-        <div class="section-eyebrow" style="margin-bottom:1rem;">Technology Transfer</div>
-        <p class="card-body">Connect global technology leaders with Indian manufacturers for licensing, joint R&amp;D, and production partnerships.</p>
-      </div>
-      <div class="card card-padded">
-        <div class="section-eyebrow" style="margin-bottom:1rem;">Export Facilitation</div>
-        <p class="card-body">Helping Indian renewable energy companies export products and services to emerging markets in Asia, Africa &amp; Middle East.</p>
-      </div>
-      <div class="card card-padded">
-        <div class="section-eyebrow" style="margin-bottom:1rem;">Joint Ventures</div>
-        <p class="card-body">Structured B2B matchmaking at IRE 2026 for international companies seeking Indian partners for project co-development.</p>
-      </div>
-    </div>
-    
-    <div style="text-align:center;">
-      <a href="contact.html" class="btn-primary">Register International Company &rarr;</a>
-    </div>
-  </div>
-</section>
-
-<!-- GOVERNMENT ASSOCIATION -->
-<section class="section reveal" id="govt">
-  <div class="container">
-    <div class="section-eyebrow">Policy, Schemes &amp; Departments</div>
-    <h2 class="section-title">Government <span>Association</span></h2>
-    <div class="section-rule"></div>
-    <p class="section-subtitle">Bringing together central ministries, state nodal agencies, PSUs, and regulatory bodies to align policy, showcase schemes, and connect with industry at IRE 2026.</p>
-    
-    <div class="grid-2" style="margin-bottom:3rem;align-items:start;">
-      <div>
-        <h4 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:var(--black);margin-bottom:1.5rem;">Central Government Bodies</h4>
-        <div class="govt-item"><div class="gi-name">Ministry of New &amp; Renewable Energy (MNRE)</div><div class="gi-desc">Policy frameworks, subsidies, PLI schemes for solar and wind</div></div>
-        <div class="govt-item"><div class="gi-name">Bureau of Energy Efficiency (BEE)</div><div class="gi-desc">Star ratings, energy audits, PAT scheme &amp; ECBC regulations</div></div>
-        <div class="govt-item"><div class="gi-name">NTPC Ltd. / SECI / IREDA</div><div class="gi-desc">Project development, green financing, renewable energy tenders</div></div>
-        <div class="govt-item"><div class="gi-name">Ministry of Heavy Industries (EV Division)</div><div class="gi-desc">FAME scheme, EV incentives, charging infrastructure policy</div></div>
-      </div>
-      <div>
-        <h4 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:var(--black);margin-bottom:1.5rem;">Telangana State Bodies</h4>
-        <div class="govt-item state"><div class="gi-name">TSREDCO</div><div class="gi-desc">Telangana State Renewable Energy Development Corporation</div></div>
-        <div class="govt-item state"><div class="gi-name">Telangana EV &amp; New Energy Vehicle Policy</div><div class="gi-desc">State subsidies, EV registration incentives &amp; charging network</div></div>
-        <div class="govt-item state"><div class="gi-name">TSSPDCL / TSNPDCL</div><div class="gi-desc">Power distribution, net metering &amp; grid connectivity approvals</div></div>
-        <div class="govt-item state"><div class="gi-name">T-Hub &amp; WE-Hub</div><div class="gi-desc">Clean energy startup incubation and technology commercialisation</div></div>
-      </div>
-    </div>
-    
-    <div class="cta-banner">
-      <div>
-        <h4>Government Association at IRE 2026</h4>
-        <p>Invite your ministry, state body, or PSU to participate in India's premier renewable energy expo — pavilion, panel discussions, and tender launches.</p>
-      </div>
-      <a href="contact.html" class="btn-primary">Enquire Now &rarr;</a>
-    </div>
-  </div>
-</section>
 
 <div id="footer-placeholder"></div>
 <script src="js/script.js"></script>
