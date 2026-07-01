@@ -127,7 +127,6 @@
       <a href="ire.html">About IRE Expo</a>
       <a href="stalls-booking/index.html">Book Your Stall</a>
       <a href="register.html">Visitor Registration</a>
-      <a href="admin.html">Admin Dashboard</a>
       <a href="ire.html#sponsors">Sponsors & Partners</a>
       <a href="tenders.html">Gov Tenders</a>
     </div>
