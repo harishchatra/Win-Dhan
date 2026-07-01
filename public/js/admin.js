@@ -345,16 +345,27 @@ async function initAdminUI() {
 
     // Update avatar badge
     const avatar = document.getElementById('user-profile-avatar');
+    const mobileAvatar = document.getElementById('mobile-user-profile-avatar');
+    const initials = userName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+    const titleText = `${userName} (${activeRole.replace('_', ' ').toUpperCase()})`;
     if (avatar) {
-      const initials = userName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
       avatar.textContent = initials;
-      avatar.title = `${userName} (${activeRole.replace('_', ' ').toUpperCase()})`;
+      avatar.title = titleText;
+    }
+    if (mobileAvatar) {
+      mobileAvatar.textContent = initials;
+      mobileAvatar.title = titleText;
     }
 
     // Update role label display
     const roleDisplay = document.getElementById('session-role-display');
+    const mobileRoleDisplay = document.getElementById('mobile-session-role-display');
+    const roleText = activeRole.replace('_', ' ').replace('-', ' ').toUpperCase();
     if (roleDisplay) {
-      roleDisplay.textContent = activeRole.replace('_', ' ').replace('-', ' ').toUpperCase();
+      roleDisplay.textContent = roleText;
+    }
+    if (mobileRoleDisplay) {
+      mobileRoleDisplay.textContent = roleText;
     }
 
     applyRolePermissions();
@@ -2330,22 +2341,20 @@ let selectedAdminStallId = null;
 let activeExhibitorCompany = '';
 
 // ── Sidebar Toggle function for mobile drawer ──
-function toggleSidebar(isOpen) {
+function toggleSidebar(forceOpen) {
   const sidebar = document.getElementById('app-sidebar');
   const overlay = document.getElementById('sidebar-overlay');
+  
+  const isCurrentlyOpen = sidebar ? sidebar.classList.contains('open') : false;
+  const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !isCurrentlyOpen;
+
   if (sidebar) {
-    if (isOpen) {
-      sidebar.classList.add('open');
-    } else {
-      sidebar.classList.remove('open');
-    }
+    if (shouldOpen) sidebar.classList.add('open');
+    else sidebar.classList.remove('open');
   }
   if (overlay) {
-    if (isOpen) {
-      overlay.classList.add('active');
-    } else {
-      overlay.classList.remove('active');
-    }
+    if (shouldOpen) overlay.classList.add('active');
+    else overlay.classList.remove('active');
   }
 }
 
