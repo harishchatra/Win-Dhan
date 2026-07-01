@@ -710,6 +710,11 @@
         state: state.value.trim()
       };
 
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Processing...';
+
       try {
         const res = await fetch('/api/visitors/register', {
           method: 'POST',
@@ -742,7 +747,9 @@
 
       } catch (err) {
         console.error('Registration API error:', err);
-        alert('❌ Error: ' + err.message);
+        showErr(phone, err.message);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
       }
     }
 

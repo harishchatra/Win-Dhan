@@ -187,6 +187,13 @@ app.put('/api/stalls/:id', checkAuth(['super_admin', 'sales_manager', 'sales_exe
   );
 });
 
+app.delete('/api/stalls/:id', checkAuth(['super_admin', 'sales_manager']), (req, res) => {
+  db.run(`DELETE FROM stalls WHERE id = ?`, [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true, changes: this.changes });
+  });
+});
+
 
 // ──────────────── LEADS API ROUTING ────────────────
 
@@ -368,6 +375,13 @@ app.get('/api/payments', checkAuth(), (req, res) => {
   });
 });
 
+app.delete('/api/payments/:id', checkAuth(['super_admin', 'finance_manager']), (req, res) => {
+  db.run(`DELETE FROM payments WHERE id = ?`, [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true, changes: this.changes });
+  });
+});
+
 app.post('/api/payments/verify', (req, res) => {
   const signature = req.headers['x-payment-signature'] || req.headers['x-razorpay-signature'];
   const expectedSecret = process.env.PAYMENT_GATEWAY_SECRET || 'fallback-secret-hash';
@@ -446,8 +460,13 @@ function syncVisitors() {
     res.pipe(csv())
       .on('data', (row) => {
         if (!row.Phone && !row.Email) return;
+
+        let rawPhone = row.Phone || '';
+        let normPhone = rawPhone.replace(/\D/g, '');
+        if (normPhone.startsWith('91') && normPhone.length > 10) normPhone = normPhone.substring(2);
+        else if (normPhone.startsWith('0') && normPhone.length > 10) normPhone = normPhone.substring(1);
         
-        db.get(`SELECT id FROM visitors WHERE phone = ? OR email = ?`, [row.Phone, row.Email], (err, existing) => {
+        db.get(`SELECT id FROM visitors WHERE phone = ? OR email = ?`, [normPhone, row.Email], (err, existing) => {
           if (err || existing) return;
           
           const passId = `IRE-V-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -461,7 +480,7 @@ function syncVisitors() {
             [
               passId,
               row.Name || 'Unknown',
-              row.Phone || '',
+              normPhone,
               row.Email || '',
               row.Company || 'N/A',
               row.Designation || 'Visitor',
@@ -493,32 +512,43 @@ app.post('/api/admin/sync_visitors', checkAuth(['super_admin', 'sales_manager'])
 
 app.post('/api/visitors/register', (req, res) => {
   const { name, phone, email, company, designation, city, state, type } = req.body;
-  const passId = `IRE-V-${Math.floor(1000 + Math.random() * 9000)}`;
+  
+  if (!phone) return res.status(400).json({ error: 'Phone number is required.' });
+  let normPhone = phone.replace(/\D/g, '');
+  if (normPhone.startsWith('91') && normPhone.length > 10) normPhone = normPhone.substring(2);
+  else if (normPhone.startsWith('0') && normPhone.length > 10) normPhone = normPhone.substring(1);
 
-  db.run(
-    `INSERT INTO visitors VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'registered', ?)`,
-    [passId, name, phone, email, company, designation, city, state, type, new Date().toISOString().split('T')[0]],
-    function(err) {
-      if (err) return res.status(500).json({ error: err.message });
+  db.get(`SELECT id FROM visitors WHERE phone = ?`, [normPhone], (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (row) return res.status(400).json({ error: 'This mobile number is already registered.' });
 
-      // Write WhatsApp & Email automation logs
-      const timeNow = new Date().toISOString();
-      db.run(`INSERT INTO automation_logs VALUES (?, 'email', 'Visitor Registered', ?, ?, ?)`, [
-        'auto-' + Date.now() + '-1',
-        email,
-        `Dear ${name},\n\nYour visitor registration for IRE Expo 2026 is confirmed. Pass ID: ${passId}.`,
-        timeNow
-      ]);
-      db.run(`INSERT INTO automation_logs VALUES (?, 'whatsapp', 'Visitor Registered', ?, ?, ?)`, [
-        'auto-' + Date.now() + '-2',
-        phone,
-        `Hi ${name}, visitor pass for IRE Expo 2026 is confirmed. Pass ID: ${passId}.`,
-        timeNow
-      ]);
+    const passId = `IRE-V-${Math.floor(1000 + Math.random() * 9000)}`;
 
-      res.json({ success: true, passId });
-    }
-  );
+    db.run(
+      `INSERT INTO visitors VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'registered', ?)`,
+      [passId, name, normPhone, email, company, designation, city, state, type, new Date().toISOString().split('T')[0]],
+      function(err) {
+        if (err) return res.status(500).json({ error: err.message });
+
+        // Write WhatsApp & Email automation logs
+        const timeNow = new Date().toISOString();
+        db.run(`INSERT INTO automation_logs VALUES (?, 'email', 'Visitor Registered', ?, ?, ?)`, [
+          'auto-' + Date.now() + '-1',
+          email,
+          `Dear ${name},\n\nYour visitor registration for IRE Expo 2026 is confirmed. Pass ID: ${passId}.`,
+          timeNow
+        ]);
+        db.run(`INSERT INTO automation_logs VALUES (?, 'whatsapp', 'Visitor Registered', ?, ?, ?)`, [
+          'auto-' + Date.now() + '-2',
+          normPhone,
+          `Hi ${name}, visitor pass for IRE Expo 2026 is confirmed. Pass ID: ${passId}.`,
+          timeNow
+        ]);
+
+        res.json({ success: true, passId });
+      }
+    );
+  });
 });
 
 app.put('/api/visitors/:id/checkin', checkAuth(), (req, res) => {
@@ -1142,6 +1172,21 @@ app.post('/api/settings', checkAuth(['super_admin']), (req, res) => {
       if (err) return res.status(500).json({ error: err.message });
       res.json({ success: true });
     });
+  });
+});
+
+// Late added DELETE routes for exhibitors and visitors
+app.delete('/api/exhibitors/:id', checkAuth(['super_admin', 'sales_manager']), (req, res) => {
+  db.run(`DELETE FROM exhibitors WHERE id = ?`, [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true, changes: this.changes });
+  });
+});
+
+app.delete('/api/visitors/:id', checkAuth(['super_admin', 'sales_manager', 'event_director']), (req, res) => {
+  db.run(`DELETE FROM visitors WHERE id = ?`, [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true, changes: this.changes });
   });
 });
 

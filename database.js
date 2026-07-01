@@ -513,6 +513,35 @@ db.serialize(() => {
       db.run(`INSERT INTO sponsor_applications VALUES ('sp-app-2', 'EV Charge Solutions', 'Nisha Sharma', '9123456789', 'nisha@evcharge.com', 'Silver', 'EV charging network', 'submitted')`);
     }
   });
+
+  // ── ON-BOOT MIGRATION: deduplicate visitor phones ──
+  db.all(`SELECT id, phone FROM visitors`, (err, rows) => {
+    if (err || !rows) return;
+    
+    db.serialize(() => {
+      // 1. Normalize all phones
+      const stmt = db.prepare(`UPDATE visitors SET phone = ? WHERE id = ?`);
+      rows.forEach(r => {
+        if (!r.phone) return;
+        let p = r.phone.replace(/\D/g, '');
+        if (p.startsWith('91') && p.length > 10) p = p.substring(2);
+        else if (p.startsWith('0') && p.length > 10) p = p.substring(1);
+        if (p !== r.phone) stmt.run(p, r.id);
+      });
+      stmt.finalize();
+
+      // 2. Safely deduplicate records by keeping only the first one
+      db.run(`
+        DELETE FROM visitors 
+        WHERE rowid NOT IN (
+          SELECT MIN(rowid) FROM visitors GROUP BY phone
+        )
+      `);
+
+      // 3. Apply the hard unique index
+      db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_visitors_phone ON visitors(phone)`);
+    });
+  });
 });
 
 module.exports = db;

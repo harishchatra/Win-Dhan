@@ -197,10 +197,14 @@ async function commitLocalDatabase(collectionKey, data) {
   } catch (err) {
     console.error('API Sync Error:', err);
     showToast('⚠️ Sync failed: ' + err.message);
+    await syncRamData(); // refresh with server truth
+    refreshDashboardMetrics();
+    return false;
   }
 
   await syncRamData();
   refreshDashboardMetrics();
+  return true;
 }
 
 // ── AUDIT LOG GENERATOR ──
@@ -986,13 +990,15 @@ function quickCheckInVisitor(visitorId) {
   }
 }
 
-function deleteVisitorRecord(visitorId) {
+async function deleteVisitorRecord(visitorId) {
   if (!confirm('Are you sure you want to delete this visitor?')) return;
   const filtered = db.visitors.filter(v => v.id !== visitorId);
-  commitLocalDatabase(DB_VISITORS, filtered);
-  logActivity(`Visitor record <strong>${visitorId}</strong> deleted.`);
-  renderVisitorsTable();
-  showToast('🗑️ Visitor record removed.');
+  const success = await commitLocalDatabase(DB_VISITORS, filtered);
+  if (success) {
+    logActivity(`Visitor record <strong>${visitorId}</strong> deleted.`);
+    renderVisitorsTable();
+    showToast('🗑️ Visitor record removed.');
+  }
 }
 
 function showVisitorQRPass(visitorId) {
@@ -2991,16 +2997,18 @@ function submitLeadForm(e) {
   showToast('💾 Leads database synchronized.');
 }
 
-function deleteLead(leadId) {
+async function deleteLead(leadId) {
   if (confirm('Are you sure you want to delete this lead?')) {
     const idx = db.leads.findIndex(l => l.id === leadId);
     if (idx !== -1) {
       const company = db.leads[idx].company;
-      db.leads.splice(idx, 1);
-      commitLocalDatabase(DB_LEADS, db.leads);
-      logActivity(`Lead company <strong>${company}</strong> profile deleted.`);
-      renderLeadsTable();
-      showToast('🗑️ Lead record removed.');
+      const filtered = db.leads.filter(l => l.id !== leadId);
+      const success = await commitLocalDatabase(DB_LEADS, filtered);
+      if (success) {
+        logActivity(`Lead company <strong>${company}</strong> profile deleted.`);
+        renderLeadsTable();
+        showToast('🗑️ Lead record removed.');
+      }
     }
   }
 }
@@ -3408,29 +3416,32 @@ function submitExhibitorForm(e) {
   showToast('💾 Exhibitor profiles synchronized.');
 }
 
-function deleteExhibitor(exhId) {
+async function deleteExhibitor(exhId) {
   if (confirm('Are you sure you want to delete this exhibitor profile? This will release their stall!')) {
     const idx = db.exhibitors.findIndex(e => e.id === exhId);
     if (idx !== -1) {
       const company = db.exhibitors[idx].company;
       const stallId = db.exhibitors[idx].assigned_stall;
-      db.exhibitors.splice(idx, 1);
-      commitLocalDatabase(DB_EXHIBITORS, db.exhibitors);
-
-      let stalls = JSON.parse(localStorage.getItem(DB_STALLS)) || [];
-      const stallIdx = stalls.findIndex(s => s.id === stallId);
-      if (stallIdx !== -1) {
-        stalls[stallIdx].status = 'available';
-        stalls[stallIdx].assigned_company = null;
-        localStorage.setItem(DB_STALLS, JSON.stringify(stalls));
+      const filtered = db.exhibitors.filter(e => e.id !== exhId);
+      const success = await commitLocalDatabase(DB_EXHIBITORS, filtered);
+      
+      if (success) {
+        if (stallId) {
+          let stalls = JSON.parse(localStorage.getItem(DB_STALLS)) || [];
+          const stallIdx = stalls.findIndex(s => s.id === stallId);
+          if (stallIdx !== -1) {
+            stalls[stallIdx].status = 'available';
+            stalls[stallIdx].assigned_company = null;
+            await commitLocalDatabase(DB_STALLS, stalls); // Sync stall release!
+          }
+        }
+        logActivity(`Exhibitor <strong>${company}</strong> removed.`);
+        await syncRamData();
+        renderExhibitorsTable();
+        renderStallsTable();
+        renderAdminMapSVG();
+        showToast('🗑️ Exhibitor profile removed.');
       }
-
-      logActivity(`Exhibitor <strong>${company}</strong> removed.`);
-      syncRamData();
-      renderExhibitorsTable();
-      renderStallsTable();
-      renderAdminMapSVG();
-      showToast('🗑️ Exhibitor profile removed.');
     }
   }
 }
