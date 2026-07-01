@@ -14,6 +14,10 @@
     // Immediate auth check
     (function() {
       document.documentElement.style.visibility = 'hidden';
+      fetch('/api/auth/session')
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
             document.documentElement.style.visibility = 'visible';
           } else {
             window.location.href = '/login.html';
@@ -1438,7 +1442,7 @@
 
             <!-- Floor Plan Image Uploads (Module 7 Asset previews) -->
             <div class="card-panel">
-              <div class="panel-title">Floor Plan Mock Uploads</div>
+              <div class="panel-title">Floor Plan Image Uploads</div>
               <p style="font-size: 0.72rem; color:var(--text-muted); margin-bottom: 1rem;">Configure the active image layers mapped to client floor layouts.</p>
               
               <div class="modal-form-group">
@@ -1580,7 +1584,7 @@
       <div class="view-pane" id="view-payments">
         <div class="view-header-bar">
           <div class="view-title-area">
-            <h2>Payments Ledger Ledger</h2>
+            <h2>Payments Ledger</h2>
             <p>Track booking fees invoices, register partial payments, and inspect collection statistics.</p>
           </div>
           <div class="view-actions-area">
@@ -2291,7 +2295,7 @@
             </div>
             <div class="modal-form-group">
               <label for="stall-size-input">Stall Dimensions (W x L) *</label>
-              <input type="text" id="stall-size-input" required placeholder="e.g. 10ft x 10ft or 9m x 5.7m">
+              <input type="text" id="stall-size-input" required placeholder="e.g. 3m x 3m or 9m x 5.7m">
             </div>
           </div>
 

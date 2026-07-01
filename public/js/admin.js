@@ -359,34 +359,35 @@ async function initAdminUI() {
 
     applyRolePermissions();
 
+    const safeExec = (fn) => { try { fn(); } catch (e) { console.error(`Error in ${fn.name}:`, e); } };
+
     // Load initial elements
-    refreshDashboardMetrics();
-    renderStallsTable();
-    renderAdminMapSVG();
-    renderLeadsTable();
-    renderExhibitorsTable();
-    renderPaymentsTable();
-    populateVenueForm();
-    renderUploadedMapsList();
-    renderAuditLogs();
+    safeExec(refreshDashboardMetrics);
+    safeExec(renderStallsTable);
+    safeExec(renderAdminMapSVG);
+    safeExec(renderLeadsTable);
+    safeExec(renderExhibitorsTable);
+    safeExec(renderPaymentsTable);
+    safeExec(renderUploadedMapsList);
+    safeExec(renderAuditLogs);
 
     // Phase 2 components
-    renderVisitorsTable();
-    renderSponsorsTable();
-    renderAgendaList();
-    renderSpeakersList();
-    populateSessionSpeakerDropdown();
-    renderCampaignsList();
-    renderInquiriesTable();
-    populateInquirySalesExecDropdown();
-    renderDocumentsRepository();
-    renderMediaGalleryGrid();
-    populateContentEditorForm();
-    populateRegSettingsForm();
-    renderNotificationsTray();
+    safeExec(renderVisitorsTable);
+    safeExec(renderSponsorsTable);
+    safeExec(renderAgendaList);
+    safeExec(renderSpeakersList);
+    safeExec(populateSessionSpeakerDropdown);
+    safeExec(renderCampaignsList);
+    safeExec(renderInquiriesTable);
+    safeExec(populateInquirySalesExecDropdown);
+    safeExec(renderDocumentsRepository);
+    safeExec(renderMediaGalleryGrid);
+    safeExec(populateContentEditorForm);
+    safeExec(populateRegSettingsForm);
+    safeExec(renderNotificationsTray);
 
     // Start server-side task completion notification polling (super_admin only)
-    startAdminNotifPolling();
+    safeExec(startAdminNotifPolling);
   } catch (err) {
     console.error('UI Rendering Error (Authentication is valid):', err);
     // DO NOT REDIRECT to login.html to prevent infinite loops and allow debugging!

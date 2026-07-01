@@ -368,32 +368,37 @@ db.serialize(() => {
         db.run(`INSERT INTO stalls VALUES (?, 'A', 'Gold', '9m x 5.7m', 750000, 'available', NULL)`, [`A-${i}`]);
       }
       
-      // Block B (18 stalls, Standard, 10ft x 10ft, 1.36L)
+      // Block B (18 stalls, Standard, 3m x 3m, 1.36L)
       for (let i = 1; i <= 18; i++) {
-        db.run(`INSERT INTO stalls VALUES (?, 'B', 'Standard', '10ft x 10ft', 136000, 'available', NULL)`, [`B-${i}`]);
+        db.run(`INSERT INTO stalls VALUES (?, 'B', 'Standard', '3m x 3m', 136000, 'available', NULL)`, [`B-${i}`]);
       }
       
-      // Block C (12 stalls, Standard, 10ft x 20ft, 2.00L)
+      // Block C (12 stalls, Standard, 3m x 6m, 2.00L)
       for (let i = 1; i <= 12; i++) {
-        db.run(`INSERT INTO stalls VALUES (?, 'C', 'Standard', '10ft x 20ft', 200000, 'available', NULL)`, [`C-${i}`]);
+        db.run(`INSERT INTO stalls VALUES (?, 'C', 'Standard', '3m x 6m', 200000, 'available', NULL)`, [`C-${i}`]);
       }
       
-      // Block D (36 stalls, Diamond, 8ft x 8ft, 1.00L)
+      // Block D (36 stalls, Diamond, 2.4m x 2.4m, 1.00L)
       const dLetters = ['a', 'b', 'c', 'd', 'e', 'f'];
       for (let u = 1; u <= 6; u++) {
         dLetters.forEach(letter => {
-          db.run(`INSERT INTO stalls VALUES (?, 'D', 'Diamond', '8ft x 8ft', 100000, 'available', NULL)`, [`D-${u}-${letter}`]);
+          db.run(`INSERT INTO stalls VALUES (?, 'D', 'Diamond', '2.4m x 2.4m', 100000, 'available', NULL)`, [`D-${u}-${letter}`]);
         });
       }
       
-      // Block E (9 stalls, Standard & VIP, 8ft x 8ft)
+      // Block E (9 stalls, Standard & VIP, 2.4m x 2.4m)
       for (let i = 1; i <= 9; i++) {
         let price = i <= 5 ? 136000 : 250000;
         let cat = i <= 5 ? 'Standard' : 'VIP';
-        db.run(`INSERT INTO stalls VALUES (?, 'E', ?, '8ft x 8ft', ?, 'available', NULL)`, [`E-${i}`, cat, price]);
+        db.run(`INSERT INTO stalls VALUES (?, 'E', ?, '2.4m x 2.4m', ?, 'available', NULL)`, [`E-${i}`, cat, price]);
       }
     }
   });
+
+  // Data Migration: Standardize all stalls to metric
+  db.run(`UPDATE stalls SET size = '3m x 3m' WHERE size = '10ft x 10ft'`);
+  db.run(`UPDATE stalls SET size = '3m x 6m' WHERE size = '10ft x 20ft'`);
+  db.run(`UPDATE stalls SET size = '2.4m x 2.4m' WHERE size = '8ft x 8ft'`);
 
   // Clear and seed real Agendas on boot
   db.run(`DELETE FROM agenda`, (err) => {
